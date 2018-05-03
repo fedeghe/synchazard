@@ -1,0 +1,30 @@
+{
+  "name": "synchazard",
+  "version": "0.0.1",
+  "description": "༺ synchazard ༻",
+  "main": "index.js",
+  "dependencies": {},
+  "private": true,
+  "devDependencies": {
+    "malta": "^3.8.3",
+    "malta-browser-refresh": "^1.2.1",
+    "malta-header-comment": "^1.0.3",
+    "malta-js-obfuscator": "^1.0.6",
+    "malta-js-uglify": "^1.0.1",
+    "malta-less": "^1.0.2",
+    "malta-markdown-pdf": "^1.0.1",
+    "npm-run-all": "^4.1.2"
+  },
+  "scripts": {
+    "start": "npm-run-all --parallel _startWS _startSRV _startCLI",
+    "_startWS": "node dataServer/ws_srv.js -vvv",
+    "_startSRV": "node dataServer/srv.js",
+    "_startCLI": "node server/srv.js",
+    "inner": "npm --prefix ./dataServer install",
+    "build": "node node_modules/malta/src/bin.js source/build.json",
+    "build1": "node node_modules/malta/src/bin.js source/build1.json",
+    "clean": "node node_modules/malta/src/bin.js source/clean.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "federico.ghedina@gmail.com"
+}

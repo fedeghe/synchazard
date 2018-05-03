@@ -1,0 +1,5 @@
+
+* Project: $PROJECT.NAME$
+* Version: $PROJECT.VERSION$ (build:__BUILDNUMBER__)
+* Author: $PROJECT.AUTHOR$
+* Malta Version: __VERSION__

@@ -1,0 +1,9 @@
+{
+    "title": "SyncHazard",
+    "version": "0.0.3", 
+    "content": "alive web pages",
+    "what": {
+        "img": "/media/synchazard3.svg",
+        "url": "http://jmvc.org" 
+    }
+}

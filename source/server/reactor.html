@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="/media/favicon.ico">
+	<title>$SERVER.HTML.TITLE$</title>
+	<link rel="stylesheet" href="/css/reactor.css">
+	<script src="/js/lib/dataWorker.js" data-worker="/js/workers/worker_reactor.js"></script>
+	<script src="/js/reactor.js"></script>
+</head>
+<body>
+	<div class="exp">
+		<div class="spaced">
+			<input class="rounded" type="text" name="" value="" placeholder="username" data-reactor="id1234" />
+			<input class="rounded" type="text" name="" value="" placeholder="password" data-reactor="id4321" />
+		</div>
+		<div class="spaced">
+			<textarea class="rounded" data-reactor="id4343" placeholder="write something here"></textarea>
+		</div>
+		
+		<div class="spaced">
+			<button onclick="$NS$.commands.init()">trigger <b><i>init</i></b></button>
+		</div>
+		<div id="number"></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+    "EXE": [
+        "mkdir -p server/css server/js/handlers server/js/lib server/js/workers server/media",
+        "cp source/server/media/* server/media/"
+    ],
+    "source/server/srv.js": "server -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json",
+
+    "source/server/*.html": "server -vars=vars.json",
+    "source/server/README.md": "server -vars=vars.json",
+    "source/server/less/*.less": "server/css -plugins=malta-less",
+
+    "source/server/js/*.js": "server/js -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json",
+    "source/server/js/workers/*.js": "server/js/workers -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json",
+    "source/server/js/handlers/*.js": "server/js/handlers -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json",
+    "source/server/js/lib/dataWorker.js": "server/js/lib -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json"
+}

@@ -1,0 +1,7 @@
+/node_modules
+/server
+/dataServer
+/tmp
+.printVersion
+.buildNum.json
+repo.txt
