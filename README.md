@@ -36,17 +36,6 @@ now open one or more browsers on http://localhost:4000
 
 ---
 
-## Some samples  
-In the client folder there is a small _index.html_ file that runs four example cases:
-- sync on file change on server (change something on the _data1.json_ on the __server__ folder and look at the clients)  
-- get a flow of random data within [0,100] from the server and plot it
-- get a incremental number from the server and show it
-- launch a special case I called `reactor` which aim to dig into the immediate forced concurrency  management for input fields and textareas.  
-
-In the upper right corner there is a link to two more samples, one is kinda live React hello world (will be much better), the second one is a bit more interesting.  
-
----
-
 ### Test broadcast to more clients within LAN
 
 Get the current LAN ip of the machine running the server:
@@ -77,16 +66,6 @@ the Action on the dataServer, when the client connects, sends back a metadata th
     - client handler: `/server/js/handlers/jsonObserver.js`
     - server Action: `/dataServer/actions/jsonObserver.js`
 
-- **hundredRandom**  
-the Action on the dataServer simply broadcasts regularly a random number &isin; [0,100]; the clients handlers simply renders a live line chart adding one point each time it receive the value through the socket.  
-    - client handler: `/server/js/handlers/randomPercentage.js`
-    - server Action: `/dataServer/actions/randomPercentage.js`
-
-- **incremental**  
-this is the simplest one, the Action broadcasts evey second an incremental counter; the client hnadler simply render it somewhere. 
-    - client handler: `/server/js/handlers/incremental.js`
-    - server Action: `/dataServer/actions/incremental.js`
-
 - **script**  
 the dataServer Action for this is pretty similar to the _datajson_ sample, there's a simple watcher on a file (`/dataServer/js/lib/sync_script.js`); what is different is the client handler function, it just inject the script. So it is possible for example inject a script that can do quite a lot, on all clients. If You uncomment the right lines and simply save the file then the injected script will inject a rude ingorant assertion tester that will _run on all clients_ a couple of tests, checking that exactly two anchors are in the dom and that the number rendered by the _incremental_ can be correctly coerced to an Integer. The title will show the outcome, in case of errors also the browser console will show the assertion messages.  
     - client handler: `/server/js/handlers/script.js`
@@ -97,17 +76,48 @@ again quite boring watcher on `/dataServer/css/sync_style.css`, on change will b
     - client handler: `/server/js/handlers/style.js`
     - server Action: `/dataServer/actions/style.js`
 
+- **hundredRandom**  
+the Action on the dataServer simply broadcasts regularly a random number &isin; [0,100]; the clients handlers simply renders a live line chart adding one point each time it receive the value through the socket.  
+    - client handler: `/server/js/handlers/randomPercentage.js`
+    - server Action: `/dataServer/actions/randomPercentage.js`  
+
+
+
+#### http://192.168.5.107:4000/samples/reactor.html
+
 - **reactor**  
 Nothing to do with React, but the name fits in somehow. Here I think there is a more clear hazard. And maybe it would be boring to read a long pseudo-description of the flow. But it's worth to try out to summarize the functionality. I wrote a small client library to enable on targeted `input[text]` and `textarea` tags some sort of concurrrency. Basically whenever the client Alice start typing in one of the target tags, immediately all other clients see the tag being edited as disabled, when Alice leave the focus on the tag, all other clients will see that tag enabled and filled with the value Alice entered.
     - client handler: `/server/js/handlers/reactor.js`
     - server Action: `/dataServer/actions/reactor.js`
 
-In all cases a WebWorker runs a `proxy` between the client side socket and the handler function, allowing for example to the _datajson_ example to receive simple metadata sent by the dataServer containing all the information needed to get the real resource, the webWorker then decides in this case to start an xhr request for the resource and when the data is available it forwards all to the handler function that decides how to consume it. In any case the WebWorker decide in the end which one is the handler function that will consume the data. The WebWorker used in the main example is `/server/js/workers/worker.js`
+- **incremental**  
+this is the simplest one, the Action broadcasts evey second an incremental counter; the client hnadler simply render it somewhere. 
+    - client handler: `/server/js/handlers/incremental.js`
+    - server Action: `/dataServer/actions/incremental.js`
+
+
+
+
+Almost in all cases a WebWorker runs a `proxy` between the client side socket and the handler function, allowing for example to the _datajson_ example to receive simple metadata sent by the dataServer containing all the information needed to get the real resource, the webWorker then decides in this case to start an xhr request for the resource and when the data is available it forwards all to the handler function that decides how to consume it. In any case the WebWorker decide in the end which one is the handler function that will consume the data. The WebWorker used in the main example is `/server/js/workers/worker.js`
+
+#### http://192.168.5.107:4000/samples/distcomp.html 
+A raw distributed computing sample to get (a bad) value for &pi; using other clients that will accept to help. 
+... to be continued
+
+#### http://192.168.5.107:4000/samples/collabText.html  
+A couple of collaborative textareas where the content and the size is shared among all clients
+... to be continued
 
 #### http://192.168.5.107:4000/samples/chat.html  
+A basic chat, here is used also the ability to send a message only to the client that sent one message  (check the console when a message is posted)
 ... to be continued
 
 #### http://192.168.5.107:4000/samples/react.html   
+The most simple immaginable example using React
+... to be continued
+
+#### http://192.168.5.107:4000/samples/job.html
+This may look wierd cause in the end the ws srv sends to the client one specific function that will be used to make a naive calculation.   
 ... to be continued
 
 ---
