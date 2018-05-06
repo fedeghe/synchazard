@@ -45,7 +45,7 @@ module.exports = (function () {
             });
         },
 
-        // let define the debig level function 
+        // let define the debug level function 
         //
         defineDebugFunction = (args) => {
             if (!args.length) return;
