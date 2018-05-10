@@ -2,5 +2,6 @@
     "source/README.md": ".",
     "source/LICENSE.md": ". -vars=vars.json",
     "source/server/require.json": true,
-    "source/dataServer/require.json": true
+    "source/dataServer/require.json": true,
+    "source/test/require.json": true
 }
