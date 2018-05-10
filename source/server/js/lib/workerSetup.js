@@ -90,7 +90,6 @@
         }, {onload: cb});
         head.appendChild(script);
     }
-
     
     /**
      * 
