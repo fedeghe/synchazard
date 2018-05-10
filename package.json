@@ -13,6 +13,8 @@
     "malta-js-uglify": "^1.0.1",
     "malta-less": "^1.0.2",
     "malta-markdown-pdf": "^1.0.1",
+    "malta-mocha": "^1.0.9",
+    "mocha": "^5.1.1",
     "npm-run-all": "^4.1.2"
   },
   "scripts": {
@@ -24,7 +26,7 @@
     "build": "node node_modules/malta/src/bin.js source/build.json",
     "build1": "node node_modules/malta/src/bin.js source/build1.json",
     "clean": "node node_modules/malta/src/bin.js source/clean.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "author": "federico.ghedina@gmail.com"
 }
