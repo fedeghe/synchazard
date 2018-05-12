@@ -34,6 +34,7 @@ const socketsSrv = require('./core/socketSrv'),
         , { path: 'actions/montecarlo' }
         , { path: 'actions/doJob' }
         , { path: 'actions/collabText' }
+        , { path: 'actions/chess' }
     ];
 /**
  * launch all actions passing if found other parameters to activate debug

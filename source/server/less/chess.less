@@ -1,0 +1,97 @@
+@bgColor: #597;
+@boardShadow: #000000;
+@boardBorder: rgba(200,200,255, 0.3);
+
+@whiteColor: #C9A85C;
+@whiteBackground: #EAE8D4;
+@whiteShadow:#000;
+
+@blackColor: #000;
+@blackBackground: #537395;
+@blackShadow: #fff;
+
+@outerBorder: rgba(170,170,170, 0.5);
+@innerBorder: rgba(170,170,170, 0.5);
+
+body {
+    background-color: @bgColor;
+    padding: 10;
+    font-family:verdana;
+    perspective: 3000px;
+    .boardContainer{
+        transform: rotateX(45deg);
+        width:90vmin;
+        height:90vmin;
+        position:relative;
+        background-color:@boardBorder;
+        margin:0 auto;
+        -moz-box-shadow:0.5vmin 0.5vmin 5vmin @boardShadow;
+        -webkit-box-shadow:0.5vmin 0.5vmin 5vmin @boardShadow;
+        box-shadow:0.5vmin 0.5vmin 5vmin @boardShadow;
+    }
+    .board {
+        position:absolute;
+        top:5vmin;
+        left:5vmin;
+        width:80vmin;
+        height:80vmin;
+        outline: 0.5vmin ridge @outerBorder;
+        margin:0 auto;
+        // margin-top:10vmin;
+        
+        
+        
+        
+        .row {
+            // transform: rotateX(45deg);
+            display:flex;
+            flex-flow: row wrap;
+            .cell{
+                align-items: flex-start;
+                width:10vmin;
+                height:10vmin;
+                line-height:10vmin;
+                text-align:center;
+                color:transparent;
+                outline: 0.3vmin inset @innerBorder;
+            }
+            
+        }
+
+        .row {
+            .cell {
+                background-color: @whiteBackground;
+                
+            }
+        }
+        
+        .row:nth-child(even){
+            .cell:nth-child(odd){
+                background-color:@blackBackground;
+            }    
+        }
+        .row:nth-child(odd){
+            .cell:nth-child(even){
+                background-color:@blackBackground;
+                
+            }    
+        }
+        .piece {
+            // transform: rotateX(-0deg);
+            display:inline-block;
+            font-size: 8vmin;
+            text-align: center;
+            width:10vmin;
+            z-index:100;
+            &.white {
+                color:@whiteColor;
+                text-shadow:0px 0px 10px @whiteShadow;
+            }
+            &.black {
+                color:@blackColor;
+                text-shadow:0px 0px 10px @blackShadow;
+            }
+        }
+    }
+}
+

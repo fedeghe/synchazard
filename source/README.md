@@ -1,6 +1,6 @@
-# SyncHazard
+[![Known Vulnerabilities](https://snyk.io/test/github/fedeghe/synchazard/badge.svg)](https://snyk.io/test/github/fedeghe/synchazard)
 
----
+# SyncHazard  
 
 This small project aims to minimize client side data requests
 
@@ -9,6 +9,8 @@ This small project aims to minimize client side data requests
 ## How it works  
 The core are the WebSockets for the communication layer and WebWorkers to put aside the client-side collaboration.  
 The server runs some kind of IFTTT like procedure that could be triggered by anything (fs watching, db hooks, kafka consumers, ...) and using a websocket broadcasts to all connected clients the relevant metadata needed to get the actual data. Now the client decides what to do and, in case it wants to proceed, it knows exactly how to: just forward the metadata to the WebWorker which starts his job (could be a xhr request or could use the websocket as well) using the information contained in the metadata. Once the request is done the response is given to a handler that knows exactly how to consume it.
+
+---
 
 ## Expectations
 - Get rid of all api GET calls triggered by user events.
@@ -46,7 +48,7 @@ assume it is **192.168.5.107**
 
 now open the `vars.json` file in the root of the project and edit the _DOMAIN\_OR\_IP_ value so that it contains the found IP address.  
 
-The server has to be restarted, go in the terminal where `npm start` has been launched, press `ctrl + c` and relaunch it.  
+The servers have to be restarted, go in the terminal where `npm start` has been launched, press `ctrl + c` and relaunch \`em.  
 
 Now on one or more clients open a browser and navigate to http://192.168.5.107:4000 standing this is the port and IP address set as CLIENT.PORT and DOMAIN_OR_IP in the _vars.json_ file.
 

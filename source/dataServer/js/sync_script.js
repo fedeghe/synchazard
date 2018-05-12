@@ -3,9 +3,8 @@
 if (!('$NS$' in window)) throw 'no $NS$ in global';
 
 console.clear();
-console.log('ᚗᚌ');
 console.log('༺ synchazard ༻');
-
+console.log('powered by ᚗᚌ');
 
 // (function () {
 //     var o = 0;
@@ -28,10 +27,10 @@ console.log('༺ synchazard ༻');
 //         },
 //         "not enough anchors"
 //     ).assert(function () {
-//             var n = document.getElementById('number').innerHTML;
-//             return n == parseInt(n, 10);
+//             var graph = document.getElementById('graph');
+//             return graph.children.item(0).tagName.match(/CANVAS/i);
 //         },
-//         "does not contain a number"
+//         "canvas is not there"
 //     ).report(
 //         function () {
 //             document.title = `PASSED on ${now}`;

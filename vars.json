@@ -14,7 +14,8 @@
     },
     "SERVER": {
         "HTML": {
-            "TITLE": "Sync hazard"
+            "TITLE": "Sync hazard",
+            "CHESS": "Chess"
         },
         "PORT": 4000,
         "TESTLIB": "$DATASERVER.HOST$/js/lib/testnject.js",
