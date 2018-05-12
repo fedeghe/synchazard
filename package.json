@@ -11,7 +11,7 @@
     "malta-header-comment": "^1.0.3",
     "malta-js-obfuscator": "^1.0.8",
     "malta-js-uglify": "^1.0.1",
-    "malta-less": "^1.0.3",
+    "malta-less": "^1.0.4",
     "malta-markdown-pdf": "^1.0.1",
     "malta-mocha": "^1.0.9",
     "mocha": "^5.1.1",
