@@ -1,3 +1,5 @@
+[![Known Vulnerabilities](https://snyk.io/test/github/fedeghe/synchazard/badge.svg)](https://snyk.io/test/github/fedeghe/synchazard)
+
 # SyncHazard  
 
 This small project aims to minimize client side data requests
