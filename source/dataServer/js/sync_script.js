@@ -2,7 +2,7 @@
 
 if (!('$NS$' in window)) throw 'no $NS$ in global';
 
-console.clear();
+// console.clear();
 console.log('༺ synchazard ༻');
 console.log('powered by ᚗᚌ');
 

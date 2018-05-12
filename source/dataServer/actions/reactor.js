@@ -44,6 +44,8 @@ module.exports.launch = (action, socketSrv, params) => {
         if (data.___TYPE === 'action') {
             switch (data.___ACTION) {
                 case 'init':
+                    console.log(`init ${__filename}`)
+                    console.log(data)
                     socketSrv.broadcast(getNodeList());
                     break;
                 case 'disable':

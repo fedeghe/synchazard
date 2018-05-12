@@ -15,26 +15,29 @@ const socketsSrv = require('./core/socketSrv'),
         {
             path: 'actions/jsonObserver',
             deps: { fs: fs, path: path },
+            actors: 'jsonObserver'
         }
         , {
             path: 'actions/style',
             deps: { fs: fs, path: path },
-            cssToObserve: 'css/sync_style.css'
+            cssToObserve: 'css/sync_style.css',
+            actors: 'style'
         }
         , {
             path: 'actions/script',
             deps: {fs: fs, path: path},
-            jsToObserve: 'js/sync_script.js'
+            jsToObserve: 'js/sync_script.js',
+            actors: 'script'
         }
-        , { path: 'actions/incremental' }
-        , { path: 'actions/randomPercentage' }
-        , { path: 'actions/reactor' }
-        , { path: 'actions/react' }
-        , { path: 'actions/chat' }
-        , { path: 'actions/montecarlo' }
-        , { path: 'actions/doJob' }
-        , { path: 'actions/collabText' }
-        , { path: 'actions/chess' }
+        , { path: 'actions/incremental', actors: 'incremental'}
+        , { path: 'actions/randomPercentage', actors: 'randomPercentage'}
+        , { path: 'actions/reactor', actors: 'reactor' }
+        , { path: 'actions/react', actors: 'react'}
+        , { path: 'actions/chat', actors: 'chat'}
+        , { path: 'actions/montecarlo', actors: 'montecarlo'}
+        , { path: 'actions/doJob', actors: 'doJob'}
+        , { path: 'actions/collabText', actors: 'collabText'}
+        , { path: 'actions/chess', actors: 'chess'}
     ];
 /**
  * launch all actions passing if found other parameters to activate debug

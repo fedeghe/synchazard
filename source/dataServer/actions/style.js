@@ -20,6 +20,7 @@ module.exports.launch = (action, socketSrv, params) => {
         if (data.___TYPE === 'action') {
             switch (data.___ACTION) {
                 case 'init':
+                    console.log(`init ${__filename}`)
                     ws.send(action.data.actions.update());
                     break;
             }

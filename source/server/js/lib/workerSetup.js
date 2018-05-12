@@ -4,29 +4,41 @@
      * the constructor does not gives the full worker back,
      * or at least
      */
-    var $NS$ = {
+    var currentScript = document.currentScript,
+        dataActors = currentScript.dataset.actors || null,
+        $NS$ = {
             commands: {},
             handlers: {},
             objHandlers: {},
+            dataWorker: new Worker(currentScript.dataset.worker),
             utils: {
                 loadStyle: loadStyle,
                 loadScript: loadScript,
                 injectTester : function (f) {
                     loadScript("$SERVER.TESTLIB$", f);
                 },
-                createAction: function (o) {
-                    return JSON.stringify(o);
+                createAction: function (action) {
+                    action.___ACTORS = dataActors || null;
+                    return JSON.stringify(action);
                 },
                 decodeFunction: function(fun){
                     return new Function('return ' + fun)();
                 }
             },
-            dataWorker: new Worker(document.currentScript.dataset.worker),
+            
             id: getClientID(),
             active: true
         },
         head = document.getElementsByTagName('head')[0];
-    
+
+    // set actors
+    $NS$.dataWorker.postMessage({
+        ___TYPE: '___INITACTORS',
+        ___ACTORS: dataActors
+    });
+
+
+
     function getClientID() {
         var cookieName = '$NS$clientID',
             cookieValue = localStorage.getItem(cookieName);
