@@ -25,9 +25,9 @@
     "_startCLI": "node server/srv.js",
     "_startWSchess": "node dataServer/ws_srv_chess.js -vvv",
     "inner": "npm --prefix ./dataServer install",
-    "build": "node node_modules/malta/src/bin.js source/build.json",
-    "build1": "node node_modules/malta/src/bin.js source/build1.json",
-    "clean": "node node_modules/malta/src/bin.js source/clean.json",
+    "build": "node --no-warnings node_modules/malta/src/bin.js source/build.json",
+    "build1": "node --no-warnings node_modules/malta/src/bin.js source/build1.json",
+    "clean": "node --no-warnings node_modules/malta/src/bin.js source/clean.json",
     "test": "mocha"
   },
   "author": "federico.ghedina@gmail.com"
