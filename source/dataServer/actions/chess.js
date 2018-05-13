@@ -13,9 +13,9 @@ module.exports.launch = (action, socketSrv, params) => {
         let newMessage;
 
         if (data.___TYPE === 'action') {
+            action.notify(__filename, data);
             switch (data.___ACTION) {
                 case 'init':
-                    console.log(`init ${__filename}`)
                     ws.send(action.encodeMessage({
                         ___TYPE: 'action',
                         ___ACTION: 'init',

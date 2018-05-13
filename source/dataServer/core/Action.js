@@ -4,6 +4,7 @@ class Action{
         this.ss = ss;
         this.actors = actors;
         this.debug = debug;
+        this.data = {};
     }
     setup(d) {this.data = d || {};}
     encodeMessage(action, id) {
@@ -11,14 +12,27 @@ class Action{
         if (id) action.___ID = id;
         return JSON.stringify(action);
     }
+    notify(filename, data) {
+        console.log("\n--- ACTION NOTIFICATION:");
+        console.log(`@ ${new Date}`);
+        console.log(`- filename: ${filename}`)
+        console.log('- data: ');
+        console.dir(data);
+        console.log("-----\n");
+    }
     decodeMessage(action) {return JSON.parse(action);}
     onconnection(f) {
         var self = this;
         this.ss.wss.on('connection', (ws, req) => {
             ws.on('message', (data) => {
                 data = JSON.parse(data);
-                const checkActors = $DATASERVER.CHECKACTORS$ ? data.___ACTORS : true;
-                // maybe shut it now cause the actors are givern and do not match
+
+                const checkActors = $DATASERVER.CHECKACTORS$ ? data.___ACTORS : false;
+                
+                /**
+                 * if the checkActors is enabled on socket srv
+                 * then maybe shut it now cause the actors are given and do not match
+                 */ 
                 if (
                     /**
                      * this first condition makes the data-actor optional on the client,
