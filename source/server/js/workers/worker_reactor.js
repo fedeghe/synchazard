@@ -29,6 +29,4 @@ worker.onmessage = function (e) {
             worker.postMessage(e.data);
             break;
     }
-        
-    
 };
