@@ -10,7 +10,8 @@
         "HOST": "http://$DOMAIN_OR_IP$:$DATASERVER.PORT$",
         "WS": "ws://$DOMAIN_OR_IP$:$DATASERVER.WSPORT$",
         "WSPORT": 9000,
-        "PORT": 8000
+        "PORT": 8000,
+        "CHECKACTORS": true
     },
     "SERVER": {
         "HTML": {

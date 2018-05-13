@@ -17,9 +17,29 @@ class Action{
         this.ss.wss.on('connection', (ws, req) => {
             ws.on('message', (data) => {
                 data = JSON.parse(data);
-                if (data.___ACTORS.split(',').indexOf(self.actors) < 0) return;
+                const checkActors = $DATASERVER.CHECKACTORS$ ? data.___ACTORS : true;
+                // maybe shut it now cause the actors are givern and do not match
+                if (
+                    /**
+                     * this first condition makes the data-actor optional on the client,
+                     * thus that check will not shut incoming connection requests from 
+                     * client that do NOT specify an actors list.
+                     * ...but if they are used they should contain one or more of the action's actors
+                     * specified in the dataServer/ws_srv.js, depending on which ones are needed in the page
+                     * 
+                     * if this condition is removed instead, then the client MUST specify the right actors
+                     * otherwise the connection will not be accepted
+                     *
+                     *
+                     * make the actors optional
+                     * yeah is falsy and is perfet as it is
+                     */
+                    checkActors && 
+                    data.___ACTORS.split(',').indexOf(self.actors) < 0
+                ) return;
+
                 ws.id = data.___ID;
-                /* forward injecting also the ws, with the id attache */
+                /* forward injecting also the ws, with the id attached */
                 f(data, ws);
             });
         });   
