@@ -21,10 +21,12 @@ module.exports.launch = (action, socketSrv, params) => {
     // RUN
     setInterval(() => {
         action.data.num++;
-        socketSrv.broadcast(action.encodeMessage({
+        var act = {
             ___TYPE: 'json',
             ___PAYLOAD: action.data
-        }));
+        };
+        action.notify(__filename, act);
+        socketSrv.broadcast(action.encodeMessage(act));
     }, 1000);
     
 };
