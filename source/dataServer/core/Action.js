@@ -8,6 +8,7 @@ class Action{
     }
     setup(d) {this.data = d || {};}
     encodeMessage(action, id) {
+        action.___TYPE = 'action';
         action.___ACTORS = this.actors;
         if (id) action.___ID = id;
         return JSON.stringify(action);
