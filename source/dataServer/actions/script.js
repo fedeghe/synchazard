@@ -13,7 +13,7 @@ module.exports.launch = (action, socketSrv, params) => {
         actions: {
             update: function () {
                 return action.encodeMessage({
-                    ___TYPE: 'script',
+                    ___ACTION: 'script',
                     ___FILECHANGED: '$DATASERVER.HOST$/' + resourceFile + '?cb=' + Math.random()
                 });
             }

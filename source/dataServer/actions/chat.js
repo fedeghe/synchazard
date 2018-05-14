@@ -17,7 +17,7 @@ module.exports.launch = (action, socketSrv, params) => {
             switch (data.___ACTION) {
                 case 'init':
                     socketSrv.broadcast(action.encodeMessage({
-                        ___TYPE: 'messages',
+                        ___ACTION: 'messages',
                         ___PAYLOAD: {
                             all : action.data.messages
                         }
@@ -37,14 +37,14 @@ module.exports.launch = (action, socketSrv, params) => {
                     // self message
                     //
                     ws.send(action.encodeMessage({
-                        ___TYPE: 'self',
+                        ___ACTION: 'self',
                         ___PAYLOAD: data.___MESSAGE
                     }));
 
                     // and broadcast
                     //
                     socketSrv.broadcast(action.encodeMessage({
-                        ___TYPE: 'message',
+                        ___ACTION: 'message',
                         ___PAYLOAD: {
                             one: newMessage
                         }

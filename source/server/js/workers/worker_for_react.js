@@ -11,12 +11,14 @@ worker.onmessage = function (e) {
     if (actors.split(',').indexOf(e.data.___ACTORS) < 0) return;
     /** */
 
-    switch (e.data.___TYPE) {
-        case 'status': 
-            worker.postMessage({
-                ___HANDLER: 'react',
-                ___DATA: e.data.___PAYLOAD
-            });
-            break;
+    if (e.data.___TYPE === 'action') {
+        switch (e.data.___ACTION) {
+            case 'status': 
+                worker.postMessage({
+                    ___HANDLER: 'react',
+                    ___DATA: e.data.___PAYLOAD
+                });
+                break;
+        }
     }
 };

@@ -7,7 +7,7 @@ module.exports.launch = (action, socketSrv, params) => {
             switch (data.___ACTION) {
                 case 'init':
                     ws.send(action.encodeMessage({
-                        ___TYPE: 'status',
+                        ___ACTION: 'status',
                         ___PAYLOAD: {
                             time : new Date
                         }
@@ -47,7 +47,7 @@ module.exports.launch = (action, socketSrv, params) => {
     new Interval(() => {
         var t = new Date;
         socketSrv.broadcast(action.encodeMessage({
-            ___TYPE: 'status',
+            ___ACTION: 'status',
             ___PAYLOAD: {
                 time: t
             }

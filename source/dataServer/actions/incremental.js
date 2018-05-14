@@ -10,7 +10,7 @@ module.exports.launch = (action, socketSrv, params) => {
             switch (data.___ACTION) {
                 case 'init':
                     ws.send(action.encodeMessage({
-                        ___TYPE: 'json',
+                        ___ACTION: 'json',
                         ___PAYLOAD: action.data
                     }));
                     break;
@@ -22,10 +22,10 @@ module.exports.launch = (action, socketSrv, params) => {
     setInterval(() => {
         action.data.num++;
         var act = {
-            ___TYPE: 'json',
+            ___ACTION: 'json',
             ___PAYLOAD: action.data
         };
-        action.notify(__filename, act);
+        // action.notify(__filename, act);
         socketSrv.broadcast(action.encodeMessage(act));
     }, 1000);
     

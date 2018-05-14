@@ -11,6 +11,7 @@ worker.onmessage = function (e) {
     if (actors.split(',').indexOf(e.data.___ACTORS) < 0) return;
     /** */
     
+    
     if (e.data.___TYPE === 'action') {
         switch (e.data.___ACTION) {
             case 'doComputation':

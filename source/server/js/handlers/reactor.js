@@ -180,7 +180,7 @@
         }
 
         switch(d.___ACTION) {
-            case 'updateInitStatus': 
+            case 'reactor_updateInitStatus': 
                 initStatus = d.___NODE_LIST;
                 for (i = 0, l = this.elements.length; i < l; i++) {
 
@@ -203,7 +203,7 @@
                     }
                 }   
                 break;
-            case 'enableAll': 
+            case 'reactor_enableAll': 
                 this.elements.forEach(function (element) {
                     if (
                         d.___ID !== $NS$.id &&
@@ -211,7 +211,7 @@
                     ) element.doEnable(d.___VALUE);
                 });
                 break;
-            case 'disableAll':
+            case 'reactor_disableAll':
                 this.elements.forEach(function (element) {
                     d.___ID !== $NS$.id &&
                     d.___NODEID == element.node.dataset.reactor &&

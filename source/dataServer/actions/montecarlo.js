@@ -15,16 +15,16 @@ module.exports.launch = (action, socketSrv, params) => {
         actions: {
             ask: function (id) {
                 return action.encodeMessage({
-                    ___TYPE: 'requestRandomPairs'
+                    ___ACTION: 'requestRandomPairs'
                 }, id);
             },
             proceed: action.encodeMessage({
-                ___TYPE: 'startComputation',
+                ___ACTION: 'startComputation',
                 ___JOB: 'generate'
             }),
             completed: function (r) {
                 var x = action.encodeMessage({
-                    ___TYPE: 'endComputation',
+                    ___ACTION: 'endComputation',
                     ___DATA: r
                 }, askingingCli);
                 return x;

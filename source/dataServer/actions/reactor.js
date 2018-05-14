@@ -11,8 +11,7 @@ module.exports.launch = (action, socketSrv, params) => {
             nodeList[nodeId].gotToken = id;
             nodeList[nodeId].value = nodeList[nodeId].value || '';
             return action.encodeMessage({
-                ___TYPE: 'reactor',
-                ___ACTION: 'disableAll',
+                ___ACTION: 'reactor_disableAll',
                 ___VALUE: nodeList[nodeId].value,
                 ___NODEID: nodeId + ""
             }, id);
@@ -24,16 +23,14 @@ module.exports.launch = (action, socketSrv, params) => {
             nodeList[nodeId].gotToken = false;
             nodeList[nodeId].value = val;
             return action.encodeMessage({
-                ___TYPE: 'reactor',
-                ___ACTION: 'enableAll',
+                ___ACTION: 'reactor_enableAll',
                 ___VALUE: val + "",
                 ___NODEID: nodeId + ""
             }, id);
         },
         getNodeList = () => {
             return action.encodeMessage({
-                ___TYPE: 'reactor',
-                ___ACTION: 'updateInitStatus',
+                ___ACTION: 'reactor_updateInitStatus',
                 ___NODE_LIST: nodeList
             });
         };

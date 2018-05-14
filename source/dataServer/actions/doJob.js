@@ -16,7 +16,6 @@ module.exports.launch = (action, socketSrv, params) => {
             switch (data.___ACTION) {
                 case 'init':
                     ws.send(action.encodeMessage({
-                        ___TYPE: 'action',
                         ___ACTION: 'doComputation',
                         ___JOB: {
                             func: jobs.getFunc1.func.toString(),

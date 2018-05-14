@@ -11,15 +11,10 @@ worker.onmessage = function (e) {
     if (actors.split(',').indexOf(e.data.___ACTORS) < 0) return;
     /** */
 
-    switch (e.data.___TYPE) {
-        case 'action':
-            worker.postMessage({
-                ___HANDLER: 'Collab',
-                ___DATA: e.data
-            });
-            break;
-        default:
-            worker.postMessage(e.data);
-            break;
+    if (e.data.___TYPE ===  'action') {
+        worker.postMessage({
+            ___HANDLER: 'Collab',
+            ___DATA: e.data
+        });
     }
 };

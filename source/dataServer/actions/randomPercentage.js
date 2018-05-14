@@ -11,7 +11,7 @@ module.exports.launch = (action, socketSrv, params) => {
             switch (data.___ACTION) {
                 case 'init':
                     ws.send(action.encodeMessage({
-                        ___TYPE: 'graph',
+                        ___ACTION: 'graph',
                         ___PAYLOAD: action.data
                     }));
                     break;
@@ -23,7 +23,7 @@ module.exports.launch = (action, socketSrv, params) => {
     setInterval(() => {
         action.data.num = Math.random() * 100;
         socketSrv.broadcast(action.encodeMessage({
-            ___TYPE: 'graph',
+            ___ACTION: 'graph',
             ___PAYLOAD: action.data
         }));
     }, 50);

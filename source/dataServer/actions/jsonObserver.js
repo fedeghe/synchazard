@@ -11,7 +11,7 @@ module.exports.launch = (action, socketSrv, params) => {
         host: '$DATASERVER.HOST$',
         actions: {
             update: action.encodeMessage({
-                ___TYPE: 'xhr',
+                ___ACTION: 'xhr',
                 ___FILECHANGED: '$DATASERVER.HOST$/' + resourceFile
             })
         }
