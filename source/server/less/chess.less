@@ -13,34 +13,113 @@
 @outerBorder: rgba(170,170,170, 0.5);
 @innerBorder: rgba(170,170,170, 0.5);
 
+@perc: 80vmin;
+@brd: 5vmin;
+@cellSize: calc((@perc - 2 * @brd) / 8);
+@outLineOut:1vmin;
+@outLineIn:0.3vmin;
+@fontSize:2vmin;
+
+// @perspective: calc(2 * 100vmin);
+@perspective: 2500px;
+
 body {
     background-color: @bgColor;
     padding: 10;
     font-family:verdana;
-    perspective: 3000px;
+    perspective: @perspective;
     .boardContainer{
         transform: rotateX(45deg);
-        width:90vmin;
-        height:90vmin;
+        width:@perc;
+        height:@perc;
         position:relative;
         background-color:@boardBorder;
         margin:0 auto;
         -moz-box-shadow:0.5vmin 0.5vmin 5vmin @boardShadow;
         -webkit-box-shadow:0.5vmin 0.5vmin 5vmin @boardShadow;
         box-shadow:0.5vmin 0.5vmin 5vmin @boardShadow;
+
+        .brdColumns, .brdRows{
+            position:absolute;
+            // border:1px solid red;
+            display:flex;
+        }
+
+        .white {
+            &.brdColumns{
+                flex-direction: row
+            }
+            &.brdRows{
+                flex-direction: column-reverse
+            }
+        }
+        .black {
+            &.brdColumns{
+                flex-direction: row-reverse
+            }
+            &.brdRows{
+                flex-direction: column
+            }
+        }
+
+
+
+        // .brdColumns{
+        //     &.white{
+        //         flex-direction: row-reverse
+        //     }
+        //     &.black{
+        //         flex-direction: row;
+        //     }
+        // }
+        // .brdRows{
+        //     &.white{
+        //         flex-direction: column-reverse
+        //     }
+        //     &.black{
+        //         flex-direction: column;
+        //     }
+        // }
+        .brdRow,.brdColumn{
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            font-weight:bold;
+            font-size:@fontSize;
+        }
+        .brdRows{
+            bottom:@brd;
+            left:0px;
+            width:@brd;
+            height:calc(@cellSize * 8);
+            
+            .brdRow {
+                flex:1;
+                width:@brd;
+                height: @cellSize;
+            }
+            
+        }
+        .brdColumns{
+            bottom:0px;
+            left:@brd;
+            height:@brd;
+            width:calc(@cellSize * 8);
+            .brdColumn {
+                flex:1;
+                width:@cellSize;
+                height: @brd;
+            }
+        }
     }
     .board {
         position:absolute;
-        top:5vmin;
-        left:5vmin;
-        width:80vmin;
-        height:80vmin;
-        outline: 0.5vmin ridge @outerBorder;
+        top:@brd;
+        left:@brd;
+        width:calc(@perc - 2 * @brd);
+        height:calc(@perc - 2 * @brd);
+        outline: @outLineOut ridge @outerBorder;
         margin:0 auto;
-        // margin-top:10vmin;
-        
-        
-        
         
         .row {
             // transform: rotateX(45deg);
@@ -48,14 +127,13 @@ body {
             flex-flow: row wrap;
             .cell{
                 align-items: flex-start;
-                width:10vmin;
-                height:10vmin;
-                line-height:10vmin;
+                width:@cellSize;
+                height:@cellSize;
+                line-height:@cellSize;
                 text-align:center;
                 color:transparent;
-                outline: 0.3vmin inset @innerBorder;
+                outline: @outLineIn inset @innerBorder;
             }
-            
         }
 
         .row {
@@ -79,9 +157,9 @@ body {
         .piece {
             // transform: rotateX(-0deg);
             display:inline-block;
-            font-size: 8vmin;
+            font-size:calc(8 * @cellSize / 10);
             text-align: center;
-            width:10vmin;
+            width:@cellSize;
             z-index:100;
             &.white {
                 color:@whiteColor;

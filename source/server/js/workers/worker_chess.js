@@ -15,9 +15,9 @@ worker.onmessage = function (e) {
         switch (e.data.___ACTION) {
             case 'init':
                 worker.postMessage({
-                    ___HANDLER: 'chess',
                     ___TYPE: 'action',
                     ___ACTION: 'init',
+                    ___HANDLER: 'chess',
                     ___DATA: e.data
                 });
                 break;

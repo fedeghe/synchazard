@@ -53,14 +53,12 @@
          * is up tp the server to decide what the initAction should trigger
          */
         init = ws.onopen = function (e) {
-            // console.clear();
-            // e && console.log(`Connection established with ${e.currentTarget.url}`);
             console.log(`Connection established with ${e ? e.currentTarget.url : url}`);
             ws.send($NS$.utils.createAction(initAction));
         };
 
         send = function (action) {
-            // ensure ti attache the client identifier
+            // ensure the client identifier
             action.___ID = action.___ID || $NS$.id;
             $NS$.active && ws.send($NS$.utils.createAction(action));
         };
@@ -115,7 +113,8 @@
 
         // and close the cli
         if (ws) {
-            ws.onclose = function () { }; // disable any onclose handler first
+            // disable any onclose handler first
+            ws.onclose = function () { };
             ws.close();
         }
     }
