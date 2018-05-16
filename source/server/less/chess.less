@@ -12,6 +12,7 @@
 
 @outerBorder: rgba(170,170,170, 0.5);
 @innerBorder: rgba(170,170,170, 0.5);
+@innerBorderHover: rgba(0,200,0, 1);
 
 @perc: 80vmin;
 @brd: 5vmin;
@@ -21,7 +22,7 @@
 @fontSize:2vmin;
 
 // @perspective: calc(2 * 100vmin);
-@perspective: 2500px;
+@perspective: 100em;
 
 body {
     background-color: @bgColor;
@@ -61,25 +62,6 @@ body {
                 flex-direction: column
             }
         }
-
-
-
-        // .brdColumns{
-        //     &.white{
-        //         flex-direction: row-reverse
-        //     }
-        //     &.black{
-        //         flex-direction: row;
-        //     }
-        // }
-        // .brdRows{
-        //     &.white{
-        //         flex-direction: column-reverse
-        //     }
-        //     &.black{
-        //         flex-direction: column;
-        //     }
-        // }
         .brdRow,.brdColumn{
             display:flex;
             align-items: center;
@@ -126,20 +108,34 @@ body {
             display:flex;
             flex-flow: row wrap;
             .cell{
-                align-items: flex-start;
+                // align-items: flex-start;
                 width:@cellSize;
                 height:@cellSize;
                 line-height:@cellSize;
                 text-align:center;
                 color:transparent;
                 outline: @outLineIn inset @innerBorder;
-            }
-        }
 
-        .row {
-            .cell {
                 background-color: @whiteBackground;
-                
+                &>.piece:hover {
+                    border: @outLineIn solid @innerBorderHover;
+                    outline:0;
+                    width:calc(@cellSize - 2 * @outLineIn);
+                    height:calc(@cellSize - 2 * @outLineIn);
+                    line-height:calc(@cellSize - 2 * @outLineIn);
+                    cursor:pointer;
+                }
+
+                // box-sizing: border-box;
+                // -moz-box-sizing: border-box;
+                // -webkit-box-sizing: border-box;
+                // overflow:hidden;
+
+                -moz-user-select: none;
+                -webkit-user-select: none;
+                -ms-user-select:none;
+                user-select:none;
+                -o-user-select:none;
             }
         }
         
@@ -155,6 +151,7 @@ body {
             }    
         }
         .piece {
+            z-index:500;
             // transform: rotateX(-0deg);
             display:inline-block;
             font-size:calc(8 * @cellSize / 10);
