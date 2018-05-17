@@ -5,7 +5,7 @@
     ],
     "source/server/srv.js": "server -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json",
 
-    "source/server/*.html": "server -vars=vars.json",
+    "source/server/*.html": "server -plugins=malta-browser-refresh[files:\"relative\"] -vars=vars.json",
     "source/server/README.md": "server -vars=vars.json",
     "source/server/less/*.less": "server/css -plugins=malta-less",
 
