@@ -53,15 +53,24 @@ Chess.prototype.initBoard = function () {
         l = 8,
         row,
         cell,
+        tmp1, tmp2,
 
-
-
+        getAlgebraicBorder = function(cl1, b) {
+            return CL.dom.create({ tag: 'div', cls: `${cl1} ${b} ${config.start}` });
+        },
+        boardContainer = CL.dom.create({ tag: 'div', cls: 'boardContainer'}),
         board = CL.dom.create({ tag: 'div', cls: 'board'}),
-        brdColumns = CL.dom.create({tag:'div', cls:'brdColumns '+ config.start}),
-        brdRows = CL.dom.create({ tag: 'div', cls: 'brdRows ' + config.start}),
+        algBorders = {
+            left: getAlgebraicBorder('brdRows', 'left'),
+            right: getAlgebraicBorder('brdRows', 'right'),
+            top: getAlgebraicBorder('brdColumns', 'top'),
+            bottom: getAlgebraicBorder('brdColumns', 'bottom')
+        },
+        brdColumns = CL.dom.create({tag:'div', cls:'brdColumns bottom '+ config.start}),
+        brdRows = CL.dom.create({ tag: 'div', cls: 'brdRows left ' + config.start}),
         self = this;
 
-    this.target.className = 'boardContainer';
+    this.target.className = 'gameContainer';
 
     for (i = 0; i < l; i++) {
         row = CL.dom.create({cls: 'row'});
@@ -72,24 +81,39 @@ Chess.prototype.initBoard = function () {
         }
         board.appendChild(row);
     }
-    this.target.appendChild(brdRows);
-    this.target.appendChild(brdColumns);
+    
 
 
     for (i=0; i < l; i++){
-        brdRows.appendChild(CL.dom.create({
+        algBorders.left.appendChild(CL.dom.create({
             cls: 'brdRow',
+            html: config.rows[i]
+        }));
+        algBorders.right.appendChild(CL.dom.create({
+            cls: 'brdRow',
+            html: config.rows[i]
+        }));
+        algBorders.bottom.appendChild(CL.dom.create({
+            cls: 'brdColumn',
             html: config.columns[i]
         }));
-        brdColumns.appendChild(CL.dom.create({
+        algBorders.top.appendChild(CL.dom.create({
             cls: 'brdColumn',
-            html: config.rows[i]
+            html: config.columns[i]
         }));
     }
 
+    // boardContainer.appendChild(brdRows);
+
+    boardContainer.appendChild(algBorders.left);
+    boardContainer.appendChild(algBorders.right);
+    boardContainer.appendChild(algBorders.bottom);
+    boardContainer.appendChild(algBorders.top);
 
 
-    this.target.appendChild(board);
+
+    boardContainer.appendChild(board);
+    this.target.appendChild(boardContainer);
 };
 
 
