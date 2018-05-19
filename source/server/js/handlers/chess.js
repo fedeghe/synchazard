@@ -9,6 +9,7 @@
     $$chess/config.js$$
     $$chess/exceptions.js$$
     $$chess/Dom.js$$
+    $$chess/Channel.js$$
     $$chess/Chess.js$$
 
     /**

@@ -28,8 +28,9 @@ class Action{
             ws.on('message', (data) => {
                 data = JSON.parse(data);
 
-                const checkActors = $DATASERVER.CHECKACTORS$ ? data.___ACTORS : false;
-                
+                const checkActors = !!$DATASERVER.CHECKACTORS$,
+                    enforceActorsMatch = !!$SHARED.ENFORCEACTORS$;
+                console.log(checkActors, enforceActorsMatch, data.___ACTORS);
                 /**
                  * if the checkActors is enabled on socket srv
                  * then maybe shut it now cause the actors are given and do not match
@@ -49,10 +50,11 @@ class Action{
                      * make the actors optional
                      * yeah is falsy and is perfet as it is
                      */
-                    checkActors && 
+                    checkActors &&
+                    enforceActorsMatch &&
                     data.___ACTORS.split(',').indexOf(self.actors) < 0
                 ) return;
-
+                console.log(data)
                 ws.id = data.___ID;
                 /* forward injecting also the ws, with the id attached */
                 f(data, ws);

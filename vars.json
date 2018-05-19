@@ -5,7 +5,7 @@
         "AUTHOR": "federico.ghedina@gmail.com"
     },
     "NS": "SH",
-    "DOMAIN_OR_IP": "localhost",
+    "DOMAIN_OR_IP": "192.168.2.103",
     "DATASERVER": {
         "HOST": "http://$DOMAIN_OR_IP$:$DATASERVER.PORT$",
         "WS": "ws://$DOMAIN_OR_IP$:$DATASERVER.WSPORT$",
@@ -25,6 +25,9 @@
             "ATTEMPTS": "Infinity",
             "INTERVAL": 5000
         }
+    },
+    "SHARED": {
+        "ENFORCEACTORS": false
     },
     "START_MESSAGE": {
         "WSERVER": " WEB SOCKET SERVER started on port $DATASERVER.WSPORT$",

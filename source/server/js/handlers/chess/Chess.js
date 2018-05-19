@@ -38,8 +38,6 @@ Chess.prototype.renderFEN = function (fen) {
             }
         }
     });
-
-
 };
 
 Chess.prototype.validateFEN = function (fen) {
@@ -53,7 +51,7 @@ Chess.prototype.initBoard = function () {
         l = 8,
         row,
         cell,
-        tmp1, tmp2,
+        tmp1, tmp2, tmp3, tmp4,
 
         getAlgebraicBorder = function(cl1, b) {
             return CL.dom.create({ tag: 'div', cls: `${cl1} ${b} ${config.start}` });
@@ -85,22 +83,20 @@ Chess.prototype.initBoard = function () {
 
 
     for (i=0; i < l; i++){
-        algBorders.left.appendChild(CL.dom.create({
+        tmp1 = CL.dom.create({
             cls: 'brdRow',
             html: config.rows[i]
-        }));
-        algBorders.right.appendChild(CL.dom.create({
-            cls: 'brdRow',
-            html: config.rows[i]
-        }));
-        algBorders.bottom.appendChild(CL.dom.create({
+        }),
+        tmp2 = tmp1.cloneNode(true),
+        tmp3 = CL.dom.create({
             cls: 'brdColumn',
             html: config.columns[i]
-        }));
-        algBorders.top.appendChild(CL.dom.create({
-            cls: 'brdColumn',
-            html: config.columns[i]
-        }));
+        }),
+        tmp4 = tmp3.cloneNode(true);
+        algBorders.left.appendChild(tmp1);
+        algBorders.right.appendChild(tmp2);
+        algBorders.bottom.appendChild(tmp3);
+        algBorders.top.appendChild(tmp4);
     }
 
     // boardContainer.appendChild(brdRows);
@@ -109,18 +105,14 @@ Chess.prototype.initBoard = function () {
     boardContainer.appendChild(algBorders.right);
     boardContainer.appendChild(algBorders.bottom);
     boardContainer.appendChild(algBorders.top);
-
-
-
     boardContainer.appendChild(board);
+
     this.target.appendChild(boardContainer);
 };
 
 
 
 Chess.prototype.handle = function (d) {
-    console.log('handle')
-    console.log(d)
     if (d.___TYPE !== 'action') return;
     switch (d.___ACTION) {
         case 'init':
