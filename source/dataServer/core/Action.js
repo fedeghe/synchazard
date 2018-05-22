@@ -30,7 +30,6 @@ class Action{
 
                 const checkActors = !!$DATASERVER.CHECKACTORS$,
                     enforceActorsMatch = !!$SHARED.ENFORCEACTORS$;
-                console.log(checkActors, enforceActorsMatch, data.___ACTORS);
                 /**
                  * if the checkActors is enabled on socket srv
                  * then maybe shut it now cause the actors are given and do not match
@@ -54,7 +53,7 @@ class Action{
                     enforceActorsMatch &&
                     data.___ACTORS.split(',').indexOf(self.actors) < 0
                 ) return;
-                console.log(data)
+                // console.log(data)
                 ws.id = data.___ID;
                 /* forward injecting also the ws, with the id attached */
                 f(data, ws);

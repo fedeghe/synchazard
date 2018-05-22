@@ -9,7 +9,11 @@ worker.onmessage = function (e) {
     if (e.data.___TYPE === '___INITACTORS') {
         actors = e.data.___ACTORS || '';
     }
-    if (enforceActorsMatch && actors && actors.split(',').indexOf(e.data.___ACTORS) < 0) return;
+    if (enforceActorsMatch) {
+        if (!actors || actors.split(',').indexOf(e.data.___ACTORS) < 0) return;
+    } else {
+        if (actors && actors.split(',').indexOf(e.data.___ACTORS) < 0) return;
+    }
     /** */
 
     if (e.data.___TYPE ===  'action') {
