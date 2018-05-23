@@ -16,7 +16,7 @@ class Action{
     notify(filename, data) {
         console.log("\n--- ACTION NOTIFICATION:");
         console.log(`@ ${new Date}`);
-        console.log(`- filename: ${filename}`)
+        console.log(`- filename: ${filename}`);
         console.log('- data: ');
         console.dir(data);
         console.log("-----\n");
