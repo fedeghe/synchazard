@@ -4,7 +4,7 @@ const fs = require('fs'),
     path = require('path'),
     socketsSrv = require('./core/socketSrv'),
     
-    // At least check for memory leaks
+    // check for memory leaks
     memwatch = require('memwatch-next'),
 
     // get args if any
