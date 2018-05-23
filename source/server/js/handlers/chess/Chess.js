@@ -7,9 +7,15 @@ function Chess(sel) {
     this.down = 'black';
 }
 
+Chess.prototype.cleanup = function () {
+    this.target.innerHTML = '';
+    this.cells = [];
+    return this;
+};
 Chess.prototype.init = function () {
     this.initBoard();
     this.renderFEN(config.pieces.posdown[config.start]);
+    return this;
 };
 
 Chess.prototype.renderFEN = function (fen) {
@@ -116,7 +122,7 @@ Chess.prototype.handle = function (d) {
     if (d.___TYPE !== 'action') return;
     switch (d.___ACTION) {
         case 'init':
-            this.init();
+            this.cleanup().init();
             break;
     }
 };
