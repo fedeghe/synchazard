@@ -4,8 +4,11 @@ const fs = require('fs'),
     path = require('path'),
     socketsSrv = require('./core/socketSrv'),
     
-    /** At least check for memory leaks **/
-    memwatch = require('memwatch-next');
+    // At least check for memory leaks
+    memwatch = require('memwatch-next'),
+
+    // get args if any
+    argz = process.argv.slice(2);
 
 memwatch.on('leak', (info) => {
     console.error('Memory leak detected:\n', info);
@@ -55,4 +58,4 @@ socketsSrv.launch([{
 }, {
     path: 'actions/chess',
     actors: 'chess'
-}], process.argv.slice(2));
+}], argz);
