@@ -63,6 +63,8 @@ Chess.prototype.initBoard = function () {
             return CL.dom.create({ tag: 'div', cls: `${cl1} ${b} ${config.start}` });
         },
         boardContainer = CL.dom.create({ tag: 'div', cls: 'boardContainer'}),
+        headerContainer = CL.dom.create({ tag: 'div', cls: 'headerContainer'}),
+        footerContainer = CL.dom.create({ tag: 'div', cls: 'footerContainer'}),
         board = CL.dom.create({ tag: 'div', cls: 'board'}),
         algBorders = {
             left: getAlgebraicBorder('brdRows', 'left'),
@@ -85,8 +87,6 @@ Chess.prototype.initBoard = function () {
         }
         board.appendChild(row);
     }
-    
-
 
     for (i=0; i < l; i++){
         tmp1 = CL.dom.create({
@@ -113,7 +113,13 @@ Chess.prototype.initBoard = function () {
     boardContainer.appendChild(algBorders.top);
     boardContainer.appendChild(board);
 
+
+
+
+
+    this.target.appendChild(headerContainer);
     this.target.appendChild(boardContainer);
+    this.target.appendChild(footerContainer);
 };
 
 

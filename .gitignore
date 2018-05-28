@@ -2,5 +2,6 @@
 /server
 /dataServer
 /tmp
+/test
 .printVersion
 .buildNum.json

@@ -14,7 +14,8 @@
 @innerBorder: rgba(170,170,170, 0.5);
 @innerBorderHover: rgba(0,200,0, 1);
 
-@perc: 80vmin;
+@perc: 70vmin;
+@rem: 15vmin; 
 @brd: 5vmin;
 @cellSize: calc((@perc - 2 * @brd) / 8);
 @outLineOut:1vmin;
@@ -32,7 +33,12 @@ body {
     .gameContainer{
 
         perspective: @perspective;
-
+        .headerContainer, .footerContainer{
+            transform: rotateX(0deg);
+            height:@rem;
+            border:1px solid red;
+            background-color: blue
+        }
         .boardContainer{
             transform: rotateX(45deg);
             width:@perc;
