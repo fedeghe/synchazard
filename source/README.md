@@ -6,19 +6,19 @@ This small project aims to minimize client side data requests
 
 ---
 
-## How it works  
+### How it works  
 The core are the WebSockets for the communication layer and WebWorkers to put aside the client-side collaboration.  
 The server runs some kind of IFTTT like procedure that could be triggered by anything (fs watching, db hooks, kafka consumers, ...) and using a websocket broadcasts to all connected clients the relevant metadata needed to get the actual data. Now the client decides what to do and, in case it wants to proceed, it knows exactly how to: just forward the metadata to the WebWorker which starts his job (could be a xhr request or could use the websocket as well) using the information contained in the metadata. Once the request is done the response is given to a handler that knows exactly how to consume it.
 
 ---
 
-## Expectations
+### Expectations
 - Get rid of most of API requests triggered by user events.
 - Being able to **really** exploit the state of stateful frontend frameworks.
 - Enable automated synchronization among all clients stairing at the same data.
 
 ---
-## Install dependencies and build
+#### Install dependencies and build
 
 Simply run:
 
