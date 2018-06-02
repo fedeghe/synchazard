@@ -1,0 +1,8 @@
+{
+    "EXE": [
+        "rm -rf dataServer server",
+        "mkdir -p dataServer/core server/js/lib"
+    ],
+    "source/server/js/lib/dataWorker.js": "server/js/lib -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json",
+    "source/dataServer/core/*.js": "dataServer/core -vars=vars.json"
+}

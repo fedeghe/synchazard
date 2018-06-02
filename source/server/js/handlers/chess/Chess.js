@@ -62,7 +62,9 @@ Chess.prototype.initBoard = function () {
         getAlgebraicBorder = function(cl1, b) {
             return CL.dom.create({ tag: 'div', cls: `${cl1} ${b} ${config.start}` });
         },
+        gameContainer = CL.dom.create({ tag: 'div', cls: 'gameContainer'}),
         boardContainer = CL.dom.create({ tag: 'div', cls: 'boardContainer'}),
+        boardersContainer = CL.dom.create({ tag: 'div', cls: 'boardersContainer'}),
         headerContainer = CL.dom.create({ tag: 'div', cls: 'headerContainer'}),
         footerContainer = CL.dom.create({ tag: 'div', cls: 'footerContainer'}),
         board = CL.dom.create({ tag: 'div', cls: 'board'}),
@@ -76,7 +78,7 @@ Chess.prototype.initBoard = function () {
         brdRows = CL.dom.create({ tag: 'div', cls: 'brdRows left ' + config.start}),
         self = this;
 
-    this.target.className = 'gameContainer';
+    // this.target.className = 'gameContainer';
 
     for (i = 0; i < l; i++) {
         row = CL.dom.create({cls: 'row'});
@@ -88,7 +90,7 @@ Chess.prototype.initBoard = function () {
         board.appendChild(row);
     }
 
-    for (i=0; i < l; i++){
+    for (i = 0; i < l; i++) {
         tmp1 = CL.dom.create({
             cls: 'brdRow',
             html: config.rows[i]
@@ -105,25 +107,23 @@ Chess.prototype.initBoard = function () {
         algBorders.top.appendChild(tmp4);
     }
 
-    // boardContainer.appendChild(brdRows);
-
-    boardContainer.appendChild(algBorders.left);
-    boardContainer.appendChild(algBorders.right);
-    boardContainer.appendChild(algBorders.bottom);
-    boardContainer.appendChild(algBorders.top);
+    boardersContainer.appendChild(algBorders.left);
+    boardersContainer.appendChild(algBorders.right);
+    boardersContainer.appendChild(algBorders.bottom);
+    boardersContainer.appendChild(algBorders.top);
+    boardContainer.appendChild(boardersContainer);
     boardContainer.appendChild(board);
-
-
-
-
-
-    this.target.appendChild(headerContainer);
-    this.target.appendChild(boardContainer);
-    this.target.appendChild(footerContainer);
+    gameContainer.appendChild(headerContainer);
+    gameContainer.appendChild(boardContainer);
+    gameContainer.appendChild(footerContainer);
+    this.target.appendChild(gameContainer);
 };
 
 
 
+/**
+ * entry point for events
+ */
 Chess.prototype.handle = function (d) {
     if (d.___TYPE !== 'action') return;
     switch (d.___ACTION) {

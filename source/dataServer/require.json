@@ -10,6 +10,5 @@
     "source/dataServer/package.json": "dataServer -vars=vars.json",
     "source/dataServer/less/*.less": "dataServer/css -plugins=malta-less -vars=vars.json",
     "source/dataServer/js/*.js": "dataServer/js -vars=vars.json",
-    "source/dataServer/js/lib/*.js": "dataServer/js/lib -vars=vars.json",
-    "source/dataServer/srv.js": "dataServer -vars=vars.json -vars=vars.json"
+    "source/dataServer/js/lib/*.js": "dataServer/js/lib -vars=vars.json"
 }
