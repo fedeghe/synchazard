@@ -18,7 +18,7 @@ The server runs some kind of IFTTT like procedure that could be triggered by any
 - Enable automated synchronization among all clients stairing at the same data.
 
 ---
-#### Install dependencies and build
+#### Install dependencies, build libs and samples
 
 Simply run:
 
@@ -119,6 +119,19 @@ This may look wierd cause in the end the ws srv sends to the client one specific
 ... to be continued
 
 ---
+
+### Clean, use it    
+The  default _build_ script creates a lot of sample files useful only as samples, if you want to build the few files really needed to exploit Synchazard just run  
+
+`> npm run base`
+
+then use then on client and on the server, adding _actions_ and _handlers_ files  as needed.
+
+
+
+
+---
+
 
 guess what  
 again ... to be continued, meanwhile feel free to reach me out for any question federico.ghedina@gmail.com
