@@ -3,7 +3,10 @@
   "version": "0.0.2",
   "description": "༺ synchazard ༻",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "memwatch-next": "^0.3.0",
+    "ws": "^5.1.1"
+  },
   "private": true,
   "devDependencies": {
     "malta": "^3.8.3",

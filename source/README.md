@@ -26,15 +26,11 @@ Simply run:
 
 and let it go, the build itself will be fast, and will observe/rebuild anything relevant on the _source_ folder... then open another terminal window.  
 
-One last thing that needs to be installed is a npm dependency on the _dataServer_ folder: `ws` 
-
-`> npm --prefix ./dataServer install`
-
-now everything is set for start.
+Now everything is set, just start it.
 
 `> npm start`  
 
-now open one or more browsers on http://localhost:4000
+and open one or more browsers on http://localhost:4000
 
 ---
 
