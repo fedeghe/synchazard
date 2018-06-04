@@ -65,7 +65,7 @@ the Action on the dataServer, when the client connects, sends back a metadata th
     - server Action: `/dataServer/actions/jsonObserver.js`
 
 - **script**  
-the dataServer Action for this is pretty similar to the _datajson_ sample, there's a simple watcher on a file (`/dataServer/js/lib/sync_script.js`); what is different is the client handler function, it just inject the script. So it is possible for example inject a script that can do quite a lot, on all clients. If You uncomment the right lines and simply save the file then the injected script will inject a rude ingorant assertion tester that will _run on all clients_ a couple of tests, checking that exactly two anchors are in the dom and that the number rendered by the _incremental_ can be correctly coerced to an Integer. The title will show the outcome, in case of errors also the browser console will show the assertion messages.  
+the dataServer Action for this is pretty similar to the _datajson_ sample, there's a simple watcher on a file (`/dataServer/js/lib/sync_script.js`); what is different is the client handler function, it just inject the script. So it is possible for example inject a script that can do quite a lot, on all clients. If You uncomment the right lines and simply save the file then the injected script will inject a rude ingorant assertion tester that will _run on all clients_ a couple of tests, checking that exactly two anchors are in the dom and that a _canvas_ tag is rendered. The title will show the outcome, in case of errors also the browser console will show the assertion messages.  
     - client handler: `/server/js/handlers/script.js`
     - server Action: `/dataServer/actions/script.js`
 
