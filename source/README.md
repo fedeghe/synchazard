@@ -57,7 +57,7 @@ I will assume here that the build is done using the local IP address _192.168.5.
 
 
 ### http://192.168.5.107:4000  
-here there are 6 _handlers_ connected to in _one_ or _two-way_ mode to server _Actions_:  
+here there are 4 _handlers_ connected to in _one_ or _two-way_ mode to server _Actions_:  
 
 - **datajson**  
 the Action on the dataServer, when the client connects, sends back a metadata that contains all information to get the initliaization data; on the client a WebWorker knows he must trigger an xhr request to get the resource (`/dataServer/data1.json`) and once the response is available, it forwards the payload to the handler function; the handler on the client side just uses it to render a title in the middle of the page, an image with a link and a small sentende below the image. The server Action does something more: watches the file and whenever a change occur to it it uses the websocket to broadcast the json to all connected clients, where the data will be consumed by the handler.
@@ -89,7 +89,7 @@ Nothing to do with React, but the name fits in somehow. Here I think there is a 
     - server Action: `/dataServer/actions/reactor.js`
 
 - **incremental**  
-this is the simplest one, the Action broadcasts evey second an incremental counter; the client hnadler simply render it somewhere. 
+this is the simplest one, the Action broadcasts evey second an incremental counter; the client handler simply render it somewhere. 
     - client handler: `/server/js/handlers/incremental.js`
     - server Action: `/dataServer/actions/incremental.js`
 
@@ -125,7 +125,7 @@ The  default _build_ script creates a lot of sample files useful only as samples
 
 `> npm run base`
 
-then use then on client and on the server, adding _actions_ and _handlers_ files  as needed.
+then use them on client and on the server, adding _actions_ and _handlers_ files  as needed.
 
 
 
