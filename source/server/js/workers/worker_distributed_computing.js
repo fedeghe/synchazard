@@ -1,8 +1,6 @@
 "use strict";
 
 var worker = this,
-    enforceActorsMatch = $SHARED.ENFORCEACTORS$,
-    actors = null,
     jobs = {
         generate : function () {
             var res = {
@@ -21,16 +19,8 @@ var worker = this,
     };
 
 worker.onmessage = function (e) {
-    /**  MANDATORY TO SET/CHECK collisions */
-    if (e.data.___TYPE === '___INITACTORS') {
-        actors = e.data.___ACTORS || '';
-    }
-    if (enforceActorsMatch) {
-        if (!actors || actors.split(',').indexOf(e.data.___ACTORS) < 0) return;
-    } else {
-        if (actors && actors.split(',').indexOf(e.data.___ACTORS) < 0) return;
-    }
-    /** */
+
+    $$onMessageLock.js$$
 
     if (e.data.___TYPE === 'action') {
         switch (e.data.___ACTION) {
