@@ -1,0 +1,10 @@
+{
+    "EXE": [
+        "rm -rf server/presentation",
+        "mkdir -p server/presentation/css server/presentation/media",
+        "cp -r source/presentation/lib server/presentation/"
+    ],
+    "source/server/media/synchazard3.svg": "server/presentation/media",
+    "source/presentation/css/style.less": "server/presentation/css -plugins=malta-less",
+    "source/presentation/index.html": "server/presentation"
+}
