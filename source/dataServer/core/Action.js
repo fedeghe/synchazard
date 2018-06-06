@@ -28,8 +28,8 @@ class Action{
             ws.on('message', (data) => {
                 data = JSON.parse(data);
 
-                const checkActors = !!$DATASERVER.CHECKACTORS$,
-                    enforceActorsMatch = !!$SHARED.ENFORCEACTORS$;
+                const checkActors = !!$ACTORS.CHECK_IF_PROVIDED$,
+                    enforceActorsMatch = !!$ACTORS.ENFORCE$;
                 /**
                  * if the checkActors is enabled on socket srv
                  * then maybe shut it now cause the actors are given and do not match
