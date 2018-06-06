@@ -10,8 +10,7 @@
         "HOST": "http://$DOMAIN_OR_IP$:$DATASERVER.PORT$",
         "WS": "ws://$DOMAIN_OR_IP$:$DATASERVER.WSPORT$",
         "WSPORT": 9000,
-        "PORT": 8000,
-        "CHECKACTORS": true
+        "PORT": 8000
     },
     "SERVER": {
         "HTML": {
@@ -26,8 +25,9 @@
             "INTERVAL": 5000
         }
     },
-    "SHARED": {
-        "ENFORCEACTORS": false
+    "ACTORS": {
+        "ENFORCE": false,
+        "CHECK_IF_PROVIDED": true
     },
     "START_MESSAGE": {
         "WSERVER": " WEB SOCKET SERVER started on port $DATASERVER.WSPORT$",
