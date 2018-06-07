@@ -1,6 +1,7 @@
 "use strict";
 
-var worker = this;
+var worker = this,
+    actors = null;
 
 function req(url, cb) {
     var oReq = new XMLHttpRequest();

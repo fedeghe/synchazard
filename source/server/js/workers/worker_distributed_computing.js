@@ -1,6 +1,7 @@
 "use strict";
 
 var worker = this,
+    actors = null,
     jobs = {
         generate : function () {
             var res = {

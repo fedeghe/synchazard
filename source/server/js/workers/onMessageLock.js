@@ -4,8 +4,7 @@
 /*====*/    /* MANDATORY TO SET/CHECK collisions */
 /*====*/    /*-----------------------------------*/
 /*====*/
-/*====*/    var actors = null,
-/*====*/        enforceActorsMatch = $ACTORS.ENFORCE$,
+/*====*/    var enforceActorsMatch = $ACTORS.ENFORCE$,
 /*====*/        gotActorsDontMatch = null;
 /*====*/
 /*====*/    // this is for init settings of the actors,

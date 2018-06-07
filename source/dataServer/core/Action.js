@@ -28,8 +28,8 @@ class Action{
             ws.on('message', (data) => {
                 data = JSON.parse(data);
 
-                const checkActors = !!$ACTORS.CHECK_IF_PROVIDED$,
-                    enforceActorsMatch = !!$ACTORS.ENFORCE$;
+                const checkActors = $ACTORS.CHECK_IF_PROVIDED$,
+                    enforceActorsMatch = $ACTORS.ENFORCE$;
                 /**
                  * if the checkActors is enabled on socket srv
                  * then maybe shut it now cause the actors are given and do not match
@@ -51,7 +51,7 @@ class Action{
                      */
                     checkActors &&
                     enforceActorsMatch &&
-                    data.___ACTORS.split(',').indexOf(self.actors) < 0
+                    (!data.___ACTORS || data.___ACTORS.split(',').indexOf(self.actors) < 0)
                 ) return;
                 // console.log(data)
                 ws.id = data.___ID;
