@@ -17,7 +17,10 @@
     "malta-less": "^1.0.4",
     "malta-markdown-pdf": "^1.0.1",
     "malta-mocha": "^1.0.9",
-    "mocha": "^5.1.1",
+    "chai": "^4.1.2",
+    "lodash": "^4.17.10",
+    "mocha": "^5.2.0",
+    "puppeteer": "^1.4.0",
     "npm-run-all": "^4.1.2"
   },
   "scripts": {
@@ -33,7 +36,8 @@
     "base": "node --no-warnings node_modules/malta/src/bin.js source/base.json",
     "presentation": "node --no-warnings node_modules/malta/src/bin.js source/presentation.json",
     "clean": "node --no-warnings node_modules/malta/src/bin.js source/clean.json",
-    "test": "mocha"
+    "_test": "mocha",
+    "test": "mocha --timeout 10000 test/setup/runner.js test/**.js"
   },
   "author": "federico.ghedina@gmail.com"
 }

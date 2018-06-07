@@ -1,6 +1,7 @@
 {
     "EXE": [
-        "mkdir -p test"
+        "mkdir -p test/setup"
     ],
-    "source/test/*.js": "test -plugins=malta-mocha -vars=vars.json"
+    "source/test/*.js": "test -vars=vars.json",
+    "source/test/setup/*.js": "test/setup -vars=vars.json"
 }
