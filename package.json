@@ -9,7 +9,7 @@
   },
   "private": true,
   "devDependencies": {
-    "malta": "^3.8.3",
+    "malta": "^3.8.9",
     "malta-browser-refresh": "^1.2.1",
     "malta-header-comment": "^1.0.3",
     "malta-js-obfuscator": "^1.0.8",

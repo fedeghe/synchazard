@@ -6,12 +6,16 @@
     },
     "NS": "SH",
     "DOMAIN_OR_IP": "localhost",
+    /*
+    hello there
+    */
     "DATASERVER": {
         "HOST": "http://$DOMAIN_OR_IP$:$DATASERVER.PORT$",
         "WS": "ws://$DOMAIN_OR_IP$:$DATASERVER.WSPORT$",
         "WSPORT": 9000,
         "PORT": 8000
     },
+    //
     "SERVER": {
         "HTML": {
             "TITLE": "Sync hazard",
