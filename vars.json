@@ -7,7 +7,7 @@
     "NS": "SH",
     "DOMAIN_OR_IP": "localhost",
     /*
-    hello there
+    comments possible from malta 3.8.9
     */
     "DATASERVER": {
         "HOST": "http://$DOMAIN_OR_IP$:$DATASERVER.PORT$",
