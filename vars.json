@@ -4,18 +4,22 @@
         "VERSION": "0.0.3",
         "AUTHOR": "federico.ghedina@gmail.com"
     },
+
+    // namespace for the lib
     "NS": "SH",
-    "DOMAIN_OR_IP": "localhost",
+
     /*
-    comments possible from malta 3.8.9
+    setup here the host or ip the app will run in
     */
+    "DOMAIN_OR_IP": "localhost",
+
     "DATASERVER": {
+        "PORT": 8000,
         "HOST": "http://$DOMAIN_OR_IP$:$DATASERVER.PORT$",
-        "WS": "ws://$DOMAIN_OR_IP$:$DATASERVER.WSPORT$",
         "WSPORT": 9000,
-        "PORT": 8000
+        "WS": "ws://$DOMAIN_OR_IP$:$DATASERVER.WSPORT$"
     },
-    //
+
     "SERVER": {
         "HTML": {
             "TITLE": "Sync hazard",
@@ -29,10 +33,15 @@
             "INTERVAL": 5000
         }
     },
-    "ACTORS": {
-        "ENFORCE": false,
-        "CHECK_IF_PROVIDED": true
-    },
+
+    /*
+    Actors check setting
+    --------------------
+    false : no check
+    true : actions must specify actor, the client must pass actors and they must match
+    */
+    "CHECK_ACTORS": false,
+
     "START_MESSAGE": {
         "WSERVER": " WEB SOCKET SERVER started on port $DATASERVER.WSPORT$",
         "DATASERVER": " DATA SERVER started on port $DATASERVER.PORT$",

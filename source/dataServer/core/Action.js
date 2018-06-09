@@ -28,34 +28,19 @@ class Action{
             ws.on('message', (data) => {
                 data = JSON.parse(data);
 
-                const checkActors = $ACTORS.CHECK_IF_PROVIDED$,
-                    enforceActorsMatch = $ACTORS.ENFORCE$;
-                /**
-                 * if the checkActors is enabled on socket srv
-                 * then maybe shut it now cause the actors are given and do not match
-                 */ 
+                /* checkActors ? */
+                const checkActors = $CHECK_ACTORS$;
                 if (
-                    /**
-                     * this first condition makes the data-actor optional on the client,
-                     * thus that check will not shut incoming connection requests from 
-                     * client that do NOT specify an actors list.
-                     * ...but if they are used they should contain one or more of the action's actors
-                     * specified in the dataServer/ws_srv.js, depending on which ones are needed in the page
-                     * 
-                     * if this condition is removed instead, then the client MUST specify the right actors
-                     * otherwise the connection will not be accepted
-                     *
-                     *
-                     * make the actors optional
-                     * yeah is falsy and is perfet as it is
-                     */
                     checkActors &&
-                    enforceActorsMatch &&
                     (!data.___ACTORS || data.___ACTORS.split(',').indexOf(self.actors) < 0)
-                ) return;
-                // console.log(data)
-                ws.id = data.___ID;
+                ) {
+                    console.log(['Actors not matching:', 'expected', self.actors, 'to be in', data.___ACTORS].join(' '));
+                    return;
+                }
+                console.log(['Actors matching:', self.actors, 'found in', data.___ACTORS].join(' '));
+
                 /* forward injecting also the ws, with the id attached */
+                ws.id = data.___ID;
                 f(data, ws);
             });
         });   

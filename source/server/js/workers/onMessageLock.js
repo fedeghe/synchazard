@@ -4,7 +4,7 @@
 /*====*/    /* MANDATORY TO SET/CHECK collisions */
 /*====*/    /*-----------------------------------*/
 /*====*/
-/*====*/    var enforceActorsMatch = $ACTORS.ENFORCE$,
+/*====*/    var enforceActorsMatch = $CHECK_ACTORS$,
 /*====*/        gotActorsDontMatch = null;
 /*====*/
 /*====*/    // this is for init settings of the actors,
@@ -17,7 +17,7 @@
 /*====*/    // this is the check about actors when the
 /*====*/    // worker receives a message from the websocket
 /*====*/    if (gotActorsDontMatch || (enforceActorsMatch && !actors)){
-/*====*/        console.err("Actors mismatch");
+/*====*/        console.log("Actors mismatch");
 /*====*/        console.log('required: ', actors);
 /*====*/        console.log('provided: ', e.data.___ACTORS);
 /*====*/        throw 'Actors area required and are not provided OR does not match';
