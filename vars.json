@@ -41,6 +41,7 @@
     true : actions must specify actor, the client must pass actors and they must match
     */
     "CHECK_ACTORS": false,
+    "NOTIFY_ACTORS_CHECKING": false,
 
     "START_MESSAGE": {
         "WSERVER": " WEB SOCKET SERVER started on port $DATASERVER.WSPORT$",

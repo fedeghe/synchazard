@@ -30,15 +30,18 @@ class Action{
 
                 /* checkActors ? */
                 const checkActors = $CHECK_ACTORS$;
-                if (
-                    checkActors &&
-                    (!data.___ACTORS || data.___ACTORS.split(',').indexOf(self.actors) < 0)
-                ) {
-                    console.log(['Actors not matching:', 'expected', self.actors, 'to be in', data.___ACTORS].join(' '));
-                    return;
+                if (checkActors) {
+                    if (!data.___ACTORS || data.___ACTORS.split(',').indexOf(self.actors) < 0) {
+                        if ($NOTIFY_ACTORS_CHECKING$){
+                            console.log(['Actors not matching:', 'expected', self.actors, 'to be in', data.___ACTORS].join(' '));
+                            console.log('... the message will not be forwarded');
+                        }
+                        return;
+                    } else {
+                        $NOTIFY_ACTORS_CHECKING$ &&
+                        console.log(['Actors matching:', self.actors, 'found in', data.___ACTORS].join(' '));
+                    }
                 }
-                console.log(['Actors matching:', self.actors, 'found in', data.___ACTORS].join(' '));
-
                 /* forward injecting also the ws, with the id attached */
                 ws.id = data.___ID;
                 f(data, ws);
