@@ -6,21 +6,23 @@ A client page loads the dataWorker.js (not meant to be modified) passing within 
     data-worker="/pathTo/webWorker.js"></script>
 ```
 Here is an ordered list of what the `dataWorker` script will do: 
-1) in the global namespace defines an object `$NS$` which will create and hold references to:
-    - **one webWorker**: that will be responsible to define the routing of all incoming data toward handling functions or object instances (thats implements a `handle` function)
-    - all handling functions & instances
-    - two injection functions for scripts and stylesheets
-    - the ~unique identifier of the client
+1) in the global namespace defines an object `$NS$` which will:
+    - create and hold a reference to **one webWorker** (from the data-worker attrsibute) that will be responsible to define the routing of all incoming data toward handling functions or object instances (thats implements a `handle` function)
+    - mantain needed references to all handling functions & instances
+    - expose:
+        - a send function meant to be used to communicate with the server (through the ws created at step #2)
+        - two injection functions for scripts and stylesheets
+        - the ~unique identifier of the client
 
-2) starts and incapsulate the webSocket connection to the server, offering a `send` method necessary for the client to send message to the socket Server when needed, this wrapper method attaches a unique identifier of the client (there is still an extremely remote chance of clientId collision)
-3) Intercept all messages coming from the webSocket and forward to the webworker, decoded as json
-4) On connection automatically sends an `init` request through the webSocket
-5) Automatically attempt to reconnect when the connection is lost for any reason (some config options are available in the vars.json build file) 
-6) Offers a couple of functions to pause & resume the communication. 
-7) Handle an optional parameter that can be passed to the script tag as attrbute which allows to avoid message collision; this topic is the only solution I found when I realized that the webSocket server can run many scripts which could all reply to, for example, a init request and the answer could collide. I'll get back to this topic after describing how the webSocket server lib is working. 
+2) starts and incapsulate the webSocket connection to the server, offering a `$NS$.send` method necessary for the client to send message to the socket Server when needed, this wrapper method attaches a unique identifier of the client (there is still an extremely remote chance of clientId collision)
+3) Intercept all messages incoming through the webSocket toward the client and forward to the webworker, decoded as json
+4) When the connection is successfully established sends an `init` request through the webSocket
+5) Attempt to reconnect when the connection is lost for any reason (some config options are available in the vars.json build file) 
+6) Offers a couple of functions to pause & resume any data flow. 
+7) Handle an optional parameter that can be passed to the script tag as attrbute which allows to avoid message collision; this topic is the only solution I found when I realized that the webSocket server can run many scripts which could all reply to, for example, a init request and the answer could collide between different clients running different workers. I'll get back to this topic after describing how the server-side of _Synchazard_ is working. 
 
 #### Handlers functions and instances
-As should be clear the webworker is meant in a simple case to almost forward the data toward the right comsumer. But where should this consumers be defined? ... in a script similar to the following one:
+As should be clear the webworker is meant in the simplest case to almost forward the data toward the right consumer or _handler_. But where should this _handlers_ be defined? ... in a script! ... similar to the following one:
 ```
 <script>
     // here $NS$ is available and loadScript can be useful    
@@ -28,7 +30,7 @@ As should be clear the webworker is meant in a simple case to almost forward the
     // btw, is possible to directly write che code contained in the injected script
 </script>
 ```
-now myHandler.js will define in $NS$.handlers all consumers needed
+now _myHandler.js_ will define in `$NS$.handlers` all consumers needed in that document
 
 ```
 (function () {
@@ -54,7 +56,6 @@ at that point it makes sense to show how the worker code would fit that particul
 var worker = this;
 
 worker.onmessage = function (e) {
-
     if (e.data.___TYPE === 'action') {
         switch (e.data.___ACTION) {
             case 'one':
@@ -63,20 +64,15 @@ worker.onmessage = function (e) {
                     ___DATA: e.data.___PAYLOAD
                 });
                 break;
-
             case 'two':
                 worker.postMessage({
                     ___HANDLER: 'handlerTwo',
                     ___DATA: e.data.___PAYLOAD
                 });
                 break;
-
-            case 'three':
-                worker.postMessage({
-                    ___HANDLER: 'handlerthree',
-                    ___DATA: e.data.___FILECHANGED
-                });
-                break;
+            //
+            // ....
+            //
             default:
                 worker.postMessage(e.data);
                 break;
@@ -84,3 +80,4 @@ worker.onmessage = function (e) {
     }
 };
 ```
+but the worker could for example forward some data that retrieves asynchronously using the data received.
