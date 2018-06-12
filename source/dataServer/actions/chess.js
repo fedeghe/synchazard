@@ -9,9 +9,6 @@ module.exports.launch = (action, socketSrv, params) => {
     // just listen
     //
     action.onconnection((data, ws) => {
-
-        let newMessage;
-
         if (data.___TYPE === 'action') {
             action.notify(__filename, data);
             switch (data.___ACTION) {
@@ -21,8 +18,6 @@ module.exports.launch = (action, socketSrv, params) => {
                         ___PAYLOAD: action.data.matches
                     }));
                     break;
-
-
             }
         }
     });
