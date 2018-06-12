@@ -127,9 +127,10 @@ The  default _build_ script creates a lot of sample files useful only as samples
 
 then use them on client and on the server, adding _actions_ and _handlers_ files  as needed.
 
+--- 
 
-
-
+### More about client and server data flow
+- [Client flow](server/CLIENT.md)
 ---
 
 
