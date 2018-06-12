@@ -1,4 +1,4 @@
-### The events flow on the cliwent
+### The events flow on the client
 
 A client page loads the dataWorker.js (not meant to be modified) passing within the script tag one information about which worker file to use (this should be implemented), something like: 
 ```
