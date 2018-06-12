@@ -10,7 +10,7 @@ Here is an ordered list of what the `dataWorker` script will do:
     - **one webWorker**: that will be responsible to define the routing of all incoming data toward handling functions or object instances (thats implements a `handle` function)
     - all handling functions & instances
     - two injection functions for scripts and stylesheets
-    - the ~unique identifiner of the client
+    - the ~unique identifier of the client
 
 2) starts and incapsulate the webSocket connection to the server, offering a `send` method necessary for the client to send message to the socket Server when needed, this wrapper method attaches a unique identifier of the client (there is still an extremely remote chance of clientId collision)
 3) Intercept all messages coming from the webSocket and forward to the webworker, decoded as json
