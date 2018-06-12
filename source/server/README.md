@@ -34,15 +34,14 @@ now myHandler.js will define in $NS$.handlers all consumers needed
 (function () {
     $NS$.handlers.handlerOne = function (data) {
         // use data on DOM as needed
-    }
-    $NS$.handlers.handlerTwo = function (data) {
-        // use data on DOM as needed
-    }
+    };
+    $NS$.handlers.handlerTwo = function (data) {};
+    
     // but even an instance (standing it implements the `handle` function)
     function myObj(){}
     myObj.protptype.handle = function (data) {
         // use data as needed
-    }
+    };
     $NS$.handlers.handlerThree = new myObj();
 })();
 ```
@@ -58,21 +57,21 @@ worker.onmessage = function (e) {
 
     if (e.data.___TYPE === 'action') {
         switch (e.data.___ACTION) {
-            case 'json':
+            case 'one':
                 worker.postMessage({
                     ___HANDLER: 'handlerOne',
                     ___DATA: e.data.___PAYLOAD
                 });
                 break;
 
-            case 'graph':
+            case 'two':
                 worker.postMessage({
                     ___HANDLER: 'handlerTwo',
                     ___DATA: e.data.___PAYLOAD
                 });
                 break;
 
-            case 'style':
+            case 'three':
                 worker.postMessage({
                     ___HANDLER: 'handlerthree',
                     ___DATA: e.data.___FILECHANGED
