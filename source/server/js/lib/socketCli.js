@@ -60,6 +60,7 @@
         send = function (action) {
             // ensure the client identifier
             action.___ID = action.___ID || $NS$.id;
+            action.___TYPE = action.___TYPE || 'action';
             $NS$.active && ws.send($NS$.utils.createAction(action));
         };
 
@@ -131,7 +132,7 @@
      * publish some meaningful functions in $NS$ namespace
      */
     $NS$.commands.init = init;
-    $NS$.utils.send = send;
+    $NS$.send = send;
 }());
 
 
