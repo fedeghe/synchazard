@@ -90,7 +90,6 @@ module.exports = (function () {
     /**
      * stay
      */
-    function noop() { }
     function heartbeat() { this.isAlive = true; }
     wss.on('connection', function connection(ws) {
         ws.isAlive = true;
