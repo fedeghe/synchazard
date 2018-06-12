@@ -5,7 +5,7 @@
     ],
     "source/server/srv.js": "server -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json",
     "source/server/*.html": "server -plugins=malta-browser-refresh[files:\"relative\"] -vars=vars.json",
-    "source/server/CLIENT.md": "server -vars=vars.json",
+    "source/server/CLIENT.md": ". -vars=vars.json",
     "source/server/less/*.less": "server/css -plugins=malta-less",
     "source/server/js/*.js": "server/js -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json",
     "source/server/js/workers/*.js": "server/js/workers -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json",

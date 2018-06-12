@@ -130,7 +130,7 @@ then use them on client and on the server, adding _actions_ and _handlers_ files
 --- 
 
 ### More about client and server data flow
-- [Client flow](server/CLIENT.md)
+- [Client flow](CLIENT.md)
 ---
 
 
