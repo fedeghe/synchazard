@@ -45,7 +45,7 @@
         input.focus();
         if (v) {
             input.value = '';
-            $NS$.utils.send({
+            $NS$.send({
                 ___TYPE: 'action',
                 ___ACTION: 'new_message',
                 ___CLIENT: $NS$.id,

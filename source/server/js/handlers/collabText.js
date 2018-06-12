@@ -43,11 +43,9 @@
     };
 
     Collab.prototype.add = function (node) {
-        var self = this,
-            id = node.id,
+        var id = node.id,
             to = setTimeout(function () {}, Infinity),
-            sizes = [0, 0],
-            scrollTop = 0;
+            sizes = [0, 0];
         
         if (id in this.nodes) {
             console.log('Node already added');
@@ -57,7 +55,7 @@
         this.nodes[id] = node;
 
         function updateAll() {
-            $NS$.utils.send({
+            $NS$.send({
                 ___TYPE: 'action',
                 ___ACTION: 'enable',
                 ___VALUE: node.value,
@@ -67,7 +65,7 @@
 
         node.addEventListener('input', function (e) {
             clearTimeout(to);
-            $NS$.utils.send({
+            $NS$.send({
                 ___TYPE: 'action',
                 ___ACTION: 'disable',
                 ___NODEID: id
@@ -85,7 +83,7 @@
             if (w !== sizes[0] || h !== sizes[1]){
                 sizes[0] = w;
                 sizes[1] = h;
-                $NS$.utils.send({
+                $NS$.send({
                     ___TYPE: 'action',
                     ___ACTION: 'resize',
                     ___NODEID: id,

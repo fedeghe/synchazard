@@ -7,7 +7,7 @@
         this.button = document.getElementById(buttonID);
         this.result = document.getElementById(resultID);
         this.button.addEventListener('click', function () {
-            $NS$.utils.send({
+            $NS$.send({
                 ___TYPE: 'action',
                 ___ACTION: 'askMontecarlo'
             });
@@ -17,7 +17,7 @@
     DC.prototype.handle = function (d) {
         if ($NS$.id !== d.___ID) {
             if (confirm('Want to help a fellow client to compute π?')){
-                $NS$.utils.send({
+                $NS$.send({
                     ___TYPE: 'action',
                     ___ACTION: 'acceptedMontecarlo'
                 });
@@ -30,7 +30,7 @@
     $NS$.handlers.DistComp = new DC();
 
     $NS$.handlers.DistCompSendResult = function (data) {
-        $NS$.utils.send({
+        $NS$.send({
             ___TYPE: 'action',
             ___ACTION: 'joinMontecarlo',
             ___DATA: data

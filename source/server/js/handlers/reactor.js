@@ -53,7 +53,7 @@
             }, 
             disable: function () {
                 this._is_disabled = true;
-                $NS$.utils.send({
+                $NS$.send({
                     ___TYPE: 'action',
                     ___ACTION: 'disable',
                     ___NODEID: this.id
@@ -61,7 +61,7 @@
             }, 
             enable: function () {
                 this._is_disabled = false;
-                $NS$.utils.send({
+                $NS$.send({
                     ___TYPE: 'action',
                     ___ACTION: 'enable',
                     ___VALUE: this.node.value,
@@ -109,7 +109,7 @@
             },
             disable: function () {
                 this._is_disabled = true;
-                $NS$.utils.send({
+                $NS$.send({
                     ___TYPE: 'action',
                     ___ACTION: 'disable',
                     ___NODEID: this.id
@@ -117,7 +117,7 @@
             },
             enable: function () {
                 this._is_disabled = false;
-                $NS$.utils.send({
+                $NS$.send({
                     ___TYPE: 'action',
                     ___ACTION: 'enable',
                     ___VALUE: this.node.value,
