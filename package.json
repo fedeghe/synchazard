@@ -36,6 +36,9 @@
     "base": "node --no-warnings node_modules/malta/src/bin.js source/base.json",
     "presentation": "node --no-warnings node_modules/malta/src/bin.js source/presentation.json",
     "clean": "node --no-warnings node_modules/malta/src/bin.js source/clean.json",
+    "buildHello": "node --no-warnings node_modules/malta/src/bin.js source/helloWorld.json",
+    "hello": "npm-run-all --parallel _startWSHELLO _startCLI",
+    "_startWSHELLO": "node dataServer/ws_srvHello.js -vvv",
     "_test": "mocha",
     "test": "mocha --timeout 10000 test/setup/runner.js test/**.js"
   },
