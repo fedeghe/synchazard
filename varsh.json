@@ -1,0 +1,14 @@
+{
+    "DOMAIN_OR_IP": "localhost",
+    "SERVER": {
+        "PORT": 4000
+    },
+    "DATASERVER": {
+        "PORT": 8000,
+        "HOST": "http://$DOMAIN_OR_IP$:$DATASERVER.PORT$"
+    },
+    "START_MESSAGE": {
+        "SERVER": " HELLO WORLD started on http://$DOMAIN_OR_IP$:$SERVER.PORT$/helloWorld.html",
+        "DATASERVER": " DATA SERVER started on port $DATASERVER.PORT$"
+    }
+}
