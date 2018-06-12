@@ -31,7 +31,7 @@
         },
         head = document.getElementsByTagName('head')[0];
 
-    // set actors
+    // set actors, even if null
     $NS$.dataWorker.postMessage({
         ___TYPE: '___INITACTORS',
         ___ACTORS: dataActors
