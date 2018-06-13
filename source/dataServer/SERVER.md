@@ -14,7 +14,7 @@ Then name of the methods, one to launch all implemented Actions (in the socketSr
 ## Finally, the hello world
 As the tradition dictates, I created the simplest example I could imagine:
 - the websocket server starts, launching a single Action.
-- the client(s) show a button `next` and an empty container to be used  to show the first two Fibonacci numbers 0 and 1, but the values comes from the server state, after initialization, thus the values depends on the server state that only at the beginnign will be 0 and 1.
+- the client(s) show a button `next` and an empty container to be used  to show the first two Fibonacci numbers 0 and 1, but the values comes from the server state, after initialization, thus the values rendered depend on the server state and only at the beginning will be 0 and 1.
 - when the page is loaded the client sends the _init_ request (this happens automatically).
 - the server handles the requests sending a unicast message containing the two current Fib values.
 - on the client the worker receives the reply to the init request and update to dom to show the current status.
