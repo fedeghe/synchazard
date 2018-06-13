@@ -20,5 +20,5 @@ memwatch.on('leak', (info) => {
 socketsSrv.launch([{
     path: 'actions/helloWorld',
     deps: { fs: fs, path: path },
-    actors: 'helloWorld'
+    actor: 'helloWorld'
 }], argz);
