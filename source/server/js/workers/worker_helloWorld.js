@@ -1,20 +1,19 @@
 "use strict";
 
-var worker = this,
-    actors = null;
+var actors = null;
 
-worker.onmessage = function (e) {
+self.onmessage = function (e) {
     if (e.data.___TYPE === 'action') {
         switch (e.data.___ACTION) {
             case 'initDone':
             case 'nextDone':
-                worker.postMessage({
+                self.postMessage({
                     ___HANDLER: 'hello',
                     ___DATA: e.data.___PAYLOAD
                 });
                 break;
             case 'boldMe':
-                worker.postMessage({
+                self.postMessage({
                     ___HANDLER: 'hello',
                     ___DATA: e.data.___ACTION
                 });

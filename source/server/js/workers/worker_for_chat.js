@@ -1,22 +1,21 @@
 "use strict";
 
-var worker = this,
-    actors = null;
+var actors = null;
 
-worker.onmessage = function (e) {
+self.onmessage = function (e) {
 
     $$onMessageLock.js$$
 
     if (e.data.___TYPE === 'action') {
         switch(e.data.___ACTION) {
             case 'messages':
-                worker.postMessage({
+                self.postMessage({
                     ___HANDLER: 'Chat',
                     ___DATA: e.data.___PAYLOAD
                 });
                 break;
             case 'message':
-                worker.postMessage({
+                self.postMessage({
                     ___HANDLER: 'Chat',
                     ___DATA: e.data.___PAYLOAD
                 });
@@ -28,7 +27,7 @@ worker.onmessage = function (e) {
              * and decide how to punish him
              */
             case 'self':
-                worker.postMessage({
+                self.postMessage({
                     ___HANDLER: 'ChatSelfHandler',
                     ___DATA: e.data.___PAYLOAD
                 });

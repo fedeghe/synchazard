@@ -1,17 +1,15 @@
 "use strict";
 
-var worker = this,
-    actors = null;
+var actors = null;
 
-
-worker.onmessage = function (e) {
+self.onmessage = function (e) {
     
-    $$onMessageLock.js$$
+    // self.importScripts('onMessageLock.js')
 
     if (e.data.___TYPE === 'action'){
         switch (e.data.___ACTION) {
             case 'init':
-                worker.postMessage({
+                self.postMessage({
                     ___TYPE: 'action',
                     ___ACTION: 'init',
                     ___HANDLER: 'chess',

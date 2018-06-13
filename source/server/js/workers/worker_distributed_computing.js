@@ -1,7 +1,6 @@
 "use strict";
 
-var worker = this,
-    actors = null,
+var actors = null,
     jobs = {
         generate : function () {
             var res = {
@@ -19,26 +18,26 @@ var worker = this,
         }
     };
 
-worker.onmessage = function (e) {
+self.onmessage = function (e) {
 
     $$onMessageLock.js$$
 
     if (e.data.___TYPE === 'action') {
         switch (e.data.___ACTION) {
             case 'requestRandomPairs':
-                worker.postMessage({
+                self.postMessage({
                     ___HANDLER: 'DistComp',
                     ___DATA: e.data
                 });
                 break;
             case 'startComputation':
-                worker.postMessage({
+                self.postMessage({
                     ___HANDLER: 'DistCompSendResult',
                     ___DATA: jobs[e.data.___JOB]()
                 });
                 break;
             case 'endComputation':
-                worker.postMessage({
+                self.postMessage({
                     ___HANDLER: 'DistCompConsumeResult',
                     ___DATA: e.data
                 });

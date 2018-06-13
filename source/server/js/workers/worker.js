@@ -1,7 +1,6 @@
 "use strict";
 
-var worker = this,
-    actors = null;
+var actors = null;
 
 function req(url, cb) {
     var oReq = new XMLHttpRequest();
@@ -13,7 +12,7 @@ function req(url, cb) {
     oReq.send();
 }
 
-worker.onmessage = function (e) {
+self.onmessage = function (e) {
 
     $$onMessageLock.js$$
 
@@ -21,7 +20,7 @@ worker.onmessage = function (e) {
         switch (e.data.___ACTION) {
             case 'xhr': 
                 req(e.data.___FILECHANGED, function (cnt) {
-                    worker.postMessage({
+                    self.postMessage({
                         ___HANDLER: 'render',
                         ___DATA: cnt
                     });
@@ -29,28 +28,28 @@ worker.onmessage = function (e) {
                 break;
 
             case 'json':
-                worker.postMessage({
+                self.postMessage({
                     ___HANDLER: 'render2',
                     ___DATA: e.data.___PAYLOAD
                 });
                 break;
 
             case 'graph':
-                worker.postMessage({
+                self.postMessage({
                     ___HANDLER: 'render3',
                     ___DATA: e.data.___PAYLOAD
                 });
                 break;
 
             case 'style':
-                worker.postMessage({
+                self.postMessage({
                     ___HANDLER: 'render4',
                     ___DATA: e.data.___FILECHANGED
                 });
                 break;
 
             case 'script':
-                worker.postMessage({
+                self.postMessage({
                     ___HANDLER: 'render5',
                     ___DATA: e.data.___FILECHANGED
                 });
@@ -58,7 +57,7 @@ worker.onmessage = function (e) {
 
             
             default:
-                worker.postMessage(e.data);
+                self.postMessage(e.data);
                 break;
         }
     }
