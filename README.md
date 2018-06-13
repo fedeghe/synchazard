@@ -135,7 +135,7 @@ then use them on client and on the server, adding _actions_ and _handlers_ files
 
 ---
 
-## Finally, the hello world
+## hello world
 As the tradition dictates, I created the simplest example I could imagine:
 - the websocket server starts, launching a single Action.
 - the client(s) show a button `next` and an empty container to be used  to show the first two Fibonacci numbers 0 and 1, but the values comes from the server state, after initialization, thus the values rendered depend on the server state and only at the beginning will be 0 and 1.
@@ -161,6 +161,10 @@ Now open the browser at [http://localhost:4000/helloWorld.html](http://localhost
 In the project's root the two _server_ and _dataServer_ folders will contain the minimum code to implement the _hello world_ sample code.
 
 ---
+
+## Actors
+
+... the explanation is coming soon!
 
 
 Guess what?  
