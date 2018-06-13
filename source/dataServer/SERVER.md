@@ -34,5 +34,5 @@ and then
 
 Now open the browser at [http://localhost:4000/helloWorld.html](http://localhost:4000/helloWorld.html) with at least two different browsers and try it out.
 
-In the project's root the two _server_ and _dataServer_ folders will contain the minimum code to implements the _hello world_ sample code.
+In the project's root the two _server_ and _dataServer_ folders will contain the minimum code to implement the _hello world_ sample code.
 
