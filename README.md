@@ -165,8 +165,60 @@ In the project's root the two _server_ and _dataServer_ folders will contain the
 ---
 
 ## Actors
+<img src="https://raw.githubusercontent.com/fedeghe/synchazard/master/source/collsion.png" alt="drawing" width="80%"/>
 
-... the explanation is coming soon ... within 24h!
+What would happen if calling `socketsSrv.launch` we pass among all needed actions two particural ones which replies with structurally similar objects to the same request, for example the _init_?  
+For sure we could take the responsability on the ___ACTION field value of the response to pay it in terms of loss of semantic. Would be a naive solution.
+
+Ignoring it in this case there will be a _race condition_, causing unpredictable and undesired outcomes. 
+
+To avoid the risk and the responsability to manage it I added a pretty simple mechanism that requires on both sides to specify a label and run a check on every worker. 
+
+On the webpage the user is in charge of setting a list of _actors_ (simple labels) that will be allowed.  
+```
+<script src="/pathTo/dataWorker.js"
+    data-worker="/pathTo/webWorker.js"
+    data-actors="dashboardHome,e2etest"
+    ></script>
+```
+
+On the server-side each action launched specifies one single _actor_ that will be enabled to consume the data send by the _action_.
+
+```
+...
+socketsSrv.launch([{
+        path: 'action/myHomeAction'
+        actor: 'dashboardHome'
+    },{
+        path: 'actions/mySettingsAction'
+        actor: 'settings'
+    }
+    ...
+    ... more actions if needed
+    ... 
+], argz);
+```
+
+The actors mechanism is hardcoded and to enable it we should rebuild _Synchazard_ setting to `true` the `CHECK_ACTORS` variable in the `vars.json`.
+
+Now the client can only accept messages coming from _actions_ which declare an _actor_ that is included in those declared by the client. The webworker do not forward the data to the handling function/instance. Since webworker are not extensible, we cannot add a special method to do the job but we can use the _importScript_ to import a checking function on the data and if the actors check fails then simply return.  
+This can be accomplished attaching the following code at the very beginning of the 'onMessage' of every worker:
+
+```
+...
+
+self.onmessage = function (e) {
+
+    self.importScripts('onMessageLock.js');
+    if (filter(e)) return;
+
+    ...
+```
+
+
+Guess what?  
+Again ... to be continued... Meanwhile, feel free to reach out to me with any questions. federico.ghedina@gmail.com
+
 
 
 Guess what?  

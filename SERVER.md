@@ -21,8 +21,7 @@ const fs = require('fs'),
  */
 socketsSrv.launch([{
         path: 'actions/myAction',
-        deps: { fs: fs, path: path },
-        actors: 'jsonObserver'
+        deps: { fs: fs, path: path }
     },
     ...
     ... more actions if needed
