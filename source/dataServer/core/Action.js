@@ -1,25 +1,27 @@
 "use strict";
 class Action{
-    constructor(ss, actors, debug) {
+    constructor(ss, actor, debug) {
         this.ss = ss;
-        this.actors = actors;
+        this.actor = actor;
         this.debug = debug;
         this.data = {};
     }
     setup(d) {this.data = d || {};}
     encodeMessage(action, id) {
         action.___TYPE = 'action';
-        action.___ACTORS = this.actors;
+        action.___ACTOR = this.actor;
         if (id) action.___ID = id;
         return JSON.stringify(action);
     }
     notify(filename, data) {
-        console.log("\n--- ACTION NOTIFICATION:");
-        console.log(`@ ${new Date}`);
-        console.log(`- filename: ${filename}`);
-        console.log('- data: ');
-        console.dir(data);
-        console.log("-----\n");
+        if ($NOTIFY_ACTORS_CHECKING$) {
+            console.log("\n--- ACTION NOTIFICATION:");
+            console.log(`@ ${new Date}`);
+            console.log(`- Action filename: ${filename}`);
+            console.log('- data: ');
+            console.dir(data);
+            console.log("-----\n");
+        }
     }
     decodeMessage(action) {return JSON.parse(action);}
     onconnection(f) {
@@ -31,15 +33,15 @@ class Action{
                 /* checkActors ? */
                 const checkActors = $CHECK_ACTORS$;
                 if (checkActors) {
-                    if (!data.___ACTORS || data.___ACTORS.split(',').indexOf(self.actors) < 0) {
+                    if (!data.___ACTORS || data.___ACTORS.split(',').indexOf(self.actor) < 0) {
                         if ($NOTIFY_ACTORS_CHECKING$){
-                            console.log(['Actors not matching:', 'expected', self.actors, 'to be in', data.___ACTORS].join(' '));
+                            console.log(['Actors not matching:', 'expected', self.actor, 'to be in', data.___ACTORS].join(' '));
                             console.log('... the message will not be forwarded');
                         }
                         return;
                     } else {
                         $NOTIFY_ACTORS_CHECKING$ &&
-                        console.log(['Actors matching:', self.actors, 'found in', data.___ACTORS].join(' '));
+                        console.log(['Actors matching:', self.actor, 'found in', data.___ACTORS].join(' '));
                     }
                 }
                 /* forward injecting also the ws, with the id attached */

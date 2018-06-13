@@ -20,42 +20,42 @@ memwatch.on('leak', (info) => {
 socketsSrv.launch([{
     path: 'actions/jsonObserver',
     deps: { fs: fs, path: path },
-    actors: 'jsonObserver'
+    actor: 'jsonObserver'
 }, {
     path: 'actions/style',
     deps: { fs: fs, path: path },
     cssToObserve: 'css/sync_style.css',
-    actors: 'style'
+    actor: 'style'
 }, {
     path: 'actions/script',
     deps: { fs: fs, path: path },
     jsToObserve: 'js/sync_script.js',
-    actors: 'script'
+    actor: 'script'
 }, {
     path: 'actions/incremental',
-    actors: 'incremental'
+    actor: 'incremental'
 }, {
     path: 'actions/randomPercentage',
-    actors: 'randomPercentage'
+    actor: 'randomPercentage'
 }, {
     path: 'actions/reactor',
-    actors: 'reactor'
+    actor: 'reactor'
 }, {
     path: 'actions/react',
-    actors: 'react'
+    actor: 'react'
 }, {
     path: 'actions/chat',
-    actors: 'chat'
+    actor: 'chat'
 }, {
     path: 'actions/montecarlo',
-    actors: 'montecarlo'
+    actor: 'montecarlo'
 }, {
     path: 'actions/doJob',
-    actors: 'doJob'
+    actor: 'doJob'
 }, {
     path: 'actions/collabText',
-    actors: 'collabText'
+    actor: 'collabText'
 }, {
     path: 'actions/chess',
-    actors: 'chess'
+    actor: 'chess'
 }], argz);

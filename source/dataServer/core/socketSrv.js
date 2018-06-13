@@ -72,8 +72,8 @@ module.exports = (function () {
             actions.forEach(params => {
                 if (!params.path) throw new Error('No path for action');
                 const a = require('../' + params.path),
-                    actors = params.actors,
-                    action = new Action(exp, actors, debug);
+                    actor = params.actor,
+                    action = new Action(exp, actor, debug);
                 debug('> ' + params.path.split('/').pop() + '.js started', 1);
                 a.launch(action, exp, params);
             });
