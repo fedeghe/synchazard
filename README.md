@@ -164,7 +164,7 @@ In the project's root the two _server_ and _dataServer_ folders will contain the
 
 ## Actors
 
-... the explanation is coming soon!
+... the explanation is coming soon ... within 24h!
 
 
 Guess what?  
