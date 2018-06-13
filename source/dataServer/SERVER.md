@@ -1,6 +1,6 @@
 ### The events flow on the server
 
-The server side of Synchazard is composed by two main elements:
+The server side of _Synchazard_ is composed by two main elements:
 1) a wrapper object of the `ws` dependency that after starting the server allows to start one or more _Actions_. This is the file `dataServer/core/socketSrv.js`
 2) the `Action` is a javascript class that basically setup a useful wrapper on those files that will define how the socket server should act when some events occur. Those events could be for example when something relevant happens on a db, when a client sends a message, a webhook call, anything observable programmatically. This file is the `dataServer/core/Action.js`
 
