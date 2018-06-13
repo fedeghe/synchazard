@@ -4,7 +4,8 @@ var actors = null;
 
 self.onmessage = function (e) {
     
-    // self.importScripts('onMessageLock.js')
+    self.importScripts('onMessageLock.js');
+    if (filter(e)) return;
 
     if (e.data.___TYPE === 'action'){
         switch (e.data.___ACTION) {
@@ -17,7 +18,7 @@ self.onmessage = function (e) {
                 });
                 break;
             default:
-                worker.postMessage(e.data);
+                self.postMessage(e.data);
                 break;
         }
     }
