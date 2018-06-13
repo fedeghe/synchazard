@@ -2,12 +2,12 @@ module.exports.launch = (action, socketSrv, params) => {
 
     "use strict";
     const updateState = () => {
-        const newTwo = action.data.one + action.data.two;
-        action.data.one = action.data.two;
-        action.data.two  = newTwo;
-    };  
-        
-    action.setup({ one: 0, two: 1});
+        const newTwo = state.one + state.two;
+        state.one = state.two;
+        state.two  = newTwo;
+    };
+
+    let state = {one: 0, two: 1};
 
     action.onconnection((data, ws) => {
         
@@ -16,14 +16,14 @@ module.exports.launch = (action, socketSrv, params) => {
                 case 'init':
                     ws.send(action.encodeMessage({
                         ___ACTION: 'initDone',
-                        ___PAYLOAD: action.data
+                        ___PAYLOAD: state
                     }));
                     break;
                 case 'next':
                     updateState();
                     socketSrv.broadcast(action.encodeMessage({
                         ___ACTION: 'nextDone',
-                        ___PAYLOAD: action.data
+                        ___PAYLOAD: state
                     }));
                     ws.send(action.encodeMessage({
                         ___ACTION: 'boldMe'
