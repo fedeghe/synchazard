@@ -23,6 +23,11 @@
                 },
                 decodeFunction: function(fun){
                     return new Function('return ' + fun)();
+                },
+                getTime : function () {
+                    var d = new Date(),
+                        n = d.getTimezoneOffset();
+                    return +d + n * 60000;
                 }
             },
             

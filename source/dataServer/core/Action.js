@@ -7,9 +7,16 @@ class Action{
         this.data = {};
     }
     setup(d) {this.data = d || {};}
+    getTime() {
+        var d = new Date(),
+            n = d.getTimezoneOffset();
+        return +d + n * 60000;
+    }
     encodeMessage(action, id) {
         action.___TYPE = 'action';
         action.___ACTOR = this.actor;
+        //time
+        action.___TIME = this.getTime();
         if (id) action.___ID = id;
         return JSON.stringify(action);
     }
