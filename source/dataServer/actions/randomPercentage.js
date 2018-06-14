@@ -6,8 +6,6 @@ module.exports.launch = (action, socketSrv, params) => {
 
     action.onconnection((data, ws) => {
         if (data.___TYPE !== 'action') return;
-
-        action.notify(__filename, data);
         switch (data.___ACTION) {
             case 'init':
                 ws.send(action.encodeMessage({

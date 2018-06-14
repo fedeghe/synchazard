@@ -33,31 +33,29 @@ module.exports.launch = (action, socketSrv, params) => {
     });
 
     action.onconnection((data, ws) => {
-        if (data.___TYPE === 'action') {
-            action.notify(__filename, data);
-            switch (data.___ACTION) {
-                case 'askMontecarlo':
-                    askingingCli = data.___ID;
-                    socketSrv.broadcast(action.data.actions.ask(askingingCli));
+        if (data.___TYPE !== 'action') return;
+        switch (data.___ACTION) {
+            case 'askMontecarlo':
+                askingingCli = data.___ID;
+                socketSrv.broadcast(action.data.actions.ask(askingingCli));
+                break;
+            case 'acceptedMontecarlo':
+                partecipants++;
+                ws.send(action.data.actions.proceed);
+                break;
+            case 'joinMontecarlo': 
+                if (partecipants){
+                    results.inside += data.___DATA.inside;
+                    results.outside += data.___DATA.outside;
+                }
+                partecipants--;
+                if (partecipants == 0) {
+                    socketSrv.broadcast(action.data.actions.completed(
+                        results.outside ? calcPi(results) : 1
+                    ));
                     break;
-                case 'acceptedMontecarlo':
-                    partecipants++;
-                    ws.send(action.data.actions.proceed);
-                    break;
-                case 'joinMontecarlo': 
-                    if (partecipants){
-                        results.inside += data.___DATA.inside;
-                        results.outside += data.___DATA.outside;
-                    }
-                    partecipants--;
-                    if (partecipants == 0) {
-                        socketSrv.broadcast(action.data.actions.completed(
-                            results.outside ? calcPi(results) : 1
-                        ));
-                        break;
-                    }
-                    break;
-            }
+                }
+                break;
         }
     });
 };

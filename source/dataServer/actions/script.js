@@ -23,13 +23,11 @@ module.exports.launch = (action, socketSrv, params) => {
     // INIT
     //
     action.onconnection((data, ws) => {
-        if (data.___TYPE === 'action') {
-            action.notify(__filename, data);
-            switch (data.___ACTION) {
-                case 'init':
-                    ws.send(action.data.actions.update());
-                    break;
-            }
+        if (data.___TYPE !== 'action') return;
+        switch (data.___ACTION) {
+            case 'init':
+                ws.send(action.data.actions.update());
+                break;
         }
     });
 

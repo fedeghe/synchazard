@@ -43,22 +43,20 @@ module.exports.launch = (action, socketSrv, params) => {
 
     // RUN
     action.onconnection((data, ws) => {
-        if (data.___TYPE === 'action') {
-            action.notify(__filename, data);
-            switch (data.___ACTION) {
-                case 'init':
-                    socketSrv.broadcast(getNodes());
-                    break;
-                case 'disable':
-                    socketSrv.broadcast(disable(data.___ID, data.___NODEID));
-                    break;
-                case 'enable':
-                    socketSrv.broadcast(enable(data.___ID, data.___VALUE, data.___NODEID));
-                    break;
-                case 'resize':
-                    socketSrv.broadcast(resize(data.___ID, data.___SIZES, data.___NODEID));
-                    break;
-            }
+        if (data.___TYPE !== 'action') return;
+        switch (data.___ACTION) {
+            case 'init':
+                socketSrv.broadcast(getNodes());
+                break;
+            case 'disable':
+                socketSrv.broadcast(disable(data.___ID, data.___NODEID));
+                break;
+            case 'enable':
+                socketSrv.broadcast(enable(data.___ID, data.___VALUE, data.___NODEID));
+                break;
+            case 'resize':
+                socketSrv.broadcast(resize(data.___ID, data.___SIZES, data.___NODEID));
+                break;
         }
     });
 };
