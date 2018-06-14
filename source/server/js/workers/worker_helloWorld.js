@@ -13,7 +13,10 @@ self.onmessage = function (e) {
             case 'nextDone':
                 self.postMessage({
                     ___HANDLER: 'hello',
-                    ___DATA: e.data.___PAYLOAD
+                    ___DATA: {
+                        ___PAYLOAD: e.data.___PAYLOAD,
+                        ___TIME: e.data.___TIME
+                    }
                 });
                 break;
             case 'boldMe':
