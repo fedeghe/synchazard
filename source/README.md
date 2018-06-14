@@ -146,6 +146,7 @@ As the tradition dictates, I created the simplest example I could imagine:
 - the server will handle the request, unpdate the pair and broadcast the new state.
 - the client(s) worker receives the new pair forward to the right handler which updates the dom.
 - the client that triggered the action will, thx to a parallel unicast message, render the numbers in red & bold.
+- all clients when initialize/update show a round trip time in milliseconds respectively from init request to init values render and from button press to the rendering of the updated values.
 
 
 To build that example simply run:
@@ -158,7 +159,7 @@ and then
 
 Now open the browser at [http://localhost:4000/helloWorld.html](http://localhost:4000/helloWorld.html) with at least two different browsers and try it out.
 
-In case you want to try out using your LAN ip, just put the correct ip in the _DOMAIN\_OR\_IP_ parameter in the `varsh.json` you will find in the root, and rerun `npm run buildhello`.
+In case you want to try out using your LAN ip, just put the correct ip in the _DOMAIN\_OR\_IP_ parameter in the `varshw.json` you will find in the root, and rerun `npm run buildhello`.
 
 In the project's root the two _server_ and _dataServer_ folders will contain the minimum code to implement the _hello world_ sample code.
 
