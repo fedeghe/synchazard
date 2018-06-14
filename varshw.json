@@ -7,6 +7,8 @@
         "PORT": 8000,
         "HOST": "http://$DOMAIN_OR_IP$:$DATASERVER.PORT$"
     },
+    "CHECK_ACTORS": false,
+    "NOTIFY_ACTORS_CHECKING": true,
     "START_MESSAGE": {
         "SERVER": " HELLO WORLD started on http://$DOMAIN_OR_IP$:$SERVER.PORT$/helloWorld.html",
         "DATASERVER": " DATA SERVER started on port $DATASERVER.PORT$"
