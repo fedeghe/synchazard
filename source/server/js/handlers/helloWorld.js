@@ -1,10 +1,12 @@
 (function () {
     "use strict";
     var next = document.getElementById('next'),
-        fib = document.getElementById('fib');
+        fib = document.getElementById('fib'),
+        t;
     console.log(next)
     next.addEventListener('click', function () {
-        $NS$.send({___ACTION: 'next'});
+        t = +new Date;
+        $NS$.send({___ACTION: 'next', ___TIME: t});
     });
     $NS$.handlers.hello = function (d) {
         if (d === 'boldMe') {
@@ -18,12 +20,17 @@
         fib.innerHTML = '';
         var e1 = document.createElement('span'),
             space = document.createElement('span'),
-            e2 = document.createElement('span');
-        e1.innerText = d.one;
-        e2.innerText = d.two;
+            e2 = document.createElement('span'),
+            t = document.createElement('p'),
+            data = d.___PAYLOAD,
+            time = d.___TIME;
+        e1.innerText = data.one;
+        e2.innerText = data.two;
+        t.innerText = 'rtt: ' + ($NS$.utils.getTime() - time);
         space.innerText = ' - ';
         fib.appendChild(e1);
         fib.appendChild(space);
         fib.appendChild(e2);
+        fib.appendChild(t);
     };
 }());

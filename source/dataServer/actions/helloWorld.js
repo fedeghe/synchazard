@@ -16,14 +16,16 @@ module.exports.launch = (action, socketSrv, params) => {
                 case 'init':
                     ws.send(action.encodeMessage({
                         ___ACTION: 'initDone',
-                        ___PAYLOAD: state
+                        ___PAYLOAD: state,
+                        ___TIME: data.___TIME
                     }));
                     break;
                 case 'next':
                     updateState();
                     socketSrv.broadcast(action.encodeMessage({
                         ___ACTION: 'nextDone',
-                        ___PAYLOAD: state
+                        ___PAYLOAD: state,
+                        ___TIME: data.___TIME
                     }));
                     ws.send(action.encodeMessage({
                         ___ACTION: 'boldMe'
