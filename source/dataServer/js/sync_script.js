@@ -34,10 +34,21 @@ console.log('powered by ᚗᚌ');
 //     ).report(
 //         function () {
 //             document.title = `PASSED on ${now}`;
+//             $NS$.send({
+//                 ___ACTION: 'test',
+//                 ___RESULT: 'passed',
+//                 ___CLIENT: navigator.userAgent
+//             });
 //         },
 //         function (e) {
 //             document.title = `FAILED on ${now}`;
 //             console.log(e.join("\n"));
+//             $NS$.send({
+//                 ___ACTION: 'test',
+//                 ___RESULT: 'failed',
+//                 ___ERROR: e.join("\n "),
+//                 ___CLIENT: navigator.userAgent
+//             });
 //         }
 //     );
 // });
