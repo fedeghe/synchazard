@@ -151,7 +151,7 @@ As the tradition dictates, I created the simplest example I could imagine:
 
 To build that example simply run:
 
-    npm run buildHello  
+    npm run build:hello  
 
 and then 
 
