@@ -32,7 +32,6 @@
     "_startWSchess": "node dataServer/ws_srv_chess.js -vvv",
     "inner": "npm --prefix ./dataServer install",
     "build": "node --no-warnings node_modules/malta/src/bin.js source/build.json",
-    "build1": "node --no-warnings node_modules/malta/src/bin.js source/build1.json",
     "base": "node --no-warnings node_modules/malta/src/bin.js source/base.json",
     "presentation": "node --no-warnings node_modules/malta/src/bin.js source/presentation.json",
     "clean": "node --no-warnings node_modules/malta/src/bin.js source/clean.json",
