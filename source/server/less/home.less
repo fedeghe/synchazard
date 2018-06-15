@@ -6,81 +6,86 @@ body{
     margin:0px;
     padding:0px;
     height:100vh;
-}
-h2 {
-    font-size:1.8em;
-    text-align:center;
-}
-h2 sub{font-size: 0.4em}
 
-img {
-    max-width: 60vw;
-    margin-top:60px;
-}
-a{
-    text-decoration: none
+    h2 {
+        font-size:1.8em;
+        text-align:center;
+        & sub{font-size: 0.4em}
+    }
+    
+    img {
+        max-width: 60vw;
+        margin-top:60px;
+    }
+    a{
+        text-decoration: none
+    }
+
+    #presentation{
+        margin-top:100px;
+        font-style: italic;
+        text-align: center;
+    }
+
+    header{
+        height: 6em;
+        line-height: 6em;
+        font-size: 0.6em;
+        font-weight: bold;
+        color: white;
+        position: fixed;
+        top: 0px;
+        width: 94%;
+        padding: 0 3%;
+        & .watch{
+            float:left
+        }
+        & .samples{
+            float:right;
+            color:white
+        }
+    }
+    
+    .clear{
+        clear:both;
+        height:0;
+        line-height:0;
+    }
+    div.exp{
+        height:100vh;
+        background-color: #000;
+        text-align:center;
+        padding:100px 100px
+    }
+    div#graph{
+        margin:0px;
+        padding:0px;
+        outline:0px;
+        border:none;
+        height:100px;
+        position:relative;
+        top:5px;
+        border-bottom-width:100vh;
+        border-bottom-style:solid;
+        border-bottom-color:black;
+    }
+
 }
 
-#presentation{
-    margin-top:100px;
-    font-style: italic;
-    text-align: center;
-}
-
-header{
-    height: 6em;
-    line-height: 6em;
-    font-size: 0.6em;
-    font-weight: bold;
-    color: white;
-    position: fixed;
-    top: 0px;
-    width: 94%;
-    padding: 0 3%;
-}
-header .watch{
-    float:left
-}
-header .samples{
-    float:right;
-    color:white
-}
-.clear{
-    clear:both;
-    height:0;
-    line-height:0;
-}
-div.exp{
-    height:100vh;
-    background-color: #000;
-    text-align:center;
-    padding:100px 100px
-}
-div#graph{
-    margin:0px;
-    padding:0px;
-    outline:0px;
-    border:none;
-    height:100px;
-    position:relative;
-    top:5px;
-    border-bottom-width:100vh;
-    border-bottom-style:solid;
-    border-bottom-color:black;
-}
 
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 420px) {
     body{
         overflow:hidden;
-    }
-    h2 {
-        font-size:1.4em;
-    }
-    p{
-        font-size:0.8em
-    }
-    img {
-        margin-top:20px;
+
+        h2 {
+            font-size:1.4em;
+        }
+        p{
+            font-size:0.8em
+        }
+        img {
+            margin-top:20px;
+        }
     }
 }
