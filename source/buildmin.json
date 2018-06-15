@@ -1,0 +1,6 @@
+{
+    "#source/README.md": ".",
+    "#source/LICENSE.md": ". -vars=vars.json",
+    "#source/server/requiremin.json": true,
+    "#source/dataServer/require.json": true
+}
