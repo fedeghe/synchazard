@@ -202,36 +202,16 @@ socketsSrv.launch([{
 
 The actors mechanism is hardcoded and to enable it we should rebuild _Synchazard_ setting to `true` the `CHECK_ACTORS` variable in the `vars.json`.
 
-Now the client can only accept messages coming from _actions_ which declare an _actor_ that is included in those declared by the client. The webworker do not forward the data to the handling function/instance. Since webworker are not extensible, we cannot add a special method to do the job.  
-Anyway we can attaching the following code at the very beginning of the 'onMessage' of every worker:
+Now the client can only accept messages coming from _actions_ which declare an _actor_ that is included in those declared by the client. The webworker do not forward the data to the handling function/instance. Since webworker are not extensible, we cannot add to it special method to do the job, but we can use the _importScripts_ to make available one function to check if the actors match (in case this option is enabled on build):
 
 ```
 ...
 
+importScripts('actorsDontMatch.js');
+
 self.onmessage = function (e) {
 
-    var enforceActorsMatch = $CHECK_ACTORS$,
-        notifyActorsChecking = $NOTIFY_ACTORS_CHECKING$,
-        gotActorsDontMatch = null;
-
-    // this is for init settings of the actors,
-    // from bro toward the worker
-    if (e.data.___TYPE === '___INITACTORS') {
-        actors = e.data.___ACTORS || '';
-    }
-    gotActorsDontMatch = actors && actors.indexOf(e.data.___ACTOR) < 0;
-
-    // this is the check about actors when the
-    // worker receives a message from the websocket
-    if (gotActorsDontMatch || (enforceActorsMatch && !actors)) {
-        if (notifyActorsChecking) {
-            console.log("Actors mismatch");
-            console.log('required: ', actors);
-            console.log('provided: ', e.data.___ACTOR);
-        }
-        return true;
-    }
-
+    if (actorsDontMatch(e)) return;
 
     ...
 ```
