@@ -11,7 +11,7 @@
     /*
     *
     */
-    "DOMAIN_OR_IP": "192.168.2.103",
+    "DOMAIN_OR_IP": "localhost",
     
     "DATASERVER": {
         "PORT": 8000,
