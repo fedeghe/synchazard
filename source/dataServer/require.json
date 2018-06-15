@@ -1,6 +1,6 @@
 {
     "EXE": [
-        "mkdir -p dataServer/actions dataServer/core dataServer/css dataServer/js/lib dataServer/auth"
+        "mkdir -p dataServer/actions dataServer/core dataServer/css dataServer/js/lib"
     ],
     "source/dataServer/*.js": "dataServer -vars=vars.json",
     "source/dataServer/actions/*.js": "dataServer/actions -vars=vars.json",
