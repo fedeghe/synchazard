@@ -107,7 +107,7 @@ A couple of collaborative textareas where the content and the size is shared amo
 ... to be continued
 
 #### http://192.168.5.107:4000/samples/chat.html  
-A basic chat which will enable messages to be sent to the client that sent one message  (check the console when a message is posted)
+A basic chat which will enable messages to be sent in broadcast and to the client that sent one message (check the console when a message is posted)
 ... to be continued
 
 #### http://192.168.5.107:4000/samples/react.html   
