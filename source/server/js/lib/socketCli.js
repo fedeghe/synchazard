@@ -53,7 +53,7 @@
          * is up tp the server to decide what the initAction should trigger
          */
         init = ws.onopen = function (e) {
-            console.log(`Connection established with ${e ? e.currentTarget.url : url}`);
+            console.log('Connection established with ' + (e ? e.currentTarget.url : url));
             ws.send($NS$.utils.createAction(initAction));
         };
 
@@ -83,10 +83,11 @@
          * a couple of functions just for debugging purposes
          */
         ws.onclose = function (e) {
+            ++reconnectionAttempts;
             console.clear();
             console.log('Connection dropped from server');
             console.log(e);
-            console.log(`... attempting reconnection in 5 seconds (#${++reconnectionAttempts})`);
+            console.log('... attempting reconnection in 5 seconds #' + reconnectionAttempts);
             /**
              * attempt reconnection
              */

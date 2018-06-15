@@ -14,7 +14,7 @@ window.addEventListener("load", function () {
         }
         render() {
             return this.state.time ? 
-                React.createElement('h1', null, 'Hi, it`s ' + this.state.time + ' and sorry but'+ this.props.message + '!')
+                React.createElement('h1', null, 'Hi, it\'s ' + this.state.time + ' and sorry but'+ this.props.message + '!')
                 :
                 null
         }

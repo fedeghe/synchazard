@@ -37,7 +37,7 @@ Chess.prototype.renderFEN = function (fen) {
                     CL.dom.create({
                         tag : 'span',
                         html: tmp,
-                        cls: `piece ${color}`
+                        cls: 'piece ' + color
                     })
                 );
                 cursor += 1;
@@ -60,7 +60,7 @@ Chess.prototype.initBoard = function () {
         tmp1, tmp2, tmp3, tmp4,
 
         getAlgebraicBorder = function(cl1, b) {
-            return CL.dom.create({ tag: 'div', cls: `${cl1} ${b} ${config.start}` });
+            return CL.dom.create({ tag: 'div', cls: [cl1, b, config.start].join(' ') });
         },
         gameContainer = CL.dom.create({ tag: 'div', cls: 'gameContainer'}),
         boardContainer = CL.dom.create({ tag: 'div', cls: 'boardContainer'}),
