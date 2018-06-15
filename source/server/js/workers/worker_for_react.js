@@ -2,18 +2,20 @@
 
 var actors = null;
 
-self.onmessage = function (e) {
-    
-    $$onMessageLock.js$$
+importScripts('actorsDontMatch.js');
 
-    if (e.data.___TYPE === 'action') {
-        switch (e.data.___ACTION) {
-            case 'status': 
-                self.postMessage({
-                    ___HANDLER: 'react',
-                    ___DATA: e.data.___PAYLOAD
-                });
-                break;
-        }
+self.onmessage = function (e) {
+
+    if (actorsDontMatch(e)) return;
+
+    if (e.data.___TYPE !== 'action') return;
+    switch (e.data.___ACTION) {
+        case 'status': 
+            self.postMessage({
+                ___HANDLER: 'react',
+                ___DATA: e.data.___PAYLOAD
+            });
+            break;
     }
+
 };

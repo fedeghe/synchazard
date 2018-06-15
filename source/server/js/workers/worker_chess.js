@@ -2,23 +2,24 @@
 
 var actors = null;
 
-self.onmessage = function (e) {
-    
-    $$onMessageLock.js$$
+importScripts('actorsDontMatch.js');
 
-    if (e.data.___TYPE === 'action'){
-        switch (e.data.___ACTION) {
-            case 'init':
-                self.postMessage({
-                    ___TYPE: 'action',
-                    ___ACTION: 'init',
-                    ___HANDLER: 'chess',
-                    ___DATA: e.data
-                });
-                break;
-            default:
-                self.postMessage(e.data);
-                break;
-        }
+self.onmessage = function (e) {
+
+    if (actorsDontMatch(e)) return;
+
+    if (e.data.___TYPE !== 'action') return;
+    switch (e.data.___ACTION) {
+        case 'init':
+            self.postMessage({
+                ___TYPE: 'action',
+                ___ACTION: 'init',
+                ___HANDLER: 'chess',
+                ___DATA: e.data
+            });
+            break;
+        default:
+            self.postMessage(e.data);
+            break;
     }
 };

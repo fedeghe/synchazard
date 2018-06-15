@@ -2,14 +2,15 @@
 
 var actors = null;
 
+importScripts('actorsDontMatch.js');
+
 self.onmessage = function (e) {
 
-    $$onMessageLock.js$$
+    if (actorsDontMatch(e)) return;
 
-    if (e.data.___TYPE ===  'action') {
-        self.postMessage({
-            ___HANDLER: 'Collab',
-            ___DATA: e.data
-        });
-    }
+    if (e.data.___TYPE !== 'action') return;
+    self.postMessage({
+        ___HANDLER: 'Collab',
+        ___DATA: e.data
+    });    
 };
