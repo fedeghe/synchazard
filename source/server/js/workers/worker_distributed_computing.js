@@ -20,8 +20,7 @@ var actors = null,
 
 self.onmessage = function (e) {
 
-    self.importScripts('onMessageLock.js');
-    if (filter(e)) return;
+    $$onMessageLock.js$$
 
     if (e.data.___TYPE === 'action') {
         switch (e.data.___ACTION) {
