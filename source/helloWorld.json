@@ -9,7 +9,7 @@
     "#source/server/js/helloWorld.js": "server/js -vars=vars.json",
     "#source/server/js/handlers/helloWorld.js": "server/js/handlers -vars=vars.json",
     "#source/server/js/workers/worker_helloWorld.js": "server/js/workers -vars=vars.json",
-    "#source/server/js/workers/onMessageLock.js": "server/js/workers -vars=vars.json",
+    "#source/server/js/workers/actorsDontMatch.js": "server/js/workers -vars=vars.json",
     "#source/server/srv.js": "server -vars=varshw.json",
     "#source/dataServer/actions/helloWorld.js": "dataServer/actions -vars=vars.json",
     "#source/dataServer/ws_srvHello.js": "dataServer -vars=vars.json"
