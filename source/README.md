@@ -42,7 +42,9 @@ Get the current LAN ip of the machine running the server:
 
 assume it is **192.168.5.107**
 
-now open the `vars.json` file in the root of the project and edit the _DOMAIN\_OR\_IP_ value so that it contains the found IP address.  
+now open the `vars.json` file in the root of the project and edit the _DOMAIN\_OR\_IP_ value so that it contains the found IP address, as follows:
+
+    “DOMAIN_OR_IP”: “192.168.5..107”,  
 
 The servers have to be restarted. To do this, go in the terminal where `npm start` has been launched, press `ctrl + c` and relaunch \`em.  
 
