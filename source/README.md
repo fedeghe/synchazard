@@ -18,37 +18,35 @@ The server runs some kind of IFTTT-like procedure that could be triggered by any
 - Enable automated synchronization among all clients staring at the same data.
 
 ---
-#### Install dependencies, build libs and samples
+### Install, build and start
 
-Simply run:
+1. To install & build just run:  
+`> npm i && npm run build`  
+Let it go... the build itself will be fast, and will observe/rebuild anything relevant changed on the _source_ folder.
 
-`> npm i && npm run build`
-
-and let it go... The build itself will be fast, and will observe/rebuild anything relevant on the _source_ folder... Then open another terminal window.  
-
-Now everything is set, just start it.
-
+2. Then open another terminal window, and start it:  
 `> npm start`  
 
-and open one or more browsers on http://localhost:4000
+3. open one or more browsers on http://localhost:4000
 
 ---
 
 ### Test broadcast to more clients within LAN
 
-Get the current LAN ip of the machine running the server:
+Testing all concurrency samples in Your LAN (including for example Your mobile connected to the LAN) is super easy. First get the current LAN ip of the machine running the server:
 
 `> ifconfig en0 | grep inet | grep -v inet6 | awk '{print $2}'`
 
 assume it is **192.168.5.107**
 
-now open the `vars.json` file in the root of the project and edit the _DOMAIN\_OR\_IP_ value so that it contains the found IP address, as follows:
+now open the `vars.json` file in the root of the project and edit the _DOMAIN\_OR\_IP_ keyed value so that it contains the found IP address, as follows:
 
     “DOMAIN_OR_IP”: “192.168.5.107”,  
 
-The servers have to be restarted. To do this, go in the terminal where `npm start` has been launched, press `ctrl + c` and relaunch \`em.  
+The servers have to be restarted. To do this, go in the terminal where `npm start` has been started, press `ctrl + c` and relaunch \`em (in case You stopped the build, Youl will have to rerun it before rerun `npm start`) 
 
-Now on one or more clients, open a browser and navigate to http://192.168.5.107:4000 - this is the port and IP address set as CLIENT.PORT and DOMAIN_OR_IP in the _vars.json_ file.
+Now on one or more clients, open a browser and navigate to http://192.168.5.107:4000  
+this is the port and IP address set as CLIENT.PORT and DOMAIN_OR_IP in the _vars.json_ file.
 
 ---
 
