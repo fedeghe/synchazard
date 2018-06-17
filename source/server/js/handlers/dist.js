@@ -37,6 +37,10 @@
         });
     };
     $NS$.handlers.DistCompConsumeResult = function (data) {
+        /**
+         * here we filter the message on the client,
+         * if the local cli id is not the one given by the server (the original requesting client id)
+         */
         if (data.___ID === $NS$.id){
             $NS$.handlers.DistComp.result.innerHTML = data.___DATA;
         }
