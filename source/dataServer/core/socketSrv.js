@@ -24,7 +24,19 @@ module.exports = (function () {
          */
         broadcast = (data) => {
             wss.clients.forEach((client) => {
+                console.log(client.id)
                 if (client.readyState === WebSocket.OPEN) {
+                    client.send(data, { binary: false });
+                }
+            });
+        },
+
+        /**
+         * unicast torawrd a single client, by id
+         */
+        unicast = (id, data) => {
+            wss.clients.forEach((client) => {
+                if (client.id === id && client.readyState === WebSocket.OPEN) {
                     client.send(data, { binary: false });
                 }
             });
@@ -33,17 +45,17 @@ module.exports = (function () {
         /**
          * Send back something only to the sender
          */
-        send = (data) => {
-            wss.on('connection', function connection(ws) {
-                ws.on('message', function incoming(data) {
-                    wss.clients.forEach(function each(client) {
-                        if (client === ws && client.readyState === WebSocket.OPEN) {
-                            client.send(data, { binary: false });
-                        }
-                    });
-                });
-            });
-        },
+        // send = (data) => {
+        //     wss.on('connection', function connection(ws) {
+        //         ws.on('message', function incoming(data) {
+        //             wss.clients.forEach(function each(client) {
+        //                 if (client === ws && client.readyState === WebSocket.OPEN) {
+        //                     client.send(data, { binary: false });
+        //                 }
+        //             });
+        //         });
+        //     });
+        // },
 
         // let define the debug level function 
         //
@@ -81,9 +93,10 @@ module.exports = (function () {
 
         exp = {
             wss: wss,
-            send: send,
+            // send: send,
             launch: launch,
             broadcast: broadcast,
+            unicast: unicast,
             debug: debug
         };
 
