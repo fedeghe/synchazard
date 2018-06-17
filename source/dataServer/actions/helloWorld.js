@@ -10,7 +10,7 @@ module.exports.launch = (action, socketSrv, params) => {
     let state = {one: 0, two: 1};
 
     action.onconnection((data, ws) => {
-\        if (data.___TYPE !== 'action') return;
+        if (data.___TYPE !== 'action') return;
         switch (data.___ACTION) {
             case 'init':
                 ws.send(action.encodeMessage({
