@@ -30,11 +30,17 @@
                     return +d + n * 60000;
                 }
             },
-            
-            id: getClientID(),
             active: true
         },
         head = document.getElementsByTagName('head')[0];
+
+    /**
+     * set a non overwritable client id, hopefully unique
+     */
+    Object.defineProperty($NS$, 'id', {
+        value: getClientId(),
+        writable: false
+    });
 
     // set actors, even if null
     $NS$.dataWorker.postMessage({
@@ -42,9 +48,7 @@
         ___ACTORS: dataActors
     });
 
-
-
-    function getClientID() {
+    function getClientId() {
         var cookieName = '$NS$clientID',
             cookieValue = localStorage.getItem(cookieName);
         if (cookieValue) {
@@ -54,7 +58,7 @@
                 cookieName,
                 "$NS$_" + Math.abs(~~((+new Date()) * Math.random() * 1E3))
             );
-            return getClientID();
+            return getClientId();
         }
     }
     if (!head) {
@@ -75,6 +79,7 @@
             return l[attr[type]].search(unCached) === 0;
         });
     }
+
     function createTag(tag, att, direct) {
         var res = document.createElement(tag),
             a;
