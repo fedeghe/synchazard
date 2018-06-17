@@ -24,7 +24,6 @@ module.exports = (function () {
          */
         broadcast = (data) => {
             wss.clients.forEach((client) => {
-                console.log(client.id)
                 if (client.readyState === WebSocket.OPEN) {
                     client.send(data, { binary: false });
                 }
