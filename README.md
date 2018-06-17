@@ -18,7 +18,7 @@ The server runs some kind of IFTTT-like procedure that could be triggered by any
 - Enable automated synchronization among all clients staring at the same data.
 
 ---
-### Install, build and start
+### Install deps, build and run the samples
 
 1. To install & build just run:  
 `> npm i && npm run build`  
@@ -214,6 +214,16 @@ self.onmessage = function (e) {
     ...
 ```
 
+---
+
+### Tests  
+I started to write tests, more will come as far as the project becomes stable (in my mind). Btw some basic e2e tests are available (once the samples are running)
+
+   npm test
+
+more are coming....
+
+---
 
 Guess what?  
 Again ... to be continued... Meanwhile, feel free to reach out to me with any questions. federico.ghedina@gmail.com
