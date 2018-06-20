@@ -1,16 +1,16 @@
 module.exports.launch = (action, socketSrv, params) => {
 
     "use strict";
-    
+
     let askingingCli = null,
         partecipants = 0,
         results = {
             inside: 0,
             outside: 0
         };
-    
+
     const calcPi = data => 4 * data.inside / (data.inside + data.outside);
-    
+
     action.setup({
         actions: {
             ask: function (id) {
@@ -18,6 +18,10 @@ module.exports.launch = (action, socketSrv, params) => {
                     ___ACTION: 'requestRandomPairs'
                 }, id);
             },
+            thx: action.encodeMessage({
+                ___ACTION: 'thx',
+                ___MSG: 'thank You very much'
+            }),
             proceed: action.encodeMessage({
                 ___ACTION: 'startComputation',
                 ___JOB: 'generate'
@@ -42,9 +46,10 @@ module.exports.launch = (action, socketSrv, params) => {
             case 'acceptedMontecarlo':
                 partecipants++;
                 ws.send(action.data.actions.proceed);
+                socketSrv.unicast(data.___ID, action.data.actions.thx);
                 break;
-            case 'joinMontecarlo': 
-                if (partecipants){
+            case 'joinMontecarlo':
+                if (partecipants) {
                     results.inside += data.___DATA.inside;
                     results.outside += data.___DATA.outside;
                 }

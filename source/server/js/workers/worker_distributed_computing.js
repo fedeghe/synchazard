@@ -2,16 +2,16 @@
 
 var actors = null,
     jobs = {
-        generate : function () {
+        generate: function () {
             var res = {
-                    inside: 0,
-                    outside: 0
-                },
+                inside: 0,
+                outside: 0
+            },
                 n = 1E7,
                 x, y;
             while (n--) {
                 x = Math.random(),
-                y = Math.random();
+                    y = Math.random();
                 res[Math.sqrt((x * x + y * y)) < 1 ? 'inside' : 'outside']++;
             }
             return res;
@@ -41,6 +41,12 @@ self.onmessage = function (e) {
         case 'endComputation':
             self.postMessage({
                 ___HANDLER: 'DistCompConsumeResult',
+                ___DATA: e.data
+            });
+            break;
+        case 'thx':
+            self.postMessage({
+                ___HANDLER: 'DistCompSayThx',
                 ___DATA: e.data
             });
             break;

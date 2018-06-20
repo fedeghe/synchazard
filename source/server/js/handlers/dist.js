@@ -1,9 +1,9 @@
 (function () {
     "use strict";
-    
-    function DC() {}
-    
-    DC.prototype.set = function (buttonID, resultID){
+
+    function DC() { }
+
+    DC.prototype.set = function (buttonID, resultID) {
         this.button = document.getElementById(buttonID);
         this.result = document.getElementById(resultID);
         this.button.addEventListener('click', function () {
@@ -16,7 +16,7 @@
 
     DC.prototype.handle = function (d) {
         if ($NS$.id !== d.___ID) {
-            if (confirm('Want to help a fellow client to compute π?')){
+            if (confirm('Want to help a fellow client to compute π?')) {
                 $NS$.send({
                     ___TYPE: 'action',
                     ___ACTION: 'acceptedMontecarlo'
@@ -36,6 +36,9 @@
             ___DATA: data
         });
     };
+    $NS$.handlers.DistCompSayThx = function (data) {
+        console.log(data.___MSG);
+    };
     $NS$.handlers.DistCompConsumeResult = function (data) {
         /**
          * here we filter the message on the client,
@@ -43,7 +46,7 @@
          * 
          * if we remove the condition, all connected clients will show the possible most precise pi value
          */
-        if (data.___ID === $NS$.id){
+        if (data.___ID === $NS$.id) {
             $NS$.handlers.DistComp.result.innerHTML = '<span style="font-family:times">&pi;</span> &asymp; ' + data.___DATA;
         }
     };
