@@ -11,7 +11,9 @@ module.exports.launch = (action, socketSrv, params) => {
     action.onconnection((data, ws) => {
 
         let newMessage;
+
         if (data.___TYPE !== 'action') return;
+
         switch (data.___ACTION) {
             case 'init':
                 socketSrv.broadcast(action.encodeMessage({

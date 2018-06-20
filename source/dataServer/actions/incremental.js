@@ -23,7 +23,6 @@ module.exports.launch = (action, socketSrv, params) => {
             ___ACTION: 'json',
             ___PAYLOAD: action.data
         };
-        // action.notify(__filename, act);
         socketSrv.broadcast(action.encodeMessage(act));
     }, 1000);
     

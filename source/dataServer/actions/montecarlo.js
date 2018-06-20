@@ -27,11 +27,10 @@ module.exports.launch = (action, socketSrv, params) => {
                 ___JOB: 'generate'
             }),
             completed: function (r) {
-                var x = action.encodeMessage({
+                return action.encodeMessage({
                     ___ACTION: 'endComputation',
                     ___DATA: r
                 }, askingingCli);
-                return x;
             }
         }
     });

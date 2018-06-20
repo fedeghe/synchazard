@@ -38,16 +38,18 @@ module.exports.launch = (action, socketSrv, params) => {
     // RUN
     action.onconnection((data, ws) => {
         if (data.___TYPE !== 'action') return;
+        var action = null;
         switch (data.___ACTION) {
             case 'init':
-                socketSrv.broadcast(getNodeList());
+                action = getNodeList());
                 break;
             case 'disable':
-                socketSrv.broadcast(disable(data.___ID, data.___NODEID));
+                action = disable(data.___ID, data.___NODEID);
                 break;
             case 'enable':
-                socketSrv.broadcast(enable(data.___ID, data.___VALUE, data.___NODEID));
+                action = enable(data.___ID, data.___VALUE, data.___NODEID);
                 break;
         }
+        action && socketSrv.broadcast(action);
     });
 };
