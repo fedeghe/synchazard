@@ -41,7 +41,7 @@ module.exports.launch = (action, socketSrv, params) => {
         var action = null;
         switch (data.___ACTION) {
             case 'init':
-                action = getNodeList());
+                action = getNodeList();
                 break;
             case 'disable':
                 action = disable(data.___ID, data.___NODEID);
