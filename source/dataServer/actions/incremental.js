@@ -2,8 +2,12 @@ module.exports.launch = (action, socketSrv, params) => {
 
     "use strict";
 
+    // SETUP
+    //
     action.setup({ num: 0 });
     
+    // INIT
+    //
     action.onconnection((data, ws) => {
         if (data.___TYPE !== 'action') return;
         switch (data.___ACTION) {
@@ -17,6 +21,7 @@ module.exports.launch = (action, socketSrv, params) => {
     });
 
     // RUN
+    //
     setInterval(() => {
         action.data.num++;
         var act = {
@@ -25,5 +30,4 @@ module.exports.launch = (action, socketSrv, params) => {
         };
         socketSrv.broadcast(action.encodeMessage(act));
     }, 1000);
-    
 };

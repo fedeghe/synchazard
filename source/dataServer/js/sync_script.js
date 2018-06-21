@@ -17,7 +17,6 @@ console.log('powered by ᚗᚌ');
 //     })();
 // })();
 
-
 // $NS$.utils.injectTester(function () {
 //     var test = $NS$.utils.test,
 //         d = new Date,

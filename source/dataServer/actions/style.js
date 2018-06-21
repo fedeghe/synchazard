@@ -2,10 +2,14 @@ module.exports.launch = (action, socketSrv, params) => {
     
     "use strict";
 
-    const resourceFile = params.cssToObserve;
-
+    const resourceFile = params.cssToObserve,
+        fs = params.deps.fs,
+        path = params.deps.path;
+    
+    // SETUP
+    //
     action.setup({
-        resourceFile: params.deps.path.resolve(__dirname + '/../' + resourceFile),
+        resourceFile: path.resolve(__dirname + '/../' + resourceFile),
         actions: {
             update: function () {
                 return action.encodeMessage({
@@ -16,6 +20,8 @@ module.exports.launch = (action, socketSrv, params) => {
         }
     });
 
+    // INIT
+    //
     action.onconnection((data, ws) => {
         if (data.___TYPE !== 'action') return;
         switch (data.___ACTION) {
@@ -26,7 +32,8 @@ module.exports.launch = (action, socketSrv, params) => {
     });
 
     // RUN
-    params.deps.fs.watchFile(
+    //
+    fs.watchFile(
         action.data.resourceFile,
         () => {
             socketSrv.broadcast(action.data.actions.update());
