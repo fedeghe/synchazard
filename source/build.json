@@ -1,5 +1,6 @@
 {
     "EXE": [
+        "rm -rf dataServer server",
         "mkdir -p docs"
     ],
     "#source/README.md": ".",
