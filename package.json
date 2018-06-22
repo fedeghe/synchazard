@@ -38,6 +38,7 @@
     "base": "node --no-warnings node_modules/malta/src/bin.js source/base.json",
     "presentation": "node --no-warnings node_modules/malta/src/bin.js source/presentation.json",
     "clean": "node --no-warnings node_modules/malta/src/bin.js source/clean.json",
+    "unbuild": "rm -rf dataServer server",
     "build:hello": "node --no-warnings node_modules/malta/src/bin.js source/helloWorld.json",
     "hello": "npm-run-all --parallel _startWSHELLO _startCLI",
     "_startWSHELLO": "node dataServer/ws_srvHello.js -vvv",
