@@ -1,3 +1,4 @@
+"use strict";
 /**
  * BARE MINIMAL SRV to free the user to create virtual hosts
  */
@@ -38,7 +39,10 @@ http.createServer(function (req, res) {
         },
         do404 = () => {
             res.statusCode = 404;
-            res.end("File " + path.basename(pathname) + '  not found!');
+            res.write('<!DOCTYPE html><body style="font-family:verdana">');
+            res.write('<h4>Synchazard: <span style="color:red">404</span></h4>');
+            res.write('<p>Document `' + path.basename(pathname) + '`  not found!</p>');
+            res.end('</body>');
             return;
         };
     
