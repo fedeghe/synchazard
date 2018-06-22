@@ -3,7 +3,6 @@
     var next = document.getElementById('next'),
         fib = document.getElementById('fib'),
         t;
-    console.log(next)
     next.addEventListener('click', function () {
         t = +new Date;
         $NS$.send({___ACTION: 'next', ___TIME: t});
