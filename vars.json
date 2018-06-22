@@ -17,7 +17,12 @@
         "PORT": 8000,
         "HOST": "http://$DOMAIN_OR_IP$:$DATASERVER.PORT$",
         "WSPORT": 9000,
-        "WS": "ws://$DOMAIN_OR_IP$:$DATASERVER.WSPORT$"
+        "WS": "ws://$DOMAIN_OR_IP$:$DATASERVER.WSPORT$",
+        "WATCH_INTERVALS": {
+            "SHORT": 500,
+            "MEDIUM": 5000,
+            "LONG": 10000
+        }
     },
 
     "SERVER": {

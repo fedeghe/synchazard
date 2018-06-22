@@ -35,6 +35,9 @@ module.exports.launch = (action, socketSrv, params) => {
     //
     fs.watchFile(
         action.data.resourceFile,
+        {
+            interval: $DATASERVER.WATCH_INTERVALS.SHORT$
+        },
         () => {
             socketSrv.broadcast(action.data.actions.update());
         }

@@ -29,6 +29,9 @@ module.exports.launch = (action, socketSrv, params) => {
     // RUN
     fs.watchFile(
         path.resolve(__dirname + action.data.resourceFile),
+        {
+            interval: $DATASERVER.WATCH_INTERVALS.SHORT$
+        },
         () => {
             socketSrv.broadcast(action.data.actions.update);
         }
