@@ -1,9 +1,9 @@
 {
-    "title": "SyncHazard",
-    "version": "0.0.3", 
+    "title": "Sync<span class='thunder'>h</span>azard",
+    "version": "0.0.3",
     "content": "alive web pages",
     "what": {
         "img": "/media/synchazard4.svg",
-        "url": "https://github.com/fedeghe/synchazard" 
+        "url": "https://github.com/fedeghe/synchazard"
     }
 }
