@@ -1,0 +1,7 @@
+{
+    "EXE": [
+        "mkdir -p dataServer server"
+    ],
+    "#source/samples/chess/server/require.json": true,
+    "#source/samples/chess/dataServer/require.json": true
+}

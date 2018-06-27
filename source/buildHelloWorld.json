@@ -1,0 +1,7 @@
+{
+    "EXE": [
+        "mkdir -p dataServer server"
+    ],
+    "#source/samples/helloworld/server/require.json": true,
+    "#source/samples/helloworld/dataServer/require.json": true
+}

@@ -1,0 +1,10 @@
+{
+    "EXE": [
+        "mkdir -p server/css server/js/handlers server/js/workers"
+    ],
+    "source/samples/helloworld/server/*.html": "server -vars=vars.json",
+    "source/samples/helloworld/server/less/*.less": "server/css -plugins=malta-less",
+    "source/samples/helloworld/server/js/*.js": "server/js -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json",
+    "source/samples/helloworld/server/js/workers/*.js": "server/js/workers -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json",
+    "source/samples/helloworld/server/js/handlers/*.js": "server/js/handlers -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json"
+}

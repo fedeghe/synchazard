@@ -56,8 +56,5 @@ socketsSrv.launch([{
     path: 'actions/collabText',
     actor: 'collabText'
 }, {
-    path: 'actions/chess',
-    actor: 'chess'
-    }, {
     path: 'actions/test'
 }], argz);

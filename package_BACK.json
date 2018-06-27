@@ -1,0 +1,49 @@
+{
+  "name": "synchazard",
+  "version": "0.0.2",
+  "description": "༺ synchazard ༻",
+  "main": "index.js",
+  "dependencies": {
+    "memwatch-next": "^0.3.0",
+    "ws": "^5.1.1"
+  },
+  "private": true,
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "lodash": "^4.17.10",
+    "malta": "^3.8.11",
+    "malta-browser-refresh": "^1.2.1",
+    "malta-header-comment": "^1.0.3",
+    "malta-js-obfuscator": "^1.0.8",
+    "malta-js-uglify": "^1.0.2",
+    "malta-less": "^1.0.4",
+    "malta-markdown-pdf": "^1.0.1",
+    "malta-mocha": "^1.0.9",
+    "malta-rename": "^1.0.2",
+    "mocha": "^5.2.0",
+    "npm-run-all": "^4.1.2",
+    "puppeteer": "^1.4.0"
+  },
+  "scripts": {
+    "start": "npm-run-all --parallel _startWS _startSRV _startCLI",
+    "startChess": "npm-run-all --parallel _startWSchess _startSRV _startCLI",
+    "_startWS": "node dataServer/ws_srv.js -vvv",
+    "_startSRV": "node dataServer/srv.js",
+    "_startCLI": "node server/srv.js",
+    "_startWSchess": "node dataServer/ws_srv_chess.js -vvv",
+    "inner": "npm --prefix ./dataServer install",
+    "build": "node --no-warnings node_modules/malta/src/bin.js source/build.json",
+    "___build:watch": "node --no-warnings node_modules/malta/src/bin.js source/builddev.json",
+    "___build:min": "node --no-warnings node_modules/malta/src/bin.js source/buildmin.json",
+    "base": "node --no-warnings node_modules/malta/src/bin.js source/base.json",
+    "presentation": "node --no-warnings node_modules/malta/src/bin.js source/presentation.json",
+    "clean": "node --no-warnings node_modules/malta/src/bin.js source/clean.json",
+    "unbuild": "rm -rf dataServer server",
+    "build:hello": "node --no-warnings node_modules/malta/src/bin.js source/helloWorld.json",
+    "hello": "npm-run-all --parallel _startWSHELLO _startCLI",
+    "_startWSHELLO": "node dataServer/ws_srvHello.js -vvv",
+    "_test": "mocha",
+    "test": "mocha --timeout 10000 test/setup/runner.js test/**.js"
+  },
+  "author": "federico.ghedina@gmail.com"
+}

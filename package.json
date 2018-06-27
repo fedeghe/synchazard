@@ -11,7 +11,7 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "lodash": "^4.17.10",
-    "malta": "^3.8.9",
+    "malta": "^3.8.11",
     "malta-browser-refresh": "^1.2.1",
     "malta-header-comment": "^1.0.3",
     "malta-js-obfuscator": "^1.0.8",
@@ -26,24 +26,19 @@
   },
   "scripts": {
     "start": "npm-run-all --parallel _startWS _startSRV _startCLI",
-    "startChess": "npm-run-all --parallel _startWSchess _startSRV _startCLI",
+    "build": "node --no-warnings node_modules/malta/src/bin.js source/build.json",
+    "build:home": "run-s build sample:home",
+    "build:hello": "run-s build sample:hello",
+    "build:chess": "run-s build sample:chess",
+    "sample:home": "node --no-warnings node_modules/malta/src/bin.js source/buildHome.json",
+    "sample:hello": "node --no-warnings node_modules/malta/src/bin.js source/buildHelloWorld.json",
+    "sample:chess": "node --no-warnings node_modules/malta/src/bin.js source/buildChess.json",
+    "clean": "node --no-warnings node_modules/malta/src/bin.js source/clean.json",
+    "test": "mocha --timeout 10000 test/setup/runner.js test/**.js",
+
     "_startWS": "node dataServer/ws_srv.js -vvv",
     "_startSRV": "node dataServer/srv.js",
-    "_startCLI": "node server/srv.js",
-    "_startWSchess": "node dataServer/ws_srv_chess.js -vvv",
-    "inner": "npm --prefix ./dataServer install",
-    "build": "node --no-warnings node_modules/malta/src/bin.js source/build.json",
-    "build:watch": "node --no-warnings node_modules/malta/src/bin.js source/builddev.json",
-    "build:min": "node --no-warnings node_modules/malta/src/bin.js source/buildmin.json",
-    "base": "node --no-warnings node_modules/malta/src/bin.js source/base.json",
-    "presentation": "node --no-warnings node_modules/malta/src/bin.js source/presentation.json",
-    "clean": "node --no-warnings node_modules/malta/src/bin.js source/clean.json",
-    "unbuild": "rm -rf dataServer server",
-    "build:hello": "node --no-warnings node_modules/malta/src/bin.js source/helloWorld.json",
-    "hello": "npm-run-all --parallel _startWSHELLO _startCLI",
-    "_startWSHELLO": "node dataServer/ws_srvHello.js -vvv",
-    "_test": "mocha",
-    "test": "mocha --timeout 10000 test/setup/runner.js test/**.js"
+    "_startCLI": "node server/srv.js"
   },
   "author": "federico.ghedina@gmail.com"
 }
