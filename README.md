@@ -18,7 +18,7 @@ The server runs some kind of IFTTT-like procedure that could be triggered by any
 - Enable automated synchronization among all clients staring at the same data.
 
 ---
-### Install deps, build and run the samples
+### Install deps, build and run ...
 
 1. To install & build just run:  
 `> npm i && npm run build`  
@@ -28,6 +28,21 @@ The build itself will be fast, and will build the `server` and `dataServer` fold
 `> npm start`  
 
 3. Now open one or more browsers on http://localhost:4000
+
+4. Opt for building the samples cause You just launched the raw lib build, there is nothing but the library itself, no samples, just an empty naked webpage.
+---
+### Build samples 
+Here you can build:  
+- a non trivial amount of sample code, which covers almost all the features provided:  
+    `npm run build:home`  
+    then  
+    `npm start`  
+- a minimalistic due _helloworld_ that shows the simplest example I could imagine  
+    `npm run build:hello`  
+    then  
+    `npm start`  
+
+in both cases the _terminal_ will invite You to visit http://localhost:4000
 
 ---
 
@@ -50,13 +65,14 @@ this is the port and IP address set as CLIENT.PORT and DOMAIN_OR_IP in the _vars
 
 ---
 
-### What are in the samples
+### More about the _build:home_ samples
 
 I will assume here that the build is done using the local IP address _192.168.5.107_ and that the ports have not been changed.
 
 
 
-### http://192.168.5.107:4000  
+#### @ url: http://192.168.5.107:4000  
+
 here there are 4 _handlers_ connected to in _one_ or _two-way_ mode to server _Actions_:  
 
 - **datajson**  
@@ -81,7 +97,7 @@ The Action on the dataServer regularly broadcasts a random number &isin; [0,100]
 
 
 
-#### http://192.168.5.107:4000/samples/reactor.html
+#### @url:  http://192.168.5.107:4000/samples/reactor.html
 
 - **reactor**  
 Nothing to do with React, but the name fits somehow. Here I think there is a clearer hazard. And maybe it would be boring to read a long pseudo-description of the flow. But it's worth trying to summarize the functionality. I wrote a small client library to enable on targeted `input[text]` and `textarea` tags some sort of concurrrency. Basically, whenever the client Alice start typing in one of the target tags, immediately all other clients can see the tag being edited as disabled, when Alice leaves the focus on the tag, all other clients will see that tag enabled and filled with the value Alice entered.
@@ -98,36 +114,28 @@ This is the simplest one. The Action broadcasts every second an incremental coun
 
 Almost in all cases a WebWorker runs a `proxy` between the client-side socket and the handler function, allowing, for example, for the _datajson_ example to receive simple metadata sent by the dataServer which contains all the information needed to get the real resource. The webWorker then decides in this case to start an xhr request for the resource and when the data is available it forwards all to the handler functions that decide how to consume it. In any case the WebWorker decides in the end which one is the handler function that will consume the data. The WebWorker used in the main example is `/server/js/workers/worker.js`
 
-#### http://192.168.5.107:4000/samples/distcomp.html 
+#### @url:  http://192.168.5.107:4000/samples/distcomp.html 
 A raw, distributed computing sample to get a (bad) value for &pi; using other clients that will accept to help. 
 ... to be continued
 
-#### http://192.168.5.107:4000/samples/collabText.html  
+#### @url:  http://192.168.5.107:4000/samples/collabText.html  
 A couple of collaborative textareas where the content and the size is shared among all clients
 ... to be continued
 
-#### http://192.168.5.107:4000/samples/chat.html  
+#### @url:  http://192.168.5.107:4000/samples/chat.html  
 A basic chat which will enable messages to be sent in broadcast and to the client that sent one message (check the console when a message is posted)
 ... to be continued
 
-#### http://192.168.5.107:4000/samples/react.html   
+#### @url:  http://192.168.5.107:4000/samples/react.html   
 The most simple immaginable example using React
 ... to be continued
 
-#### http://192.168.5.107:4000/samples/job.html
+#### @url:  http://192.168.5.107:4000/samples/job.html
 This may look wierd because in the end the ws srv sends one specific function to the client that will be used to make a naive calculation.   
 ... to be continued
 
 ---
 
-### Clean, use it    
-The  default _build_ script creates a lot of sample files useful only as samples. If you want to build the few files really needed to exploit Synchazard just run  
-
-`> npm run base`
-
-then use them on client and on the server, adding _actions_ and _handlers_ files  as needed.
-
---- 
 
 ### More about client and server data flow
 - [Client flow](docs/CLIENT.md)
@@ -155,7 +163,7 @@ To build that example simply run:
 
 and then 
 
-    npm run hello
+    npm start
 
 Now open the browser at [http://localhost:4000/](http://localhost:4000/) with at least two different browsers and try it out.
 
@@ -217,7 +225,7 @@ self.onmessage = function (e) {
 ---
 
 ### Tests  
-I started to write tests, more will come as far as the project becomes stable (in my mind). Btw some basic e2e tests are available (once the samples are running)
+I started to write tests, more will come as far as the project becomes stable (in my mind). Btw some basic e2e tests are available (once the `home` code is started)
 
    npm test
 
