@@ -1,9 +1,10 @@
 {
     "EXE": [
-        "mkdir -p dataServer/core dataserver/js/lib"
+        "mkdir -p dataServer/core dataServer/actions dataserver/js/lib"
     ],
     "source/dataServer/*.js": "dataServer -vars=vars.json",    
     "source/dataServer/core/*.js": "dataServer/core -vars=vars.json",
+    "source/dataServer/actions/*.js": "dataServer/actions -vars=vars.json",
     "source/dataServer/js/*.js": "dataServer/js -vars=vars.json",
     "source/dataServer/js/lib/*.js": "dataServer/js/lib -vars=vars.json",
     "source/dataServer/SERVER.md": "docs -vars=vars.json"

@@ -25,20 +25,22 @@
     "puppeteer": "^1.4.0"
   },
   "scripts": {
-    "start": "npm-run-all --parallel _startWS _startSRV _startCLI",
+    "start": "npm-run-all --parallel _start:ws _start:srv _start:cli",
     "build": "node --no-warnings node_modules/malta/src/bin.js source/build.json",
-    "build:home": "run-s build sample:home",
-    "build:hello": "run-s build sample:hello",
-    "build:chess": "run-s build sample:chess",
-    "sample:home": "node --no-warnings node_modules/malta/src/bin.js source/buildHome.json",
-    "sample:hello": "node --no-warnings node_modules/malta/src/bin.js source/buildHelloWorld.json",
-    "sample:chess": "node --no-warnings node_modules/malta/src/bin.js source/buildChess.json",
+    "build:home": "run-s build _sample:home",
+    "build:hello": "run-s build _sample:hello",
+    "build:chess": "run-s build _sample:chess",
+    "docs": "node --no-warnings node_modules/malta/src/bin.js source/docs.json",
     "clean": "node --no-warnings node_modules/malta/src/bin.js source/clean.json",
+    "cleanall": "node --no-warnings node_modules/malta/src/bin.js source/cleanall.json",
     "test": "mocha --timeout 10000 test/setup/runner.js test/**.js",
 
-    "_startWS": "node dataServer/ws_srv.js -vvv",
-    "_startSRV": "node dataServer/srv.js",
-    "_startCLI": "node server/srv.js"
+    "_sample:home": "node --no-warnings node_modules/malta/src/bin.js source/buildHome.json",
+    "_sample:hello": "node --no-warnings node_modules/malta/src/bin.js source/buildHelloWorld.json",
+    "_sample:chess": "node --no-warnings node_modules/malta/src/bin.js source/buildChess.json",
+    "_start:ws": "node dataServer/ws_srv.js -vvv",
+    "_start:srv": "node dataServer/srv.js",
+    "_start:cli": "node server/srv.js"
   },
   "author": "federico.ghedina@gmail.com"
 }

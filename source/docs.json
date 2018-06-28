@@ -1,0 +1,7 @@
+{
+    "EXE": [
+        "rm -rf docs"
+    ],
+    "#source/README.md": ".",
+    "#source/LICENSE.md": ". -vars=vars.json"
+}
