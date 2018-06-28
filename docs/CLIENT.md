@@ -6,7 +6,7 @@ A client page loads the dataWorker.js (not meant to be modified) passing within 
     data-worker="/pathTo/webWorker.js"></script>
 ```
 Here is an ordered list of what the `dataWorker` script will do: 
-1) in the global namespace defines an object `$NS$` which will:
+1) in the global namespace defines an object `SH` which will:
     - create and hold a reference to **one webWorker** (from the data-worker attrsibute) that will be responsible to define the routing of all incoming data toward handling functions or object instances (thats implements a `handle` function)
     - mantain needed references to all handling functions & instances
     - expose:
@@ -14,7 +14,7 @@ Here is an ordered list of what the `dataWorker` script will do:
         - two injection functions for scripts and stylesheets
         - the ~unique identifier of the client
 
-2) starts and incapsulate the webSocket connection to the server, offering a `$NS$.send` method necessary for the client to send message to the socket Server when needed, this wrapper method attaches a unique identifier of the client (there is still an extremely remote chance of clientId collision)
+2) starts and incapsulate the webSocket connection to the server, offering a `SH.send` method necessary for the client to send message to the socket Server when needed, this wrapper method attaches a unique identifier of the client (there is still an extremely remote chance of clientId collision)
 3) Intercept all messages incoming through the webSocket toward the client and forward to the webworker, decoded as json
 4) When the connection is successfully established sends an `init` request through the webSocket
 5) Attempt to reconnect when the connection is lost for any reason (some config options are available in the vars.json build file) 
@@ -25,26 +25,26 @@ Here is an ordered list of what the `dataWorker` script will do:
 As should be clear the webworker is meant in the simplest case to almost forward the data toward the right consumer or _handler_. But where should this _handlers_ be defined? ... in a script! ... similar to the following one:
 ```
 <script>
-    // here $NS$ is available and loadScript can be useful    
-    $NS$.utils.loadScript('/js/handlers/myHandler.js');
+    // here SH is available and loadScript can be useful    
+    SH.utils.loadScript('/js/handlers/myHandler.js');
     // btw, is possible to directly write che code contained in the injected script
 </script>
 ```
-now _myHandler.js_ will define in `$NS$.handlers` all consumers needed in that document
+now _myHandler.js_ will define in `SH.handlers` all consumers needed in that document
 
 ```
 (function () {
-    $NS$.handlers.handlerOne = function (data) {
+    SH.handlers.handlerOne = function (data) {
         // use data on DOM as needed
     };
-    $NS$.handlers.handlerTwo = function (data) {};
+    SH.handlers.handlerTwo = function (data) {};
     
     // but even an instance (standing it implements the `handle` function)
     function myObj(){}
     myObj.protptype.handle = function (data) {
         // use data as needed
     };
-    $NS$.handlers.handlerThree = new myObj();
+    SH.handlers.handlerThree = new myObj();
 })();
 ```
 

@@ -1,4 +1,4 @@
-### The events flow on the server
+### The events flow on the (socket) server
 
 The server-side of _Synchazard_ is composed by two main elements:
 1) a wrapper object of the `ws` dependency that after starting the server allows to start one or more _Actions_. This is the file `dataServer/core/socketSrv.js`

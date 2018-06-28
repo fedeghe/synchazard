@@ -1,4 +1,4 @@
-### The events flow on the server
+### The events flow on the (socket) server
 
 The server-side of _Synchazard_ is composed by two main elements:
 1) a wrapper object of the `ws` dependency that after starting the server allows to start one or more _Actions_. This is the file `dataServer/core/socketSrv.js`
@@ -62,7 +62,7 @@ module.exports.launch = (action, socketSrv, params) => {
 
 here to send a unicast message to the client that connected we should use:
 
-    $NS$.send(action.encodeMessage({... here our message object ...}))  
+    SH.send(action.encodeMessage({... here our message object ...}))  
 
 to broadcast a message to all connected clients instead we should use:
 

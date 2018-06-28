@@ -34,13 +34,13 @@ The build itself will be fast, and will build the `server` and `dataServer` fold
 ### Build samples 
 Here you can build:  
 - a non trivial amount of sample code, which covers almost all the features provided:  
-    `npm run build:home`  
+    `> npm run build:home`  
     then  
-    `npm start`  
+    `> npm start`  
 - a minimalistic due _helloworld_ that shows the simplest example I could imagine  
-    `npm run build:hello`  
+    `> npm run build:hello`  
     then  
-    `npm start`  
+    `> npm start`  
 
 in both cases the _terminal_ will invite You to visit http://localhost:4000
 
@@ -159,11 +159,11 @@ As the tradition dictates, I created the simplest example I could imagine:
 
 To build that example simply run:
 
-    npm run build:hello  
+    > npm run build:hello  
 
 and then 
 
-    npm start
+    > npm start
 
 Now open the browser at [http://localhost:4000/](http://localhost:4000/) with at least two different browsers and try it out.
 
@@ -227,7 +227,7 @@ self.onmessage = function (e) {
 ### Tests  
 I started to write tests, more will come as far as the project becomes stable (in my mind). Btw some basic e2e tests are available (once the `home` code is started)
 
-   npm test
+   > npm test
 
 more are coming....
 
