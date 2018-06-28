@@ -66,7 +66,7 @@
 
         /**
          * whenever the client receives a message through the socket it 
-         * just decode and forward the payload to the dataWorker, here further actions will be decided
+         * just decode and forward the payload to the synchazard, here further actions will be decided
          * 
          * the socket allows only to pass strings, so if an object is needed (more flexible option)
          * the server is in charge of serialize it, and the worker expects the payload to be unserialized
@@ -74,7 +74,7 @@
          */
         ws.onmessage = function (evt) {
             $NS$.active && 
-            $NS$.dataWorker.postMessage(
+            $NS$.synchazard.postMessage(
                 JSON.parse(evt.data)
             );
         };

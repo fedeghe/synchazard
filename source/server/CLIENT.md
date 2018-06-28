@@ -1,11 +1,11 @@
 ### The events flow on the client
 
-A client page loads the dataWorker.js (not meant to be modified) passing within the script tag one information about which worker file to use (this should be implemented), something like: 
+A client page loads the synchazard.js (not meant to be modified) passing within the script tag one information about which worker file to use (this should be implemented), something like: 
 ```
-<script src="/pathTo/dataWorker.js"
+<script src="/pathTo/synchazard.js"
     data-worker="/pathTo/webWorker.js"></script>
 ```
-Here is an ordered list of what the `dataWorker` script will do: 
+Here is an ordered list of what the `synchazard` script will do: 
 1) in the global namespace defines an object `$NS$` which will:
     - create and hold a reference to **one webWorker** (from the data-worker attrsibute) that will be responsible to define the routing of all incoming data toward handling functions or object instances (thats implements a `handle` function)
     - mantain needed references to all handling functions & instances

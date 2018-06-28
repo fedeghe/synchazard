@@ -189,7 +189,7 @@ To avoid the risk and the responsability to manage it I added a pretty simple me
 
 On the webpage the user is in charge of setting a list of _actors_ (simple labels) that will be allowed.  
 ```
-<script src="/pathTo/dataWorker.js"
+<script src="/pathTo/synchazard.js"
     data-worker="/pathTo/webWorker.js"
     data-actors="dashboardHome,e2etest"
     ></script>

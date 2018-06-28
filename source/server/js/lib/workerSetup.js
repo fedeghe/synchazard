@@ -10,7 +10,7 @@
             commands: {},
             handlers: {},
             objHandlers: {},
-            dataWorker: new Worker(currentScript.dataset.worker),
+            synchazard: new Worker(currentScript.dataset.worker),
             utils: {
                 loadStyle: loadStyle,
                 loadScript: loadScript,
@@ -28,6 +28,9 @@
                     var d = new Date(),
                         n = d.getTimezoneOffset();
                     return +d + n * 60000;
+                },
+                getRTT : function (action) {
+                    return action ? $NS$.utils.getTime() - action.___TIME : null;
                 }
             },
             active: true
@@ -43,7 +46,7 @@
     });
 
     // set actors, even if null
-    $NS$.dataWorker.postMessage({
+    $NS$.synchazard.postMessage({
         ___TYPE: '___INITACTORS',
         ___ACTORS: dataActors
     });
@@ -138,7 +141,7 @@
      * if the function is found forward to it the
      * DATA 
      */
-    $NS$.dataWorker.onmessage = function (e) {
+    $NS$.synchazard.onmessage = function (e) {
         //=================================================
         function r() {
             switch (typeof $NS$.handlers[e.data.___HANDLER]) {
@@ -161,9 +164,9 @@
     /**
      * in case a error occurs just shut the worker down 
      */
-    $NS$.dataWorker.onerror = function (e) {
+    $NS$.synchazard.onerror = function (e) {
         console.log(e);
-        $NS$.dataWorker.terminate();
+        $NS$.synchazard.terminate();
     };
 
     /**
@@ -171,5 +174,5 @@
      * the easyiest option is to publish it
      */
     window.$NS$ = $NS$;
-    window.onbeforeunload = $NS$.dataWorker.terminate;
+    window.onbeforeunload = $NS$.synchazard.terminate;
 })();

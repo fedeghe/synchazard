@@ -17,8 +17,8 @@ memwatch.on('leak', (info) => {
 /**
  * launch all actions passing if found other parameters to activate debug
  */
-socketsSrv.launch([{
-    path: 'actions/test',
-    deps: { fs: fs, path: path },
-    actor: 'chess'
-}], argz);
+// socketsSrv.launch([{
+//     path: 'actions/test',
+//     deps: { fs: fs, path: path },
+//     actor: 'test'
+// }], argz);

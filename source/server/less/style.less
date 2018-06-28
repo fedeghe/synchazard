@@ -1,14 +1,35 @@
+* {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                    supported by Chrome and Opera */
+}
 body {
-    font-family:verdana;
-    background-color:#126;
-    background-image: url('../media/synchazard4.svg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center; 
-    h1 {
-        font-size:4em;
-        text-align:center;
-        color:#ddd;
-        margin-top:20%;
-    }
+  font-family: verdana;
+  background-color: #126;
+  background-image: url('../media/synchazard4.svg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  height: 100vh;
+}
+body section {
+  text-align: center;
+  padding-top: 20%;
+  color: #ddd;
+}
+body section h1 {
+  font-size: 4em;
+}
+body section h5 {
+  color: white;
 }
