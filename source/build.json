@@ -1,6 +1,6 @@
 {
     "EXE": [
-        "rm -rf dataServer server README.md LICENSE.md",
+        "rm -rf dataServer server",
         "mkdir -p dataServer server"
     ],
     "#source/server/require.json": true,
