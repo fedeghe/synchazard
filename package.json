@@ -1,6 +1,6 @@
 {
   "name": "synchazard",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "༺ synchazard ༻",
   "main": "index.js",
   "dependencies": {
