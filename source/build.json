@@ -1,8 +1,8 @@
 {
     "EXE": [
-        "rm -rf dataServer server",
-        "mkdir -p dataServer server"
+        "rm -rf serverws server",
+        "mkdir -p serverws server"
     ],
     "#source/server/require.json": true,
-    "#source/dataServer/require.json": true
+    "#source/serverws/require.json": true
 }

@@ -1,4 +1,4 @@
 {
-    "#source/samples/helloworld/server/require.json": true,
-    "#source/samples/helloworld/dataServer/require.json": true
+    "source/samples/helloworld/server/require.json": true,
+    "source/samples/helloworld/serverws/require.json": true
 }

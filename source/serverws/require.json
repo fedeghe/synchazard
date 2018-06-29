@@ -1,0 +1,10 @@
+{
+    "EXE": [
+        "mkdir -p serverws/core serverws/actions serverws/js/lib"
+    ],
+    "source/serverws/*.js": "serverws -vars=vars.json",    
+    "source/serverws/core/*.js": "serverws/core -vars=vars.json",
+    "source/serverws/actions/*.js": "serverws/actions -vars=vars.json",
+    "source/serverws/js/*.js": "serverws/js -vars=vars.json",
+    "source/serverws/js/lib/*.js": "serverws/js/lib -vars=vars.json"
+}

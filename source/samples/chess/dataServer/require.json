@@ -1,8 +1,0 @@
-{
-    "EXE": [
-        "mkdir -p dataServer/actions dataServer/css"
-    ],
-    "source/samples/chess/dataServer/actions/*.js": "dataServer/actions -vars=vars.json",
-    "source/samples/chess/dataServer/less/*.less": "dataServer/css -plugins=malta-less -vars=vars.json",
-    "source/samples/chess/dataServer/*.js": "dataServer -vars=vars.json"
-}
