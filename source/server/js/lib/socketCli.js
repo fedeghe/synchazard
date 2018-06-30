@@ -1,8 +1,8 @@
-(function () {
+(function (W) {
 
     "use strict";
     
-    if (!("WebSocket" in window))
+    if (!("WebSocket" in W))
         throw new Error('No WebSockets available on client side!');
     
     var ws = false,
@@ -57,6 +57,9 @@
             ws.send($NS$.utils.createAction(initAction));
         };
 
+        /**
+         * 
+         */
         send = function (action) {
             // ensure the client identifier
             action.___ID = action.___ID || $NS$.id;
@@ -91,7 +94,7 @@
             /**
              * attempt reconnection
              */
-            --maxReconnectionAttempts && window.setTimeout(startWs, reconnectionInterval);
+            --maxReconnectionAttempts && W.setTimeout(startWs, reconnectionInterval);
         };
 
         /**
@@ -104,15 +107,12 @@
         };
     }());
 
-    /**
-     * let the client close the connection before refresh OR close
-     */
+    // let the client close the connection
+    // before refresh OR close
     function close() {
         // automatically blur current element
         // on reload otherwise would hang
-        //
         document.activeElement.blur();
-
         // and close the cli
         if (ws) {
             // disable any onclose handler first
@@ -126,15 +126,15 @@
      * this will not work on safari mobile for example,
      * need to ahndle that on the server (see ws.on('error', ...) on socketSrv.js) 
      */
-    window.addEventListener("beforeunload", close);
-    window.addEventListener("pagehide", close);
+    W.addEventListener("beforeunload", close);
+    W.addEventListener("pagehide", close);
 
     /**
      * publish some meaningful functions in $NS$ namespace
      */
     $NS$.commands.init = init;
     $NS$.send = send;
-}());
+})(this);
 
 
 
