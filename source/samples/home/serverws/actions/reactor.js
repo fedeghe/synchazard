@@ -1,4 +1,4 @@
-module.exports.launch = (action, socketSrv, params) => {
+module.exports.launch = (action, synchazard, params) => {
 
     "use strict";
 
@@ -50,6 +50,6 @@ module.exports.launch = (action, socketSrv, params) => {
                 action = enable(data.___ID, data.___VALUE, data.___NODEID);
                 break;
         }
-        action && socketSrv.broadcast(action);
+        action && synchazard.broadcast(action);
     });
 };

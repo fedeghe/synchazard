@@ -124,7 +124,7 @@
     /**
      * when the browser is shut down close the socket,
      * this will not work on safari mobile for example,
-     * need to ahndle that on the server (see ws.on('error', ...) on socketSrv.js) 
+     * need to ahndle that on the server (see ws.on('error', ...) on synchazard.js) 
      */
     W.addEventListener("beforeunload", close);
     W.addEventListener("pagehide", close);

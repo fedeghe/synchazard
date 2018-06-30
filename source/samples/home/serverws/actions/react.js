@@ -1,4 +1,4 @@
-module.exports.launch = (action, socketSrv, params) => {
+module.exports.launch = (action, synchazard, params) => {
 
     "use strict";
     action.onconnection((data, ws) => {
@@ -44,7 +44,7 @@ module.exports.launch = (action, socketSrv, params) => {
     // RUN
     new Interval(() => {
         var t = new Date;
-        socketSrv.broadcast(action.encodeMessage({
+        synchazard.broadcast(action.encodeMessage({
             ___ACTION: 'status',
             ___PAYLOAD: {
                 time: t

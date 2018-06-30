@@ -1,4 +1,4 @@
-module.exports.launch = (action, socketSrv, params) => {
+module.exports.launch = (action, synchazard, params) => {
 
     "use strict";
     const updateState = () => {
@@ -21,7 +21,7 @@ module.exports.launch = (action, socketSrv, params) => {
                 break;
             case 'next':
                 updateState();
-                socketSrv.broadcast(action.encodeMessage({
+                synchazard.broadcast(action.encodeMessage({
                     ___ACTION: 'nextDone',
                     ___PAYLOAD: state,
                     ___TIME: data.___TIME

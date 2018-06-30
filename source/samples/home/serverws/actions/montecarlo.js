@@ -1,4 +1,4 @@
-module.exports.launch = (action, socketSrv, params) => {
+module.exports.launch = (action, synchazard, params) => {
 
     "use strict";
 
@@ -40,12 +40,12 @@ module.exports.launch = (action, socketSrv, params) => {
         switch (data.___ACTION) {
             case 'askMontecarlo':
                 askingingCli = data.___ID;
-                socketSrv.broadcast(action.data.actions.ask(askingingCli));
+                synchazard.broadcast(action.data.actions.ask(askingingCli));
                 break;
             case 'acceptedMontecarlo':
                 partecipants++;
                 ws.send(action.data.actions.proceed);
-                socketSrv.unicast(data.___ID, action.data.actions.thx);
+                synchazard.unicast(data.___ID, action.data.actions.thx);
                 break;
             case 'joinMontecarlo':
                 if (partecipants) {
@@ -54,7 +54,7 @@ module.exports.launch = (action, socketSrv, params) => {
                 }
                 partecipants--;
                 if (partecipants == 0) {
-                    socketSrv.broadcast(action.data.actions.completed(
+                    synchazard.broadcast(action.data.actions.completed(
                         results.outside ? calcPi(results) : 1
                     ));
                     break;

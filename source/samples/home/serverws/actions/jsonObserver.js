@@ -1,4 +1,4 @@
-module.exports.launch = (action, socketSrv, params) => {
+module.exports.launch = (action, synchazard, params) => {
 
     "use strict";
 
@@ -33,7 +33,7 @@ module.exports.launch = (action, socketSrv, params) => {
             interval: $DATASERVER.WATCH_INTERVALS.SHORT$
         },
         () => {
-            socketSrv.broadcast(action.data.actions.update);
+            synchazard.broadcast(action.data.actions.update);
         }
     );
 };

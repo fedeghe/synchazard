@@ -1,4 +1,4 @@
-module.exports.launch = (action, socketSrv, params) => {
+module.exports.launch = (action, synchazard, params) => {
 
     "use strict";
 
@@ -36,7 +36,7 @@ module.exports.launch = (action, socketSrv, params) => {
     fs.watchFile(
         action.data.resourceFile,
         () => {
-            socketSrv.broadcast(action.data.actions.update());
+            synchazard.broadcast(action.data.actions.update());
         }
     );
 };

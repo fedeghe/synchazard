@@ -1,4 +1,4 @@
-module.exports.launch = (action, socketSrv, params) => {
+module.exports.launch = (action, synchazard, params) => {
 
     "use strict";
 
@@ -28,6 +28,6 @@ module.exports.launch = (action, socketSrv, params) => {
             ___ACTION: 'json',
             ___PAYLOAD: action.data
         };
-        socketSrv.broadcast(action.encodeMessage(act));
+        synchazard.broadcast(action.encodeMessage(act));
     }, 1000);
 };

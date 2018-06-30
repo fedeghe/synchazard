@@ -1,4 +1,4 @@
-module.exports.launch = (action, socketSrv, params) => {
+module.exports.launch = (action, synchazard, params) => {
     "use strict";
     let nodeList = {};
     const disable = (id, nodeId) => {
@@ -46,16 +46,16 @@ module.exports.launch = (action, socketSrv, params) => {
         if (data.___TYPE !== 'action') return;
         switch (data.___ACTION) {
             case 'init':
-                socketSrv.broadcast(getNodes());
+                synchazard.broadcast(getNodes());
                 break;
             case 'disable':
-                socketSrv.broadcast(disable(data.___ID, data.___NODEID));
+                synchazard.broadcast(disable(data.___ID, data.___NODEID));
                 break;
             case 'enable':
-                socketSrv.broadcast(enable(data.___ID, data.___VALUE, data.___NODEID));
+                synchazard.broadcast(enable(data.___ID, data.___VALUE, data.___NODEID));
                 break;
             case 'resize':
-                socketSrv.broadcast(resize(data.___ID, data.___SIZES, data.___NODEID));
+                synchazard.broadcast(resize(data.___ID, data.___SIZES, data.___NODEID));
                 break;
         }
     });

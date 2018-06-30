@@ -1,4 +1,4 @@
-module.exports.launch = (action, socketSrv, params) => {
+module.exports.launch = (action, synchazard, params) => {
     
     "use strict";
 
@@ -16,7 +16,7 @@ module.exports.launch = (action, socketSrv, params) => {
 
         switch (data.___ACTION) {
             case 'init':
-                socketSrv.broadcast(action.encodeMessage({
+                synchazard.broadcast(action.encodeMessage({
                     ___ACTION: 'messages',
                     ___PAYLOAD: {
                         all : action.data.messages
@@ -43,7 +43,7 @@ module.exports.launch = (action, socketSrv, params) => {
 
                 // and broadcast
                 //
-                socketSrv.broadcast(action.encodeMessage({
+                synchazard.broadcast(action.encodeMessage({
                     ___ACTION: 'message',
                     ___PAYLOAD: {
                         one: newMessage

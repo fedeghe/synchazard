@@ -1,4 +1,4 @@
-module.exports.launch = (action, socketSrv, params) => {
+module.exports.launch = (action, synchazard, params) => {
 
     "use strict";
 
@@ -19,7 +19,7 @@ module.exports.launch = (action, socketSrv, params) => {
     // RUN
     setInterval(() => {
         action.data.num = ~~(Math.random() * 100);
-        socketSrv.broadcast(action.encodeMessage({
+        synchazard.broadcast(action.encodeMessage({
             ___ACTION: 'graph',
             ___PAYLOAD: action.data
         }));
