@@ -1,12 +1,12 @@
 {
     "EXE": [
-        "mkdir -p serverws/actions serverws/css serverws/js/lib"
+        "mkdir -p serverWS/actions serverWS/css serverWS/js/lib"
     ],
     
-    "source/samples/home/serverws/actions/*.js": "serverws/actions -vars=vars.json",
-    "source/samples/home/serverws/data1.json": "serverws -vars=vars.json",
-    "source/samples/home/serverws/less/*.less": "serverws/css -plugins=malta-less -vars=vars.json",
-    "source/samples/home/serverws/js/*.js": "serverws/js -vars=vars.json",
-    "source/samples/home/serverws/js/lib/*.js": "serverws/js/lib -vars=vars.json",
-    "source/samples/home/serverws/*.js": "serverws -vars=vars.json"
+    "source/samples/home/serverWS/actions/*.js": "serverWS/actions -vars=vars.json",
+    "source/samples/home/serverWS/data1.json": "serverWS -vars=vars.json",
+    "source/samples/home/serverWS/less/*.less": "serverWS/css -plugins=malta-less -vars=vars.json",
+    "source/samples/home/serverWS/js/*.js": "serverWS/js -vars=vars.json",
+    "source/samples/home/serverWS/js/lib/*.js": "serverWS/js/lib -vars=vars.json",
+    "source/samples/home/serverWS/*.js": "serverWS -vars=vars.json"
 }

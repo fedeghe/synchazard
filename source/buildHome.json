@@ -1,4 +1,4 @@
 {
     "source/samples/home/server/require.json": true,
-    "source/samples/home/serverws/require.json": true
+    "source/samples/home/serverWS/require.json": true
 }

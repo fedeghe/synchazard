@@ -4,7 +4,7 @@ var assert = require('assert'),
 
 $NS$ = { utils: {} };
 
-$$../serverws/js/lib/testnject.js$$
+$$../serverWS/js/lib/testnject.js$$
 
 describe('test tester', function () {
 

@@ -1,4 +1,4 @@
 {
     "source/samples/chess/server/require.json": true,
-    "source/samples/chess/serverws/require.json": true
+    "source/samples/chess/serverWS/require.json": true
 }

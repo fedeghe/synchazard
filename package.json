@@ -26,7 +26,7 @@
     "puppeteer": "^1.4.0"
   },
   "scripts": {
-    "start": "npm-run-all --parallel _start:ws _start:srv _start:cli",
+    "start": "npm-run-all --parallel _start:ws _start:data _start:srv",
     "build": "node --no-warnings node_modules/malta/src/bin.js source/build.json",
     "build:home": "run-s build _sample:home",
     "build:hello": "run-s build _sample:hello",
@@ -38,9 +38,9 @@
     "_sample:home": "node --no-warnings node_modules/malta/src/bin.js source/buildHome.json",
     "_sample:hello": "node --no-warnings node_modules/malta/src/bin.js source/buildHelloWorld.json",
     "_sample:chess": "node --no-warnings node_modules/malta/src/bin.js source/buildChess.json",
-    "_start:ws": "node serverws/ws_srv.js -vvv",
-    "_start:srv": "node serverws/srv.js",
-    "_start:cli": "node server/srv.js"
+    "_start:ws": "node serverWS/ws_srv.js -vvv",
+    "_start:data": "node serverWS/srv.js",
+    "_start:srv": "node server/srv.js"
   },
   "author": "federico.ghedina@gmail.com"
 }

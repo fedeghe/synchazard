@@ -1,8 +1,8 @@
 {
     "EXE": [
-        "rm -rf serverws server",
-        "mkdir -p serverws server"
+        "rm -rf serverWS server",
+        "mkdir -p serverWS server"
     ],
     "#source/server/require.json": true,
-    "#source/serverws/require.json": true
+    "#source/serverWS/require.json": true
 }

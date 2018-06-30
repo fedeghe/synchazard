@@ -1,5 +1,5 @@
 {
     "EXE": [
-        "rm -rf serverws server"
+        "rm -rf serverWS server"
     ]
 }
