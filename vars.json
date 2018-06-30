@@ -32,7 +32,7 @@
         },
         "PORT": 4000,
         "TESTLIB": "$DATASERVER.HOST$/js/lib/testnject.js",
-        "TIMEGAP": 30,
+        "TIMEGAP": 1,
         "RECONNECTION": {
             "ATTEMPTS": "Infinity",
             "INTERVAL": 5000
