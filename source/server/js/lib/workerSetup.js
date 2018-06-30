@@ -1,4 +1,4 @@
-(function () {
+(function (W) {
     "use strict";
     /**
      * the constructor does not gives the full worker back,
@@ -7,31 +7,22 @@
     var currentScript = document.currentScript,
         dataActors = currentScript.dataset.actors || null,
         $NS$ = {
-            commands: {},
+            
             handlers: {},
             objHandlers: {},
             synchazard: new Worker(currentScript.dataset.worker),
+            commands: {
+                stop: stop,
+                resume: resume
+            },
             utils: {
                 loadStyle: loadStyle,
                 loadScript: loadScript,
-                injectTester : function (f) {
-                    loadScript("$SERVER.TESTLIB$", f);
-                },
-                createAction: function (action) {
-                    action.___ACTORS = dataActors || null;
-                    return JSON.stringify(action);
-                },
-                decodeFunction: function(fun){
-                    return new Function('return ' + fun)();
-                },
-                getTime : function () {
-                    var d = new Date(),
-                        n = d.getTimezoneOffset();
-                    return +d + n * 60000;
-                },
-                getRTT : function (action) {
-                    return action ? $NS$.utils.getTime() - action.___TIME : null;
-                }
+                injectTester : injectTester,
+                createAction: createAction,
+                decodeFunction: decodeFunction,
+                getTime : getTime,
+                getRTT : getRTT
             },
             active: true
         },
@@ -49,11 +40,55 @@
         writable: false
     });
 
-    // set actors, even if null
+    /**
+     * set actors, even if null
+     */
     $NS$.synchazard.postMessage({
         ___TYPE: '___INITACTORS',
         ___ACTORS: dataActors
     });
+
+    /**
+     * meant to be used to get the action rtt
+     * 
+     * @param {*} action 
+     */
+    function getRTT(action) {
+        return action ? getTime() - action.___TIME : null;
+    }
+
+    /** 
+     * 
+     * @param {*} fun 
+     */
+    function decodeFunction(fun) {
+        return new Function('return ' + fun)();
+    }
+
+    /**
+     * 
+     */
+    function getTime() {
+        var d = new Date(),
+            n = d.getTimezoneOffset();
+        return +d + n * 60000;
+    }
+    /**
+     * 
+     * @param {*} action 
+     */
+    function createAction(action) {
+        action.___ACTORS = dataActors || null;
+        return JSON.stringify(action);
+    }
+
+    /**
+     * 
+     * @param {*} f 
+     */
+    function injectTester(f) {
+        loadScript("$SERVER.TESTLIB$", f);
+    }
 
     /**
      * Get the client id, from localStorage if already stored there
@@ -92,6 +127,12 @@
         });
     }
 
+    /**
+     * 
+     * @param {*} tag 
+     * @param {*} att 
+     * @param {*} direct 
+     */
     function createTag(tag, att, direct) {
         var res = document.createElement(tag),
             a;
@@ -100,10 +141,19 @@
         return res;
     }
 
+    /**
+     * 
+     * @param {*} t 
+     */
     function mayRemove(t) {
         t && t.parentNode.removeChild(t);
     }
 
+    /**
+     * 
+     * @param {*} cssPath 
+     * @param {*} cb 
+     */
     function loadStyle(cssPath, cb) {
         var link = getCleanPath(cssPath, 'css');
         mayRemove(link);
@@ -115,6 +165,11 @@
         head.appendChild(link);
     }
     
+    /**
+     * 
+     * @param {*} jsPath 
+     * @param {*} cb 
+     */
     function loadScript(jsPath, cb) {
         var script = getCleanPath(jsPath, 'js');
         mayRemove(script);
@@ -128,17 +183,17 @@
     /**
      * 
      */
-    $NS$.commands.stop = function (to) {
+    function stop(to) {
         $NS$.active = false;
         to &&
-        typeof to === 'number' &&
-        setTimeout($NS$.commands.resume, to);
+            typeof to === 'number' &&
+            setTimeout($NS$.commands.resume, to);
     };
 
     /**
      * this is only available to the client obsiously 
      */
-    $NS$.commands.resume = function () {
+    function resume() {
         $NS$.active = true;
     };
 
@@ -182,6 +237,6 @@
      * the worker is used inside the socketCli in the onMessage
      * the easyiest option is to publish it
      */
-    window.$NS$ = $NS$;
-    window.onbeforeunload = $NS$.synchazard.terminate;
-})();
+    W.$NS$ = $NS$;
+    W.onbeforeunload = $NS$.synchazard.terminate;
+})(this);
