@@ -41,14 +41,15 @@ The build itself will be fast, and will build the `server` and `serverWS` folder
 Here you can build:  
 - a non trivial amount of sample code, which covers almost all the features provided:  
     `> npm run build:home`  
-    then  
+    then in another terminal tab  
     `> npm start`  
 - a minimalistic due _helloworld_ that shows the simplest example I could imagine  
     `> npm run build:hello`  
-    then  
+    then in another terminal tab    
     `> npm start`  
 
-in both cases the _terminal_ will invite You to visit http://localhost:4000
+Opening another terminal to start is needed cause in those two cases the build is set in watch mode, then any relevant editing to the source files involves will trigger the right fresh build.  
+Anyway in both cases the _terminal_ will invite You to visit http://localhost:4000
 
 ---
 
