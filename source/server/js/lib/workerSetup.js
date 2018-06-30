@@ -37,8 +37,12 @@
         },
         head = document.getElementsByTagName('head')[0];
 
+    if (!head) {
+        throw new Error('NO head');
+    }
+
     /**
-     * set a non overwritable client id, hopefully unique
+     * Set a non overwritable client id, hopefully unique
      */
     Object.defineProperty($NS$, 'id', {
         value: getClientId(),
@@ -51,6 +55,14 @@
         ___ACTORS: dataActors
     });
 
+    /**
+     * Get the client id, from localStorage if already stored there
+     * otherwise creates and save it in the Localstorage and recall itself,
+     * 
+     * WARN: obviously, is is not reliable since can be overridden easily
+     * 
+     * @return {string} description
+     */
     function getClientId() {
         var cookieName = '$NS$clientID',
             cookieValue = localStorage.getItem(cookieName);
@@ -63,9 +75,6 @@
             );
             return getClientId();
         }
-    }
-    if (!head) {
-        throw new Error('NO head');
     }
 
     /**
