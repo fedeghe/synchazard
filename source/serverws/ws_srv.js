@@ -2,7 +2,7 @@ require('events').EventEmitter.defaultMaxListeners = Infinity;
 
 const fs = require('fs'),
     path = require('path'),
-    socketsSrv = require('./core/socketSrv'),
+    socketsSrv = require('./core/synchazard'),
     
     // check for memory leaks
     memwatch = require('memwatch-next'),
