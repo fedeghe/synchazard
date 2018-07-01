@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 (function () {
     "use strict"; 
     function onresize(instance) {

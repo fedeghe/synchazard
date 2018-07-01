@@ -1,5 +1,7 @@
-window.addEventListener("load", function () {
-    
+/**
+ * 
+ */
+window.addEventListener("load", function () {    
     class Welcome extends React.Component {
         constructor(props){
             super(props)

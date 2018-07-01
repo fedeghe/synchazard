@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 (function () {
     "use strict";
     var head = document.getElementsByTagName('head')[0];
