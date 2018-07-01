@@ -2,36 +2,29 @@
     "PROJECT": {
         "NAME": "SyncHazard",
         "VERSION": "0.0.4",
-        "AUTHOR": "federico.ghedina@gmail.com"
+        "AUTHOR": "federico.ghedina@gmail.com",
+        "URL": "https://github.com/fedeghe/synchazard"
     },
 
     // namespace for the lib
     "NS": "SH",
 
-    /*
-    setup here the host or ip the app will run in
-    */
+    // setup here the host or ip the app will run in
     "DOMAIN_OR_IP": "localhost",
 
     "DATASERVER": {
         "PORT": 8000,
         "HOST": "http://$DOMAIN_OR_IP$:$DATASERVER.PORT$",
+
         "WSPORT": 9000,
-        "WS": "ws://$DOMAIN_OR_IP$:$DATASERVER.WSPORT$",
-        "WATCH_INTERVALS": {
-            "SHORT": 500,
-            "MEDIUM": 5000,
-            "LONG": 10000
-        }
+        "WSHOST": "ws://$DOMAIN_OR_IP$:$DATASERVER.WSPORT$"
     },
 
-    "SERVER": {
-        "HTML": {
-            "TITLE": "Sync hazard",
-            "CHESS": "Chess"
-        },
+    "WEBSERVER": {
         "PORT": 4000,
-        "TESTLIB": "$DATASERVER.HOST$/js/lib/testnject.js",
+        "HOST": "http://$DOMAIN_OR_IP$:$WEBSERVER.PORT$",
+        // "TESTLIB": "$DATASERVER.HOST$/js/lib/testnject.js",
+        "TESTLIB": "$WEBSERVER.HOST$/js/lib/testnject.js",
         "TIMEGAP": 1,
         "RECONNECTION": {
             "ATTEMPTS": "Infinity",
@@ -39,18 +32,17 @@
         }
     },
 
-    /*
-    Actors check setting
-    --------------------
-    false : no check
-    true : actions must specify actor, the client must pass actors and they must match
-    */
+    // Actors check setting
+    //======================
+    // false : no check
+    // true : actions must specify actor, the client must pass actors and they must match
     "CHECK_ACTORS": false,
+    // toggle checking debug messages
     "NOTIFY_ACTORS_CHECKING": false,
 
     "START_MESSAGE": {
         "WSERVER": " WEB SOCKET SERVER started on port $DATASERVER.WSPORT$",
         "DATASERVER": " DATA SERVER started on port $DATASERVER.PORT$",
-        "SERVER": " CLI SERVER started on http://$DOMAIN_OR_IP$:$SERVER.PORT$"
+        "WEBSERVER": " CLI SERVER started on $WEBSERVER.HOST$"
     }
 }

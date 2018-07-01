@@ -1,5 +1,5 @@
 module.exports = {
-    appUrl: 'http://$DOMAIN_OR_IP$:$SERVER.PORT$',
+    appUrl: 'http://$DOMAIN_OR_IP$:$WEBSERVER.PORT$',
     puppeteer: {
         headless: true,
         slowMo: 100,

@@ -87,7 +87,7 @@
      * @param {*} f 
      */
     function injectTester(f) {
-        loadScript("$SERVER.TESTLIB$", f);
+        loadScript("$WEBSERVER.TESTLIB$", f);
     }
 
     /**
@@ -222,7 +222,7 @@
          * in case give a small timegap
          */
         '___HANDLER' in e.data && e.data.___HANDLER in $NS$.handlers ?
-        r() : setTimeout(r, $SERVER.TIMEGAP$);
+        r() : setTimeout(r, $WEBSERVER.TIMEGAP$);
     };
 
     /**

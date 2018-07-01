@@ -1,6 +1,6 @@
 (function () {
     "use strict";
-    var port = "$SERVER.PORT$",
+    var port = "$WEBSERVER.PORT$",
         msg = "$START_MESSAGE.SERVER$";
     $$../srv.js$$
 })();

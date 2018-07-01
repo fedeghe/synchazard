@@ -20,8 +20,8 @@
         init = noop,
         send = noop,
         reconnectionAttempts = 0,
-        maxReconnectionAttempts = $SERVER.RECONNECTION.ATTEMPTS$,
-        reconnectionInterval = $SERVER.RECONNECTION.INTERVAL$,
+        maxReconnectionAttempts = $WEBSERVER.RECONNECTION.ATTEMPTS$,
+        reconnectionInterval = $WEBSERVER.RECONNECTION.INTERVAL$,
         url = null;
 
     /**
@@ -32,7 +32,7 @@
 
         ws && ws.close();
 
-        url = "$DATASERVER.WS$/?id=" + $NS$.id;
+        url = "$DATASERVER.WSHOST$/?id=" + $NS$.id;
         /**
          * Attempt to start the client socket
          */
