@@ -4,6 +4,5 @@
     ],
     "source/serverWS/*.js": "serverWS -vars=vars.json",    
     "source/serverWS/core/*.js": "serverWS/core -vars=vars.json",
-    "source/serverWS/js/*.js": "serverWS/js -vars=vars.json",
-    "source/serverWS/js/lib/*.js": "serverWS/js/lib -vars=vars.json"
+    "source/serverWS/js/*.js": "serverWS/js -vars=vars.json"
 }
