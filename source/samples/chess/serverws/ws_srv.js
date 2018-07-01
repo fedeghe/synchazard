@@ -2,7 +2,7 @@ require('events').EventEmitter.defaultMaxListeners = Infinity;
 
 const fs = require('fs'),
     path = require('path'),
-    socketsSrv = require('./core/synchazard'),
+    synchazard = require('./core/synchazard'),
     
     // check for memory leaks
     memwatch = require('memwatch-next'),
@@ -17,7 +17,7 @@ memwatch.on('leak', (info) => {
 /**
  * launch all actions passing if found other parameters to activate debug
  */
-socketsSrv.launch([{
+synchazard.launch([{
     path: 'actions/chess',
     deps: { fs: fs, path: path },
     actor: 'chess'
