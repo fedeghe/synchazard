@@ -36,7 +36,7 @@ module.exports.launch = (action, synchazard, params) => {
     fs.watchFile(
         action.data.resourceFile,
         {
-            interval: $DATASERVER.WATCH_INTERVALS.SHORT$
+            interval: synchazard.WATCH_INTERVALS.SHORT
         },
         () => {
             synchazard.broadcast(action.data.actions.update());

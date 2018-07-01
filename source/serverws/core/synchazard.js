@@ -80,7 +80,12 @@ module.exports = (function () {
             launch: launch,
             broadcast: broadcast,
             unicast: unicast,
-            debug: debug
+            debug: debug,
+            "WATCH_INTERVALS": {
+                "SHORT": 500,
+                "MEDIUM": 2000,
+                "LONG": 5000
+            }
         };
 
     /**
