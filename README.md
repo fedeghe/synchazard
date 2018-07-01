@@ -48,7 +48,7 @@ Here you can build:
     then in another terminal tab    
     `> npm start`  
 
-Opening another terminal to start is needed cause in those two cases the build is set in watch mode, then any relevant editing to the source files involves will trigger the right fresh build.  
+Opening another terminal to start is needed cause in those two cases the build is set in watch mode, then any relevant editing to the source files involved will trigger the right fresh build.  
 Anyway in both cases the _terminal_ will invite You to visit http://localhost:4000
 
 ---
