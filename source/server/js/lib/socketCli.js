@@ -14,9 +14,9 @@
          * it will be sent automatically when the socket connection is established
          */
         initAction = {
-            ___TYPE: 'action',
-            ___ACTION: 'init',
-            ___ID: $NS$.id
+            _TYPE: 'action',
+            _ACTION: 'init',
+            _ID: $NS$.id
         },
         noop = function () {},
         init = noop,
@@ -65,9 +65,9 @@
          */
         send = function (action) {
             // ensure the client identifier
-            action.___ID = action.___ID || $NS$.id;
-            action.___TYPE = action.___TYPE || 'action';
-            action.___TIME = action.___TIME || $NS$.utils.getTime();
+            action._ID = action._ID || $NS$.id;
+            action._TYPE = action._TYPE || 'action';
+            action._TIME = action._TIME || $NS$.utils.getTime();
             $NS$.active && ws.send($NS$.utils.createAction(action));
         };
 

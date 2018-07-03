@@ -8,12 +8,12 @@ self.onmessage = function (e) {
 
     if (actorsDontMatch(e)) return;
 
-    if (e.data.___TYPE !== 'action') return;
-    switch (e.data.___ACTION) {
+    if (e.data._TYPE !== 'action') return;
+    switch (e.data._ACTION) {
         case 'status': 
             self.postMessage({
-                ___HANDLER: 'react',
-                ___DATA: e.data.___PAYLOAD
+                _HANDLER: 'react',
+                _DATA: e.data._PAYLOAD
             });
             break;
     }

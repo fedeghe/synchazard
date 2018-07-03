@@ -18,42 +18,42 @@ self.onmessage = function (e) {
 
     if (actorsDontMatch(e)) return;
 
-    if (e.data.___TYPE !== 'action') return;
-    switch (e.data.___ACTION) {
+    if (e.data._TYPE !== 'action') return;
+    switch (e.data._ACTION) {
         case 'xhr': 
-            req(e.data.___FILECHANGED, function (cnt) {
+            req(e.data._FILECHANGED, function (cnt) {
                 self.postMessage({
-                    ___HANDLER: 'render',
-                    ___DATA: cnt
+                    _HANDLER: 'render',
+                    _DATA: cnt
                 });
             });
             break;
 
         case 'json':
             self.postMessage({
-                ___HANDLER: 'render2',
-                ___DATA: e.data.___PAYLOAD
+                _HANDLER: 'render2',
+                _DATA: e.data._PAYLOAD
             });
             break;
 
         case 'graph':
             self.postMessage({
-                ___HANDLER: 'render3',
-                ___DATA: e.data.___PAYLOAD
+                _HANDLER: 'render3',
+                _DATA: e.data._PAYLOAD
             });
             break;
 
         case 'style':
             self.postMessage({
-                ___HANDLER: 'render4',
-                ___DATA: e.data.___FILECHANGED
+                _HANDLER: 'render4',
+                _DATA: e.data._FILECHANGED
             });
             break;
 
         case 'script':
             self.postMessage({
-                ___HANDLER: 'render5',
-                ___DATA: e.data.___FILECHANGED
+                _HANDLER: 'render5',
+                _DATA: e.data._FILECHANGED
             });
             break;
 

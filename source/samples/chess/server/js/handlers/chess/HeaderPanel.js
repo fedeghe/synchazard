@@ -5,6 +5,6 @@ function HeaderPanel() {
     this.container.appendChild(this.startGameButton);
 
     this.startGameButton.addEventListener('click', function () {
-        $NS$.send({___ACTION: 'initMatch'});
+        $NS$.send({_ACTION: 'initMatch'});
     });
 }

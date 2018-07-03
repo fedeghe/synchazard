@@ -11,12 +11,12 @@ module.exports.launch = (action, synchazard, params) => {
     };
 
     action.onconnection((data, ws) => {
-        if (data.___TYPE !== 'action') return;
-        switch (data.___ACTION) {
+        if (data._TYPE !== 'action') return;
+        switch (data._ACTION) {
             case 'init':
                 ws.send(action.encodeMessage({
-                    ___ACTION: 'doComputation',
-                    ___JOB: {
+                    _ACTION: 'doComputation',
+                    _JOB: {
                         func: jobs.getFunc1.func.toString(),
                         desc: jobs.getFunc1.description
                     }

@@ -15,42 +15,42 @@ module.exports.launch = (action, synchazard, params) => {
         actions: {
             ask: function (id) {
                 return action.encodeMessage({
-                    ___ACTION: 'requestRandomPairs'
+                    _ACTION: 'requestRandomPairs'
                 }, id);
             },
             thx: action.encodeMessage({
-                ___ACTION: 'thx',
-                ___MSG: 'thank You very much'
+                _ACTION: 'thx',
+                _MSG: 'thank You very much'
             }),
             proceed: action.encodeMessage({
-                ___ACTION: 'startComputation',
-                ___JOB: 'generate'
+                _ACTION: 'startComputation',
+                _JOB: 'generate'
             }),
             completed: function (r) {
                 return action.encodeMessage({
-                    ___ACTION: 'endComputation',
-                    ___DATA: r
+                    _ACTION: 'endComputation',
+                    _DATA: r
                 }, askingingCli);
             }
         }
     });
 
     action.onconnection((data, ws) => {
-        if (data.___TYPE !== 'action') return;
-        switch (data.___ACTION) {
+        if (data._TYPE !== 'action') return;
+        switch (data._ACTION) {
             case 'askMontecarlo':
-                askingingCli = data.___ID;
+                askingingCli = data._ID;
                 synchazard.broadcast(action.data.actions.ask(askingingCli));
                 break;
             case 'acceptedMontecarlo':
                 partecipants++;
                 ws.send(action.data.actions.proceed);
-                synchazard.unicast(data.___ID, action.data.actions.thx);
+                synchazard.unicast(data._ID, action.data.actions.thx);
                 break;
             case 'joinMontecarlo':
                 if (partecipants) {
-                    results.inside += data.___DATA.inside;
-                    results.outside += data.___DATA.outside;
+                    results.inside += data._DATA.inside;
+                    results.outside += data._DATA.outside;
                 }
                 partecipants--;
                 if (partecipants == 0) {

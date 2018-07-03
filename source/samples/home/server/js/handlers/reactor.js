@@ -54,18 +54,18 @@
             disable: function () {
                 this._is_disabled = true;
                 $NS$.send({
-                    ___TYPE: 'action',
-                    ___ACTION: 'disable',
-                    ___NODEID: this.id
+                    _TYPE: 'action',
+                    _ACTION: 'disable',
+                    _NODEID: this.id
                 });
             }, 
             enable: function () {
                 this._is_disabled = false;
                 $NS$.send({
-                    ___TYPE: 'action',
-                    ___ACTION: 'enable',
-                    ___VALUE: this.node.value,
-                    ___NODEID: this.id
+                    _TYPE: 'action',
+                    _ACTION: 'enable',
+                    _VALUE: this.node.value,
+                    _NODEID: this.id
                 });
             },
             doDisable : function(v) {
@@ -110,18 +110,18 @@
             disable: function () {
                 this._is_disabled = true;
                 $NS$.send({
-                    ___TYPE: 'action',
-                    ___ACTION: 'disable',
-                    ___NODEID: this.id
+                    _TYPE: 'action',
+                    _ACTION: 'disable',
+                    _NODEID: this.id
                 });
             },
             enable: function () {
                 this._is_disabled = false;
                 $NS$.send({
-                    ___TYPE: 'action',
-                    ___ACTION: 'enable',
-                    ___VALUE: this.node.value,
-                    ___NODEID: this.id
+                    _TYPE: 'action',
+                    _ACTION: 'enable',
+                    _VALUE: this.node.value,
+                    _NODEID: this.id
                 });
             },
             doDisable: function (v) {
@@ -179,9 +179,9 @@
             return;
         }
 
-        switch(d.___ACTION) {
+        switch(d._ACTION) {
             case 'reactor_updateInitStatus': 
-                initStatus = d.___NODE_LIST;
+                initStatus = d._NODE_LIST;
                 for (i = 0, l = this.elements.length; i < l; i++) {
 
                     if (this.elements[i].id in initStatus) {
@@ -206,16 +206,16 @@
             case 'reactor_enableAll': 
                 this.elements.forEach(function (element) {
                     if (
-                        d.___ID !== $NS$.id &&
-                        d.___NODEID == element.node.dataset.reactor
-                    ) element.doEnable(d.___VALUE);
+                        d._ID !== $NS$.id &&
+                        d._NODEID == element.node.dataset.reactor
+                    ) element.doEnable(d._VALUE);
                 });
                 break;
             case 'reactor_disableAll':
                 this.elements.forEach(function (element) {
-                    d.___ID !== $NS$.id &&
-                    d.___NODEID == element.node.dataset.reactor &&
-                    element.doDisable(d.___VALUE);
+                    d._ID !== $NS$.id &&
+                    d._NODEID == element.node.dataset.reactor &&
+                    element.doDisable(d._VALUE);
                 });
                 break;
         }

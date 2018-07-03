@@ -24,30 +24,30 @@ self.onmessage = function (e) {
 
     if (actorsDontMatch(e)) return;
 
-    if (e.data.___TYPE !== 'action') return;
-    switch (e.data.___ACTION) {
+    if (e.data._TYPE !== 'action') return;
+    switch (e.data._ACTION) {
         case 'requestRandomPairs':
             self.postMessage({
-                ___HANDLER: 'DistComp',
-                ___DATA: e.data
+                _HANDLER: 'DistComp',
+                _DATA: e.data
             });
             break;
         case 'startComputation':
             self.postMessage({
-                ___HANDLER: 'DistCompSendResult',
-                ___DATA: jobs[e.data.___JOB]()
+                _HANDLER: 'DistCompSendResult',
+                _DATA: jobs[e.data._JOB]()
             });
             break;
         case 'endComputation':
             self.postMessage({
-                ___HANDLER: 'DistCompConsumeResult',
-                ___DATA: e.data
+                _HANDLER: 'DistCompConsumeResult',
+                _DATA: e.data
             });
             break;
         case 'thx':
             self.postMessage({
-                ___HANDLER: 'DistCompSayThx',
-                ___DATA: e.data
+                _HANDLER: 'DistCompSayThx',
+                _DATA: e.data
             });
             break;
     }

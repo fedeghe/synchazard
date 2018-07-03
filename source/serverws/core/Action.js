@@ -13,11 +13,11 @@ class Action{
         return +d + n * 60000;
     }
     encodeMessage(action, id) {
-        action.___TYPE = 'action';
-        action.___ACTOR = this.actor;
+        action._TYPE = 'action';
+        action._ACTOR = this.actor;
         //time
-        action.___TIME = this.getTime();
-        if (id) action.___ID = id;
+        action._TIME = this.getTime();
+        if (id) action._ID = id;
         return JSON.stringify(action);
     }
     notify(filename, data) {
@@ -40,19 +40,19 @@ class Action{
                 /* checkActors ? */
                 const checkActors = $CHECK_ACTORS$;
                 if (checkActors) {
-                    if (!data.___ACTORS || data.___ACTORS.split(',').indexOf(self.actor) < 0) {
+                    if (!data._ACTORS || data._ACTORS.split(',').indexOf(self.actor) < 0) {
                         if ($NOTIFY_ACTORS_CHECKING$){
-                            console.log(['Actors not matching:', 'expected', self.actor, 'to be in', data.___ACTORS].join(' '));
+                            console.log(['Actors not matching:', 'expected', self.actor, 'to be in', data._ACTORS].join(' '));
                             console.log('... the message will not be forwarded');
                         }
                         return;
                     } else {
                         $NOTIFY_ACTORS_CHECKING$ &&
-                        console.log(['Actors matching:', self.actor, 'found in', data.___ACTORS].join(' '));
+                        console.log(['Actors matching:', self.actor, 'found in', data._ACTORS].join(' '));
                     }
                 }
                 /* forward injecting also the ws, with the id attached */
-                ws.id = data.___ID;
+                ws.id = data._ID;
                 f(data, ws);
             });
         });   

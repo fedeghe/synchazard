@@ -2,12 +2,12 @@ module.exports.launch = (action, synchazard, params) => {
 
     "use strict";
     action.onconnection((data, ws) => {
-        if (data.___TYPE !== 'action') return;
-        switch (data.___ACTION) {
+        if (data._TYPE !== 'action') return;
+        switch (data._ACTION) {
             case 'init':
                 ws.send(action.encodeMessage({
-                    ___ACTION: 'status',
-                    ___PAYLOAD: {
+                    _ACTION: 'status',
+                    _PAYLOAD: {
                         time : new Date
                     }
                 }));
@@ -45,8 +45,8 @@ module.exports.launch = (action, synchazard, params) => {
     new Interval(() => {
         var t = new Date;
         synchazard.broadcast(action.encodeMessage({
-            ___ACTION: 'status',
-            ___PAYLOAD: {
+            _ACTION: 'status',
+            _PAYLOAD: {
                 time: t
             }
         }));

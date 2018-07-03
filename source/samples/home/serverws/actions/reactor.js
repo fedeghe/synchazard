@@ -11,9 +11,9 @@ module.exports.launch = (action, synchazard, params) => {
             nodeList[nodeId].gotToken = id;
             nodeList[nodeId].value = nodeList[nodeId].value || '';
             return action.encodeMessage({
-                ___ACTION: 'reactor_disableAll',
-                ___VALUE: nodeList[nodeId].value,
-                ___NODEID: nodeId + ""
+                _ACTION: 'reactor_disableAll',
+                _VALUE: nodeList[nodeId].value,
+                _NODEID: nodeId + ""
             }, id);
         },
         enable = (id, val, nodeId) => {
@@ -23,31 +23,31 @@ module.exports.launch = (action, synchazard, params) => {
             nodeList[nodeId].gotToken = false;
             nodeList[nodeId].value = val;
             return action.encodeMessage({
-                ___ACTION: 'reactor_enableAll',
-                ___VALUE: val + "",
-                ___NODEID: nodeId + ""
+                _ACTION: 'reactor_enableAll',
+                _VALUE: val + "",
+                _NODEID: nodeId + ""
             }, id);
         },
         getNodeList = () => {
             return action.encodeMessage({
-                ___ACTION: 'reactor_updateInitStatus',
-                ___NODE_LIST: nodeList
+                _ACTION: 'reactor_updateInitStatus',
+                _NODE_LIST: nodeList
             });
         };
     
     // RUN
     action.onconnection((data, ws) => {
-        if (data.___TYPE !== 'action') return;
+        if (data._TYPE !== 'action') return;
         var action = null;
-        switch (data.___ACTION) {
+        switch (data._ACTION) {
             case 'init':
                 action = getNodeList();
                 break;
             case 'disable':
-                action = disable(data.___ID, data.___NODEID);
+                action = disable(data._ID, data._NODEID);
                 break;
             case 'enable':
-                action = enable(data.___ID, data.___VALUE, data.___NODEID);
+                action = enable(data._ID, data._VALUE, data._NODEID);
                 break;
         }
         action && synchazard.broadcast(action);

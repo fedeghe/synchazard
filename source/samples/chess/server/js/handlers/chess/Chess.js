@@ -149,8 +149,8 @@ Chess.prototype.render = function (d) {
  * entry point for events
  */
 Chess.prototype.handle = function (d) {
-    if (d.___TYPE !== 'action') return;
-    switch (d.___ACTION) {
+    if (d._TYPE !== 'action') return;
+    switch (d._ACTION) {
         case 'init':
             this.cleanup().init();
             break;

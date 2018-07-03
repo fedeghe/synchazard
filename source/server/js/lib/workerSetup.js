@@ -44,8 +44,8 @@
      * set actors, even if null
      */
     $NS$.synchazard.postMessage({
-        ___TYPE: '___INITACTORS',
-        ___ACTORS: dataActors
+        _TYPE: '_INITACTORS',
+        _ACTORS: dataActors
     });
 
     /**
@@ -54,7 +54,7 @@
      * @param {*} action 
      */
     function getRTT(action) {
-        return action ? getTime() - action.___TIME : null;
+        return action ? getTime() - action._TIME : null;
     }
 
     /** 
@@ -78,7 +78,7 @@
      * @param {*} action 
      */
     function createAction(action) {
-        action.___ACTORS = dataActors || null;
+        action._ACTORS = dataActors || null;
         return JSON.stringify(action);
     }
 
@@ -208,12 +208,12 @@
     $NS$.synchazard.onmessage = function (e) {
         //=================================================
         function r() {
-            switch (typeof $NS$.handlers[e.data.___HANDLER]) {
+            switch (typeof $NS$.handlers[e.data._HANDLER]) {
                 case 'function':
-                    $NS$.handlers[e.data.___HANDLER](e.data.___DATA);
+                    $NS$.handlers[e.data._HANDLER](e.data._DATA);
                     break;
                 case 'object':
-                    $NS$.handlers[e.data.___HANDLER].handle(e.data.___DATA);
+                    $NS$.handlers[e.data._HANDLER].handle(e.data._DATA);
                     break;
                 default: break;
             }
@@ -221,7 +221,7 @@
         /**
          * in case give a small timegap
          */
-        '___HANDLER' in e.data && e.data.___HANDLER in $NS$.handlers ?
+        '_HANDLER' in e.data && e.data._HANDLER in $NS$.handlers ?
         r() : setTimeout(r, $WEBSERVER.TIMEGAP$);
     };
 

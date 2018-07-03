@@ -8,9 +8,9 @@ self.onmessage = function (e) {
 
     if (actorsDontMatch(e)) return;
 
-    if (e.data.___TYPE !== 'action') return;
+    if (e.data._TYPE !== 'action') return;
     self.postMessage({
-        ___HANDLER: 'Collab',
-        ___DATA: e.data
+        _HANDLER: 'Collab',
+        _DATA: e.data
     });    
 };

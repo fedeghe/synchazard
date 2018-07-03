@@ -11,15 +11,15 @@ module.exports.launch = (action, synchazard, params) => {
         host: '$DATASERVER.HOST$',
         actions: {
             update: action.encodeMessage({
-                ___ACTION: 'xhr',
-                ___FILECHANGED: '$DATASERVER.HOST$/' + resourceFile
+                _ACTION: 'xhr',
+                _FILECHANGED: '$DATASERVER.HOST$/' + resourceFile
             })
         }
     });
 
     action.onconnection((data, ws) => {
-        if (data.___TYPE !== 'action') return;
-        switch (data.___ACTION) {
+        if (data._TYPE !== 'action') return;
+        switch (data._ACTION) {
             case 'init':
                 ws.send(action.data.actions.update);
                 break;

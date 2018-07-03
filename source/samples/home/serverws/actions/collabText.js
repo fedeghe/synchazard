@@ -8,9 +8,9 @@ module.exports.launch = (action, synchazard, params) => {
             nodeList[nodeId].gotToken = id;
             nodeList[nodeId].value = nodeList[nodeId].value || '';
             return action.encodeMessage({
-                ___ACTION: 'disableAll',
-                ___VALUE: nodeList[nodeId].value,
-                ___NODEID: nodeId + ""
+                _ACTION: 'disableAll',
+                _VALUE: nodeList[nodeId].value,
+                _NODEID: nodeId + ""
             }, id);
         },
         enable = (id, value, nodeId) => {
@@ -20,42 +20,42 @@ module.exports.launch = (action, synchazard, params) => {
             nodeList[nodeId].gotToken = false;
             nodeList[nodeId].value = value;
             return action.encodeMessage({
-                ___ACTION: 'enableAll',
-                ___VALUE: value + "",
-                ___NODEID: nodeId + ""
+                _ACTION: 'enableAll',
+                _VALUE: value + "",
+                _NODEID: nodeId + ""
             }, id);
         },
         getNodes = () => {
             return action.encodeMessage({
-                ___ACTION: 'updateInitStatus',
-                ___NODE_LIST: nodeList
+                _ACTION: 'updateInitStatus',
+                _NODE_LIST: nodeList
             });
         },
         resize = (id, sizes, nodeId) => {
             nodeList[nodeId] = nodeList[nodeId] || {};
             nodeList[nodeId].sizes = sizes;
             return action.encodeMessage({
-                ___ACTION: 'resize',
-                ___SIZES: sizes,
-                ___NODEID: nodeId + ""
+                _ACTION: 'resize',
+                _SIZES: sizes,
+                _NODEID: nodeId + ""
             }, id);
         };
 
     // RUN
     action.onconnection((data, ws) => {
-        if (data.___TYPE !== 'action') return;
-        switch (data.___ACTION) {
+        if (data._TYPE !== 'action') return;
+        switch (data._ACTION) {
             case 'init':
                 synchazard.broadcast(getNodes());
                 break;
             case 'disable':
-                synchazard.broadcast(disable(data.___ID, data.___NODEID));
+                synchazard.broadcast(disable(data._ID, data._NODEID));
                 break;
             case 'enable':
-                synchazard.broadcast(enable(data.___ID, data.___VALUE, data.___NODEID));
+                synchazard.broadcast(enable(data._ID, data._VALUE, data._NODEID));
                 break;
             case 'resize':
-                synchazard.broadcast(resize(data.___ID, data.___SIZES, data.___NODEID));
+                synchazard.broadcast(resize(data._ID, data._SIZES, data._NODEID));
                 break;
         }
     });

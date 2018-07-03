@@ -182,7 +182,7 @@ In the project's root the two _server_ and _serverWS_ folders will contain the m
 <img src="https://raw.githubusercontent.com/fedeghe/synchazard/master/source/collsion.png" alt="drawing" width="80%"/>
 
 What would happen if calling `socketsSrv.launch` we pass among all needed actions two particural ones which replies with structurally similar objects to the same request, for example the _init_?  
-For sure we could take the responsability on the ___ACTION field value of the response to pay it in terms of loss of semantic. Would be a naive solution.
+For sure we could take the responsability on the \_ACTION field value of the response to pay it in terms of loss of semantic. Would be a naive solution.
 
 Ignoring it in this case there will be a _race condition_, causing unpredictable and undesired outcomes. 
 

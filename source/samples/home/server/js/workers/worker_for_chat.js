@@ -8,18 +8,18 @@ self.onmessage = function (e) {
 
     if (actorsDontMatch(e)) return;
 
-    if (e.data.___TYPE !== 'action') return;
-    switch(e.data.___ACTION) {
+    if (e.data._TYPE !== 'action') return;
+    switch(e.data._ACTION) {
         case 'messages':
             self.postMessage({
-                ___HANDLER: 'Chat',
-                ___DATA: e.data.___PAYLOAD
+                _HANDLER: 'Chat',
+                _DATA: e.data._PAYLOAD
             });
             break;
         case 'message':
             self.postMessage({
-                ___HANDLER: 'Chat',
-                ___DATA: e.data.___PAYLOAD
+                _HANDLER: 'Chat',
+                _DATA: e.data._PAYLOAD
             });
             break;
         /**
@@ -30,8 +30,8 @@ self.onmessage = function (e) {
          */
         case 'self':
             self.postMessage({
-                ___HANDLER: 'ChatSelfHandler',
-                ___DATA: e.data.___PAYLOAD
+                _HANDLER: 'ChatSelfHandler',
+                _DATA: e.data._PAYLOAD
             });
             break;
     }

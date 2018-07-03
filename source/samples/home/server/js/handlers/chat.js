@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    var ___ID = $NS$.id;
+    var _ID = $NS$.id;
 
     function cleanup (text, pre) {
         return (pre ? '<pre>' : '') +
@@ -46,11 +46,11 @@
         if (v) {
             input.value = '';
             $NS$.send({
-                ___TYPE: 'action',
-                ___ACTION: 'new_message',
-                ___CLIENT: $NS$.id,
-                ___MESSAGE: v,
-                ___TIMESTAMP: new Date() + ""
+                _TYPE: 'action',
+                _ACTION: 'new_message',
+                _CLIENT: $NS$.id,
+                _MESSAGE: v,
+                _TIMESTAMP: new Date() + ""
             });
         }
     });
@@ -86,7 +86,7 @@
     
     $NS$.handlers.ChatSelfHandler = function (x) {
         console.log("SELF MESSAGE: " + cleanup(x));
-        localStorage.setItem('$NS$clientID', ___ID);
+        localStorage.setItem('$NS$clientID', _ID);
     };
 })();
 

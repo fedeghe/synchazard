@@ -12,13 +12,13 @@ module.exports.launch = (action, synchazard, params) => {
 
         let newMessage;
 
-        if (data.___TYPE !== 'action') return;
+        if (data._TYPE !== 'action') return;
 
-        switch (data.___ACTION) {
+        switch (data._ACTION) {
             case 'init':
                 synchazard.broadcast(action.encodeMessage({
-                    ___ACTION: 'messages',
-                    ___PAYLOAD: {
+                    _ACTION: 'messages',
+                    _PAYLOAD: {
                         all : action.data.messages
                     }
                 }));
@@ -26,26 +26,26 @@ module.exports.launch = (action, synchazard, params) => {
 
             case 'new_message':
                 newMessage = {
-                    id: data.___CLIENT,
-                    message: data.___MESSAGE,
-                    timestamp: data.___TIMESTAMP
+                    id: data._CLIENT,
+                    message: data._MESSAGE,
+                    timestamp: data._TIMESTAMP
                 };
                 
-                '___MESSAGE' in data
+                '_MESSAGE' in data
                 && action.data.messages.push(newMessage);
 
                 // self message
                 //
                 ws.send(action.encodeMessage({
-                    ___ACTION: 'self',
-                    ___PAYLOAD: data.___MESSAGE
+                    _ACTION: 'self',
+                    _PAYLOAD: data._MESSAGE
                 }));
 
                 // and broadcast
                 //
                 synchazard.broadcast(action.encodeMessage({
-                    ___ACTION: 'message',
-                    ___PAYLOAD: {
+                    _ACTION: 'message',
+                    _PAYLOAD: {
                         one: newMessage
                     }
                 }));

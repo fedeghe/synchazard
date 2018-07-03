@@ -9,12 +9,12 @@ module.exports.launch = (action, synchazard, params) => {
     // INIT
     //
     action.onconnection((data, ws) => {
-        if (data.___TYPE !== 'action') return;
-        switch (data.___ACTION) {
+        if (data._TYPE !== 'action') return;
+        switch (data._ACTION) {
             case 'init':
                 ws.send(action.encodeMessage({
-                    ___ACTION: 'json',
-                    ___PAYLOAD: action.data
+                    _ACTION: 'json',
+                    _PAYLOAD: action.data
                 }));
                 break;
         }
@@ -25,8 +25,8 @@ module.exports.launch = (action, synchazard, params) => {
     setInterval(() => {
         action.data.num++;
         var act = {
-            ___ACTION: 'json',
-            ___PAYLOAD: action.data
+            _ACTION: 'json',
+            _PAYLOAD: action.data
         };
         synchazard.broadcast(action.encodeMessage(act));
     }, 1000);

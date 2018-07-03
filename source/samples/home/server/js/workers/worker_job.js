@@ -8,12 +8,12 @@ self.onmessage = function (e) {
 
     if (actorsDontMatch(e)) return;
 
-    if (e.data.___TYPE !== 'action') return;
-    switch (e.data.___ACTION) {
+    if (e.data._TYPE !== 'action') return;
+    switch (e.data._ACTION) {
         case 'doComputation':
             self.postMessage({
-                ___HANDLER: 'computer',
-                ___DATA: e.data.___JOB
+                _HANDLER: 'computer',
+                _DATA: e.data._JOB
             });
             break;
     }

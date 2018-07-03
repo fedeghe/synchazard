@@ -8,14 +8,14 @@ self.onmessage = function (e) {
 
     if (actorsDontMatch(e)) return;
 
-    if (e.data.___TYPE !== 'action') return;
-    switch (e.data.___ACTION) {
+    if (e.data._TYPE !== 'action') return;
+    switch (e.data._ACTION) {
         case 'init':
             self.postMessage({
-                ___TYPE: 'action',
-                ___ACTION: 'init',
-                ___HANDLER: 'chess',
-                ___DATA: e.data
+                _TYPE: 'action',
+                _ACTION: 'init',
+                _HANDLER: 'chess',
+                _DATA: e.data
             });
             break;
         default:

@@ -8,20 +8,20 @@ self.onmessage = function (e) {
 
     if (actorsDontMatch(e)) return;
 
-    if (e.data.___TYPE !== 'action') return;
-    switch (e.data.___ACTION) {
+    if (e.data._TYPE !== 'action') return;
+    switch (e.data._ACTION) {
         case 'reactor_disableAll':
         case 'reactor_enableAll':
         case 'reactor_updateInitStatus':
             self.postMessage({
-                ___HANDLER: 'Reactor',
-                ___DATA: e.data
+                _HANDLER: 'Reactor',
+                _DATA: e.data
             });
             break;
         case 'json':
             self.postMessage({
-                ___HANDLER: 'render2',
-                ___DATA: e.data.___PAYLOAD
+                _HANDLER: 'render2',
+                _DATA: e.data._PAYLOAD
             });
             break;
         default:

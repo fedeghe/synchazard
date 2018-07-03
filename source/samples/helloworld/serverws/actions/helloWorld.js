@@ -10,24 +10,24 @@ module.exports.launch = (action, synchazard, params) => {
     let state = {one: 0, two: 1};
 
     action.onconnection((data, ws) => {
-        if (data.___TYPE !== 'action') return;
-        switch (data.___ACTION) {
+        if (data._TYPE !== 'action') return;
+        switch (data._ACTION) {
             case 'init':
                 ws.send(action.encodeMessage({
-                    ___ACTION: 'initDone',
-                    ___PAYLOAD: state,
-                    ___TIME: data.___TIME
+                    _ACTION: 'initDone',
+                    _PAYLOAD: state,
+                    _TIME: data._TIME
                 }));
                 break;
             case 'next':
                 updateState();
                 synchazard.broadcast(action.encodeMessage({
-                    ___ACTION: 'nextDone',
-                    ___PAYLOAD: state,
-                    ___TIME: data.___TIME
+                    _ACTION: 'nextDone',
+                    _PAYLOAD: state,
+                    _TIME: data._TIME
                 }));
                 ws.send(action.encodeMessage({
-                    ___ACTION: 'boldMe'
+                    _ACTION: 'boldMe'
                 }));
                 break;
         }

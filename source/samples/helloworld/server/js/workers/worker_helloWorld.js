@@ -8,22 +8,22 @@ self.onmessage = function (e) {
 
     if (actorsDontMatch(e)) return;
 
-    if (e.data.___TYPE !== 'action') return;
-    switch (e.data.___ACTION) {
+    if (e.data._TYPE !== 'action') return;
+    switch (e.data._ACTION) {
         case 'initDone':
         case 'nextDone':
             self.postMessage({
-                ___HANDLER: 'hello',
-                ___DATA: {
-                    ___PAYLOAD: e.data.___PAYLOAD,
-                    ___TIME: e.data.___TIME
+                _HANDLER: 'hello',
+                _DATA: {
+                    _PAYLOAD: e.data._PAYLOAD,
+                    _TIME: e.data._TIME
                 }
             });
             break;
         case 'boldMe':
             self.postMessage({
-                ___HANDLER: 'hello',
-                ___DATA: e.data.___ACTION
+                _HANDLER: 'hello',
+                _DATA: e.data._ACTION
             });
             break;
         default:break;

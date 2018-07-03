@@ -11,25 +11,25 @@ module.exports.launch = (action, synchazard, params) => {
     // just listen
     //
     action.onconnection((data, ws) => {
-        if (data.___TYPE !== 'action') return;
-        switch (data.___ACTION) {
+        if (data._TYPE !== 'action') return;
+        switch (data._ACTION) {
             case 'init':
                 ws.send(action.encodeMessage({
-                    ___ACTION: 'init',
-                    ___PAYLOAD: action.data.matches
+                    _ACTION: 'init',
+                    _PAYLOAD: action.data.matches
                 }));
                 break;
             case 'createMatch':
                 ws.send(action.encodeMessage({
-                    ___ACTION: 'matchCreated',
-                    ___PAYLOAD: action.data.matches
+                    _ACTION: 'matchCreated',
+                    _PAYLOAD: action.data.matches
                 }));
                 break;
 
             case 'joinMatch':
                 ws.send(action.encodeMessage({
-                    ___ACTION: 'matchJoined',
-                    ___PAYLOAD: action.data.matches
+                    _ACTION: 'matchJoined',
+                    _PAYLOAD: action.data.matches
                 }));
                 break;
             default: 

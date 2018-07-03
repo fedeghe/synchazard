@@ -13,8 +13,8 @@ module.exports.launch = (action, synchazard, params) => {
         actions: {
             update: function () {
                 return action.encodeMessage({
-                    ___ACTION: 'style',
-                    ___FILECHANGED: '$DATASERVER.HOST$/' + resourceFile + '?cb=' + Math.random()
+                    _ACTION: 'style',
+                    _FILECHANGED: '$DATASERVER.HOST$/' + resourceFile + '?cb=' + Math.random()
                 });
             }
         }
@@ -23,8 +23,8 @@ module.exports.launch = (action, synchazard, params) => {
     // INIT
     //
     action.onconnection((data, ws) => {
-        if (data.___TYPE !== 'action') return;
-        switch (data.___ACTION) {
+        if (data._TYPE !== 'action') return;
+        switch (data._ACTION) {
             case 'init':
                 ws.send(action.data.actions.update());
                 break;

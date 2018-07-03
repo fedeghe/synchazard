@@ -56,18 +56,18 @@ at that point it makes sense to show how the worker code would fit that particul
 var worker = this;
 
 worker.onmessage = function (e) {
-    if (e.data.___TYPE === 'action') {
-        switch (e.data.___ACTION) {
+    if (e.data._TYPE === 'action') {
+        switch (e.data._ACTION) {
             case 'one':
                 worker.postMessage({
-                    ___HANDLER: 'handlerOne',
-                    ___DATA: e.data.___PAYLOAD
+                    _HANDLER: 'handlerOne',
+                    _DATA: e.data._PAYLOAD
                 });
                 break;
             case 'two':
                 worker.postMessage({
-                    ___HANDLER: 'handlerTwo',
-                    ___DATA: e.data.___PAYLOAD
+                    _HANDLER: 'handlerTwo',
+                    _DATA: e.data._PAYLOAD
                 });
                 break;
             //

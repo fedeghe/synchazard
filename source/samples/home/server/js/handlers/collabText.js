@@ -7,35 +7,35 @@
     
     Collab.prototype.handle = function (d) {
         var i = null;
-        if (d.___TYPE !== 'action') return;
-        switch (d.___ACTION) {
+        if (d._TYPE !== 'action') return;
+        switch (d._ACTION) {
             case 'enableAll':
-                if (d.___ID !== $NS$.id) {
-                    this.nodes[d.___NODEID].removeAttribute('disabled');
-                    this.nodes[d.___NODEID].value = d.___VALUE;
+                if (d._ID !== $NS$.id) {
+                    this.nodes[d._NODEID].removeAttribute('disabled');
+                    this.nodes[d._NODEID].value = d._VALUE;
                 }
                 break;
             case 'disableAll':
-                if (d.___ID !== $NS$.id) {
-                    this.nodes[d.___NODEID].setAttribute('disabled', 'disabled');
+                if (d._ID !== $NS$.id) {
+                    this.nodes[d._NODEID].setAttribute('disabled', 'disabled');
                 }
                 break;
             case 'updateInitStatus': 
                 for (i in this.nodes){
-                    if (i in d.___NODE_LIST) {
-                        this.nodes[i].value = d.___NODE_LIST[i].value || '';
+                    if (i in d._NODE_LIST) {
+                        this.nodes[i].value = d._NODE_LIST[i].value || '';
 
-                        if ('sizes' in d.___NODE_LIST[i]) {
-                            this.nodes[i].style.width = d.___NODE_LIST[i].sizes[0] + 'px';
-                            this.nodes[i].style.height = d.___NODE_LIST[i].sizes[1] + 'px';
+                        if ('sizes' in d._NODE_LIST[i]) {
+                            this.nodes[i].style.width = d._NODE_LIST[i].sizes[0] + 'px';
+                            this.nodes[i].style.height = d._NODE_LIST[i].sizes[1] + 'px';
                         }
                     }
                 }
                 break;
             case 'resize':
-                if (d.___ID !== $NS$.id) {
-                    this.nodes[d.___NODEID].style.width = d.___SIZES[0] + 'px';
-                    this.nodes[d.___NODEID].style.height = d.___SIZES[1] + 'px';
+                if (d._ID !== $NS$.id) {
+                    this.nodes[d._NODEID].style.width = d._SIZES[0] + 'px';
+                    this.nodes[d._NODEID].style.height = d._SIZES[1] + 'px';
                 }
                 break;
         }
@@ -56,19 +56,19 @@
 
         function updateAll() {
             $NS$.send({
-                ___TYPE: 'action',
-                ___ACTION: 'enable',
-                ___VALUE: node.value,
-                ___NODEID: id
+                _TYPE: 'action',
+                _ACTION: 'enable',
+                _VALUE: node.value,
+                _NODEID: id
             });
         }
 
         node.addEventListener('input', function (e) {
             clearTimeout(to);
             $NS$.send({
-                ___TYPE: 'action',
-                ___ACTION: 'disable',
-                ___NODEID: id
+                _TYPE: 'action',
+                _ACTION: 'disable',
+                _NODEID: id
             });
             to = setTimeout(function () {
                 updateAll();
@@ -84,10 +84,10 @@
                 sizes[0] = w;
                 sizes[1] = h;
                 $NS$.send({
-                    ___TYPE: 'action',
-                    ___ACTION: 'resize',
-                    ___NODEID: id,
-                    ___SIZES: [w, h]
+                    _TYPE: 'action',
+                    _ACTION: 'resize',
+                    _NODEID: id,
+                    _SIZES: [w, h]
                 });
             }
         });

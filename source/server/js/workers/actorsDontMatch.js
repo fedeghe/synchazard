@@ -10,10 +10,10 @@
 /**/
 /**/    // this is for init settings of the actors,
 /**/    // from bro toward the worker
-/**/    if (e.data.___TYPE === '___INITACTORS') {
-/**/        actors = e.data.___ACTORS || '';
+/**/    if (e.data._TYPE === '_INITACTORS') {
+/**/        actors = e.data._ACTORS || '';
 /**/    }
-/**/    gotActorsDontMatch = actors && actors.indexOf(e.data.___ACTOR) < 0;
+/**/    gotActorsDontMatch = actors && actors.indexOf(e.data._ACTOR) < 0;
 /**/
 /**/    // this is the check about actors when the
 /**/    // worker receives a message from the websocket
@@ -21,7 +21,7 @@
 /**/        if (notifyActorsChecking) {
 /**/            console.log("Actors mismatch");
 /**/            console.log('required: ', actors);
-/**/            console.log('provided: ', e.data.___ACTOR);
+/**/            console.log('provided: ', e.data._ACTOR);
 /**/        }
 /**/        return true;
 /**/    }
