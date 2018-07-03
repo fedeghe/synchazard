@@ -12,12 +12,17 @@ class Action{
             n = d.getTimezoneOffset();
         return +d + n * 60000;
     }
-    encodeMessage(action, id) {
+    encodeMessage(action, options) {
         action._TYPE = 'action';
         action._ACTOR = this.actor;
         //time
-        action._TIME = this.getTime();
-        if (id) action._ID = id;
+        action._TIME = action._TIME || this.getTime();
+        if (options) {
+            if (options.id) action._ID = options.id;
+            if (options.data) {
+                action._TIME = options.data._TIME;
+            }
+        }
         return JSON.stringify(action);
     }
     notify(filename, data) {

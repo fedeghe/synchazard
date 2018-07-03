@@ -64,10 +64,6 @@
          * wrap the ws.send adding some useful stuff (before check active flag)
          */
         send = function (action) {
-            // ensure the client identifier
-            action._ID = action._ID || $NS$.id;
-            action._TYPE = action._TYPE || 'action';
-            action._TIME = action._TIME || $NS$.utils.getTime();
             $NS$.active && ws.send($NS$.utils.createAction(action));
         };
 

@@ -14,7 +14,7 @@ module.exports.launch = (action, synchazard, params) => {
                 _ACTION: 'reactor_disableAll',
                 _VALUE: nodeList[nodeId].value,
                 _NODEID: nodeId + ""
-            }, id);
+            }, { id : id });
         },
         enable = (id, val, nodeId) => {
             nodeList[nodeId] = nodeList[nodeId] || {};
@@ -26,7 +26,7 @@ module.exports.launch = (action, synchazard, params) => {
                 _ACTION: 'reactor_enableAll',
                 _VALUE: val + "",
                 _NODEID: nodeId + ""
-            }, id);
+            }, { id : id });
         },
         getNodeList = () => {
             return action.encodeMessage({

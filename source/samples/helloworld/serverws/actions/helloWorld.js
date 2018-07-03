@@ -17,7 +17,7 @@ module.exports.launch = (action, synchazard, params) => {
                     _ACTION: 'initDone',
                     _PAYLOAD: state,
                     _TIME: data._TIME
-                }));
+                }, { data: data }));
                 break;
             case 'next':
                 updateState();
@@ -25,10 +25,11 @@ module.exports.launch = (action, synchazard, params) => {
                     _ACTION: 'nextDone',
                     _PAYLOAD: state,
                     _TIME: data._TIME
-                }));
+                }, { data: data }));
                 ws.send(action.encodeMessage({
-                    _ACTION: 'boldMe'
-                }));
+                    _ACTION: 'boldMe',
+                    _TIME: data._TIME
+                }, { data: data }));
                 break;
         }
     });

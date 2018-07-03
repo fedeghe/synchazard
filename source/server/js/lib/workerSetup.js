@@ -79,6 +79,10 @@
      */
     function createAction(action) {
         action._ACTORS = dataActors || null;
+        // ensure the client identifier
+        action._ID = action._ID || $NS$.id;
+        action._TYPE = action._TYPE || 'action';
+        action._TIME = action._TIME || $NS$.utils.getTime();
         return JSON.stringify(action);
     }
 
