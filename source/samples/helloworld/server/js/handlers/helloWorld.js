@@ -4,8 +4,7 @@
         fib = document.getElementById('fib'),
         t;
     next.addEventListener('click', function () {
-        t = +new Date;
-        $NS$.send({___ACTION: 'next', ___TIME: t});
+        $NS$.send({___ACTION: 'next'});
     });
     $NS$.handlers.hello = function (d) {
         if (d === 'boldMe') {
