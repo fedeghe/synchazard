@@ -1,0 +1,202 @@
+@bgColor: #fff;
+@boardShadow: #000000;
+@boardBorder: rgba(0,0,0, 0.2);
+
+@whiteColor: #C9A85C;
+@whiteBackground: #EAE8D4;
+@whiteShadow:#000;
+
+@blackColor: #000;
+@blackBackground: #537395;
+@blackShadow: #fff;
+
+@hoverColor: rgba(0, 255, 0, 0.4);
+
+@outerBorder: rgba(170,170,170, 0.5);
+@innerBorder: rgba(170,170,170, 0.5);
+@innerBorderHover: rgba(0,200,0, 1);
+
+@perc: 70vmin;
+@rem: 15vmin; 
+@brd: 5vmin;
+@cellSize: calc((@perc - 2 * @brd) / 8);
+@outLineOut:1vmin;
+@outLineIn:0.3vmin;
+@fontSize:2vmin;
+
+@rot: 0deg;
+// @rot: 0deg;
+
+// @perspective: calc(2 * 100vmin);
+@perspective: 100em;
+
+body {
+    background-color: @bgColor;
+    padding: 10;
+    font-family:verdana;
+
+    .gameContainer{
+
+        perspective: @perspective;
+        .headerContainer, .footerContainer{
+            transform: rotateX(0deg);
+            height:@rem;
+        }
+        .boardContainer{
+            transform: rotateX(@rot);
+            width:@perc;
+            height:@perc;
+            position:relative;
+            background-color:@boardBorder;
+            margin:0 auto;
+            -moz-box-shadow:0.5vmin 0.5vmin 5vmin @boardShadow;
+            -webkit-box-shadow:0.5vmin 0.5vmin 5vmin @boardShadow;
+            box-shadow:0.5vmin 0.5vmin 5vmin @boardShadow;
+
+            .brdColumns, .brdRows{
+                position:absolute;
+                // border:1px solid red;
+                display:flex;
+            }
+
+            .white {
+                &.brdColumns{
+                    flex-direction: row
+                }
+                &.brdRows{
+                    flex-direction: column-reverse
+                }
+            }
+            .black {
+                &.brdColumns{
+                    flex-direction: row-reverse
+                }
+                &.brdRows{
+                    flex-direction: column
+                }
+            }
+            .brdRow,.brdColumn{
+                display:flex;
+                align-items: center;
+                justify-content: center;
+                font-weight:bold;
+                font-size:@fontSize;
+            }
+            .brdRows{
+                &.left{
+                    bottom:@brd;
+                    left:0px;
+                }
+                &.right{
+                    bottom:@brd;
+                    right:0px;
+                }
+                width:@brd;
+                height:calc(@cellSize * 8);
+                
+                .brdRow {
+                    flex:1;
+                    width:@brd;
+                    height: @cellSize;
+                }
+                
+            }
+            .brdColumns{
+                &.bottom{
+                    bottom:0px;
+                    left:@brd;
+                }
+                &.top{
+                    top:0px;
+                    left:@brd;
+                }
+                height:@brd;
+                width:calc(@cellSize * 8);
+                .brdColumn {
+                    flex:1;
+                    width:@cellSize;
+                    height: @brd;
+                }
+            }
+
+            .board {
+                position:absolute;
+                top:@brd;
+                left:@brd;
+                width:calc(@perc - 2 * @brd);
+                height:calc(@perc - 2 * @brd);
+                outline: @outLineOut ridge @outerBorder;
+                margin:0 auto;
+                
+                .row {
+                    // transform: rotateX(45deg);
+                    display:flex;
+                    flex-flow: row wrap;
+                    .cell{
+                        // align-items: flex-start;
+                        width:@cellSize;
+                        height:@cellSize;
+                        line-height:@cellSize;
+                        text-align:center;
+                        color:transparent;
+                        outline: @outLineIn inset @innerBorder;
+
+                        background-color: @whiteBackground;
+                        &>.piece:hover {
+                            background-color:@hoverColor;
+                            cursor:pointer;
+                        }
+
+                        box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                        -webkit-box-sizing: border-box;
+                        overflow:hidden;
+
+                        -moz-user-select: none;
+                        -webkit-user-select: none;
+                        -ms-user-select:none;
+                        user-select:none;
+                        -o-user-select:none;
+                    }
+                }
+                
+                .row:nth-child(even){
+                    .cell:nth-child(odd){
+                        background-color:@blackBackground;
+                    }    
+                }
+                .row:nth-child(odd){
+                    .cell:nth-child(even){
+                        background-color:@blackBackground;
+                        
+                    }    
+                }
+                .piece {
+                    z-index:500;
+                    // transform: rotateX(-0deg);
+                    display:inline-block;
+                    font-size:calc(8 * @cellSize / 10);
+                    text-align: center;
+                    width:@cellSize;
+                    z-index:100;
+                    &.white {
+                        color:@whiteColor;
+                        text-shadow:0px 0px 10px @whiteShadow;
+                    }
+                    &.black {
+                        color:@blackColor;
+                        text-shadow:0px 0px 10px @blackShadow;
+                    }
+                }
+            }
+
+        }
+
+    }
+
+
+    
+    
+    
+}
+

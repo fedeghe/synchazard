@@ -64,6 +64,7 @@
             // ensure the client identifier
             action.___ID = action.___ID || $NS$.id;
             action.___TYPE = action.___TYPE || 'action';
+            action.___TIME = $NS$.utils.getTime();
             $NS$.active && ws.send($NS$.utils.createAction(action));
         };
 
