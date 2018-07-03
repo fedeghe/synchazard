@@ -10,6 +10,8 @@
          * serialized action that can be used to ask the server
          * for initialization information, is up to us to decide how to call it.
          * the only important thing is that the socket server knows how to handle/reply to it
+         * 
+         * it will be sent automatically when the socket connection is established
          */
         initAction = {
             ___TYPE: 'action',
@@ -30,12 +32,13 @@
      */
     (function startWs() {
 
+        // in case is up and running then shut it down
         ws && ws.close();
 
+        // pass the client id 
         url = "$DATASERVER.WSHOST$/?id=" + $NS$.id;
-        /**
-         * Attempt to start the client socket
-         */
+
+        // attempt to start the client socket
         try {
             ws = new WebSocket(url);
         } catch (err) {
@@ -46,9 +49,9 @@
         /**
          * OPTIONAL
          * 
-         * when the socket conn is established, send the simple initAction
+         * when the socket conn is established, send the simple 'init' request
          * this function is also exposed to the client through the global scope so that 
-         * is possible to trigger the same sending by a user actin for example
+         * is possible to trigger the same sending by a user action for example
          * 
          * is up tp the server to decide what the initAction should trigger
          */
@@ -58,7 +61,7 @@
         };
 
         /**
-         * 
+         * wrap the ws.send adding some useful stuff (before check active flag)
          */
         send = function (action) {
             // ensure the client identifier
@@ -98,9 +101,8 @@
             --maxReconnectionAttempts && W.setTimeout(startWs, reconnectionInterval);
         };
 
-        /**
-         * handle it somehow
-         */
+        // handle it somehow
+        //
         ws.onerror = function (e) {
             console.log('ws client error');
             console.log(e);
@@ -108,8 +110,8 @@
         };
     }());
 
-    // let the client close the connection
-    // before refresh OR close
+    // let the client close the connection before refresh OR close
+    // 
     function close() {
         // automatically blur current element
         // on reload otherwise would hang
