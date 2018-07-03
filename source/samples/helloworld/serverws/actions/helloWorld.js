@@ -15,20 +15,17 @@ module.exports.launch = (action, synchazard, params) => {
             case 'init':
                 ws.send(action.encodeMessage({
                     _ACTION: 'initDone',
-                    _PAYLOAD: state,
-                    _TIME: data._TIME
+                    _PAYLOAD: state
                 }, { data: data }));
                 break;
             case 'next':
                 updateState();
                 synchazard.broadcast(action.encodeMessage({
                     _ACTION: 'nextDone',
-                    _PAYLOAD: state,
-                    _TIME: data._TIME
+                    _PAYLOAD: state
                 }, { data: data }));
                 ws.send(action.encodeMessage({
-                    _ACTION: 'boldMe',
-                    _TIME: data._TIME
+                    _ACTION: 'boldMe'
                 }, { data: data }));
                 break;
         }
