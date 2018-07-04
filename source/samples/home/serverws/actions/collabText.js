@@ -11,7 +11,7 @@ module.exports.launch = (action, synchazard, params) => {
                 _ACTION: 'disableAll',
                 _VALUE: nodeList[nodeId].value,
                 _NODEID: nodeId + ""
-            }, id);
+            }, { id: id });
         },
         enable = (id, value, nodeId) => {
             nodeList[nodeId] = nodeList[nodeId] || {};
@@ -23,7 +23,7 @@ module.exports.launch = (action, synchazard, params) => {
                 _ACTION: 'enableAll',
                 _VALUE: value + "",
                 _NODEID: nodeId + ""
-            }, id);
+            }, { id: id });
         },
         getNodes = () => {
             return action.encodeMessage({
@@ -38,7 +38,7 @@ module.exports.launch = (action, synchazard, params) => {
                 _ACTION: 'resize',
                 _SIZES: sizes,
                 _NODEID: nodeId + ""
-            }, id);
+            }, { id: id });
         };
 
     // RUN
