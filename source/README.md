@@ -104,7 +104,7 @@ The Action on the serverWS regularly broadcasts a random number &isin; [0,100]. 
 
 
 
-#### @url:  http://192.168.5.107:4000/samples/reactor.html
+#### @url:  http://192.168.5.107:4000/reactor.html
 
 - **reactor**  
 Nothing to do with React, but the name fits somehow. Here I think there is a clearer hazard. And maybe it would be boring to read a long pseudo-description of the flow. But it's worth trying to summarize the functionality. I wrote a small client library to enable on targeted `input[text]` and `textarea` tags some sort of concurrrency. Basically, whenever the client Alice start typing in one of the target tags, immediately all other clients can see the tag being edited as disabled, when Alice leaves the focus on the tag, all other clients will see that tag enabled and filled with the value Alice entered.
@@ -121,23 +121,23 @@ This is the simplest one. The Action broadcasts every second an incremental coun
 
 Almost in all cases a WebWorker runs a `proxy` between the client-side socket and the handler function, allowing, for example, for the _datajson_ example to receive simple metadata sent by the serverWS which contains all the information needed to get the real resource. The webWorker then decides in this case to start an xhr request for the resource and when the data is available it forwards all to the handler functions that decide how to consume it. In any case the WebWorker decides in the end which one is the handler function that will consume the data. The WebWorker used in the main example is `/server/js/workers/worker.js`
 
-#### @url:  http://192.168.5.107:4000/samples/distcomp.html 
+#### @url:  http://192.168.5.107:4000/distcomp.html 
 A raw, distributed computing sample to get a (bad) value for &pi; using other clients that will accept to help. 
 ... to be continued
 
-#### @url:  http://192.168.5.107:4000/samples/collabText.html  
+#### @url:  http://192.168.5.107:4000/collabText.html  
 A couple of collaborative textareas where the content and the size is shared among all clients
 ... to be continued
 
-#### @url:  http://192.168.5.107:4000/samples/chat.html  
+#### @url:  http://192.168.5.107:4000/chat.html  
 A basic chat which will enable messages to be sent in broadcast and to the client that sent one message (check the console when a message is posted)
 ... to be continued
 
-#### @url:  http://192.168.5.107:4000/samples/react.html   
+#### @url:  http://192.168.5.107:4000/react.html   
 The most simple immaginable example using React
 ... to be continued
 
-#### @url:  http://192.168.5.107:4000/samples/job.html
+#### @url:  http://192.168.5.107:4000/job.html
 This may look wierd because in the end the ws srv sends one specific function to the client that will be used to make a naive calculation.   
 ... to be continued
 

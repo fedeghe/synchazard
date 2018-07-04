@@ -38,12 +38,12 @@ module.exports.launch = (action, synchazard, params) => {
     //
     action.onconnection((data, ws) => {
 
-        if (data.___TYPE === 'action') {
-            switch (data.___ACTION) {
+        if (data._TYPE === 'action') {
+            switch (data._ACTION) {
                 case 'init':
                     synchazard.broadcast(action.encodeMessage({
-                        ___ACTION: 'messages',
-                        ___PAYLOAD: {
+                        _ACTION: 'messages',
+                        _PAYLOAD: {
                             all : action.data.messages
                         }
                     }));
