@@ -57,4 +57,6 @@ synchazard.launch([{
     actor: 'collabText'
 }, {
     path: 'actions/test'
-}], argz);
+}/*, {
+    path: 'actions/sunshine'
+}*/], argz);

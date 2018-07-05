@@ -13,6 +13,7 @@
     $NS$.utils.loadScript('/js/handlers/randomPercentage.js', remove);
     $NS$.utils.loadScript('/js/handlers/style.js', remove);
     $NS$.utils.loadScript('/js/handlers/script.js', remove);
+    $NS$.utils.loadScript('/js/handlers/sunshine.js', remove);
 
     window.createWatch = function (node) {
         function p2(d) {

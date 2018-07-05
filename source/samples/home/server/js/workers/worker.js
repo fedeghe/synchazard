@@ -56,7 +56,12 @@ self.onmessage = function (e) {
                 _DATA: e.data._FILECHANGED
             });
             break;
-
+        case 'sunshine':
+            self.postMessage({
+                _HANDLER: 'sunshine',
+                _DATA: e.data._PAYLOAD
+            });
+            break;
         
         default:
             self.postMessage(e.data);
