@@ -3,11 +3,17 @@
  */
 (function () {
     "use strict"; 
+    var resizeBooked = false;
     function onresize(instance) {
         window.addEventListener('resize', function() {
-            instance.w = document.body.clientWidth;
-            instance.canvas.setAttribute('width', instance.w);
-        })
+            // if (resizeBooked) return;
+            // resizeBooked = true;
+            // setTimeout(function () {
+                instance.w = document.body.clientWidth;
+                instance.canvas.setAttribute('width', instance.w);
+                // resizeBooked = false;
+            // }, 10);
+        });
     }
     function Grp(w, h) {
         this.w = w || document.body.clientWidth;
@@ -17,7 +23,10 @@
         this.canvas.style.backgroundColor = 'transparent';
         this.canvas.style.margin = '0px';
         this.canvas.style.padding = '0px';
+        this.canvas.style.top = '2px';
+        this.canvas.style.position = 'relative';
         this.canvas.style.border = 'none';
+        // this.canvas.style.filter = 'blur(.5px)';
         this.canvas.style.height = this.h + 'px';
         this.init();
         if (!w && !h) onresize(this);
@@ -38,7 +47,7 @@
     Grp.prototype.addPoint = function (v) {
         var n = 100,
             i = 0, l;
-        
+
         this.points.push(v);
         
         if (this.points.length > n) {
