@@ -26,7 +26,6 @@ module.exports.launch = (action, synchazard, params) => {
             a.slice(i, i + howmany);
     };
     
-    // INIT
     //
     action.onconnection((data, ws) => {
         if (data._TYPE !== 'action') return;
@@ -48,5 +47,5 @@ module.exports.launch = (action, synchazard, params) => {
             _ACTION: 'sunshine',
             _PAYLOAD: sliceRot(action.data.colors, action.data.index, action.data.size)
         }));
-    }, 1000);
+    }, 60E3);
 };

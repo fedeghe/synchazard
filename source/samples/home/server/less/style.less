@@ -10,6 +10,12 @@ body{
 h2 {font-size:2em}
 h2 sub{font-size: 0.4em}
 
+h6{
+    margin:0px;
+    font-size:0.6em;
+    padding:1.5em;
+    color:gray
+}
 img {
     max-width: 60vw
 }
@@ -18,34 +24,6 @@ a{
     text-decoration: none
 }
 
-button {
-    padding:.4em;
-    margin:.2em;
-    font-size:1em;
-    border:none 5px #000000;
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;
-    border-radius:5px;
-    background:-webkit-gradient(linear, 80% 20%, 10% 21%, from(#FFFFEC), to(#C0B9B5));
-    cursor:pointer;
-}
-
-#presentation{
-    font-style: italic;
-    text-align: center
-}
-#number{
-    text-align:center;
-    margin-top:100px;
-    color: #161616;
-    text-shadow:0px 0px 1px white;
-}
-h6{
-    margin:0px;
-    font-size:0.6em;
-    padding:1.5em;
-    color:gray
-}
 header{
     height:4em;
     margin-bottom:50px
@@ -58,59 +36,12 @@ header{
 
 input:focus{border:none;}
 
-input[type=text], input[type=text]:disabled{
-    font-size:1em;
-    padding:.4em;
-    width:200px;
-    border:none;
-    outline:none;
-    margin-bottom:10px;
+.clear{
+    clear:both;
+    height:0;
+    line-height:0;
 }
 
-input[type=text]:disabled, textarea:disabled {
-    background-color: #ddd;
-    color: gray;
-    font-style: italic;
-}
-input{
-    max-width:40vw;
-}
-
-textarea{
-    width:400px;
-    height:100px;
-    font-family: inherit;
-    font-size:inherit;
-    border:1px solid black
-}
-
-div.exp{
-    height:100vh;
-    background-color: #000;
-    text-align:center;
-    padding:100px 100px
-}
-
-div#sensor{
-    margin:0px;
-    padding:0px;
-    outline:0px;
-    border:none;
-    height:100px;
-    position:relative;
-    bottom:-1px;
-    border-bottom-width:100vh;
-    border-bottom-style:solid;
-    border-bottom-color:black;
-}
-.samplesLink{
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    font-size: 0.6em;
-    padding: 1.5em;
-    color: white;
-}
 
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width : 420px) {
