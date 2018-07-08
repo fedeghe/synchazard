@@ -15,18 +15,21 @@
     }
 
     var target = document.body,
+        container = document.createElement('div'),
         form = document.createElement('form'),
         input = document.createElement('input'),
-        container = document.createElement('div'),
+        messagesContainer = document.createElement('div'),
         lastMessage = null;
 
-    container.className = 'container';
+    messagesContainer.className = 'messagesContainer';
+    container.className = 'chat';
 
     form.appendChild(input);
     input.setAttribute('type', 'text');
     input.setAttribute('placeholder', '...type a message here');
 
-    target.appendChild(form);
+    container.appendChild(form);
+    container.appendChild(messagesContainer);
     target.appendChild(container);
     input.focus();
     
@@ -72,15 +75,15 @@
             return tag;
         }
         if ('all' in messages) {
-            container.innerHTML = '';
+            messagesContainer.innerHTML = '';
             messages.all.forEach(function (m){
-                container.appendChild(getLine(m));
+                messagesContainer.appendChild(getLine(m));
             });
         } else if('one' in messages) {
-            container.appendChild(getLine(messages.one));
+            messagesContainer.appendChild(getLine(messages.one));
         }
 
-        container.scrollTop = container.scrollHeight;
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
     };
     
     $NS$.handlers.ChatSelfHandler = function (x) {
