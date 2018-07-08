@@ -3,7 +3,7 @@
 
 
 <p style="width:100%;text-align:center">
-  <img src="./synchazard4.svg" style="margin:0 auto;max-width:100%;width:320px">
+  <img src="./source/server/media/synchazard4.svg" style="margin:0 auto;max-width:100%;width:320px">
 </p>
 
 # SyncHazard  
