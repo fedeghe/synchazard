@@ -20,7 +20,7 @@
         container = document.createElement('div'),
         lastMessage = null;
 
-    container.setAttribute('id', 'container');
+    container.className = 'container';
 
     form.appendChild(input);
     input.setAttribute('type', 'text');
@@ -46,7 +46,6 @@
         if (v) {
             input.value = '';
             $NS$.send({
-                _TYPE: 'action',
                 _ACTION: 'new_message',
                 _CLIENT: $NS$.id,
                 _MESSAGE: v,

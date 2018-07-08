@@ -8,7 +8,6 @@
         this.result = document.getElementById(resultID);
         this.button.addEventListener('click', function () {
             $NS$.send({
-                _TYPE: 'action',
                 _ACTION: 'askMontecarlo'
             });
         });
@@ -18,7 +17,6 @@
         if ($NS$.id !== d._ID) {
             if (confirm('Want to help a fellow client to compute π?')) {
                 $NS$.send({
-                    _TYPE: 'action',
                     _ACTION: 'acceptedMontecarlo'
                 });
             } else {
@@ -31,7 +29,6 @@
 
     $NS$.handlers.DistCompSendResult = function (data) {
         $NS$.send({
-            _TYPE: 'action',
             _ACTION: 'joinMontecarlo',
             _DATA: data
         });

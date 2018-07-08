@@ -1,6 +1,6 @@
 (function () {
     "use strict";
-    var trg = document.getElementById('presentation');
+    var trg = document.querySelector('.presentation');
 
     trg.innerHTML = '&hellip; loading';
 

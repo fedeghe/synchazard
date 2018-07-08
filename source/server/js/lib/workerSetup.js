@@ -6,8 +6,7 @@
      */
     var currentScript = document.currentScript,
         dataActors = currentScript.dataset.actors || null,
-        $NS$ = {
-            
+        $NS$ = {   
             handlers: {},
             objHandlers: {},
             synchazard: new Worker(currentScript.dataset.worker),

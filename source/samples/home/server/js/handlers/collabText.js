@@ -56,7 +56,6 @@
 
         function updateAll() {
             $NS$.send({
-                _TYPE: 'action',
                 _ACTION: 'enable',
                 _VALUE: node.value,
                 _NODEID: id
@@ -66,7 +65,6 @@
         node.addEventListener('input', function (e) {
             clearTimeout(to);
             $NS$.send({
-                _TYPE: 'action',
                 _ACTION: 'disable',
                 _NODEID: id
             });
@@ -84,7 +82,6 @@
                 sizes[0] = w;
                 sizes[1] = h;
                 $NS$.send({
-                    _TYPE: 'action',
                     _ACTION: 'resize',
                     _NODEID: id,
                     _SIZES: [w, h]

@@ -8,6 +8,16 @@ body {
     background-position: center top;
     background-color: #567;
     margin: 0 auto;
+
+    p{
+        .msg{
+            color:black;
+        }
+        .self{
+            font-style: italic;
+            color: #777;
+        }
+    }
 }
 input[type=text],input[type=text]:focus{
     width:96%;
@@ -17,12 +27,12 @@ input[type=text],input[type=text]:focus{
     -webkit-border-bottom-right-radius:10px;
     border-top-right-radius:10px;
     border-bottom-right-radius:10px;
-    border-left: 3px solid black;
+    border: 2px solid #49ADE9;
+    border-left: 5px solid #49ADE9;
     padding:5px 3% 5px 1%;
     font-size:inherit;
-    
 }
-#container{
+.container{
     height: 300px;
     border-left: 3px solid black;
     overflow-y: scroll;
@@ -36,18 +46,7 @@ input[type=text],input[type=text]:focus{
     border-top-right-radius:10px;
     border-bottom-right-radius:10px;
 }
-p{
-    padding: 0px;
-    margin:0px;
-    margin-top:5px;
-}
-p.msg{
-    color:black;
-}
-p.self{
-    font-style: italic;
-    color: #777;
-}
+
 @media only screen and (min-device-width: 375px) and (max-device-height: 812px)  { 
 
     body{

@@ -4,7 +4,7 @@
     $NS$.utils.loadScript(
         '/js/simpleCanvasGrph.js',
         function () {
-            var trg = document.getElementById('graph'),
+            var trg = document.querySelector('.graph'),
                 gr = Scg.create().render(trg);
 
             $NS$.handlers.render3 = function (d) {

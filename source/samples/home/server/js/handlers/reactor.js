@@ -54,7 +54,6 @@
             disable: function () {
                 this._is_disabled = true;
                 $NS$.send({
-                    _TYPE: 'action',
                     _ACTION: 'disable',
                     _NODEID: this.id
                 });
@@ -62,7 +61,6 @@
             enable: function () {
                 this._is_disabled = false;
                 $NS$.send({
-                    _TYPE: 'action',
                     _ACTION: 'enable',
                     _VALUE: this.node.value,
                     _NODEID: this.id
@@ -110,7 +108,6 @@
             disable: function () {
                 this._is_disabled = true;
                 $NS$.send({
-                    _TYPE: 'action',
                     _ACTION: 'disable',
                     _NODEID: this.id
                 });
@@ -118,7 +115,6 @@
             enable: function () {
                 this._is_disabled = false;
                 $NS$.send({
-                    _TYPE: 'action',
                     _ACTION: 'enable',
                     _VALUE: this.node.value,
                     _NODEID: this.id
@@ -186,7 +182,6 @@
 
                     if (this.elements[i].id in initStatus) {
                         if (initStatus[this.elements[i].id].gotToken === false) {
-
                             this.elements[i].doEnable(initStatus[this.elements[i].id].value);
                         } else if (
                             initStatus[this.elements[i].id].gotToken &&
