@@ -9,44 +9,48 @@ body {
     background-color: #567;
     margin: 0 auto;
 
-    p{
-        .msg{
-            color:black;
+    .chat {
+        p{
+            &.msg{
+                color:black;
+            }
+            &.self{
+                font-style: italic;
+                color: #777;
+            }
         }
-        .self{
-            font-style: italic;
-            color: #777;
+        form {
+            input[type=text],input[type=text]:focus{
+                width:96%;
+                -moz-border-radius-topright:10px;
+                -moz-border-radius-bottomright:10px;
+                -webkit-border-top-right-radius:10px;
+                -webkit-border-bottom-right-radius:10px;
+                border-top-right-radius:10px;
+                border-bottom-right-radius:10px;
+                padding:5px 3% 5px 1%;
+                font-size:inherit;
+            }
+            input[type=text],input[type=text]:focus, .messagesContainer{
+                border: 2px solid #49ADE9;
+                border-left: 5px solid #49ADE9;
+            }
+        }
+        .messagesContainer{
+            height: 300px;
+            border-left: 3px solid black;
+            overflow-y: scroll;
+            margin-top: 30px;
+            padding: 5px;
+            background-color: white;
+            -moz-border-radius-topright:10px;
+            -moz-border-radius-bottomright:10px;
+            -webkit-border-top-right-radius:10px;
+            -webkit-border-bottom-right-radius:10px;
+            border-top-right-radius:10px;
+            border-bottom-right-radius:10px;
         }
     }
-}
-input[type=text],input[type=text]:focus{
-    width:96%;
-    -moz-border-radius-topright:10px;
-    -moz-border-radius-bottomright:10px;
-    -webkit-border-top-right-radius:10px;
-    -webkit-border-bottom-right-radius:10px;
-    border-top-right-radius:10px;
-    border-bottom-right-radius:10px;
-    padding:5px 3% 5px 1%;
-    font-size:inherit;
-}
-.container{
-    height: 300px;
-    border-left: 3px solid black;
-    overflow-y: scroll;
-    margin-top: 30px;
-    padding: 5px;
-    background-color: white;
-    -moz-border-radius-topright:10px;
-    -moz-border-radius-bottomright:10px;
-    -webkit-border-top-right-radius:10px;
-    -webkit-border-bottom-right-radius:10px;
-    border-top-right-radius:10px;
-    border-bottom-right-radius:10px;
-}
-input[type=text],input[type=text]:focus, .container{
-    border: 2px solid #49ADE9;
-    border-left: 5px solid #49ADE9;
 }
 
 @media only screen and (min-device-width: 375px) and (max-device-height: 812px)  { 
