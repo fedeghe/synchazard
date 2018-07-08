@@ -24,8 +24,16 @@
                  ' @ ' +
                 [p2(d.getHours()), p2(d.getMinutes()), p2(d.getSeconds())].join(':')
         }
-        setInterval(function () {
+        function t() {
             node.innerHTML = format(new Date);
-        }, 1000);
+        }; t();
+        setInterval(t, 1000);
     };
+
+
+    
+
+
+
+
 })();
