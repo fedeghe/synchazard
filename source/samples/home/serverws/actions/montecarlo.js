@@ -16,7 +16,7 @@ module.exports.launch = (action, synchazard, params) => {
             ask: function (id) {
                 return action.encodeMessage({
                     _ACTION: 'requestRandomPairs'
-                }, id);
+                }, {id: id});
             },
             thx: action.encodeMessage({
                 _ACTION: 'thx',
@@ -30,7 +30,7 @@ module.exports.launch = (action, synchazard, params) => {
                 return action.encodeMessage({
                     _ACTION: 'endComputation',
                     _DATA: r
-                }, askingingCli);
+                }, {id: askingingCli});
             }
         }
     });
