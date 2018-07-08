@@ -1,54 +1,61 @@
+$$reset.css$$
+
 body{
     font-family: verdana;
-    font-size: 1.5em;
+    font-size: 2.5em;
+    line-height: 1.2em;
     background-color: #fff;
     color: #000;
-    margin:0px;
-    padding:0px;
-    height:100vh;
-}
-h2 {font-size:2em}
-h2 sub{font-size: 0.4em}
+    margin: 0px;
+    padding: 0px;
+    height: 100vh;
 
-h6{
-    margin:0px;
-    font-size:0.6em;
-    padding:1.5em;
-    color:gray
-}
-img {
-    max-width: 60vw
-}
-a{
-    color: #d44;
-    text-decoration: none
-}
+    h1,h2,h3,h4,h5,h6{font-weight: bold;}
+    h1 {font-size: 2em;line-height:2em;}
+    h2 {font-size: 1.8em;line-height:1.8em;}
+    h3 {font-size: 1.6em;line-height:1.6em;}
+    h4 {font-size: 1.2em;line-height:1.2em;}
+    h5 {font-size: 1em;line-height:1em;}
+    h6 {font-size: 0.8em;line-height:0.8em;}
 
-header{
-    height:4em;
-    margin-bottom:50px
-}
-.rounded{
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;
-    border-radius:5px;
-}
-
-input:focus{border:none;}
-
-.clear{
-    clear:both;
-    height:0;
-    line-height:0;
+    h2 sub{font-size: 0.4em}
+    h6{
+        margin: 0px;
+        padding: 1.5em;
+        color: gray;
+    }
+    img {max-width: 60vw}
+    input:focus{outline: none;}
+    a{
+        color: #d44;
+        text-decoration: none
+    }
+    header{
+        height: 4em;
+        margin-bottom: 50px
+    }
+    .rounded{
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+    }
+    .group:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
 }
 
 
 /* Smartphones (portrait) ----------- */
-@media only screen and (max-width : 420px) {
+@media only screen and (max-width : 596px) {
+    body {
+        font-size:1.3em;
+    }
     textarea{
-        max-width:100%;
+        max-width: 100%;
     }
     h1, h2{
-        font-size:2rem
+        font-size: 2rem
     }
 }

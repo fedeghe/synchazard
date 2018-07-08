@@ -1,23 +1,33 @@
+$$style.less$$
 body {
-    margin: 10px;
+    margin: 50px;
     ul {
         list-style-type: lower-greek;
-        padding:20px;
-        margin:10px;
-        a{
-            text-decoration: none;
-            color:green;
-            &:hover{
-                color:black;
+        padding: 20px;
+        margin: 10px;
+        li {
+            line-height: 3rem;
+            a{
+                text-decoration: none;
+                color: green;
+                &:hover{
+                    color: black;
+                }
             }
         }
     }
     a {
-        color:#aaa;
-        text-decoration:none;
+        color: #aaa;
+        text-decoration: none;
         &:hover{
-            color:green;
+            color: green;
         }
+    }
+}
+
+@media only screen and (max-width : 420px) {
+    body{
+        margin: 50px 10px
     }
 }
 
