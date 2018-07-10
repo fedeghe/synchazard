@@ -5,5 +5,5 @@
  */
 (function () {
     "use strict";
-    $NS$.utils.loadScript('/js/handlers/chess.js');
+    $NS$.utils.loadScript('/js/handlers/chessManager.js');
 })();

@@ -12,6 +12,9 @@ module.exports.launch = (action, synchazard, params) => {
     //
     action.onconnection((data, ws) => {
         if (data._TYPE !== 'action') return;
+
+        console.log(data);
+        
         switch (data._ACTION) {
             case 'init':
                 ws.send(action.encodeMessage({

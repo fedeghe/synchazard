@@ -5,7 +5,7 @@
      * ChessLib
      */
     var CL = {};
-    
+
     $$chess/config.js$$
     $$chess/exceptions.js$$
     $$chess/Dom.js$$
@@ -15,7 +15,7 @@
     /**
      * publish the handler
      */
-    $NS$.handlers.chess = new Chess('#trg');
+    $NS$.handlers.chessManager = new ChessManager(document.getElementById('trg'));
 })();
 
 

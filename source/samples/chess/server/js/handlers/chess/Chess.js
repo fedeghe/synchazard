@@ -1,7 +1,7 @@
 $$chess/headerPanel.js$$
 
-function Chess(sel) {
-    this.target = document.querySelector(sel);
+function Chess(trg) {
+    this.target = trg;
     this.target.innerHTML = '';
     this.cells = [];
     if (!this.target) throw 'NO target found';
@@ -148,11 +148,6 @@ Chess.prototype.render = function (d) {
 /**
  * entry point for events
  */
-Chess.prototype.handle = function (d) {
-    if (d._TYPE !== 'action') return;
-    switch (d._ACTION) {
-        case 'init':
-            this.cleanup().init();
-            break;
-    }
+Chess.prototype.start = function (d) {
+    this.cleanup().init();
 };

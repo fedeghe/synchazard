@@ -14,7 +14,7 @@ self.onmessage = function (e) {
             self.postMessage({
                 _TYPE: 'action',
                 _ACTION: 'init',
-                _HANDLER: 'chess',
+                _HANDLER: 'chessManager',
                 _DATA: e.data
             });
             break;

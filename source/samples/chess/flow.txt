@@ -1,0 +1,71 @@
+
+wsCLI                       wsSRV
+
+
+init >
+------------------------------------
+                            < initok
+                             -default config
+------------------------------------
+consume config
+
+
+
+
+@PLAYER1 (always white)
+ActionButton
+createMatch >
+------------------------------------
+                      < matchCreated
+                            - generate matchID (alive with no actions for 30min)
+                            - sotre the creator clientID
+------------------------------------
+show link
+save matchID
+wait for player to join
+
+
+
+
+
+
+@PLAYER2 uses give link for match
+init >
+(matchID )
+------------------------------------
+                            < initMatch @PLAYER2
+                            -config inverse
+
+                            (< initMatch @PLAYER1)
+--------------------------------------------------
+consume config
+
+
+
+
+
+                          @BOTH timer
+                          < ACTIVE PLAYER1
+------------------------------------------
+@PLAYER1 : enableBoard
+
+                          < INACTIVE PLAYER2
+--------------------------------------------
+@PLAYER1 : enableBoard
+
+                          < PLAY @PLAYER1
+-----------------------------------------
+@PLAYER1
+enableBoard
+send move >
+-------------------------------------
+                           store move
+                           < @BOTH send board state
+                           < ACTIVE PLAYER2
+                           < INACTIVE PLAYER1
+
+
+
+
+
+
