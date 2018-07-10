@@ -6,18 +6,6 @@
         throw new Error('No WebSockets available on client side!');
     
     var ws = false,
-        /**
-         * serialized action that can be used to ask the server
-         * for initialization information, is up to us to decide how to call it.
-         * the only important thing is that the socket server knows how to handle/reply to it
-         * 
-         * it will be sent automatically when the socket connection is established
-         */
-        initAction = {
-            _TYPE: 'action',
-            _ACTION: 'init',
-            _ID: $NS$.id
-        },
         noop = function () {},
         init = noop,
         send = noop,
@@ -57,7 +45,7 @@
          */
         init = ws.onopen = function (e) {
             console.log('Connection established with ' + (e ? e.currentTarget.url : url));
-            ws.send($NS$.utils.createAction(initAction));
+            ws.send($NS$.utils.createInitAction());
         };
 
         /**

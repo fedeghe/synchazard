@@ -19,8 +19,10 @@
                 loadScript: loadScript,
                 injectTester : injectTester,
                 createAction: createAction,
+                createInitAction: createInitAction,
                 decodeFunction: decodeFunction,
                 getTime : getTime,
+                getQS: getQS,
                 getRTT : getRTT
             },
             active: true
@@ -46,6 +48,22 @@
         _TYPE: '_INITACTORS',
         _ACTORS: dataActors
     });
+
+    /**
+     * get queryString as obj
+     */
+    function getQS() {
+        var search = document.location.search,
+            els = search && search.substr(1).split('&'),
+            i, len, tmp, out = {};
+        if (els) {
+            for (i = 0, len = els.length; i < len; i += 1) {
+                tmp = els[i].split('=');
+                out[tmp[0]] = out[tmp[0]] || W.decodeURIComponent(tmp[1]);
+            }
+        }
+        return out;
+    }
 
     /**
      * meant to be used to get the action rtt
@@ -83,6 +101,20 @@
         action._TYPE = action._TYPE || 'action';
         action._TIME = action._TIME || $NS$.utils.getTime();
         return JSON.stringify(action);
+    }
+
+    function createInitAction () {
+        /**
+         * serialized action that can be used to ask the server
+         * for initialization information, is up to us to decide how to call it.
+         * the only important thing is that the socket server knows how to handle/reply to it
+         * 
+         * it will be sent automatically when the socket connection is established
+         */
+        return createAction({
+            _ACTION: 'init',
+            _QS: getQS()
+        });
     }
 
     /**
