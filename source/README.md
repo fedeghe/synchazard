@@ -65,7 +65,7 @@ now open the `vars.json` file in the root of the project and edit the _DOMAIN\_O
 
     “DOMAIN_OR_IP”: “192.168.5.107”,  
 
-**The servers have to be rebuilt & restarted** so stop and rerun the build command and the start.  
+**The servers have to be rebuilt & restarted** so stop and rerun both the build and then start commands.  
 
 Now on one or more clients, open one or more browsers and navigate to http://192.168.5.107:4000 . This is the port and IP address set as CLIENT.PORT and DOMAIN_OR_IP in the _vars.json_ file.
 
