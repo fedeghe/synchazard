@@ -43,9 +43,11 @@
          * 
          * is up tp the server to decide what the initAction should trigger
          */
-        init = ws.onopen = function (e) {
-            console.log('Connection established with ' + (e ? e.currentTarget.url : url));
-            ws.send($NS$.utils.createInitAction());
+        init = ws.onopen = function (e){
+            $NS$.utils.ready(function(){
+                console.log('Connection established with ' + (e ? e.currentTarget.url : url));
+                ws.send($NS$.utils.createInitAction());
+            });
         };
 
         /**

@@ -15,6 +15,25 @@
                 resume: resume
             },
             utils: {
+                ready: (function () {
+                    var cb = [],
+                        readyStateCheckInterval = setInterval(function () {
+                            if (document.readyState === "complete") {
+                                $NS$.loaded = true;
+                                clearInterval(readyStateCheckInterval);
+                                for (var i = 0, l = cb.length; i < l; i++) {
+                                    cb[i].call(this);
+                                }
+                            }
+                        }, 10);
+                    return function (c) {
+                        if (document.readyState === "complete") {
+                            c.call(this);
+                        } else {
+                            cb.push(c);
+                        }
+                    };
+                })(),
                 loadStyle: loadStyle,
                 loadScript: loadScript,
                 injectTester : injectTester,
