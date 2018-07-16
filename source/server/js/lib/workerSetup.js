@@ -22,13 +22,13 @@
                                 $NS$.loaded = true;
                                 clearInterval(readyStateCheckInterval);
                                 for (var i = 0, l = cb.length; i < l; i++) {
-                                    cb[i].call(this);
+                                    cb[i].call(W);
                                 }
                             }
                         }, 10);
                     return function (c) {
                         if (document.readyState === "complete") {
-                            c.call(this);
+                            c.call(W);
                         } else {
                             cb.push(c);
                         }
