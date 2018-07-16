@@ -85,20 +85,20 @@ console.log('powered by ᚗᚌ');
 
 
 /**
- * the page blurs in in X seconds
+ * the page blurs in in X seconds, not in all brows: https://caniuse.com/#search=filter
  */
-// (function () {
-//     var X = 0.5,
-//         b = 50,
-//         i = X*1E3 / b,
-//         f = function () {return 'blur(' + b + 'px)';};
-//     document.body.style.filter = f();
-//     setTimeout(function x() {
-//         b--;
-//         document.body.style.filter = f();
-//         b && setTimeout(x, i);
-//     }, 10);
-// })();
+(function () {
+    var X = 0.5,
+        b = 50,
+        i = X*1E3 / b,
+        f = function () {return 'blur(' + b + 'px)';};
+    document.body.style.filter = f();
+    setTimeout(function x() {
+        b--;
+        document.body.style.filter = f();
+        b && setTimeout(x, i);
+    }, 0);
+})();
 
 
 
