@@ -89,14 +89,11 @@ console.log('powered by ᚗᚌ');
  */
 (function () {
     var X = 0.5,
-        b = 50,
-        i = X*1E3 / b,
-        f = function () {return 'blur(' + b + 'px)';};
-    document.body.style.filter = f();
+        bl = 50,
+        i = X*1E3 / bl;
     setTimeout(function x() {
-        b--;
-        document.body.style.filter = f();
-        b && setTimeout(x, i);
+        document.body.style.filter = 'blur(' + bl + 'px)';
+        bl-- && setTimeout(x, i);
     }, 0);
 })();
 
