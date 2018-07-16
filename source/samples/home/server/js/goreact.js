@@ -11,18 +11,20 @@ window.addEventListener("load", function () {
             
             var self = this;
             $NS$.handlers.react = function (d) {
-                self.setState({time: d.time});
-            }
-        }
+                self.setState({
+                    time: d.time
+                });
+            };
+        }        
         render() {
             return this.state.time ? 
-                React.createElement('h1', null, 'Hi, it\'s ' + this.state.time + ' and sorry but'+ this.props.message + '!')
+                React.createElement('h1', null, 'Hi, it\'s ' + this.state.time + ', definitely time to '+ this.props.message + '!')
                 :
                 null
         }
     }
     ReactDOM.render(
-        React.createElement(Welcome, { message: ' ... cant`t wait for You!' }),
+        React.createElement(Welcome, { message: ' ... move forward' }),
         document.getElementById('app')
     );
 });
