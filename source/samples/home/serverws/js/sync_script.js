@@ -26,7 +26,7 @@ console.log('powered by ᚗᚌ');
 //         },
 //         "not enough anchors"
 //     ).assert(function () {
-//             var graph = document.getElementById('graph');
+//             var graph = document.querySelector('.graph');
 //             return graph.children.item(0).tagName.match(/CANVAS/i);
 //         },
 //         "canvas is not there"
