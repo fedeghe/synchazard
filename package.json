@@ -7,6 +7,10 @@
     "memwatch-next": "^0.3.0",
     "ws": "^5.1.1"
   },
+  "engines": {
+    "node": ">=6.4.0",
+    "npm": ">=4.6.1"
+  },
   "private": true,
   "devDependencies": {
     "chai": "^4.1.2",
