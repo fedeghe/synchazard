@@ -2,18 +2,16 @@ $$style.less$$
 body{
     h2 {
         text-align: center;
-        & sub{font-size: 0.4em}
+        & sub{
+            font-size: 0.4em;
+            position: relative;
+            top: 0.4em;
+        }
     }
     
     img {
         max-width: 60vw;
         margin-top: 60px;
-    }
-
-    .presentation{
-        margin: 0px 0px 20px;
-        font-style: italic;
-        text-align: center;
     }
 
     header{
@@ -32,8 +30,14 @@ body{
             color: inherit
         }
     }
+
+    .presentation{
+        margin: 0px 0px 20px;
+        font-style: italic;
+        text-align: center;
+    }
     
-    div.exp{
+    .exp{
         height: 100vh;
         background-color: #000;
         text-align: center;
@@ -78,7 +82,7 @@ body{
             margin-top: 20px;
         }
         .graph{
-            border-bottom-width: 30vh;
+            border-bottom-width: 100vh;
         }
     }
 }
