@@ -13,11 +13,9 @@ module.exports.launch = (action, synchazard, params) => {
 
     action.setup({
         actions: {
-            ask: function (id) {
-                return action.encodeMessage({
-                    _ACTION: 'requestRandomPairs'
-                }, {id: id});
-            },
+            ask: (id) => {return action.encodeMessage({
+                _ACTION: 'requestRandomPairs'
+            }, {id: id})},
             thx: action.encodeMessage({
                 _ACTION: 'thx',
                 _MSG: 'thank You very much'
@@ -26,18 +24,21 @@ module.exports.launch = (action, synchazard, params) => {
                 _ACTION: 'startComputation',
                 _JOB: 'generate'
             }),
-            completed: function (r) {
-                return action.encodeMessage({
-                    _ACTION: 'endComputation',
-                    _DATA: r
-                }, {id: askingingCli});
-            }
+            completed: (r) => {return action.encodeMessage({
+                _ACTION: 'endComputation',
+                _DATA: r
+            }, {id: askingingCli});}
         }
     });
 
     action.onconnection((data, ws) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
+            case 'init':
+                synchazard.unicast(data._ID, action.data.actions.completed(
+                    results.outside ? calcPi(results) : NaN
+                ));
+                break;
             case 'askMontecarlo':
                 askingingCli = data._ID;
                 synchazard.broadcast(action.data.actions.ask(askingingCli));
@@ -54,10 +55,9 @@ module.exports.launch = (action, synchazard, params) => {
                 }
                 partecipants--;
                 if (partecipants == 0) {
-                    const a = action.data.actions.completed(
-                        results.outside ? calcPi(results) : 1
-                    );
-                    synchazard.broadcast(a);
+                    synchazard.broadcast(action.data.actions.completed(
+                        results.outside ? calcPi(results) : NaN
+                    ));
                     break;
                 }
                 break;
