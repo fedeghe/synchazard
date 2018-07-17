@@ -43,8 +43,8 @@
          * 
          * if we remove the condition, all connected clients will show the possible most precise pi value
          */
-        if (data._ID === $NS$.id) {
+        // if (data._ID === $NS$.id) {
             $NS$.handlers.DistComp.result.innerHTML = '<span style="font-family:times">&pi;</span> &asymp; ' + data._DATA;
-        }
+        // }
     };
 })();

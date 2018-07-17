@@ -54,9 +54,10 @@ module.exports.launch = (action, synchazard, params) => {
                 }
                 partecipants--;
                 if (partecipants == 0) {
-                    synchazard.broadcast(action.data.actions.completed(
+                    const a = action.data.actions.completed(
                         results.outside ? calcPi(results) : 1
-                    ));
+                    );
+                    synchazard.broadcast(a);
                     break;
                 }
                 break;
