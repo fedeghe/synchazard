@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const { test } = require('./setup/browser');
 
-const data = require('./../serverWS/data1.json');
+const data = require('./../serverws/data1.json');
 // console.log(data);
 
 describe('index', () => {

@@ -1,8 +1,8 @@
 {
     "EXE": [
-        "mkdir -p serverWS/actions serverWS/css"
+        "mkdir -p serverws/actions serverws/css"
     ],
-    "source/samples/chess/serverWS/actions/*.js": "serverWS/actions -vars=vars.json",
-    "source/samples/chess/serverWS/less/*.less": "serverWS/css -plugins=malta-less -vars=vars.json",
-    "source/samples/chess/serverWS/*.js": "serverWS -vars=vars.json"
+    "source/samples/chess/serverws/actions/*.js": "serverws/actions -vars=vars.json",
+    "source/samples/chess/serverws/less/*.less": "serverws/css -plugins=malta-less -vars=vars.json",
+    "source/samples/chess/serverws/*.js": "serverws -vars=vars.json"
 }

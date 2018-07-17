@@ -6,5 +6,5 @@
     "#source/README.md": ".",
     "#source/LICENSE.md": ". -vars=vars.json",
     "#source/server/CLIENT.md": "docs -vars=vars.json",
-    "#source/serverWS/SERVER.md": "docs -vars=vars.json"
+    "#source/serverws/SERVER.md": "docs -vars=vars.json"
 }

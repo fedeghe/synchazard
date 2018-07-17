@@ -1,5 +1,5 @@
 {
     "EXE": [
-        "rm -rf serverWS server node_modules"
+        "rm -rf serverws server node_modules"
     ]
 }
