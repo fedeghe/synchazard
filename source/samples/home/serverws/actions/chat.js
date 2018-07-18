@@ -23,7 +23,6 @@ module.exports.launch = (action, synchazard, params) => {
                     }
                 }));
                 break;
-
             case 'new_message':
                 newMessage = {
                     id: data._CLIENT,
