@@ -13,13 +13,13 @@ self.onmessage = function (e) {
         case 'messages':
             self.postMessage({
                 _HANDLER: 'Chat',
-                _DATA: e.data._PAYLOAD
+                _DATA: e.data
             });
             break;
         case 'message':
             self.postMessage({
                 _HANDLER: 'Chat',
-                _DATA: e.data._PAYLOAD
+                _DATA: e.data
             });
             break;
         /**
@@ -31,7 +31,7 @@ self.onmessage = function (e) {
         case 'self':
             self.postMessage({
                 _HANDLER: 'ChatSelfHandler',
-                _DATA: e.data._PAYLOAD
+                _DATA: e.data
             });
             break;
     }
