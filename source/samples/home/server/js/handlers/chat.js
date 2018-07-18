@@ -78,7 +78,6 @@
 
         switch (data._ACTION) {
             case 'messages': 
-                messagesContainer.innerHTML = '';
                 messages.all.forEach(function (m) {
                     messagesContainer.appendChild(getLine(m));
                 });
