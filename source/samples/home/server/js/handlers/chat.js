@@ -57,7 +57,7 @@
         }
     });
     
-    $NS$.handlers.Chat = function (messages) {
+    $NS$.handlers.Chat = function (data) {
         function getLine(m){
             var tag = document.createElement('p'),
                 user = document.createElement('strong'),
@@ -74,21 +74,27 @@
             tag.appendChild(msg);
             return tag;
         }
-        if ('all' in messages) {
-            messagesContainer.innerHTML = '';
-            messages.all.forEach(function (m){
-                messagesContainer.appendChild(getLine(m));
-            });
-        } else if('one' in messages) {
-            messagesContainer.appendChild(getLine(messages.one));
+        var messages = data._PAYLOAD;
+
+        switch (data._ACTION) {
+            case 'messages': 
+                messagesContainer.innerHTML = '';
+                messages.all.forEach(function (m) {
+                    messagesContainer.appendChild(getLine(m));
+                });
+                break;
+            case 'message': 
+                messagesContainer.appendChild(getLine(messages.one));
+                break;
         }
 
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     };
     
-    $NS$.handlers.ChatSelfHandler = function (x) {
-        console.log("SELF MESSAGE: " + cleanup(x));
-        localStorage.setItem('$NS$clientID', _ID);
+    $NS$.handlers.ChatSelfHandler = function (data) {
+        var selfMessage = data._PAYLOAD;
+        console.log("SELF MESSAGE: " + cleanup(selfMessage));
+        $NS$.utils.storage.set('$NS$clientID', _ID);
     };
 })();
 
