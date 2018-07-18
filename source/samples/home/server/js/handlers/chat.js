@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    var _ID = $NS$.id;
+    
 
     function cleanup (text, pre) {
         return (pre ? '<pre>' : '') +
@@ -11,9 +11,26 @@
                 .replace(/>/g, '&gt;')
                 .replace(/"/g, '&quot;')
                 .replace(/'/g, '&#039;')
+                .replace(/&#(\S*)\d;/g, ' ')
+                .replace(/&#(\S*)\d/g, ' ')
             ) + (pre ? '</pre>' : '');
     }
+    function getLine(m) {
+        var tag = document.createElement('p'),
+            user = document.createElement('strong'),
+            msg = document.createElement('span'),
+            self = m.id === $NS$.id;
 
+        tag.className = 'msg';
+        user.innerText = cleanup(m.id) + " : ";
+        msg.innerText = cleanup(m.message);
+        if (self) {
+            tag.className = 'self';
+        }
+        tag.appendChild(user);
+        tag.appendChild(msg);
+        return tag;
+    }
     var target = document.body,
         container = document.createElement('div'),
         form = document.createElement('form'),
@@ -41,9 +58,7 @@
         e.preventDefault();
         lastMessage = input.value;
         
-        var v = cleanup(input.value)
-            .replace(/&#(\S*)\d;/g, ' ')
-            .replace(/&#(\S*)\d/g, ' ');
+        var v = cleanup(input.value);
 
         input.focus();
         if (v) {
@@ -58,22 +73,7 @@
     });
     
     $NS$.handlers.Chat = function (data) {
-        function getLine(m){
-            var tag = document.createElement('p'),
-                user = document.createElement('strong'),
-                msg = document.createElement('span'),
-                self = m.id === $NS$.id;
-
-            tag.className = 'msg';
-            user.innerText = cleanup(m.id) + " : ";
-            msg.innerText = cleanup(m.message);
-            if (self) {
-                tag.className = 'self';
-            }
-            tag.appendChild(user);
-            tag.appendChild(msg);
-            return tag;
-        }
+        
         var messages = data._PAYLOAD;
 
         switch (data._ACTION) {
@@ -93,7 +93,7 @@
     $NS$.handlers.ChatSelfHandler = function (data) {
         var selfMessage = data._PAYLOAD;
         console.log("SELF MESSAGE: " + cleanup(selfMessage));
-        $NS$.utils.storage.set('$NS$clientID', _ID);
+        $NS$.utils.storage.set('$NS$clientID', $NS$.id);
     };
 })();
 
