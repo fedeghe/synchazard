@@ -1,5 +1,8 @@
 (function (W) {
     "use strict";
+
+    $$utilities.js$$
+
     /**
      * the constructor does not gives the full worker back,
      * or at least
@@ -34,6 +37,7 @@
                         }
                     };
                 })(),
+                storage: Utilities.storage, 
                 loadStyle: loadStyle,
                 loadScript: loadScript,
                 injectTester : injectTester,
@@ -154,11 +158,13 @@
      */
     function getClientId() {
         var cookieName = '$NS$clientID',
-            cookieValue = localStorage.getItem(cookieName);
+            // cookieValue = localStorage.getItem(cookieName);
+            cookieValue = $NS$.utils.storage.get(cookieName);
         if (cookieValue) {
             return cookieValue;
         } else {
-            localStorage.setItem(
+            // localStorage.setItem(
+            $NS$.utils.storage.set(
                 cookieName,
                 "$NS$_" + Math.abs(~~((+new Date()) * Math.random() * 1E3))
             );

@@ -1,5 +1,4 @@
 (function (W) {
-
     "use strict";
     
     if (!("WebSocket" in W))
