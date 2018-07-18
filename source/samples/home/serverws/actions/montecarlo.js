@@ -9,7 +9,9 @@ module.exports.launch = (action, synchazard, params) => {
             outside: 0
         };
 
-    const calcPi = data => 4 * data.inside / (data.inside + data.outside);
+    const calcPi = data => results.outside
+        ? 4 * data.inside / (data.inside + data.outside)
+        : NaN;
 
     action.setup({
         actions: {
@@ -24,9 +26,9 @@ module.exports.launch = (action, synchazard, params) => {
                 _ACTION: 'startComputation',
                 _JOB: 'generate'
             }),
-            completed: (r) => {return action.encodeMessage({
+            completed: () => {return action.encodeMessage({
                 _ACTION: 'endComputation',
-                _DATA: r
+                _DATA: calcPi(results)
             }, {id: askingingCli});}
         }
     });
@@ -35,9 +37,7 @@ module.exports.launch = (action, synchazard, params) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
             case 'init':
-                synchazard.unicast(data._ID, action.data.actions.completed(
-                    results.outside ? calcPi(results) : NaN
-                ));
+                synchazard.unicast(data._ID, action.data.actions.completed());
                 break;
             case 'askMontecarlo':
                 askingingCli = data._ID;
@@ -53,9 +53,7 @@ module.exports.launch = (action, synchazard, params) => {
                     results.inside += data._DATA.inside;
                     results.outside += data._DATA.outside;
                 }
-                !--partecipants && synchazard.broadcast(action.data.actions.completed(
-                    results.outside ? calcPi(results) : NaN
-                ));
+                !--partecipants && synchazard.broadcast(action.data.actions.completed());
                 break;
         }
     });

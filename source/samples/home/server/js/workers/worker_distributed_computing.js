@@ -1,6 +1,7 @@
 "use strict";
 
 var actors = null,
+    strategy = 0,
     jobs = {
         generate: function () {
             var res = {
@@ -10,12 +11,17 @@ var actors = null,
                 n = 1E7,
                 x, y;
             while (n--) {
-                x = Math.random(),
-                    y = Math.random();
-                res[Math.sqrt((x * x + y * y)) < 1 ? 'inside' : 'outside']++;
+                x = this.strategy(),
+                y = this.strategy();
+                // why  loose time, around 1 sqrt is ininfluent
+                // res[Math.sqrt(x * x + y * y) < 1 ? 'inside' : 'outside']++;
+                res[(x * x + y * y) < 1 ? 'inside' : 'outside']++;
             }
             return res;
-        }
+        },
+        strategy: [
+            Math.random
+        ][strategy]
     };
 
 importScripts('actorsDontMatch.js');
