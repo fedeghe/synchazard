@@ -53,13 +53,9 @@ module.exports.launch = (action, synchazard, params) => {
                     results.inside += data._DATA.inside;
                     results.outside += data._DATA.outside;
                 }
-                partecipants--;
-                if (partecipants == 0) {
-                    synchazard.broadcast(action.data.actions.completed(
-                        results.outside ? calcPi(results) : NaN
-                    ));
-                    break;
-                }
+                !--partecipants && synchazard.broadcast(action.data.actions.completed(
+                    results.outside ? calcPi(results) : NaN
+                ));
                 break;
         }
     });
