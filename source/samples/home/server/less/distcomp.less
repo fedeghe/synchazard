@@ -1,6 +1,56 @@
 $$style.less$$
 body {
+    margin:1rem;
+    background-color:#eee;
+    h3{
+        padding:2rem 0;
+    }
+    
+    summary{
+        outline:none;
+        cursor:pointer;
+        font-size:0.8em;
+        color:gray;
+        &:hover{
+            color:#0a0;
+        }
+    }
+    div.fmla{
+        font-size:1rem;
+        margin:3rem 0;
+    }
+    details{
+        margin:10px;
+        div.cnt {
+            margin-top:2rem;
+            background-color:white;
+            position:relative;
+            top:-10px;
+            border-left:1px solid green;
+            margin-left:0.6rem;
+            padding:2rem;            
+            -moz-border-radius-topright:20px;
+            -moz-border-radius-bottomright:20px;
+            -webkit-border-top-right-radius:20px;
+            -webkit-border-bottom-right-radius:20px;
+            border-top-right-radius:20px;
+            border-bottom-right-radius:20px;
+        }
+        sup{
+            position:relative;
+            font-size:1.2rem;
+            top:-1rem;
+        }
+        img.mc {
+            margin:10px;
+            max-width:90%;
+        }
+    }
+    strong{
+        font-weight:bold;
+    }
     button {
+        color:black;
         padding:.4em;
         margin:.2em;
         font-size:1em;
@@ -10,5 +60,14 @@ body {
         border-radius:5px;
         background:-webkit-gradient(linear, 80% 20%, 10% 21%, from(#FFFFEC), to(#C0B9B5));
         cursor:pointer;
+        outline:none;
+    }
+    
+    .pi{
+        font-family:times;
+        font-size:2.5rem;
+    }
+    #result {
+        margin-top:1rem;
     }
 }

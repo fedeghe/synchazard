@@ -10,8 +10,35 @@
 	<!-- <script src="/js/lib/synchazard.js" data-worker="/js/workers/worker_distributed_computing.js" data-actors="montecarlo"></script> -->
 	<script src="/js/lib/synchazard.js" data-worker="/js/workers/worker_distributed_computing.js"></script>
 	<script src="/js/DistComp.js"></script>
+	<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async></script>
+	</script>
 </head>
 <body>
+	<h3>Distributed computing <span class="pi">&pi;</span></h3>
+	<details>
+		<summary>click here for more details about this example</summary>
+		<div class="cnt">
+			<p>Among all possible approaches to calculate
+				<span class="pi">&pi;</span> I really like one that uses the
+				<a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">montecarlo</a> computational approach which basically exploits randomness to solve something that could be deterministic.</p>
+			<br>
+			<p>In the case of
+				<span class="pi">&pi;</span> it's extremely simple:</p>
+			<img class="mc" src="media/montecarlopi.png" alt="">
+			<p>We calculate a <strong>lot</strong> of random numbers &isin; [0, 1] so to collect a <strong>lot/2</strong> of points in the unary square in
+				&real;<sup>2</sup>+,
+				<br> some of those points will lie within the unary circle quarter and some will not.
+				<br> It`s clear at that point that:
+			</p>
+			<div class="fmla">
+				 $$ &pi; \approx 4 * {\#IN \over \#ALL}$$
+			</div>
+			<p>The more Points we get and the better is the distribution of the random function we use, the better will be the value that we get for <span class="pi">&pi;</span>.</p>
+			<br>
+			<p>In this example the first client that press the button will ask all other clients to calculate 10<sup>7</sup> points and concur to the calculation. The results are stored in the server and all incoming clients will see the most recent result.</p>	
+		</div>
+	</details>
+	
 	<button type="button" id="ask">Ask Montecarlo help</button>
 	<div id="result">
 	</div>

@@ -44,7 +44,14 @@
          * if we remove the condition, all connected clients will show the possible most precise pi value
          */
         // if (data._ID === $NS$.id) {
-            $NS$.handlers.DistComp.result.innerHTML = '<span style="font-family:times">&pi;</span> &asymp; ' + data._DATA;
+        var result = document.createElement('p'),
+            distance = document.createElement('p');
+        result.innerHTML = '<span class="pi">&pi;</span> &asymp; ' + data._DATA;
+        distance.innerHTML = 'err (agains Math.PI): ' + (100 * (Math.PI - parseFloat(data._DATA, 10)) / Math.PI).toFixed(7) + '%'
+        $NS$.handlers.DistComp.result.innerHTML = '';
+        $NS$.handlers.DistComp.result.appendChild(result);
+        $NS$.handlers.DistComp.result.appendChild(distance);
+            // '<span style="font-family:times">&pi;</span> &asymp; ' + data._DATA;
         // }
     };
 })();
