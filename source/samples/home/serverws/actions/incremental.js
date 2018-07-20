@@ -24,10 +24,9 @@ module.exports.launch = (action, synchazard, params) => {
     //
     setInterval(() => {
         action.data.num++;
-        var act = {
+        synchazard.broadcast(action.encodeMessage({
             _ACTION: 'json',
             _PAYLOAD: action.data
-        };
-        synchazard.broadcast(action.encodeMessage(act));
+        }));
     }, 1000);
 };
