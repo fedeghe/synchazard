@@ -20,7 +20,7 @@
             return d > 9 ? d : '0' + d;
         }
         function format (d) {
-            return [p2(d.getDate()), p2(d.getMonth()), d.getFullYear()].join('-') +
+            return [p2(d.getDate()), p2(d.getMonth() + 1), d.getFullYear()].join('-') +
                  ' @ ' +
                 [p2(d.getHours()), p2(d.getMinutes()), p2(d.getSeconds())].join(':')
         }
