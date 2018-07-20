@@ -20,6 +20,7 @@ memwatch.on('leak', (info) => {
 synchazard.launch([{
     path: 'actions/jsonObserver',
     deps: { fs: fs, path: path },
+    jsonToObserve: './data1.json',
     actor: 'jsonObserver'
 }, {
     path: 'actions/style',

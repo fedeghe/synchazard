@@ -1,8 +1,7 @@
 module.exports.launch = (action, synchazard, params) => {
 
     "use strict";
-
-    const resourceFile = 'data1.json',
+    const resourceFile = params.jsonToObserve,
         fs = params.deps.fs,
         path = params.deps.path;
 
@@ -29,11 +28,7 @@ module.exports.launch = (action, synchazard, params) => {
     // RUN
     fs.watchFile(
         path.resolve(__dirname + action.data.resourceFile),
-        {
-            interval: synchazard.WATCH_INTERVALS.SHORT
-        },
-        () => {
-            synchazard.broadcast(action.data.actions.update);
-        }
+        { interval: synchazard.WATCH_INTERVALS.SHORT },
+        () => synchazard.broadcast(action.data.actions.update)
     );
 };
