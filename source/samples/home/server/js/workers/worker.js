@@ -4,6 +4,7 @@ var actors = null;
 
 function req(url, cb) {
     var oReq = new XMLHttpRequest();
+    oReq.contentType = 'application/json';
     oReq.onload = function () {
         this.status == 200 && cb(this.response);
     };
