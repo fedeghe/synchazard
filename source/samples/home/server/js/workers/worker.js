@@ -6,7 +6,24 @@ function req(url, cb) {
     var oReq = new XMLHttpRequest();
     oReq.contentType = 'application/json';
     oReq.onload = function () {
-        this.status == 200 && cb(this.response);
+        
+        this.status == 200
+        && cb(
+            /**
+             * IE sucks forever
+             * ----------------
+             * this is just for fucking IE, since in the xhr
+             * the type has to be set lately (after open!!!!),
+             * anyway the type could not be json, and anyway looks 
+             * to be always a string.
+             * 
+             * this is a quick & dirty fix for a browser that has always been
+             * and will always be a fucking nasty browser
+             */
+            typeof this.response === 'string'
+            ? JSON.parse(this.response)
+            : this.response
+        );
     };
     oReq.open("GET", url + "?cb=" + Math.random());
     oReq.responseType = 'json';
