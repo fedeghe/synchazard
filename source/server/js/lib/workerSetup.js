@@ -7,7 +7,10 @@
      * the constructor does not gives the full worker back,
      * or at least
      */
-    var currentScript = document.currentScript,
+    var currentScript = document.currentScript || (function () {
+            var scripts = document.getElementsByTagName('script');
+            return scripts[scripts.length - 1];
+        })(),
         dataActors = currentScript.dataset.actors || null,
         $NS$ = {   
             handlers: {},
@@ -181,10 +184,11 @@
     function getCleanPath(p, type) {
         var unCached = p.split('?')[0],
             attr = {css: 'href', js: 'src'},
-            els = [].slice.call(document.getElementsByTagName(type), 0);
-        return els.find(function (l) {
-            return l[attr[type]].search(unCached) === 0;
-        });
+            els = [].slice.call(document.getElementsByTagName(type), 0),
+            res = els.filter(function (l) {
+                return l[attr[type]].search(unCached) === 0;
+            });
+        return res.length ? res[0] : null;
     }
 
     /**
