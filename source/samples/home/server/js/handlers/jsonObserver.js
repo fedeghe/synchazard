@@ -8,9 +8,15 @@
         
         /**
          * this is just for fucking IE, since in the xhr
-         * the type has to be set lately
+         * the type has to be set latel (after open!!!!),
+         * so the type could not be json
+         * 
+         * this is a quick & dirty fix
          */
-        d = JSON.parse(d); 
+        d = typeof d == 'object' ? d : JSON.parse(d); 
+        /**
+         * end of the quick & dirty
+         */
 
         trg.innerHTML = '';
         var title = document.createElement('h2'),
