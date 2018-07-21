@@ -4,11 +4,11 @@ var actors = null;
 
 function req(url, cb) {
     var oReq = new XMLHttpRequest();
-    oReq.responseType = 'json';
     oReq.onload = function () {
         this.status == 200 && cb(this.response);
     };
     oReq.open("GET", url + "?cb=" + Math.random());
+    oReq.responseType = 'json';
     oReq.send();
 }
 

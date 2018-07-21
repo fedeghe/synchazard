@@ -5,6 +5,13 @@
     trg.innerHTML = '&hellip; loading';
 
     $NS$.handlers.render = function (d) {
+        
+        /**
+         * this is just for fucking IE, since in the xhr
+         * the type has to be set lately
+         */
+        d = JSON.parse(d); 
+
         trg.innerHTML = '';
         var title = document.createElement('h2'),
             version = document.createElement('sub'),
