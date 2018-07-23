@@ -6,7 +6,6 @@ function req(url, cb) {
     var oReq = new XMLHttpRequest();
     oReq.contentType = 'application/json';
     oReq.onload = function () {
-        
         this.status == 200
         && cb(
             /**
@@ -26,6 +25,7 @@ function req(url, cb) {
         );
     };
     oReq.open("GET", url + "?cb=" + Math.random());
+    oReq.setRequestHeader('Accept', 'application/json; charset=utf-8');
     oReq.responseType = 'json';
     oReq.send();
 }
