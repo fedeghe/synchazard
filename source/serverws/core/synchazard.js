@@ -92,6 +92,9 @@ module.exports = (function () {
      * stay
      */
     function heartbeat() { this.isAlive = true; }
+    wss.on('close', function connection(ws) {
+        console.log('close')
+    })
     wss.on('connection', function connection(ws) {
         ws.isAlive = true;
         ws.on('pong', heartbeat);

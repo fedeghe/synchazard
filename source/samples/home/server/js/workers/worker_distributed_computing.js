@@ -56,5 +56,11 @@ self.onmessage = function (e) {
                 _DATA: e.data
             });
             break;
+        case 'noClients': 
+            self.postMessage({
+                _HANDLER: 'DistCompNoClients',
+                _DATA: e.data
+            });
+            break;
     }
 };

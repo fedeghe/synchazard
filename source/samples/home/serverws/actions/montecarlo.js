@@ -14,6 +14,7 @@ module.exports.launch = (action, synchazard, params) => {
         : NaN;
 
     action.setup({
+        clients: 0,
         actions: {
             ask: (id) => {return action.encodeMessage({
                 _ACTION: 'requestRandomPairs'
@@ -25,6 +26,9 @@ module.exports.launch = (action, synchazard, params) => {
             proceed: action.encodeMessage({
                 _ACTION: 'startComputation',
                 _JOB: 'generate'
+            }),
+            noClients: action.encodeMessage({
+                _ACTION: 'noClients',
             }),
             completed: () => {return action.encodeMessage({
                 _ACTION: 'endComputation',
@@ -41,7 +45,13 @@ module.exports.launch = (action, synchazard, params) => {
                 break;
             case 'askMontecarlo':
                 askingingCli = data._ID;
-                synchazard.broadcast(action.data.actions.ask(askingingCli));
+                // there are other clients on this page available?
+                const ava = action.getCount();
+                if (ava.URL[data._URL].length > 1) {
+                    synchazard.broadcast(action.data.actions.ask(askingingCli));
+                } else {
+                    synchazard.unicast(data._ID, action.data.actions.noClients);
+                }
                 break;
             case 'acceptedMontecarlo':
                 partecipants++;

@@ -6,7 +6,10 @@ class Action{
         this.debug = debug;
         this.data = {};
     }
+    
+
     setup(d) {this.data = d || {};}
+    getCount() {return Action.count;}
     getTime() {
         var d = new Date(),
             n = d.getTimezoneOffset();
@@ -42,6 +45,11 @@ class Action{
             ws.on('message', (data) => {
                 data = JSON.parse(data);
 
+                if (data._TYPE === 'action' && data._ACTION === 'close') {
+                    Action.unsetCount(data);
+                    return;
+                }
+
                 /* checkActors ? */
                 const checkActors = $CHECK_ACTORS$;
                 if (checkActors) {
@@ -58,10 +66,42 @@ class Action{
                 }
                 /* forward injecting also the ws, with the id attached */
                 ws.id = data._ID;
+                Action.setCount(data);
                 f(data, ws);
             });
         });   
     }
 }
+
+
+/**
+ * There is some static stuff that is needed to keep track exactly about dthe same information in two different structures:
+ * clientId : [urls,] yeee...will be always one per client
+ * url: [clientId, ...]  here will be more
+ * 
+ * and those are updated everytime a client open a page and move elsewhere (or shut down the bro)
+ * 
+ * this allows for example in the distrubuted computing example (build:home) to tell to a client that there are no available
+ * clients to help him for the calculation
+ */
+Action.count = {
+    ID: {},
+    URL: {}
+};
+Action.setCountOLD = function (data) {
+    if (!(data._ID in Action.count.ID)) Action.count.ID[data._ID] = {};
+    if (!(data._URL in Action.count.ID[data._ID])) Action.count.ID[data._ID][data._URL] = true;
+
+    if (!(data._URL in Action.count.URL)) Action.count.URL[data._URL] = {};
+    if (!(data._ID in Action.count.URL[data._URL])) Action.count.URL[data._URL][data._ID] = true; 
+};
+Action.setCount = function (data) {
+    if (!(data._ID in Action.count.ID)) Action.count.ID[data._ID] = [];
+    if (Action.count.ID[data._ID].indexOf(data._URL) < 0) Action.count.ID[data._ID].push(data._URL);
+
+    if (!(data._URL in Action.count.URL)) Action.count.URL[data._URL] = [];
+    if (Action.count.URL[data._URL].indexOf(data._ID) < 0) Action.count.URL[data._URL].push(data._ID);
+};
+
 
 module.exports = Action; 

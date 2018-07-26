@@ -27,6 +27,9 @@
 
     $NS$.handlers.DistComp = new DC();
 
+    $NS$.handlers.DistCompNoClients = function (data) {
+        alert('Ups ... ! Looks like there are no other clients on this page that could help You... try later!');
+    };
     $NS$.handlers.DistCompSendResult = function (data) {
         $NS$.send({
             _ACTION: 'joinMontecarlo',

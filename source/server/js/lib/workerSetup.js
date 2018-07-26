@@ -46,6 +46,7 @@
                 injectTester : injectTester,
                 createAction: createAction,
                 createInitAction: createInitAction,
+                createCloseAction: createCloseAction,
                 decodeFunction: decodeFunction,
                 getTime : getTime,
                 getQS: getQS,
@@ -126,6 +127,7 @@
         action._ID = action._ID || $NS$.id;
         action._TYPE = action._TYPE || 'action';
         action._TIME = action._TIME || $NS$.utils.getTime();
+        action._URL = document.location.href;
         return JSON.stringify(action);
     }
 
@@ -139,6 +141,19 @@
          */
         return createAction({
             _ACTION: 'init',
+            _QS: getQS()
+        });
+    }
+    function createCloseAction() {
+        /**
+         * serialized action that can be used to ask the server
+         * for initialization information, is up to us to decide how to call it.
+         * the only important thing is that the socket server knows how to handle/reply to it
+         * 
+         * it will be sent automatically when the socket connection is established
+         */
+        return createAction({
+            _ACTION: 'close',
             _QS: getQS()
         });
     }
