@@ -44,9 +44,8 @@
          * here we filter the message on the client,
          * if the local cli id is not the one given by the server (the original requesting client id)
          * 
-         * if we set to false the all flag  then all connected clients will show the possible most precise pi value
+         * if we set to false the all flag  only the asking client will display the result
          */
-
         var all = true;
         if (all || data._ID === $NS$.id) {
             var result = document.createElement('p'),
