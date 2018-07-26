@@ -28,7 +28,7 @@
     $NS$.handlers.DistComp = new DC();
 
     $NS$.handlers.DistCompNoClients = function (data) {
-        alert('Ups ... ! Looks like there are no other clients on this page that could help You... try later!');
+        alert("Ups ... !\nLooks like there are no other clients on this page that could help You... try later!\nor open one or more of the same page elsewhere");
     };
     $NS$.handlers.DistCompSendResult = function (data) {
         $NS$.send({
