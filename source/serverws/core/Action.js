@@ -73,7 +73,6 @@ class Action{
     }
 }
 
-
 /**
  * There is some static stuff that is needed to keep track exactly about dthe same information in two different structures:
  * clientId : [urls,] yeee...will be always one per client
@@ -88,20 +87,23 @@ Action.count = {
     ID: {},
     URL: {}
 };
-Action.setCountOLD = function (data) {
-    if (!(data._ID in Action.count.ID)) Action.count.ID[data._ID] = {};
-    if (!(data._URL in Action.count.ID[data._ID])) Action.count.ID[data._ID][data._URL] = true;
-
-    if (!(data._URL in Action.count.URL)) Action.count.URL[data._URL] = {};
-    if (!(data._ID in Action.count.URL[data._URL])) Action.count.URL[data._URL][data._ID] = true; 
-};
 Action.setCount = function (data) {
     if (!(data._ID in Action.count.ID)) Action.count.ID[data._ID] = [];
     if (Action.count.ID[data._ID].indexOf(data._URL) < 0) Action.count.ID[data._ID].push(data._URL);
 
     if (!(data._URL in Action.count.URL)) Action.count.URL[data._URL] = [];
     if (Action.count.URL[data._URL].indexOf(data._ID) < 0) Action.count.URL[data._URL].push(data._ID);
+}
+Action.unsetCount = function (data) {
+    var t = null;
+    if (data._ID in Action.count.ID) {
+        t = Action.count.ID[data._ID].indexOf(data._URL);
+        t >= 0 && Action.count.ID[data._ID].splice(t, 1);
+    }
+    if (data._URL in Action.count.URL) {
+        t = Action.count.URL[data._URL].indexOf(data._ID);
+        t >= 0 && Action.count.URL[data._URL].splice(t, 1);
+    }
 };
-
 
 module.exports = Action; 
