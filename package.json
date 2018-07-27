@@ -27,7 +27,7 @@
     "malta-js-obfuscator": "^1.0.8",
     "malta-js-uglify": "^1.0.2",
     "malta-less": "^1.0.4",
-    "malta-markdown-pdf": "^1.0.1",
+    "malta-markdown-pdf": "^1.0.2",
     "malta-mocha": "^1.0.9",
     "malta-rename": "^1.0.2",
     "mocha": "^5.2.0",
