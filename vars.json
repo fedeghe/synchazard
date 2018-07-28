@@ -1,4 +1,8 @@
 {
+    //
+    // yee... here INLINE comments are allowed,
+    // Malta will clean it up before consume it!
+    //
     "PROJECT": {
         "NAME": "SyncHazard",
         "VERSION": "0.0.4",
