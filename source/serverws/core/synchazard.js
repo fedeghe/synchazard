@@ -95,7 +95,11 @@ module.exports = (function () {
     wss.on('close', function connection(ws) {
         console.log('close')
     })
-    wss.on('connection', function connection(ws) {
+    wss.on('connection', function connection(ws, req) {
+        if (req.headers.origin.search("$WEBSERVER.HOST$") !== 0) {
+            ws.terminate();
+            console.log(`${req.headers.origin} is not allowed to request here.`);
+        }
         ws.isAlive = true;
         ws.on('pong', heartbeat);
         
