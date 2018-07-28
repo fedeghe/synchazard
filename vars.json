@@ -23,7 +23,6 @@
     "WEBSERVER": {
         "PORT": 4000,
         "HOST": "http://$DOMAIN_OR_IP$:$WEBSERVER.PORT$",
-        // "TESTLIB": "$DATASERVER.HOST$/js/lib/testnject.js",
         "TESTLIB": "$WEBSERVER.HOST$/js/lib/testnject.js",
         "TIMEGAP": 1,
         "RECONNECTION": {
