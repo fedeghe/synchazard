@@ -8,9 +8,21 @@ console.log('powered by ᚗᚌ');
 
 //================================================================
 // PLEASE CONSIDER TO UNCOMMENT THE FOLLOWING SECTIONS ONE BY ONE 
+// SAVE IT AND LOOK AT THE HOME PAGE, NO REFRESH NEEDED
 //================================================================
 
-
+/**
+ * the page blurs in in X seconds, not in all brows: https://caniuse.com/#search=filter
+ */
+(function () {
+    var X = 0.5,
+        bl = 50,
+        i = X * 1E3 / bl;
+    setTimeout(function x() {
+        document.body.style.filter = 'blur(' + bl + 'px)';
+        bl-- && setTimeout(x, i);
+    }, 0);
+})();
 
 /**
  *  fades in the body
@@ -25,8 +37,6 @@ console.log('powered by ᚗᚌ');
 //         }
 //     })();
 // })();
-
-
 
 /**
  * injects a test library and then sends reports back to the srv
@@ -67,8 +77,6 @@ console.log('powered by ᚗᚌ');
 //     );
 // });
 
-
-
 /**
  * reproduce a windy sound on the client
  */
@@ -81,23 +89,6 @@ console.log('powered by ᚗᚌ');
 //              // sine|square|triangle
 //     );
 // });
-
-
-
-/**
- * the page blurs in in X seconds, not in all brows: https://caniuse.com/#search=filter
- */
-(function () {
-    var X = 0.5,
-        bl = 50,
-        i = X*1E3 / bl;
-    setTimeout(function x() {
-        document.body.style.filter = 'blur(' + bl + 'px)';
-        bl-- && setTimeout(x, i);
-    }, 0);
-})();
-
-
 
 // /**
 //  * each of the following one are destructive
