@@ -5,3 +5,7 @@
 /test
 .printVersion
 .buildNum.json
+source/samples/bchain/srv.js
+source/samples/chess/srv.js
+source/samples/helloworld/srv.js
+source/samples/home/srv.js
