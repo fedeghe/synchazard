@@ -1,5 +1,10 @@
 $$reset.css$$
 
+@loader-size: 120px;
+@loader-border-size: 16px;
+@loader-lifespan: 1s;
+@loader-color: #fff;
+
 body{
     font-family: verdana;
     font-size: 2em;
@@ -44,6 +49,21 @@ body{
         content: "";
         display: table;
         clear: both;
+    }
+
+    .loader {
+        margin:0 auto;
+        border: @loader-border-size solid transparent; /* Light grey */
+        border-top: @loader-border-size solid @loader-color; /* Blue */
+        border-radius: 50%;
+        width: @loader-size;
+        height: @loader-size;
+        animation: spin @loader-lifespan linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
     }
 }
 

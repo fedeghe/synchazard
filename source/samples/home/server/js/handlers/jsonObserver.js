@@ -2,7 +2,7 @@
     "use strict";
     var trg = document.querySelector('.presentation');
 
-    trg.innerHTML = '&hellip; loading';
+    trg.innerHTML = '<div class="loader"></div>';
 
     $NS$.handlers.render = function (d) {
         trg.innerHTML = '';
