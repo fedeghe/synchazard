@@ -65,7 +65,6 @@
             input.value = '';
             $NS$.send({
                 _ACTION: 'new_message',
-                _CLIENT: $NS$.id,
                 _MESSAGE: v,
                 _TIMESTAMP: new Date() + ""
             });

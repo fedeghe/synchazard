@@ -16,7 +16,7 @@ module.exports.launch = (action, synchazard, params) => {
 
         switch (data._ACTION) {
             case 'init':
-                synchazard.broadcast(action.encodeMessage({
+                ws.send(action.encodeMessage({
                     _ACTION: 'messages',
                     _PAYLOAD: {
                         all : action.data.messages
@@ -25,7 +25,7 @@ module.exports.launch = (action, synchazard, params) => {
                 break;
             case 'new_message':
                 newMessage = {
-                    id: data._CLIENT,
+                    id: data._ID,
                     message: data._MESSAGE,
                     timestamp: data._TIMESTAMP
                 };
