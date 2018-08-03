@@ -1,7 +1,11 @@
 {
     "EXE": [
         "rm -rf serverws server",
-        "mkdir -p serverws server"
+        "mkdir -p serverws server",
+        "cp source/srv.js source/samples/bchain",
+        "cp source/srv.js source/samples/helloworld",
+        "cp source/srv.js source/samples/chess",
+        "cp source/srv.js source/samples/home"
     ],
     "#source/server/require.json": true,
     "#source/serverws/require.json": true,
