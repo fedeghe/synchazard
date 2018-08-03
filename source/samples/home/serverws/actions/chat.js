@@ -26,7 +26,7 @@ module.exports.launch = (action, synchazard, params) => {
             case 'new_message':
                 newMessage = {
                     id: data._ID,
-                    message: data._MESSAGE,
+                    message: data._MESSAGE || 'no message',
                     timestamp: data._TIMESTAMP
                 };
                 
