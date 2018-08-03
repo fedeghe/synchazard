@@ -1,2 +1,22 @@
 <?xml version="1.0" standalone="no"?>
-<svg width="500" height="500" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 500 500" target="[object HTMLDivElement]" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g fill="#3C3C3B"><circle cx="100" cy="250" r="75"/><circle cx="400" cy="250" r="75"/><circle cx="290" cy="165" r="110"/><circle cx="150" cy="165" r="50"/><rect x="100" y="175" width="300" height="150"/></g><g fill="#eeee00" stroke="#ff660077" stroke-width="15" transform="  translate(0 200)  scale(1, 0.5)"><polygon points="250,0 300,75 265,75 210,260 335,190 265,425 300,425 250,500 200,425 235,425 290,240 165,310 235,75 200,75"/><animate attributeName="stroke" values="#ff660077;#ffaa00aa;#ff660077" dur="0.3s" repeatCount="indefinite"/><animate attributeName="fill" values="#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#fff" dur="5s" repeatCount="indefinite"/></g></svg>
+<svg width="500" height="500" 
+  xmlns="http://www.w3.org/2000/svg" viewbox="0 0 500 500" target="[object HTMLDivElement]" 
+  xmlns:cc="http://creativecommons.org/ns#" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:ev="http://www.w3.org/2001/xml-events" 
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+  xmlns:svg="http://www.w3.org/2000/svg" 
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g fill="#3C3C3B">
+    <circle cx="100" cy="250" r="75"/>
+    <circle cx="400" cy="250" r="75"/>
+    <circle cx="290" cy="165" r="110"/>
+    <circle cx="150" cy="165" r="50"/>
+    <rect x="100" y="175" width="300" height="150"/>
+  </g>
+  <g fill="#eeee00" stroke="#ff660077" stroke-width="15" transform="  translate(0 200)  scale(1, 0.5)">
+    <polygon points="250,0 300,75 265,75 210,260 335,190 265,425 300,425 250,500 200,425 235,425 290,240 165,310 235,75 200,75"/>
+    <animate attributeName="stroke" values="#ff660077;#ffaa00aa;#ff660077" dur="0.3s" repeatCount="indefinite"/>
+    <animate attributeName="fill" values="#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#eeee00;#fff" dur="5s" repeatCount="indefinite"/>
+  </g>
+</svg>
