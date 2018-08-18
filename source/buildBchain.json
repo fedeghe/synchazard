@@ -1,0 +1,4 @@
+{
+    "source/samples/bchain/server/require.json": true,
+    "source/samples/bchain/serverws/require.json": true
+}

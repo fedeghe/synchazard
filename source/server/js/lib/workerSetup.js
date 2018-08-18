@@ -1,6 +1,7 @@
 (function (W) {
     "use strict";
 
+    /** include utilities */
     $$utilities.js$$
 
     /**
@@ -144,14 +145,11 @@
             _QS: getQS()
         });
     }
+
+    /**
+     * same as createInitAction but for closing
+     */
     function createCloseAction() {
-        /**
-         * serialized action that can be used to ask the server
-         * for initialization information, is up to us to decide how to call it.
-         * the only important thing is that the socket server knows how to handle/reply to it
-         * 
-         * it will be sent automatically when the socket connection is established
-         */
         return createAction({
             _ACTION: 'close',
             _QS: getQS()
@@ -176,12 +174,10 @@
      */
     function getClientId() {
         var cookieName = '$NS$clientID',
-            // cookieValue = localStorage.getItem(cookieName);
             cookieValue = $NS$.utils.storage.get(cookieName);
         if (cookieValue) {
             return cookieValue;
         } else {
-            // localStorage.setItem(
             $NS$.utils.storage.set(
                 cookieName,
                 "$NS$_" + Math.abs(~~((+new Date()) * Math.random() * 1E3))

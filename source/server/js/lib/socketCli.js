@@ -86,8 +86,9 @@
             --maxReconnectionAttempts && W.setTimeout(startWs, reconnectionInterval);
         };
 
-        // handle it somehow
-        //
+        /**
+         * handle it somehow
+         */
         ws.onerror = function (e) {
             console.log('ws client error');
             console.log(e);
@@ -95,19 +96,28 @@
         };
     }());
 
-    // let the client close the connection before refresh OR close
-    // 
+    /**
+     * let the client close the connection before refresh OR close
+     */ 
     function close() {
-        // automatically send the close client action 
-        // allowing the server to be updated about which client is on which page
+        /**
+         * automatically send the close client action 
+         * allowing the server to be updated about which client is on which page
+         */
         ws && ws.send($NS$.utils.createCloseAction());
         
-        // automatically blur current element
-        // on reload otherwise would hang
+        /**
+         * automatically blur current element
+         * on reload otherwise would hang
+         */
         document.activeElement.blur();
-        // and close the cli
+        /**
+         * and close the cli
+         */
         if (ws) {
-            // disable any onclose handler first
+            /**
+             * disable any onclose handler first
+             */
             ws.onclose = function () { };
             ws.close();
         }

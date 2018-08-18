@@ -40,6 +40,7 @@
     "build:home": "run-s build _sample:home",
     "build:hello": "run-s build _sample:hello",
     "build:chess": "run-s build _sample:chess",
+    "build:bchain": "run-s build _sample:bchain",
     "docs": "node --no-warnings node_modules/malta/src/bin.js source/docs.json",
     "clean": "node --no-warnings node_modules/malta/src/bin.js source/clean.json",
     "cleanall": "node --no-warnings node_modules/malta/src/bin.js source/cleanall.json",
@@ -47,6 +48,7 @@
     "_sample:home": "node --no-warnings node_modules/malta/src/bin.js source/buildHome.json",
     "_sample:hello": "node --no-warnings node_modules/malta/src/bin.js source/buildHelloWorld.json",
     "_sample:chess": "node --no-warnings node_modules/malta/src/bin.js source/buildChess.json",
+    "_sample:bchain": "node --no-warnings node_modules/malta/src/bin.js source/buildBchain.json",
     "_start:ws": "node serverWS/ws_srv.js -vvv",
     "_start:data": "node serverWS/srv.js",
     "_start:srv": "node server/srv.js"
