@@ -13,7 +13,8 @@
             return scripts[scripts.length - 1];
         })(),
         dataActors = currentScript.dataset.actors || null,
-        $NS$ = {   
+        $NS$ = {  
+            active: true, 
             handlers: {},
             objHandlers: {},
             synchazard: new Worker(currentScript.dataset.worker),
@@ -52,8 +53,7 @@
                 getTime : getTime,
                 getQS: getQS,
                 getRTT : getRTT
-            },
-            active: true
+            }
         },
         head = document.getElementsByTagName('head')[0];
 
@@ -126,20 +126,23 @@
         action._ACTORS = dataActors || null;
         // ensure the client identifier
         action._ID = action._ID || $NS$.id;
+        // default type is action
         action._TYPE = action._TYPE || 'action';
+        // given odr current
         action._TIME = action._TIME || $NS$.utils.getTime();
+        // pass also always current url
         action._URL = document.location.href;
         return JSON.stringify(action);
     }
 
-    function createInitAction () {
-        /**
-         * serialized action that can be used to ask the server
-         * for initialization information, is up to us to decide how to call it.
-         * the only important thing is that the socket server knows how to handle/reply to it
-         * 
-         * it will be sent automatically when the socket connection is established
-         */
+    /**
+     * serialized action that can be used to ask the server
+     * for initialization information, is up to us to decide how to call it.
+     * the only important thing is that the socket server knows how to handle/reply to it
+     * 
+     * it will be sent automatically when the socket connection is established
+     */
+    function createInitAction () { 
         return createAction({
             _ACTION: 'init',
             _QS: getQS()
@@ -148,6 +151,7 @@
 
     /**
      * same as createInitAction but for closing
+     * sent automatically on refresh or close
      */
     function createCloseAction() {
         return createAction({
@@ -260,9 +264,8 @@
      */
     function stop(to) {
         $NS$.active = false;
-        to &&
-            typeof to === 'number' &&
-            setTimeout($NS$.commands.resume, to);
+        to && typeof to === 'number'
+        && setTimeout($NS$.commands.resume, to);
     };
 
     /**
