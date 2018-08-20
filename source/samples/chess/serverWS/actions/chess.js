@@ -2,11 +2,8 @@ module.exports.launch = (action, synchazard, params) => {
     
     "use strict";
 
-    // setup messages storage
-    //
-    action.setup({matches: []});
-
-    const matches = [];
+    // Manager
+    $$matchManager.js$$
 
     // just listen
     //
@@ -19,23 +16,32 @@ module.exports.launch = (action, synchazard, params) => {
             case 'init':
                 ws.send(action.encodeMessage({
                     _ACTION: 'init',
-                    _PAYLOAD: action.data.matches
+                    _PAYLOAD: []
                 }));
                 break;
-            case 'createMatch':
+            case 'initMatch':
                 ws.send(action.encodeMessage({
                     _ACTION: 'matchCreated',
-                    _PAYLOAD: action.data.matches
+                    _PAYLOAD: Manager.createMatch()
                 }));
                 break;
 
             case 'joinMatch':
                 ws.send(action.encodeMessage({
                     _ACTION: 'matchJoined',
-                    _PAYLOAD: action.data.matches
+                    _PAYLOAD: []
                 }));
                 break;
+
+            case 'saveMatch':
+                ws.send(action.encodeMessage({
+                    _ACTION: 'matchSaved',
+                    _PAYLOAD: Manager.saveMatch(data)
+                }));
+                break;
+
             default: 
+                console.log('DEFAULT REACHED:');
                 console.log(data);
                 break
         }

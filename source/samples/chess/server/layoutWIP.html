@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      * {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      body {
+        font-family: verdana;
+        background-color: #126;
+        background-image: url('../media/synchazard4.svg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        height: 100vh;
+        max-width: 100%;
+        text-align: center;
+        margin: 0 auto;
+      }
+      body section {
+        text-align: center;
+        padding-top: 7%;
+        color: #ddd;
+      }
+      body section h1 {
+        font-size: 4em;
+      }
+      body section h5 {
+        color: white;
+      }
+
+    </style>
+    <style>
+    body {
+      background-color: #fff;
+      padding: 10;
+      font-family: verdana;
+    }
+    body .gameContainer .headerContainer{
+      background-color:green;
+    }
+    body .gameContainer .footerContainer{
+      background-color:blue;
+    }
+    body .gameContainer .headerContainer,
+    body .gameContainer .footerContainer {
+      height: 5vmin;
+    }
+    
+
+    @media screen and (orientation:portrait) {
+      body .gameContainer .boardContainer {
+        width: 100vw;
+        height: 100vw;
+        position: relative;
+        background-color: rgba(0, 0, 0, 0.2);
+        margin: 0 auto;
+      }
+
+      body .gameContainer .headerContainer{
+        
+        width:100%;
+      }
+      body .gameContainer .footerContainer {
+        
+        width:100%;
+      }
+    }
+    @media screen and (orientation:landscape) {
+      body .gameContainer .grp{
+        height:90vmin;
+      }
+      body .gameContainer .boardContainer {
+        width: 90vmin;
+        height: 90vmin;
+        position: relative;
+        background-color: rgba(0, 0, 0, 0.2);
+        margin: 0 auto;
+      }
+      .flo{
+        float:left;
+      }
+      .group:after {
+          content: "";
+          display: table;
+          clear: both;
+      }
+      .primary, .secondary{
+        width: calc((100vw - 90vmin)/2);
+        height: 90vmin;
+      }
+      .primary{background-color:yellow}
+      .secondary{background-color:purple}
+    }
+    </style>
+  </head>
+  <body>
+    <div id="trg">
+      <div class="gameContainer">
+        <div class="headerContainer">Header</div>
+        <div class="grp">
+          <div class="primary flo">x</div>
+          <div class="boardContainer flo">BOARD</div>
+          <div class="secondary flo">x</div>
+        </div>
+
+        <div class="footerContainer">Footer</div>
+      </div>
+    </div>
+  </body>
+</html>

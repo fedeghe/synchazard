@@ -1,4 +1,5 @@
 $$chess/headerPanel.js$$
+$$chess/footerPanel.js$$
 
 function Chess(trg) {
     this.target = trg;
@@ -7,6 +8,7 @@ function Chess(trg) {
     if (!this.target) throw 'NO target found';
     this.gameContainer = null;
     this.headerPanel  = new HeaderPanel();
+    this.footerPanel  = new FooterPanel();
 }
 
 Chess.prototype.cleanup = function () {
@@ -54,10 +56,6 @@ Chess.prototype.validateFEN = function (fen) {
     if (false) throw new Error('Fen invalid');
 };
 
-Chess.prototype.initHeader = function () {
-    this.headerContainer = CL.dom.create({ tag: 'div', cls: 'headerContainer' });
-    this.headerContainer.appendChild(this.headerPanel.container);
-};
 
 Chess.prototype.initBoardersContainer = function () {
     this.boardersContainer = CL.dom.create({ tag: 'div', cls: 'boardersContainer' });
@@ -107,7 +105,6 @@ Chess.prototype.initBoard = function () {
         l = 8,
         row,
         cell;
-
     for (i = 0; i < l; i++) {
         row = CL.dom.create({ cls: 'row' });
         for (j = 0; j < l; j++) {
@@ -126,19 +123,12 @@ Chess.prototype.initBoardContainer = function () {
     this.initBoard();
 };
 
-Chess.prototype.initFooter = function () {
-    this.footerContainer = CL.dom.create({ tag: 'div', cls: 'footerContainer' });
-    this.footerContainer.innerHTML = 'Footer';
-};
-
 Chess.prototype.prepare = function () {
     this.gameContainer = CL.dom.create({ tag: 'div', cls: 'gameContainer' });
-    this.initHeader();
     this.initBoardContainer();
-    this.initFooter();
-    this.gameContainer.appendChild(this.headerContainer);
+    this.gameContainer.appendChild(this.headerPanel.container);
     this.gameContainer.appendChild(this.boardContainer);
-    this.gameContainer.appendChild(this.footerContainer);
+    this.gameContainer.appendChild(this.footerPanel.container);
 };
 
 Chess.prototype.render = function (d) {
