@@ -14,16 +14,13 @@ const Manager = {
   matches: {}
 };
 Manager.createMatch = function () {
-  const token = createToken(32),
-    tokenB = createToken(32),
-    tokenW = createToken(32),
-    match = {
-      main: token,
-      w: tokenW,
-      b: tokenB,
+  const match = {
+      w: createToken(32),
+      b: createToken(32),
       id: Manager.nextId++
     };
-  Manager.matches[match.main] = match;
+  Manager.matches[match.w] = match;
+  Manager.matches[match.b] = match;
   console.log('creating a match: ', match);
 };
 Manager.saveMatch = function (data) {

@@ -14,6 +14,13 @@ module.exports.launch = (action, synchazard, params) => {
         
         switch (data._ACTION) {
             case 'init':
+                /**
+                 * check if qs contains all needed for a match
+                 */
+
+                /**
+                 * otherwise simply init
+                 */
                 ws.send(action.encodeMessage({
                     _ACTION: 'init',
                     _PAYLOAD: []
