@@ -1,71 +1,18 @@
-
-wsCLI                       wsSRV
-
-
-init >
-------------------------------------
-                            < initok
-                             -default config
-------------------------------------
-consume config
-
-
-
-
-@PLAYER1 (always white)
-ActionButton
-createMatch >
-------------------------------------
-                      < matchCreated
-                            - generate matchID (alive with no actions for 30min)
-                            - sotre the creator clientID
-------------------------------------
-show link
-save matchID
-wait for player to join
-
-
-
-
-
-
-@PLAYER2 uses give link for match
-init >
-(matchID )
-------------------------------------
-                            < initMatch @PLAYER2
-                            -config inverse
-
-                            (< initMatch @PLAYER1)
---------------------------------------------------
-consume config
-
-
-
-
-
-                          @BOTH timer
-                          < ACTIVE PLAYER1
-------------------------------------------
-@PLAYER1 : enableBoard
-
-                          < INACTIVE PLAYER2
---------------------------------------------
-@PLAYER1 : enableBoard
-
-                          < PLAY @PLAYER1
------------------------------------------
-@PLAYER1
-enableBoard
-send move >
+ALICE wants to start a match with BOB
 -------------------------------------
-                           store move
-                           < @BOTH send board state
-                           < ACTIVE PLAYER2
-                           < INACTIVE PLAYER1
+
+EVENT: ALICE clicks create match button
+
+C - creates a 'white_token_cli'
+  - save it in the localStorage
+  - send it in the `create` request (create)
 
 
+      S - creates a match token adding the 'white_token_cli' and creating and adding a 'black_token_cli'
+        - send back a link that ALICE must send to BOB, the QS contains the matchId (created)
 
+C - render the link contained in the `created`
 
+EVENT: ALICE copies the link and send it to BOB
 
-
+EVENT: BOB navigate to the given link

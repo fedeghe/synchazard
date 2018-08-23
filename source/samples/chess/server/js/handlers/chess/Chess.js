@@ -89,12 +89,10 @@ Chess.prototype.initBoardersContainer = function () {
         algBorders.bottom.appendChild(tmp3);
         algBorders.top.appendChild(tmp4);
     }
-
     this.boardersContainer.appendChild(algBorders.left);
     this.boardersContainer.appendChild(algBorders.right);
     this.boardersContainer.appendChild(algBorders.bottom);
     this.boardersContainer.appendChild(algBorders.top);
-
     this.boardContainer.appendChild(this.boardersContainer);
 };
 
@@ -139,5 +137,6 @@ Chess.prototype.render = function (d) {
  * entry point for events
  */
 Chess.prototype.start = function (d) {
+    console.log(d)
     this.cleanup().init();
 };

@@ -21,10 +21,9 @@
             switch (d._ACTION) {
                 case 'init':
                     var game = new Chess(document.getElementById('trg'));
-                    game.start();
+                    game.start(d);
                     break;
             }
-            // 
         }
     };
 })();

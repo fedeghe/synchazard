@@ -1,34 +1,48 @@
+$$../../isomorph/token.js$$
 
-function createToken(l) {
-  const min = 33,
-    max = 126,
-    out = [];
-  while(l--) {
-    out.push(String.fromCharCode(33 + Math.random()*(max - min))); 
-  }
-  return out.join('');
-}
+const createMatchToken = () => {
+    const t1 = createToken(64),
+        t2 = createToken(64),
+        id = 3 * Manager.nextId++;
+    return { 
+        token: {
+            white: {
+                srv: t1,
+                cli: null
+            },
+            black: {
+                srv: t2,
+                cli: null
+            }
+        },
+        id: id,
+        matchId: mix(t1, t2, id)
+    };
+};
 
 const Manager = {
-  nextId: 1,
-  matches: {}
+    nextId: +new Date,
+    matches: {}
 };
+
+
+
+
+
+
 Manager.createMatch = function () {
-  const match = {
-      w: createToken(32),
-      b: createToken(32),
-      id: Manager.nextId++
+    const match = {
+        id: createMatchToken(),
+        created: +new Date
     };
-  Manager.matches[match.w] = match;
-  Manager.matches[match.b] = match;
-  console.log('creating a match: ', match);
+    Manager.matches[match.id.token.matchId] = match;
+    console.log('creating a match: ');
+    console.log(match);
+    console.log(match.id);
 };
 Manager.saveMatch = function (data) {
-  console.log('saving match: ', data);
+    console.log('saving match: ', data);
 };
 Manager.joinMatch = function (data) {
-  console.log('saving match: ', data);
-};
-Manager.joinMatch = function (data) {
-  console.log('saving match: ', data);
+    console.log('saving match: ', data);
 };

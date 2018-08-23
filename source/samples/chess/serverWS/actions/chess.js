@@ -23,7 +23,9 @@ module.exports.launch = (action, synchazard, params) => {
                  */
                 ws.send(action.encodeMessage({
                     _ACTION: 'init',
-                    _PAYLOAD: []
+                    _PAYLOAD: {
+                        originalRequest: data
+                    }
                 }));
                 break;
             case 'initMatch':
