@@ -210,24 +210,4 @@ JMVC.Channel('colorsPalette').pub('invert', ['#232323']);
 JMVC.Channel('optionsPalette').pub('opened');
 JMVC.Channel('optionsPalette').pub('closed');
 
-
-
-
-/*
-JMVC.Pipe.reset();
-
-JMVC.Pipe.sub('news', function (){
-    alert(JMVC.array.coll2array(arguments).join(' '));
-});
-JMVC.Pipe.sub('alarm', function (){
-    alert(JMVC.array.coll2array(arguments).join(' '));
-});
-JMVC.Pipe.sub(['alarm', 'news'], function (){
-    alert('double ' + JMVC.array.coll2array(arguments).join(' '));
-});
-
-JMVC.Pipe.pub('news', ['World is sold out!']);
-
-JMVC.Pipe.pub('alarm', ['Bomb in the hole,','runaway!!!']);
- */
 //-----------------------------------------------------------------------------
