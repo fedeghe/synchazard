@@ -10,6 +10,8 @@
     $$chess/exceptions.js$$
     $$chess/Dom.js$$
     $$chess/Channel.js$$
+    $$chess/channelManager.js$$
+
     $$chess/Chess.js$$
 
     /**
@@ -20,7 +22,9 @@
             if (d._TYPE !== 'action')return;
             switch (d._ACTION) {
                 case 'init':
-                    var game = new Chess(document.getElementById('trg'));
+                    var game = new Chess(
+                        document.getElementById('trg')
+                    );
                     game.start(d);
                     break;
             }

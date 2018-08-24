@@ -25,11 +25,6 @@ const Manager = {
     matches: {}
 };
 
-
-
-
-
-
 Manager.createMatch = function () {
     const match = {
         id: createMatchToken(),
@@ -37,8 +32,7 @@ Manager.createMatch = function () {
     };
     Manager.matches[match.id.token.matchId] = match;
     console.log('creating a match: ');
-    console.log(match);
-    console.log(match.id);
+    console.log(JSON.stringify(match));
 };
 Manager.saveMatch = function (data) {
     console.log('saving match: ', data);

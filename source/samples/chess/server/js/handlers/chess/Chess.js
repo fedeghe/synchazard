@@ -8,7 +8,7 @@ function Chess(trg) {
     if (!this.target) throw 'NO target found';
     this.gameContainer = null;
     this.headerPanel  = new HeaderPanel();
-    this.footerPanel  = new FooterPanel();
+    this.footerPanel = new FooterPanel();
 }
 
 Chess.prototype.cleanup = function () {
@@ -16,6 +16,7 @@ Chess.prototype.cleanup = function () {
     this.cells = [];
     return this;
 };
+
 Chess.prototype.init = function () {
     this.prepare();
     this.render();
