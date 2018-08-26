@@ -27,6 +27,10 @@
                     );
                     game.start(d);
                     break;
+                default: 
+                    console.log('default:')
+                    console.log(d);
+                    break;
             }
         }
     };

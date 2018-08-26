@@ -172,8 +172,8 @@ CL.Channel = (function () {
 
 
 /*
-var colorsPalette = JMVC.Channel('colorsPalette'),
-    optionsPalette = JMVC.Channel('optionsPalette');
+var colorsPalette = Channel('colorsPalette'),
+    optionsPalette = Channel('optionsPalette');
 
 colorsPalette.sub('getNewColor', function (topic, c){
     console.debug('got color :' + c);
@@ -194,20 +194,20 @@ optionsPalette.pub('closed');
 //////// THE GOOD THING IS THAT IT WORKS EVEN IN DIRECT MODE
 
 
-JMVC.Channel('colorsPalette').sub('getNewColor', function (topic, c){
+Channel('colorsPalette').sub('getNewColor', function (topic, c){
     console.debug('got color :' + c);
 });
-JMVC.Channel('colorsPalette').sub('invert', function (topic, c){
+Channel('colorsPalette').sub('invert', function (topic, c){
    console.debug('trying to invert color ' + c + ' ... '); 
 });
-JMVC.Channel('optionsPalette').sub(['opened', 'closed'], function (topic){
+Channel('optionsPalette').sub(['opened', 'closed'], function (topic){
     console.debug('The option palette has been ' + topic);
 });
 
-JMVC.Channel('colorsPalette').pub('getNewColor', ['#fede76']);
+Channel('colorsPalette').pub('getNewColor', ['#fede76']);
 
-JMVC.Channel('colorsPalette').pub('invert', ['#232323']);
-JMVC.Channel('optionsPalette').pub('opened');
-JMVC.Channel('optionsPalette').pub('closed');
+Channel('colorsPalette').pub('invert', ['#232323']);
+Channel('optionsPalette').pub('opened');
+Channel('optionsPalette').pub('closed');
 
 //-----------------------------------------------------------------------------

@@ -3,20 +3,22 @@ $$../../isomorph/token.js$$
 const createMatchToken = () => {
     const t1 = createToken(64),
         t2 = createToken(64),
+        t3 = createToken(64),
+        t4 = createToken(64),
         id = 3 * Manager.nextId++;
     return { 
         token: {
             white: {
                 srv: t1,
-                cli: null
+                cli: t2
             },
             black: {
-                srv: t2,
-                cli: null
+                srv: t3,
+                cli: t4
             }
         },
-        id: id,
-        matchId: mix(t1, t2, id)
+        matchId: mix([t1, t2, t3, t4], id),
+        created: +new Date
     };
 };
 
@@ -26,13 +28,13 @@ const Manager = {
 };
 
 Manager.createMatch = function () {
-    const match = {
-        id: createMatchToken(),
-        created: +new Date
+    const m = createMatchToken();
+    Manager.matches[m.matchId] = m;
+    return {
+        matchId: m.matchId,
+        token: m.token.white,
+        created: m.created,
     };
-    Manager.matches[match.id.token.matchId] = match;
-    console.log('creating a match: ');
-    console.log(JSON.stringify(match));
 };
 Manager.saveMatch = function (data) {
     console.log('saving match: ', data);

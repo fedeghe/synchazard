@@ -9,15 +9,16 @@ function createToken(l) {
     return out;
 }
 
-function mix(t1, t2, n) {
+function mix(tokens, n) {
     "use strict";
     var m = '',
-        nStr = `${n}`,
+        nStr = "" + n,
         i = 0,
         j = 1,
+        tLen = tokens.length,
         l = nStr.length;
     for (null; j <= 7; j++)
         for (i = 0; i < l; i++)
-            m += (i % 2 ? t1 : t2)[j * nStr[i]];
+            m += tokens[i % tLen][j * nStr[i]];
     return m;
 }
