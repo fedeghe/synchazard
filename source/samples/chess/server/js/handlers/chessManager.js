@@ -10,7 +10,6 @@
     $$chess/exceptions.js$$
     $$chess/Dom.js$$
     $$chess/Channel.js$$
-    $$chess/channelManager.js$$
 
     $$chess/Chess.js$$
 
@@ -26,6 +25,10 @@
                         document.getElementById('trg')
                     );
                     game.start(d);
+                    break;
+                case 'matchCreated':
+                    console.log("Consume the link");
+                    console.log(d);
                     break;
                 default: 
                     console.log('default:')

@@ -22,3 +22,10 @@ function mix(tokens, n) {
             m += tokens[i % tLen][j * nStr[i]];
     return m;
 }
+
+function toQs(o){
+    var r = [];
+    for (var i in o) 
+        r.push(i + '=' + encodeURIComponent(o[i]));
+    return '?' + r.join('&');
+}
