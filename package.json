@@ -4,7 +4,6 @@
   "description": "༺ synchazard ༻",
   "main": "index.js",
   "dependencies": {
-    "memwatch-next": "^0.3.0",
     "ws": "^5.1.1"
   },
   "engines": {
