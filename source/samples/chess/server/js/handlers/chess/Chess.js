@@ -137,7 +137,15 @@ Chess.prototype.render = function (d) {
 /**
  * entry point for events
  */
+Chess.prototype.newGameLink = function (d) {
+    console.log(d._PAYLOAD.link);
+};
 Chess.prototype.start = function (d) {
+    console.log("Start Chess")
     console.log(d)
     this.cleanup().init();
 };
+Chess.prototype.checkQs = function () {
+    var qs = CL.bom.qs2obj();
+    console.log(qs);
+}
