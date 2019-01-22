@@ -1,3 +1,7 @@
 {
-    
+    "EXE": [
+        "mkdir -p serverws/actions serverws/css serverws/js/lib"
+    ],
+    "source/samples/meier/serverws/actions/*.js": "serverws/actions -vars=vars.json",
+    "source/samples/meier/serverws/*.js": "serverws -vars=vars.json"
 }

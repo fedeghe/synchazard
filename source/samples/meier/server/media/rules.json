@@ -1,0 +1,30 @@
+{
+   "title": "Meier",
+    "description": [
+        "This is game goes back at least to Viking times. It is basically a high spirited game of chance, lying and bluff for 3 or more players.",
+        "The first player shakes 2 dice in a cup, then with or without looking at them calls out what they are and passes the cup on to the next player, covered so the next player cannot see the dice.",
+        "The second player can accept the throw or reject it. Essentially the second player decides whether the first is telling the truth or lying; but each subsequent throw must be better than the last.",
+        "If he rejects the throw the first player shows the dice; if his call was true, the second player loses and starts next round, if the first player was lying he must start again.",
+        "If the second player accepts the throw he can choose to look at dice or not, then do one of 4 things:",
+        "Shake dice, call with or without looking and pass it on.",
+        "Pass it on without shaking, repeating previous player’s call",
+        "Pass it on without shaking, calling higher than previous player.",
+        "Shake dice, look, pull a disgusted face, shake and call without looking (blind roll).",
+        "As the aim is to hand on a pair of dice with a better result than the one given to you, you always have to equal or better the previous call and it becomes a game of bluff because what is actually in the cup may be far worse than what the players are calling out. However if you say the previous player is lying and they are not then you lose, so it is often advantageous to play along with what you think may be very unlikely scores until they become implausible and it must be a lie or is it. This is why players do not always look at the dice because everyone thinks they are lying anyway so what is the point in pretending.",
+        "As with all games, have a few trial runs and you will soon pick it and the strategies up.",
+        "Calling:",
+        "The calls are always higher die first, with the two dice combined into a singe number, eg. Forty-one not four and one, one and four or fourteen.",
+        "This can be the same as the previous call or higher.",
+        "The ranking order (from lowest) is;",
+        "31, 32",
+        "41, 42, 43",
+        "51, 52, 53, 54",
+        "61, 62, 63, 64, 65",
+        "11, 22, 33, 44, 55, 66",
+        "21 (Meier)",
+        "It’s useful to know that 62 is the middle of this sequence.",
+        "Like poker, Meier works well as a betting game but as it is not so serious, it also works well when the odd drink is flowing.",
+        "Usually people drop out when they are proved to be bluffing or reject a true call until there is a winner then it all starts again. Although you can play with three people it is more fun to start with more.",
+        "If a round gets to the stage of being passed round all those who are still in, with Meier accepted by every player, then the player who first called that Meier has won and the last player has lost."
+    ]
+}
