@@ -1,0 +1,4 @@
+{
+    "source/samples/meier/server/require.json": true,
+    "source/samples/meier/serverws/require.json": true
+}
