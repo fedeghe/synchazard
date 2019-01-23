@@ -108,7 +108,7 @@ module.exports = (function () {
          * this save the server from suddendeath of all clients that
          * does not trigger the "beforeunload" event, then the connection
          * hangs and the we server crash.
-         * conterproof:
+         * counterproof:
          * - comment the following line
          * - connect with safari mobile
          * - shut down the browser
