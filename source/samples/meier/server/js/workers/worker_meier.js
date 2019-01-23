@@ -5,27 +5,17 @@ var actors = null;
 importScripts('actorsDontMatch.js');
 
 self.onmessage = function (e) {
-
-    if (actorsDontMatch(e)) return;
+    if (actorsDontMatch(e)) {
+        return;
+    }
 
     if (e.data._TYPE !== 'action') return;
     switch (e.data._ACTION) {
-        case 'initDone':
-        case 'nextDone':
+        case 'beStatusAware':
             self.postMessage({
-                _HANDLER: 'hello',
-                _DATA: {
-                    _PAYLOAD: e.data._PAYLOAD,
-                    _TIME: e.data._TIME
-                }
+                _HANDLER: 'init',
+                _DATA: e.data
             });
-            break;
-        case 'boldMe':
-            self.postMessage({
-                _HANDLER: 'hello',
-                _DATA: e.data._ACTION
-            });
-            break;
         default:break;
     }
 };
