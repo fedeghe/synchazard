@@ -10,6 +10,7 @@
     "node": ">=6.4.0",
     "npm": ">=4.6.1"
   },
+  "author": "federico.ghedina@gmail.com",
   "keywords": [
     "io",
     "realtime",
@@ -18,17 +19,17 @@
   ],
   "private": true,
   "devDependencies": {
-    "event-stream": "^3.3.4",
     "chai": "^4.1.2",
+    "event-stream": "^3.3.4",
     "lodash": "^4.17.10",
-    "malta": "^3.8.11",
-    "malta-browser-refresh": "^1.2.1",
-    "malta-header-comment": "^1.0.3",
-    "malta-js-obfuscator": "^1.0.8",
-    "malta-js-uglify": "^1.0.2",
-    "malta-less": "^1.0.4",
-    "malta-mocha": "^1.0.9",
-    "malta-rename": "^1.0.2",
+    "malta": "^3.9.17",
+    "malta-browser-refresh": "^1.2.2",
+    "malta-header-comment": "^1.0.6",
+    "malta-js-obfuscator": "^1.0.12",
+    "malta-js-uglify": "^1.0.6",
+    "malta-less": "^1.0.8",
+    "malta-mocha": "^1.0.13",
+    "malta-rename": "^1.0.4",
     "mocha": "^5.2.0",
     "npm-run-all": "^4.1.2",
     "puppeteer": "^1.4.0"
@@ -51,6 +52,5 @@
     "_start:ws": "node serverWS/ws_srv.js -vvv",
     "_start:data": "node serverWS/srv.js",
     "_start:srv": "node server/srv.js"
-  },
-  "author": "federico.ghedina@gmail.com"
+  }
 }
