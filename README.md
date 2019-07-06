@@ -41,7 +41,7 @@ The build itself will be fast, and will build the `server` and `serverws` folder
 Here you can build:  
 - a non trivial amount of sample code, which covers almost all the features provided:  
     `> npm run build:home`  
-    then in another terminal tab  
+    then in another terminal tab (this build is in watch mode on the source folder) 
     `> npm start`  
 - a minimalistic due _helloworld_ that shows the simplest example I could imagine  
     `> npm run build:hello`  
