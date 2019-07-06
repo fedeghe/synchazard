@@ -51,8 +51,10 @@ console.log('powered by ᚗᚌ');
 //         },
 //         "not enough anchors"
 //     ).assert(function () {
-//             var graph = document.querySelector('.graph');
-//             return graph.children.item(0).tagName.match(/CANVAS/i);
+//             var graph = document.querySelector('.graph'),
+//                 child0 = graph.children;
+
+//             return child0 && child0.item(0) && child0.item(0).tagName.match(/CANVAS/i);
 //         },
 //         "canvas is not there"
 //     ).report(
