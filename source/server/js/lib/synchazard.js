@@ -1,2 +1,4 @@
-$$workerSetup.js$$
-$$socketCli.js$$
+/* eslint-disable */
+$$workerSetup.js$$;
+$$socketCli.js$$;
+/* eslint-enable */

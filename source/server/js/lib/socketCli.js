@@ -1,9 +1,12 @@
+/* eslint-disable no-undef */
 (function (W) {
-    'use strict';
     
-    if (!("WebSocket" in W))
+    
+    if (!("WebSocket" in W)) {
         throw new Error('No WebSockets available on client side!');
+    }
     
+    // eslint-disable-next-line vars-on-top
     var ws = false,
         noop = function () {},
         init = noop,
@@ -23,7 +26,7 @@
         ws && ws.close();
 
         // pass the client id 
-        url = "$DATASERVER.WSHOST$/?id=" + $NS$.id;
+        url = `$DATASERVER.WSHOST$/?id=${  $NS$.id}`;
 
         // attempt to start the client socket
         try {
@@ -42,9 +45,10 @@
          * 
          * is up tp the server to decide what the initAction should trigger
          */
+        // eslint-disable-next-line no-multi-assign
         init = ws.onopen = function (){
             $NS$.utils.ready(function(){
-                console.log('Connection established with ' + url);
+                console.log(`Connection established with ${  url}`);
                 ws.send($NS$.utils.createInitAction());
             });
         };
@@ -79,7 +83,7 @@
             console.clear();
             console.log('Connection dropped from server');
             console.log(e);
-            console.log('... attempting reconnection in 5 seconds #' + reconnectionAttempts);
+            console.log(`... attempting reconnection in 5 seconds #${  reconnectionAttempts}`);
             /**
              * attempt reconnection
              */

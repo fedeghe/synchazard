@@ -1,61 +1,63 @@
-(function (W) {
-    "use strict";
-
+(function(W) {
     /** include utilities */
-    $$utilities.js$$
+    // eslint-disable-next-line
+    $$utilities.js$$;
 
     /**
      * the constructor does not gives the full worker back,
      * or at least
      */
-    var currentScript = document.currentScript || (function () {
+    // eslint-disable-next-line vars-on-top
+    var currentScript = document.currentScript || (function() {
             var scripts = document.getElementsByTagName('script');
             return scripts[scripts.length - 1];
         })(),
-        dataActors = currentScript.dataset.actors || null,
-        $NS$ = {  
-            active: true, 
+         dataActors = currentScript.dataset.actors || null,
+         $NS$ = {
+            active: true,
             handlers: {},
             objHandlers: {},
             synchazard: new Worker(currentScript.dataset.worker),
             commands: {
                 stop: stop,
-                resume: resume
+                resume: resume,
             },
             utils: {
-                ready: (function () {
+                ready: (function() {
                     var cb = [],
-                        readyStateCheckInterval = setInterval(function () {
-                            if (document.readyState === "complete") {
+                         readyStateCheckInterval = setInterval(function() {
+                             var i, l;
+                            if (document.readyState === 'complete') {
                                 $NS$.loaded = true;
                                 clearInterval(readyStateCheckInterval);
-                                for (var i = 0, l = cb.length; i < l; i++) {
+                                for (i = 0, l = cb.length; i < l; i++) {
                                     cb[i].call(W);
                                 }
                             }
                         }, 10);
-                    return function (c) {
-                        if (document.readyState === "complete") {
+                    return function(c) {
+                        if (document.readyState === 'complete') {
                             c.call(W);
                         } else {
                             cb.push(c);
                         }
                     };
                 })(),
-                storage: Utilities.storage, 
-                loadStyle: loadStyle,
-                loadScript: loadScript,
-                injectTester : injectTester,
-                createAction: createAction,
-                createInitAction: createInitAction,
-                createCloseAction: createCloseAction,
-                decodeFunction: decodeFunction,
-                getTime : getTime,
-                getQS: getQS,
-                getRTT : getRTT
-            }
+                // eslint-disable-next-line no-undef
+                storage: Utilities.storage,
+                loadStyle,
+                loadScript,
+                injectTester,
+                createAction,
+                createInitAction,
+                createCloseAction,
+                decodeFunction,
+                getTime,
+                getQS,
+                getRTT,
+            },
         },
-        head = document.getElementsByTagName('head')[0];
+         head = document.getElementsByTagName('head')[0];
 
     if (!head) {
         throw new Error('NO head');
@@ -66,7 +68,7 @@
      */
     Object.defineProperty($NS$, 'id', {
         value: getClientId(),
-        writable: false
+        writable: false,
     });
 
     /**
@@ -74,16 +76,19 @@
      */
     $NS$.synchazard.postMessage({
         _TYPE: '_INITACTORS',
-        _ACTORS: dataActors
+        _ACTORS: dataActors,
     });
 
     /**
      * get queryString as obj
      */
     function getQS() {
-        var search = document.location.search,
-            els = search && search.substr(1).split('&'),
-            i, len, tmp, out = {};
+        var {search} = document.location,
+             els = search && search.substr(1).split('&'),
+             i,
+             len,
+             tmp,
+             out = {};
         if (els) {
             for (i = 0, len = els.length; i < len; i += 1) {
                 tmp = els[i].split('=');
@@ -95,32 +100,30 @@
 
     /**
      * meant to be used to get the action rtt
-     * 
-     * @param {*} action 
+     *
+     * @param {*} action
      */
     function getRTT(action) {
         return action ? getTime() - action._TIME : null;
     }
 
-    /** 
-     * 
-     * @param {*} fun 
+    /**
+     *
+     * @param {*} fun
      */
     function decodeFunction(fun) {
-        return new Function('return ' + fun)();
+        // eslint-disable-next-line no-new-func
+        return new Function(`return ${  fun}`)();
     }
 
-    /**
-     * 
-     */
     function getTime() {
         var d = new Date(),
-            n = d.getTimezoneOffset();
+             n = d.getTimezoneOffset();
         return +d + n * 60000;
     }
     /**
-     * 
-     * @param {*} action 
+     *
+     * @param {*} action
      */
     function createAction(action) {
         action._ACTORS = dataActors || null;
@@ -139,13 +142,13 @@
      * serialized action that can be used to ask the server
      * for initialization information, is up to us to decide how to call it.
      * the only important thing is that the socket server knows how to handle/reply to it
-     * 
+     *
      * it will be sent automatically when the socket connection is established
      */
-    function createInitAction () { 
+    function createInitAction() {
         return createAction({
             _ACTION: 'init',
-            _QS: getQS()
+            _QS: getQS(),
         });
     }
 
@@ -156,135 +159,150 @@
     function createCloseAction() {
         return createAction({
             _ACTION: 'close',
-            _QS: getQS()
+            _QS: getQS(),
         });
     }
 
     /**
-     * 
-     * @param {*} f 
+     *
+     * @param {*} f
      */
     function injectTester(f) {
-        loadScript("$WEBSERVER.TESTLIB$", f);
+        loadScript('$WEBSERVER.TESTLIB$', f);
     }
 
     /**
      * Get the client id, from localStorage if already stored there
      * otherwise creates and save it in the Localstorage and recall itself,
-     * 
+     *
      * WARN: obviously, is is not reliable since can be overridden easily
-     * 
+     *
      * @return {string} description
      */
     function getClientId() {
         var cookieName = '$NS$clientID',
-            cookieValue = $NS$.utils.storage.get(cookieName);
+             cookieValue = $NS$.utils.storage.get(cookieName);
         if (cookieValue) {
             return cookieValue;
-        } else {
+        } 
             $NS$.utils.storage.set(
                 cookieName,
-                "$NS$_" + Math.abs(~~((+new Date()) * Math.random() * 1E3))
+                `$NS$_${  Math.abs(~~(+new Date() * Math.random() * 1e3))}`
             );
             return getClientId();
-        }
+        
     }
 
     /**
      * function to get url passed without cachebuster
-     * 
-     * @param {*} p 
-     * @param {*} type 
+     *
+     * @param {*} p
+     * @param {*} type
      */
     function getCleanPath(p, type) {
         var unCached = p.split('?')[0],
-            attr = {css: 'href', js: 'src'},
-            els = [].slice.call(document.getElementsByTagName(type), 0),
-            res = els.filter(function (l) {
+             attr = { css: 'href', js: 'src' },
+             els = [].slice.call(document.getElementsByTagName(type), 0),
+             res = els.filter(function(l) {
                 return l[attr[type]].search(unCached) === 0;
             });
         return res.length ? res[0] : null;
     }
 
     /**
-     * 
-     * @param {*} tag 
-     * @param {*} att 
-     * @param {*} direct 
+     *
+     * @param {*} tag
+     * @param {*} att
+     * @param {*} direct
      */
     function createTag(tag, att, direct) {
         var res = document.createElement(tag),
-            a;
-        for (a in att) res.setAttribute(a, att[a]);
-        for (a in direct) res[a] = direct[a];
+             a;
+        for (a in att){
+            if (att.hasOwnProperty(a)) {
+                res.setAttribute(a, att[a]);
+            }
+        }
+        for (a in direct) {
+            if (direct.hasOwnProperty(a)) {
+                res[a] = direct[a];
+            }
+        }
         return res;
     }
 
     /**
-     * 
-     * @param {*} t 
+     *
+     * @param {*} t
      */
     function mayRemove(t) {
         t && t.parentNode.removeChild(t);
     }
 
     /**
-     * 
-     * @param {*} cssPath 
-     * @param {*} cb 
+     *
+     * @param {*} cssPath
+     * @param {*} cb
      */
     function loadStyle(cssPath, cb) {
         var link = getCleanPath(cssPath, 'css');
         mayRemove(link);
-        link = createTag('link', {
-            rel : 'stylesheet',
-            type: 'text/css',
-            href : cssPath
-        }, {onload : cb});
+        link = createTag(
+            'link',
+            {
+                rel: 'stylesheet',
+                type: 'text/css',
+                href: cssPath,
+            },
+            { onload: cb }
+        );
         head.appendChild(link);
     }
-    
+
     /**
-     * 
-     * @param {*} jsPath 
-     * @param {*} cb 
+     *
+     * @param {*} jsPath
+     * @param {*} cb
      */
     function loadScript(jsPath, cb) {
         var script = getCleanPath(jsPath, 'js');
         mayRemove(script);
-        script = createTag('script', {
-            type: 'text/javascript',
-            src: jsPath
-        }, {onload: cb});
+        script = createTag(
+            'script',
+            {
+                type: 'text/javascript',
+                src: jsPath,
+            },
+            { onload: cb }
+        );
         head.appendChild(script);
     }
-    
+
     /**
-     * 
+     *
      */
     function stop(to) {
         $NS$.active = false;
-        to && typeof to === 'number'
-        && setTimeout($NS$.commands.resume, to);
-    };
+        to && typeof to === 'number' && setTimeout($NS$.commands.resume, to);
+    }
 
     /**
-     * this is only available to the client obsiously 
+     * this is only available to the client obsiously
      */
     function resume() {
         $NS$.active = true;
-    };
+    }
 
     /**
      * When the worker receives a message (always from the socketcli)
-     * 
+     *
      * just check that has a HANDLER function that can be accessed globally
-     * 
+     *
      * if the function is found forward to it the
-     * DATA 
+     * DATA
      */
-    $NS$.synchazard.onmessage = function (e) {
-        //=================================================
+    $NS$.synchazard.onmessage = function(e) {
+        //= ================================================
         function r() {
             switch (typeof $NS$.handlers[e.data._HANDLER]) {
                 case 'function':
@@ -293,20 +311,23 @@
                 case 'object':
                     $NS$.handlers[e.data._HANDLER].handle(e.data._DATA);
                     break;
-                default: break;
+                default:
+                    break;
             }
         }
         /**
          * in case give a small timegap
          */
-        '_HANDLER' in e.data && e.data._HANDLER in $NS$.handlers ?
-        r() : setTimeout(r, $WEBSERVER.TIMEGAP$);
+        '_HANDLER' in e.data && e.data._HANDLER in $NS$.handlers
+            ? r()
+            // eslint-disable-next-line no-undef
+            : setTimeout(r, $WEBSERVER.TIMEGAP$);
     };
 
     /**
-     * in case a error occurs just shut the worker down 
+     * in case a error occurs just shut the worker down
      */
-    $NS$.synchazard.onerror = function (e) {
+    $NS$.synchazard.onerror = function(e) {
         console.log(e);
         $NS$.synchazard.terminate();
     };
@@ -315,6 +336,7 @@
      * the worker is used inside the socketCli in the onMessage
      * the easyiest option is to publish it
      */
+    // eslint-disable-next-line
     W.$NS$ = $NS$;
     W.onbeforeunload = $NS$.synchazard.terminate;
-})(this);
+}(this))
