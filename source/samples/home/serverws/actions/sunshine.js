@@ -1,6 +1,5 @@
 module.exports.launch = (action, synchazard, params) => {
-
-    "use strict";
+    'use strict';
 
     // SETUP
     //
@@ -19,23 +18,21 @@ module.exports.launch = (action, synchazard, params) => {
     const sliceRot = (a, i, howmany) => {
         const len = a.length;
         i = i % len;
-        const rot = i < len && (i + howmany) > len;
-        return rot ?
-            [].concat(a.slice(i), a.slice(0, howmany - (len - i)))
-            :
-            a.slice(i, i + howmany);
+        return (i + howmany) > len
+            ? [].concat(a.slice(i), a.slice(0, howmany - (len - i)))
+            : a.slice(i, i + howmany);
     };
 
     //
     action.onconnection((data, ws) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
-            case 'init':
-                ws.send(action.encodeMessage({
-                    _ACTION: 'sunshine',
-                    _PAYLOAD: sliceRot(action.data.colors, action.data.index, action.data.size)
-                }));
-                break;
+        case 'init':
+            ws.send(action.encodeMessage({
+                _ACTION: 'sunshine',
+                _PAYLOAD: sliceRot(action.data.colors, action.data.index, action.data.size)
+            }));
+            break;
         }
     });
 

@@ -1,7 +1,5 @@
 module.exports.launch = (action, synchazard, params) => {
-
-    "use strict";
-
+    'use strict';
     const resourceFile = params.jsToObserve,
         fs = params.deps.fs,
         path = params.deps.path;
@@ -9,7 +7,7 @@ module.exports.launch = (action, synchazard, params) => {
     // SETUP
     //
     action.setup({
-        resourceFile: path.resolve(__dirname + '/../' + resourceFile),
+        resourceFile: path.resolve(path.join(__dirname, '/../', resourceFile)),
         actions: {
             update: function () {
                 return action.encodeMessage({
@@ -25,9 +23,9 @@ module.exports.launch = (action, synchazard, params) => {
     action.onconnection((data, ws) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
-            case 'init':
-                ws.send(action.data.actions.update());
-                break;
+        case 'init':
+            ws.send(action.data.actions.update());
+            break;
         }
     });
 

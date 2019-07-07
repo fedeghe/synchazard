@@ -1,5 +1,5 @@
 module.exports.launch = (action, synchazard, params) => {
-    "use strict";
+    'use strict';
     let nodeList = {};
     const disable = (id, nodeId) => {
             nodeList[nodeId] = nodeList[nodeId] || {};
@@ -10,7 +10,7 @@ module.exports.launch = (action, synchazard, params) => {
             return action.encodeMessage({
                 _ACTION: 'disableAll',
                 _VALUE: nodeList[nodeId].value,
-                _NODEID: nodeId + ""
+                _NODEID: nodeId + ''
             }, { id: id });
         },
         enable = (id, value, nodeId) => {
@@ -21,8 +21,8 @@ module.exports.launch = (action, synchazard, params) => {
             nodeList[nodeId].value = value;
             return action.encodeMessage({
                 _ACTION: 'enableAll',
-                _VALUE: value + "",
-                _NODEID: nodeId + ""
+                _VALUE: value + '',
+                _NODEID: nodeId + ''
             }, { id: id });
         },
         getNodes = () => {
@@ -37,7 +37,7 @@ module.exports.launch = (action, synchazard, params) => {
             return action.encodeMessage({
                 _ACTION: 'resize',
                 _SIZES: sizes,
-                _NODEID: nodeId + ""
+                _NODEID: nodeId + ''
             }, { id: id });
         };
 
@@ -45,18 +45,18 @@ module.exports.launch = (action, synchazard, params) => {
     action.onconnection((data, ws) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
-            case 'init':
-                synchazard.broadcast(getNodes());
-                break;
-            case 'disable':
-                synchazard.broadcast(disable(data._ID, data._NODEID));
-                break;
-            case 'enable':
-                synchazard.broadcast(enable(data._ID, data._VALUE, data._NODEID));
-                break;
-            case 'resize':
-                synchazard.broadcast(resize(data._ID, data._SIZES, data._NODEID));
-                break;
+        case 'init':
+            synchazard.broadcast(getNodes());
+            break;
+        case 'disable':
+            synchazard.broadcast(disable(data._ID, data._NODEID));
+            break;
+        case 'enable':
+            synchazard.broadcast(enable(data._ID, data._VALUE, data._NODEID));
+            break;
+        case 'resize':
+            synchazard.broadcast(resize(data._ID, data._SIZES, data._NODEID));
+            break;
         }
     });
 };

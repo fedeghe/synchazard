@@ -1,6 +1,5 @@
 module.exports.launch = (action, synchazard, params) => {
-
-    "use strict";
+    'use strict';
     const resourceFile = params.jsonToObserve,
         fs = params.deps.fs,
         path = params.deps.path;
@@ -19,15 +18,15 @@ module.exports.launch = (action, synchazard, params) => {
     action.onconnection((data, ws) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
-            case 'init':
-                ws.send(action.data.actions.update);
-                break;
+        case 'init':
+            ws.send(action.data.actions.update);
+            break;
         }
     });
 
     // RUN
     fs.watchFile(
-        path.resolve(__dirname + action.data.resourceFile),
+        path.resolve(path.join(__dirname, action.data.resourceFile)),
         { interval: synchazard.WATCH_INTERVALS.SHORT },
         () => synchazard.broadcast(action.data.actions.update)
     );
