@@ -1,15 +1,17 @@
-"use strict";
+'use strict';
 
-if (!('$NS$' in window)) throw 'no $NS$ in global';
+if (!('$NS$' in window)) {
+    throw new Error('no $NS$ in global');
+}
 
 console.clear();
 console.log('༺ synchazard ༻');
 console.log('powered by ᚗᚌ');
 
-//================================================================
-// PLEASE CONSIDER TO UNCOMMENT THE FOLLOWING SECTIONS ONE BY ONE 
+// ================================================================
+// PLEASE CONSIDER TO UNCOMMENT THE FOLLOWING SECTIONS ONE BY ONE
 // SAVE IT AND LOOK AT THE HOME PAGE, NO REFRESH NEEDED
-//================================================================
+// ================================================================
 
 /**
  * the page blurs in in X seconds, not in all brows: https://caniuse.com/#search=filter

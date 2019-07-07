@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /**
  * THIS IS MY DOM
  */

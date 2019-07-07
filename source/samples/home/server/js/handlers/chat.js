@@ -1,8 +1,5 @@
 (function () {
-    "use strict";
-
-    
-
+    'use strict';
     function cleanup (text, pre) {
         return (pre ? '<pre>' : '') +
             (text
@@ -15,14 +12,14 @@
                 .replace(/&#(\S*)\d/g, ' ')
             ) + (pre ? '</pre>' : '');
     }
-    function getLine(m) {
+    function getLine (m) {
         var tag = document.createElement('p'),
             user = document.createElement('strong'),
             msg = document.createElement('span'),
             self = m.id === $NS$.id;
 
         tag.className = 'msg';
-        user.innerText = cleanup(m.id) + " : ";
+        user.innerText = cleanup(m.id) + ' : ';
         msg.innerText = cleanup(m.message);
         if (self) {
             tag.className = 'self';
@@ -49,52 +46,47 @@
     container.appendChild(messagesContainer);
     target.appendChild(container);
     input.focus();
-    
+
     input.addEventListener('keyup', function (e) {
-        if (e.keyCode !== 38 || !lastMessage) {return;}
+        if (e.keyCode !== 38 || !lastMessage) {
+            return;
+        }
         input.value = lastMessage;
     })
     form.addEventListener('submit', function (e) {
         e.preventDefault();
         lastMessage = input.value;
-        
-        var v = cleanup(input.value);
 
+        var v = cleanup(input.value);
         input.focus();
         if (v) {
             input.value = '';
             $NS$.send({
                 _ACTION: 'new_message',
                 _MESSAGE: v,
-                _TIMESTAMP: new Date() + ""
+                _TIMESTAMP: new Date() + ''
             });
         }
     });
-    
+
     $NS$.handlers.Chat = function (data) {
-        
         var messages = data._PAYLOAD;
-
         switch (data._ACTION) {
-            case 'messages': 
-                messages.all.forEach(function (m) {
-                    messagesContainer.appendChild(getLine(m));
-                });
-                break;
-            case 'message': 
-                messagesContainer.appendChild(getLine(messages.one));
-                break;
+        case 'messages':
+            messages.all.forEach(function (m) {
+                messagesContainer.appendChild(getLine(m));
+            });
+            break;
+        case 'message': 
+            messagesContainer.appendChild(getLine(messages.one));
+            break;
         }
-
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     };
-    
+
     $NS$.handlers.ChatSelfHandler = function (data) {
         var selfMessage = data._PAYLOAD;
-        console.log("SELF MESSAGE: " + cleanup(selfMessage));
+        console.log('SELF MESSAGE: ' + cleanup(selfMessage));
         $NS$.utils.storage.set('$NS$clientID', $NS$.id);
     };
 })();
-
-
-

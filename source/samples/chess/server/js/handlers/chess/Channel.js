@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /**
  * [Channel description]
  * @param {[type]} n [description]
@@ -7,9 +8,9 @@ CL.Channel = (function () {
 
         // function added to free completely
         // that object from dependencies
-        // 
+        //
         findInArray = function (arr, mvar) {
-            //IE6,7,8 would fail here
+            // IE6,7,8 would fail here
             if ('indexOf' in arr) {
                 return arr.indexOf(mvar);
             }
@@ -169,8 +170,6 @@ CL.Channel = (function () {
     };
 })();
 
-
-
 /*
 var colorsPalette = Channel('colorsPalette'),
     optionsPalette = Channel('optionsPalette');
@@ -179,7 +178,7 @@ colorsPalette.sub('getNewColor', function (topic, c){
     console.debug('got color :' + c);
 });
 colorsPalette.sub('invert', function (topic, c){
-   console.debug('trying to invert color ' + c + ' ... '); 
+   console.debug('trying to invert color ' + c + ' ... ');
 });
 optionsPalette.sub(['opened', 'closed'], function (topic){
     console.debug('The option palette has been ' + topic);
@@ -193,12 +192,11 @@ optionsPalette.pub('closed');
 
 //////// THE GOOD THING IS THAT IT WORKS EVEN IN DIRECT MODE
 
-
 Channel('colorsPalette').sub('getNewColor', function (topic, c){
     console.debug('got color :' + c);
 });
 Channel('colorsPalette').sub('invert', function (topic, c){
-   console.debug('trying to invert color ' + c + ' ... '); 
+   console.debug('trying to invert color ' + c + ' ... ');
 });
 Channel('optionsPalette').sub(['opened', 'closed'], function (topic){
     console.debug('The option palette has been ' + topic);
@@ -211,3 +209,4 @@ Channel('optionsPalette').pub('opened');
 Channel('optionsPalette').pub('closed');
 
 //-----------------------------------------------------------------------------
+*/

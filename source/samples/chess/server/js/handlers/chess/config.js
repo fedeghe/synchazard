@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 var config = {
     pieces: {
         names: {
@@ -40,5 +41,5 @@ var config = {
     start: 'white',
     mode: 'filled',
     rows: [1, 2, 3, 4, 5, 6, 7, 8],
-    columns: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'],
+    columns: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 };

@@ -1,6 +1,5 @@
 module.exports.launch = (action, synchazard, params) => {
     'use strict';
-
     // SETUP
     //
     action.setup({ num: 0 });

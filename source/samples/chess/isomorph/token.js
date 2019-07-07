@@ -1,31 +1,39 @@
 
-function createToken(l) {
-    "use strict";
+// eslint-disable-next-line no-unused-vars
+function createToken (l) {
+    'use strict';
     var set = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
         len = set.length,
         out = '';
-    while (l--) 
+    while (l--) {
         out += set[~~(len * Math.random())];
+    }
     return out;
 }
 
-function mix(tokens, n) {
-    "use strict";
+// eslint-disable-next-line no-unused-vars
+function mix (tokens, n) {
+    'use strict';
     var m = '',
-        nStr = "" + n,
+        nStr = '' + n,
         i = 0,
         j = 1,
         tLen = tokens.length,
         l = nStr.length;
-    for (null; j <= 7; j++)
-        for (i = 0; i < l; i++)
+    for (null; j <= 7; j++) {
+        for (i = 0; i < l; i++) {
             m += tokens[i % tLen][j * nStr[i]];
+        }
+    }
     return m;
 }
 
-function toQs(o){
-    var r = [];
-    for (var i in o) 
+// eslint-disable-next-line no-unused-vars
+function toQs (o) {
+    var r = [],
+        i;
+    for (i in o) {
         r.push(i + '=' + encodeURIComponent(o[i]));
+    }
     return '?' + r.join('&');
 }
