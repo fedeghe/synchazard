@@ -1,5 +1,5 @@
 (function (W) {
-    "use strict";
+    'use strict';
     
     if (!("WebSocket" in W))
         throw new Error('No WebSockets available on client side!');
