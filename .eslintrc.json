@@ -1,12 +1,16 @@
 {
     "env": {
         "browser": true,
+        "node": true,
         "es6": true
     },
     "extends": "standard",
     "globals": {
         "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
+        "SharedArrayBuffer": "readonly",
+        "$NS$": true,
+        "ReactDOM": true,
+        "React": true
     },
     "parserOptions": {
         "ecmaVersion": 2018

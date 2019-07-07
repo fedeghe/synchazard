@@ -1,21 +1,15 @@
 /**
- * 
+ *
  */
 (function () {
-    "use strict"; 
-    var resizeBooked = false;
-    function onresize(instance) {
-        window.addEventListener('resize', function() {
-            // if (resizeBooked) return;
-            // resizeBooked = true;
-            // setTimeout(function () {
-                instance.w = document.body.clientWidth;
-                instance.canvas.setAttribute('width', instance.w);
-                // resizeBooked = false;
-            // }, 10);
+    'use strict';
+    function onresize (instance) {
+        window.addEventListener('resize', function () {
+            instance.w = document.body.clientWidth;
+            instance.canvas.setAttribute('width', instance.w);
         });
     }
-    function Grp(w, h) {
+    function Grp (w, h) {
         this.w = w || document.body.clientWidth;
         this.h = h || 100;
         this.points = [];
@@ -26,7 +20,6 @@
         this.canvas.style.top = '2px';
         this.canvas.style.position = 'relative';
         this.canvas.style.border = 'none';
-        // this.canvas.style.filter = 'blur(.5px)';
         this.canvas.style.height = this.h + 'px';
         this.init();
         if (!w && !h) onresize(this);
@@ -49,7 +42,7 @@
             i = 0, l;
 
         this.points.push(v);
-        
+
         if (this.points.length > n) {
             this.points = this.points.reverse().slice(0, n).reverse();
         }
@@ -60,21 +53,20 @@
 
         this.ctx.beginPath();
         this.ctx.fillStyle = '#000';
-        
+
         this.ctx.moveTo(this.w, 100);
-        if (l < n) this.ctx.lineTo(~~((l-1) * this.w / n), 100);
-        for (i = l - 1; i > 0 ; i--) {
+        if (l < n) this.ctx.lineTo(~~((l - 1) * this.w / n), 100);
+        for (i = l - 1; i > 0; i--) {
             this.ctx.lineTo(~~(i * this.w / n), ~~(this.points[i]));
-            this.ctx.lineTo(~~((i-1) * this.w / n), ~~(this.points[i-1]));
+            this.ctx.lineTo(~~((i - 1) * this.w / n), ~~(this.points[i - 1]));
         }
         this.ctx.lineTo(0, 100);
         this.ctx.closePath();
         this.ctx.fill();
     };
 
-
     window.Scg = {
-        create : function (w, h) {
+        create: function (w, h) {
             return new Grp(w, h);
         }
     };
