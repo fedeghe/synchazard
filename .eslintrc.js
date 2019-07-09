@@ -8,6 +8,11 @@ module.exports = {
             "classes": true
           }
     },
+    globals: {
+        maltaV: true,
+        maltaF: true,
+        maltaE: true,
+    },
     env: {
         browser: true,
         node: true,
