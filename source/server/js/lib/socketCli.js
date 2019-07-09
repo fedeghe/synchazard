@@ -12,8 +12,8 @@
         init = noop,
         send = noop,
         reconnectionAttempts = 0,
-        maxReconnectionAttempts = $WEBSERVER.RECONNECTION.ATTEMPTS$,
-        reconnectionInterval = $WEBSERVER.RECONNECTION.INTERVAL$,
+        maxReconnectionAttempts = maltaV('WEBSERVER.RECONNECTION.ATTEMPTS'),
+        reconnectionInterval = maltaV('WEBSERVER.RECONNECTION.INTERVAL'),
         url = null;
 
     /**
@@ -26,7 +26,7 @@
         ws && ws.close();
 
         // pass the client id 
-        url = `$DATASERVER.WSHOST$/?id=${  $NS$.id}`;
+        url = `maltaV('DATASERVER.WSHOST')/?id=${maltaV('NS').id}`;
 
         // attempt to start the client socket
         try {
@@ -47,9 +47,9 @@
          */
         // eslint-disable-next-line no-multi-assign
         init = ws.onopen = function (){
-            $NS$.utils.ready(function(){
-                console.log(`Connection established with ${  url}`);
-                ws.send($NS$.utils.createInitAction());
+            maltaV('NS').utils.ready(function(){
+                console.log(`Connection established with ${url}`);
+                ws.send(maltaV('NS').utils.createInitAction());
             });
         };
 
@@ -57,7 +57,7 @@
          * wrap the ws.send adding some useful stuff (before check active flag)
          */
         send = function (action) {
-            $NS$.active && ws.send($NS$.utils.createAction(action));
+            maltaV('NS').active && ws.send(maltaV('NS').utils.createAction(action));
         };
 
         /**
@@ -69,8 +69,8 @@
          * back to an object literal
          */
         ws.onmessage = function (evt) {
-            $NS$.active && 
-            $NS$.synchazard.postMessage(
+            maltaV('NS').active && 
+            maltaV('NS').synchazard.postMessage(
                 JSON.parse(evt.data)
             );
         };
@@ -108,7 +108,7 @@
          * automatically send the close client action 
          * allowing the server to be updated about which client is on which page
          */
-        ws && ws.send($NS$.utils.createCloseAction());
+        ws && ws.send(maltaV('NS').utils.createCloseAction());
         
         /**
          * automatically blur current element
@@ -136,10 +136,10 @@
     W.addEventListener("pagehide", close);
 
     /**
-     * publish some meaningful functions in $NS$ namespace
+     * publish some meaningful functions in maltaV('NS') namespace
      */
-    $NS$.commands.init = init;
-    $NS$.send = send;
+    maltaV('NS').commands.init = init;
+    maltaV('NS').send = send;
 })(this);
 
 

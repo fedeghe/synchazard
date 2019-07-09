@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 (function () {
-    "use strict";
-    var port = "$WEBSERVER.PORT$",
-        msg = "$START_MESSAGE.WEBSERVER$";
-    $$../srv.js$$
+    var port = `maltaV('WEBSERVER.PORT')`,
+        msg = `maltaV('START_MESSAGE.WEBSERVER')`;
+    // eslint-disable-next-line no-undef
+    maltaF('../srv.js')
 })();

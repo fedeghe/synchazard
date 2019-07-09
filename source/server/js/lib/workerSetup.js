@@ -1,7 +1,7 @@
 (function(W) {
     /** include utilities */
     // eslint-disable-next-line
-    $$utilities.js$$;
+    maltaF('utilities.js');
 
     /**
      * the constructor does not gives the full worker back,
@@ -13,7 +13,7 @@
             return scripts[scripts.length - 1];
         })(),
          dataActors = currentScript.dataset.actors || null,
-         $NS$ = {
+         maltaV('NS') = {
             active: true,
             handlers: {},
             objHandlers: {},
@@ -28,7 +28,7 @@
                          readyStateCheckInterval = setInterval(function() {
                              var i, l;
                             if (document.readyState === 'complete') {
-                                $NS$.loaded = true;
+                                maltaV('NS').loaded = true;
                                 clearInterval(readyStateCheckInterval);
                                 for (i = 0, l = cb.length; i < l; i++) {
                                     cb[i].call(W);
@@ -66,7 +66,7 @@
     /**
      * Set a non overwritable client id, hopefully unique
      */
-    Object.defineProperty($NS$, 'id', {
+    Object.defineProperty(maltaV('NS'), 'id', {
         value: getClientId(),
         writable: false,
     });
@@ -74,7 +74,7 @@
     /**
      * set actors, even if null
      */
-    $NS$.synchazard.postMessage({
+    maltaV('NS').synchazard.postMessage({
         _TYPE: '_INITACTORS',
         _ACTORS: dataActors,
     });
@@ -128,11 +128,11 @@
     function createAction(action) {
         action._ACTORS = dataActors || null;
         // ensure the client identifier
-        action._ID = action._ID || $NS$.id;
+        action._ID = action._ID || maltaV('NS').id;
         // default type is action
         action._TYPE = action._TYPE || 'action';
         // given odr current
-        action._TIME = action._TIME || $NS$.utils.getTime();
+        action._TIME = action._TIME || maltaV('NS').utils.getTime();
         // pass also always current url
         action._URL = document.location.href;
         return JSON.stringify(action);
@@ -180,14 +180,14 @@
      * @return {string} description
      */
     function getClientId() {
-        var cookieName = '$NS$clientID',
-             cookieValue = $NS$.utils.storage.get(cookieName);
+        var cookieName = `maltaV('NS')clientID`,
+             cookieValue = maltaV('NS').utils.storage.get(cookieName);
         if (cookieValue) {
             return cookieValue;
         } 
-            $NS$.utils.storage.set(
+            maltaV('NS').utils.storage.set(
                 cookieName,
-                `$NS$_${  Math.abs(~~(+new Date() * Math.random() * 1e3))}`
+                `maltaV('NS')_${  Math.abs(~~(+new Date() * Math.random() * 1e3))}`
             );
             return getClientId();
         
@@ -282,15 +282,15 @@
      *
      */
     function stop(to) {
-        $NS$.active = false;
-        to && typeof to === 'number' && setTimeout($NS$.commands.resume, to);
+        maltaV('NS').active = false;
+        to && typeof to === 'number' && setTimeout(maltaV('NS').commands.resume, to);
     }
 
     /**
      * this is only available to the client obsiously
      */
     function resume() {
-        $NS$.active = true;
+        maltaV('NS').active = true;
     }
 
     /**
@@ -301,15 +301,15 @@
      * if the function is found forward to it the
      * DATA
      */
-    $NS$.synchazard.onmessage = function(e) {
+    maltaV('NS').synchazard.onmessage = function(e) {
         //= ================================================
         function r() {
-            switch (typeof $NS$.handlers[e.data._HANDLER]) {
+            switch (typeof maltaV('NS').handlers[e.data._HANDLER]) {
                 case 'function':
-                    $NS$.handlers[e.data._HANDLER](e.data._DATA);
+                    maltaV('NS').handlers[e.data._HANDLER](e.data._DATA);
                     break;
                 case 'object':
-                    $NS$.handlers[e.data._HANDLER].handle(e.data._DATA);
+                    maltaV('NS').handlers[e.data._HANDLER].handle(e.data._DATA);
                     break;
                 default:
                     break;
@@ -318,7 +318,7 @@
         /**
          * in case give a small timegap
          */
-        '_HANDLER' in e.data && e.data._HANDLER in $NS$.handlers
+        '_HANDLER' in e.data && e.data._HANDLER in maltaV('NS').handlers
             ? r()
             // eslint-disable-next-line no-undef
             : setTimeout(r, $WEBSERVER.TIMEGAP$);
@@ -327,9 +327,9 @@
     /**
      * in case a error occurs just shut the worker down
      */
-    $NS$.synchazard.onerror = function(e) {
+    maltaV('NS').synchazard.onerror = function(e) {
         console.log(e);
-        $NS$.synchazard.terminate();
+        maltaV('NS').synchazard.terminate();
     };
 
     /**
@@ -337,6 +337,6 @@
      * the easyiest option is to publish it
      */
     // eslint-disable-next-line
-    W.$NS$ = $NS$;
-    W.onbeforeunload = $NS$.synchazard.terminate;
+    W.maltaV('NS') = maltaV('NS');
+    W.onbeforeunload = maltaV('NS').synchazard.terminate;
 }(this))

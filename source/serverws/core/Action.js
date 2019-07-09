@@ -1,4 +1,5 @@
-"use strict";
+
+
 class Action{
     constructor(ss, actor, debug) {
         this.ss = ss;
@@ -9,16 +10,19 @@ class Action{
     
 
     setup(d) {this.data = d || {};}
+
     getCount() {return Action.count;}
+
     getTime() {
         var d = new Date(),
             n = d.getTimezoneOffset();
         return +d + n * 60000;
     }
+
     encodeMessage(action, options) {
         action._TYPE = 'action';
         action._ACTOR = this.actor;
-        //time
+        // time
         action._TIME = action._TIME || this.getTime();
         if (options) {
             if (options.id) action._ID = options.id;
@@ -28,8 +32,9 @@ class Action{
         }
         return JSON.stringify(action);
     }
+
     notify(filename, data) {
-        if ($NOTIFY_ACTORS_CHECKING$) {
+        if (maltaV('NOTIFY_ACTORS_CHECKING')) {
             console.log("\n--- ACTION NOTIFICATION:");
             console.log(`@ ${new Date}`);
             console.log(`- Action filename: ${filename}`);
@@ -38,7 +43,9 @@ class Action{
             console.log("-----\n");
         }
     }
+
     decodeMessage(action) {return JSON.parse(action);}
+
     onconnection(f) {
         var self = this;
         this.ss.wss.on('connection', (ws, req) => {
@@ -51,18 +58,18 @@ class Action{
                 }
 
                 /* checkActors ? */
-                const checkActors = $CHECK_ACTORS$;
+                const checkActors = maltaV('CHECK_ACTORS');
                 if (checkActors) {
                     if (!data._ACTORS || data._ACTORS.split(',').indexOf(self.actor) < 0) {
-                        if ($NOTIFY_ACTORS_CHECKING$){
+                        if (maltaV('NOTIFY_ACTORS_CHECKING')){
                             console.log(['Actors not matching:', 'expected', self.actor, 'to be in', data._ACTORS].join(' '));
                             console.log('... the message will not be forwarded');
                         }
                         return;
-                    } else {
-                        $NOTIFY_ACTORS_CHECKING$ &&
+                    } 
+                        maltaV('NOTIFY_ACTORS_CHECKING') &&
                         console.log(['Actors matching:', self.actor, 'found in', data._ACTORS].join(' '));
-                    }
+                    
                 }
                 /* forward injecting also the ws, with the id attached */
                 ws.id = data._ID;

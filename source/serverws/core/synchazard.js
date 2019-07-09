@@ -8,10 +8,10 @@ const WebSocket = require('ws'),
 
 module.exports = (function () {
 
-    "use strict";
+    
 
     let debug = function () {};
-    const port = $DATASERVER.WSPORT$,
+    const port = maltaV('DATASERVER.WSPORT'),
         srvCnf = {port: port},
 
         /**
@@ -67,10 +67,10 @@ module.exports = (function () {
             defineDebugFunction(args);
             actions.forEach(params => {
                 if (!params.path) throw new Error('No path for action');
-                const a = require('../' + params.path),
-                    actor = params.actor,
+                const a = require(`../${  params.path}`),
+                    {actor} = params,
                     action = new Action(exp, actor, debug);
-                debug('> ' + params.path.split('/').pop() + '.js started', 1);
+                debug(`> ${  params.path.split('/').pop()  }.js started`, 1);
                 a.launch(action, exp, params);
             });
         },
@@ -96,7 +96,7 @@ module.exports = (function () {
         console.log('close')
     })
     wss.on('connection', function connection(ws, req) {
-        if (req.headers.origin.search("$WEBSERVER.HOST$") !== 0) {
+        if (req.headers.origin.search("maltaV('WEBSERVER.HOST')") !== 0) {
             ws.terminate();
             console.log(`${req.headers.origin} is not allowed to request here.`);
         }
@@ -122,4 +122,4 @@ module.exports = (function () {
     return exp;
 })();
 
-console.log('$START_MESSAGE.WSERVER$');
+console.log(`maltaV('START_MESSAGE.WSERVER')`);

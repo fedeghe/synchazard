@@ -1,4 +1,4 @@
 /* eslint-disable */
-$$workerSetup.js$$;
-$$socketCli.js$$;
+maltaF('workerSetup.js');
+maltaF('socketCli.js');
 /* eslint-enable */

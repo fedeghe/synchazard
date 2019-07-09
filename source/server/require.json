@@ -3,10 +3,10 @@
         "mkdir -p server/css server/js/lib server/js/workers server/js/handlers server/media",
         "cp source/server/media/* server/media/"
     ],
-    "source/server/srv.js": "server -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json",
+    "source/server/srv.js": "server -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json -options=placeholderMode:'func'",
     "source/server/index.html": "server -vars=vars.json",
     "source/server/less/*.less": "server/css -plugins=malta-less -vars=vars.json",
-    "source/server/js/workers/actorsDontMatch.js": "server/js/workers -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json",
-    "source/server/js/lib/synchazard.js": "server/js/lib -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json",
-    "source/server/js/lib/testnject.js": "server/js/lib -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json"
+    "source/server/js/workers/actorsDontMatch.js": "server/js/workers -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json -options=placeholderMode:'func'",
+    "source/server/js/lib/synchazard.js": "server/js/lib -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json -options=placeholderMode:'func'",
+    "source/server/js/lib/testnject.js": "server/js/lib -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json -options=placeholderMode:'func'"
 }
