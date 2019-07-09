@@ -1739,10 +1739,10 @@ malta@>=3.8.14, malta@>=3.9.11:
   resolved "https://registry.yarnpkg.com/malta/-/malta-3.9.17.tgz#a8e5cebb8616c2040c52ac9b6f835ed656773fd0"
   integrity sha512-dmk3pHFGtu2XddA7djUQRHsFTzPiSpyOo+u+VCebUxexSYEPYZ3b+QwvSEzn4rXsUvU+ra6I+5yfb5i9dpDvjg==
 
-malta@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/malta/-/malta-4.0.0.tgz#ddf13d54c37337ee5e9ee8f463e00056ea9ffb4e"
-  integrity sha512-J+ztvOR74f9fkw8tiCLhMi6nrBVlM64mPDtumoIgOtPGGSkIaLyFISSAnZr9zQQ9uZqHi/W7BqetlHZvtaAFiA==
+malta@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/malta/-/malta-4.0.2.tgz#018c333a4e80e7b904a6f5533e5844cc0df89c40"
+  integrity sha512-T8lhmvo4KMiywwwOm7mT7HrfTfgoEoOoXvalZEkCxBJ0EjLUUFT7aO6wI0yK8d7xz/H1dM9Fq7LP8SjUjQ4WPQ==
 
 map-stream@0.0.7:
   version "0.0.7"
