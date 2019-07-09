@@ -1,14 +1,17 @@
 (function () {
-    "use strict";
-    $NS$.handlers.computer = function (f) {
-        var func = $NS$.utils.decodeFunction(f.func),
-            trg = document.getElementById('trg');
+    maltaV('NS').handlers.computer = function (f) {
+        var func = maltaV('NS').utils.decodeFunction(f.func),
+            trg = document.getElementById('trg'),
+            i = 0;
 
-        for (var i = 0; i < 100; i++) (function(j){
-            var el = document.createElement('div'),
-                desc = f.desc.replace('$p', i);
-            el.innerHTML = desc + ' = ' + func(i);
-            trg.appendChild(el);
-        })(i);
+        for (null; i < 100; i++) {
+            // eslint-disable-next-line no-loop-func
+            (function(j){
+                var el = document.createElement('div'),
+                    desc = f.desc.replace('$p', j);
+                el.innerHTML = `${desc} = ${func(j)}`;
+                trg.appendChild(el);
+            })(i);
+        }
     }
 }());

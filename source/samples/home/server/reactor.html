@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="icon" href="/media/favicon.ico">
-	<title>$PROJECT.NAME$ $PROJECT.VERSION$ - reactor</title>
-	<link rel="stylesheet" type="text/css" href="/css/reactor.css">
-	<!-- <script src="/js/lib/synchazard.js" data-worker="/js/workers/worker_reactor.js" data-actors="reactor,incremental"></script> -->
-	<script src="/js/lib/synchazard.js" data-worker="/js/workers/worker_reactor.js"></script>
-	<script src="/js/reactor.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="/media/favicon.ico">
+    <title>maltaV('PROJECT.NAME') maltaV('PROJECT.VERSION') - reactor</title>
+    <link rel="stylesheet" type="text/css" href="/css/reactor.css">
+    <!-- <script src="/js/lib/synchazard.js" data-worker="/js/workers/worker_reactor.js" data-actors="reactor,incremental"></script> -->
+    <script src="/js/lib/synchazard.js" data-worker="/js/workers/worker_reactor.js"></script>
+    <script src="/js/reactor.js"></script>
 </head>
+
 <body>
-	<div class="explanation">
-		<h3>Reactor</h3>
-		<p>Modify one of these input and check what happens on other clients when You start typing and when you loose the focus.</p>
-	</div>
-	<div class="exp">
-		<div>
-			<input class="rounded" type="text" name="" value="" placeholder="username" data-reactor="id1234" />
-			<input class="rounded" type="text" name="" value="" placeholder="password" data-reactor="id4321" />
-		</div>
-		<div>
-			<textarea class="rounded" data-reactor="id4343" placeholder="write something here"></textarea>
-		</div>
-		
-		<div>
-			<button onclick="$NS$.commands.init()">trigger <b><i>init</i></b></button>
-		</div>
-		<div id="number"></div>
-	</div>
+    <div class="explanation">
+        <h3>Reactor</h3>
+        <p>Modify one of these input and check what happens on other clients when You start typing and when you loose
+            the focus.</p>
+    </div>
+    <div class="exp">
+        <div>
+            <input class="rounded" type="text" name="" value="" placeholder="username" data-reactor="id1234" />
+            <input class="rounded" type="text" name="" value="" placeholder="password" data-reactor="id4321" />
+        </div>
+        <div>
+            <textarea class="rounded" data-reactor="id4343" placeholder="write something here"></textarea>
+        </div>
+
+        <div>
+            <button onclick="maltaV('NS').commands.init()">trigger <b><i>init</i></b></button>
+        </div>
+        <div id="number"></div>
+    </div>
 </body>
+
 </html>

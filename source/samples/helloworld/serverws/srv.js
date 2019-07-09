@@ -1,5 +1,5 @@
 (function () {
-    var port = "$DATASERVER.PORT$",
-        msg = "$START_MESSAGE.DATASERVER$";
-    $$../srv.js$$
+    var port = "maltaV('DATASERVER.PORT')",
+        msg = "maltaV('START_MESSAGE.DATASERVER')";
+    maltaF('../srv.js')
 })();

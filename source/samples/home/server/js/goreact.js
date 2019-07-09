@@ -10,15 +10,16 @@ window.addEventListener('load', function () {
             };
 
             var self = this;
-            $NS$.handlers.react = function (d) {
+            maltaV('NS').handlers.react = function (d) {
                 self.setState({
                     time: d.time
                 });
             };
         }
+
         render () {
             return this.state.time
-                ? React.createElement('h1', null, 'Hi, it\'s ' + this.state.time + ', definitely time to ' + this.props.message + '!')
+                ? React.createElement('h1', null, `Hi, it's ${this.state.time}, definitely time to ${this.props.message}!`)
                 : null;
         }
     }

@@ -1,5 +1,4 @@
 module.exports.launch = (action, synchazard, params) => {
-    'use strict';
     let askingingCli = null,
         partecipants = 0,
         results = {
@@ -67,6 +66,7 @@ module.exports.launch = (action, synchazard, params) => {
             }
             !--partecipants && synchazard.broadcast(action.data.actions.completed());
             break;
+        default:break;
         }
     });
 };

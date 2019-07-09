@@ -2,6 +2,5 @@
  *
  */
 (function () {
-    'use strict';
-    $NS$.utils.loadScript('/js/handlers/computer.js');
+    maltaV('NS').utils.loadScript('/js/handlers/computer.js');
 })();

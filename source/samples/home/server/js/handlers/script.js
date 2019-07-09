@@ -1,4 +1,4 @@
 (function () {
-    "use strict";
-    $NS$.handlers.render5 = $NS$.utils.loadScript;
+    // eslint-disable-next-line no-undef
+    maltaV('NS').handlers.render5 = maltaV('NS').utils.loadScript;
 }());

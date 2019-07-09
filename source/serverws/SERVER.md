@@ -62,7 +62,7 @@ module.exports.launch = (action, synchazard, params) => {
 
 here to send a unicast message to the client that connected we should use:
 
-    $NS$.send(action.encodeMessage({... here our message object ...}))  
+    maltaV('NS').send(action.encodeMessage({... here our message object ...}))  
 
 to broadcast a message to all connected clients instead we should use:
 

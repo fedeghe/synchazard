@@ -1,7 +1,6 @@
 
 // eslint-disable-next-line no-unused-vars
 function createToken (l) {
-    'use strict';
     var set = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
         len = set.length,
         out = '';
@@ -13,9 +12,8 @@ function createToken (l) {
 
 // eslint-disable-next-line no-unused-vars
 function mix (tokens, n) {
-    'use strict';
     var m = '',
-        nStr = '' + n,
+        nStr = `${  n}`,
         i = 0,
         j = 1,
         tLen = tokens.length,
@@ -33,7 +31,7 @@ function toQs (o) {
     var r = [],
         i;
     for (i in o) {
-        r.push(i + '=' + encodeURIComponent(o[i]));
+        r.push(`${i  }=${  encodeURIComponent(o[i])}`);
     }
-    return '?' + r.join('&');
+    return `?${  r.join('&')}`;
 }

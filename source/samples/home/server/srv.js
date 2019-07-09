@@ -1,7 +1,6 @@
 (function () {
-    'use strict';
-    var port = '$WEBSERVER.PORT$',
-        msg = '$START_MESSAGE.SERVER$';
+    var port = "maltaV('WEBSERVER.PORT')",
+        msg = "maltaV('START_MESSAGE.SERVER')";
     
-    $$../srv.js$$
+    maltaF('../srv.js')
 })();

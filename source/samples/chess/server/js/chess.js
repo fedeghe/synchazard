@@ -4,6 +4,5 @@
  * for simplicity here will just render its content in a DOMnode
  */
 (function () {
-    "use strict";
-    $NS$.utils.loadScript('/js/handlers/chessManager.js');
+    maltaV('NS').utils.loadScript('/js/handlers/chessManager.js');
 })();

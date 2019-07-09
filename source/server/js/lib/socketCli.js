@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 (function (W) {
-    
-    
+
     if (!("WebSocket" in W)) {
         throw new Error('No WebSockets available on client side!');
     }

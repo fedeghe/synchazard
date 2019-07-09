@@ -1,5 +1,3 @@
-"use strict";
-
 var actors = null,
     strategy = 0,
     jobs = {
@@ -11,7 +9,7 @@ var actors = null,
                 n = 1E7,
                 x, y;
             while (n--) {
-                x = this.strategy(),
+                x = this.strategy();
                 y = this.strategy();
                 // why  loose time, around 1 sqrt is ininfluent
                 // res[Math.sqrt(x * x + y * y) < 1 ? 'inside' : 'outside']++;
@@ -62,5 +60,6 @@ self.onmessage = function (e) {
                 _DATA: e.data
             });
             break;
+            default: break;
     }
 };

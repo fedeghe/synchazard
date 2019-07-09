@@ -23,7 +23,7 @@ describe('index', () => {
 
         await page.goto(`${opts.appUrl}`);
         for (let tag in checks) {
-            tmp = await page.$$eval(`body ${tag}`, d => d.length);
+            tmp = await page.$eval(`body ${tag}`, d => d.length);
             expect(tmp).to.be.equal(checks[tag]);
         }
     }));

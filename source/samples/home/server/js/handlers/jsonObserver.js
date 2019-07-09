@@ -1,16 +1,18 @@
 (function () {
-    "use strict";
+    
+
     var trg = document.querySelector('.presentation');
 
     trg.innerHTML = '<div class="loader"></div>';
 
-    $NS$.handlers.render = function (d) {
-        trg.innerHTML = '';
+    // eslint-disable-next-line no-undef
+    maltaV('NS').handlers.render = function (d) {
         var title = document.createElement('h2'),
             version = document.createElement('sub'),
             text = document.createElement('p'),
             a = document.createElement('a'),
             img = document.createElement('img');
+        trg.innerHTML = '';
 
         img.setAttribute('src', d.what.img);
         a.setAttribute('href', d.what.url);

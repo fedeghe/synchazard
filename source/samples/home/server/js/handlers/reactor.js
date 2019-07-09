@@ -1,5 +1,6 @@
 (function () {
-    "use strict";
+    
+
     var EXCEPTIONS = {
         DATA_REACTOR: 'No data-reactor attribute found'
     };
@@ -53,14 +54,14 @@
             }, 
             disable: function () {
                 this._is_disabled = true;
-                $NS$.send({
+                maltaV('NS').send({
                     _ACTION: 'disable',
                     _NODEID: this.id
                 });
             }, 
             enable: function () {
                 this._is_disabled = false;
-                $NS$.send({
+                maltaV('NS').send({
                     _ACTION: 'enable',
                     _VALUE: this.node.value,
                     _NODEID: this.id
@@ -107,14 +108,14 @@
             },
             disable: function () {
                 this._is_disabled = true;
-                $NS$.send({
+                maltaV('NS').send({
                     _ACTION: 'disable',
                     _NODEID: this.id
                 });
             },
             enable: function () {
                 this._is_disabled = false;
-                $NS$.send({
+                maltaV('NS').send({
                     _ACTION: 'enable',
                     _VALUE: this.node.value,
                     _NODEID: this.id
@@ -185,7 +186,7 @@
                             this.elements[i].doEnable(initStatus[this.elements[i].id].value);
                         } else if (
                             initStatus[this.elements[i].id].gotToken &&
-                            initStatus[this.elements[i].id].gotToken !== $NS$.id
+                            initStatus[this.elements[i].id].gotToken !== maltaV('NS').id
                         ) {
                             this.elements[i].doDisable(initStatus[this.elements[i].id].value);
                         }
@@ -201,14 +202,14 @@
             case 'reactor_enableAll': 
                 this.elements.forEach(function (element) {
                     if (
-                        d._ID !== $NS$.id &&
+                        d._ID !== maltaV('NS').id &&
                         d._NODEID == element.node.dataset.reactor
                     ) element.doEnable(d._VALUE);
                 });
                 break;
             case 'reactor_disableAll':
                 this.elements.forEach(function (element) {
-                    d._ID !== $NS$.id &&
+                    d._ID !== maltaV('NS').id &&
                     d._NODEID == element.node.dataset.reactor &&
                     element.doDisable(d._VALUE);
                 });
@@ -238,7 +239,7 @@
         this.scan().ready();
     };
     
-    $NS$.handlers.Reactor = new Reactor();
+    maltaV('NS').handlers.Reactor = new Reactor();
 })();
 
 

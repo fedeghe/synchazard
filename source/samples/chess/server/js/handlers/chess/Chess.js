@@ -1,7 +1,7 @@
 
 /* eslint-disable */
-$$chess/headerPanel.js$$
-$$chess/footerPanel.js$$
+maltaF('chess/headerPanel.js')
+maltaF('chess/footerPanel.js')
 /* eslint-enable */
 /* eslint-disable no-undef */
 
@@ -53,7 +53,7 @@ Chess.prototype.renderFEN = function (fen) {
                     CL.dom.create({
                         tag: 'span',
                         html: tmp,
-                        cls: 'piece ' + color
+                        cls: `piece ${color}`
                     })
                 );
                 cursor += 1;

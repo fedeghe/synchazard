@@ -67,7 +67,7 @@ module.exports = (function () {
             defineDebugFunction(args);
             actions.forEach(params => {
                 if (!params.path) throw new Error('No path for action');
-                const a = require(`../${  params.path}`),
+                const a = require(`../${params.path}`),
                     {actor} = params,
                     action = new Action(exp, actor, debug);
                 debug(`> ${  params.path.split('/').pop()  }.js started`, 1);

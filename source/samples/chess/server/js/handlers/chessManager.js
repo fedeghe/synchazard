@@ -1,5 +1,5 @@
 (function () {
-    'use strict';
+    
 
     /**
      * ChessLib
@@ -9,18 +9,18 @@
         game = null;
 
     /* eslint-disable */
-    $$chess/config.js$$
-    $$chess/exceptions.js$$
-    $$chess/Dom.js$$
-    $$chess/Bom.js$$
-    $$chess/Channel.js$$
-    $$chess/Chess.js$$
+    maltaF('chess/config.js')
+    maltaF('chess/exceptions.js')
+    maltaF('chess/Dom.js')
+    maltaF('chess/Bom.js')
+    maltaF('chess/Channel.js')
+    maltaF('chess/Chess.js')
     /* eslint-enable */
 
     /**
      * publish the handler
      */
-    $NS$.handlers.chessManager = {
+    maltaV('NS').handlers.chessManager = {
         handle: (d) => {
             if (d._TYPE !== 'action') {
                 return;

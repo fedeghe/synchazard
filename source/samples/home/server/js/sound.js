@@ -1,28 +1,32 @@
 (function () {
-    'use strict';
+    
 
     function synth (mods, duration, min, max, mode) {
+        var aContext,
+            period,
+            oscillator,
+            freqFactory;
         min = min || 80;
         max = max || 1120;
-        var aContext = window.a_context || new (window.AudioContext || window.webkitAudioContext)(),
-            period = duration / mods,
-            oscillator = aContext.createOscillator(),
-            freqFactory = {
-                index: 0,
-                next: function () {
-                    this.index++;
-                    return ~~(Math.random() * (max - min) + min); // [20, 10K] Hz
-                },
-                gotNext: function () {
-                    return this.index < mods;
-                }
-            };
+        aContext = window.a_context || new (window.AudioContext || window.webkitAudioContext)();
+        period = duration / mods;
+        oscillator = aContext.createOscillator();
+        freqFactory = {
+            index: 0,
+            next: function () {
+                this.index++;
+                return ~~(Math.random() * (max - min) + min); // [20, 10K] Hz
+            },
+            gotNext: function () {
+                return this.index < mods;
+            }
+        };
 
         oscillator.type = mode || 'sine'; // 'square', 'triangle'
         oscillator.connect(aContext.destination);
 
-        console.log('Period: ' + period);
-        console.log('Type: ' + oscillator.type);
+        console.log(`Period: ${period}`);
+        console.log(`Type: ${oscillator.type}`);
 
         // ensure stop on small periods
         setTimeout(function () {
@@ -33,7 +37,7 @@
         (function play () {
             var freq = freqFactory.next();
             oscillator.frequency.value = freq;
-            console.log('#' + freqFactory.index + ': ' + freq + ' Hz');
+            console.log(`#${freqFactory.index}: ${freq} Hz`);
             setTimeout(function () {
                 if (freqFactory.gotNext()) {
                     play();

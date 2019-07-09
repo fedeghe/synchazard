@@ -1,8 +1,9 @@
 module.exports.launch = (action, synchazard, params) => {
-    'use strict';
+    
+
     const resourceFile = params.jsToObserve,
-        fs = params.deps.fs,
-        path = params.deps.path;
+        {fs} = params.deps,
+        {path} = params.deps;
 
     // SETUP
     //
@@ -12,7 +13,7 @@ module.exports.launch = (action, synchazard, params) => {
             update: function () {
                 return action.encodeMessage({
                     _ACTION: 'script',
-                    _FILECHANGED: '$DATASERVER.HOST$/' + resourceFile + '?cb=' + Math.random()
+                    _FILECHANGED: `maltaV('DATASERVER.HOST')/${resourceFile}?cb=${Math.random()}`
                 });
             }
         }

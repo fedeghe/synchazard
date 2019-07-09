@@ -16,7 +16,7 @@
         var tag = document.createElement('p'),
             user = document.createElement('strong'),
             msg = document.createElement('span'),
-            self = m.id === $NS$.id;
+            self = m.id === maltaV('NS').id;
 
         tag.className = 'msg';
         user.innerText = cleanup(m.id) + ' : ';
@@ -61,7 +61,7 @@
         input.focus();
         if (v) {
             input.value = '';
-            $NS$.send({
+            maltaV('NS').send({
                 _ACTION: 'new_message',
                 _MESSAGE: v,
                 _TIMESTAMP: new Date() + ''
@@ -69,7 +69,7 @@
         }
     });
 
-    $NS$.handlers.Chat = function (data) {
+    maltaV('NS').handlers.Chat = function (data) {
         var messages = data._PAYLOAD;
         switch (data._ACTION) {
         case 'messages':
@@ -84,9 +84,9 @@
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     };
 
-    $NS$.handlers.ChatSelfHandler = function (data) {
+    maltaV('NS').handlers.ChatSelfHandler = function (data) {
         var selfMessage = data._PAYLOAD;
         console.log('SELF MESSAGE: ' + cleanup(selfMessage));
-        $NS$.utils.storage.set('$NS$clientID', $NS$.id);
+        maltaV('NS').utils.storage.set('maltaV('NS')clientID', maltaV('NS').id);
     };
 })();

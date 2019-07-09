@@ -70,10 +70,10 @@
         value: getClientId(),
         writable: false,
     });
+    
 
-    /**
-     * set actors, even if null
-     */
+    //set actors, even if null
+
     maltaV('NS').synchazard.postMessage({
         _TYPE: '_INITACTORS',
         _ACTORS: dataActors,
@@ -113,7 +113,7 @@
      */
     function decodeFunction(fun) {
         // eslint-disable-next-line no-new-func
-        return new Function(`return ${  fun}`)();
+        return new Function(`return ${fun}`)();
     }
 
     function getTime() {
@@ -168,7 +168,7 @@
      * @param {*} f
      */
     function injectTester(f) {
-        loadScript('$WEBSERVER.TESTLIB$', f);
+        loadScript(`maltaV('WEBSERVER.TESTLIB')`, f);
     }
 
     /**
@@ -187,7 +187,7 @@
         } 
             maltaV('NS').utils.storage.set(
                 cookieName,
-                `maltaV('NS')_${  Math.abs(~~(+new Date() * Math.random() * 1e3))}`
+                `maltaV('NS')_${Math.abs(~~(+new Date() * Math.random() * 1e3))}`
             );
             return getClientId();
         
@@ -321,7 +321,7 @@
         '_HANDLER' in e.data && e.data._HANDLER in maltaV('NS').handlers
             ? r()
             // eslint-disable-next-line no-undef
-            : setTimeout(r, $WEBSERVER.TIMEGAP$);
+            : setTimeout(r, maltaV('WEBSERVER.TIMEGAP'));
     };
 
     /**

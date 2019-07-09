@@ -1,6 +1,5 @@
 (function () {
-    "use strict";
-    $NS$.handlers.sunshine = function (d) {
-        document.body.style.background= 'linear-gradient(to bottom,' + d.join(',') + ')';
+    maltaV('NS').handlers.sunshine = function (d) {
+        document.body.style.background= `linear-gradient(to bottom,${d.join(',')})`;
     }
 }());

@@ -1,5 +1,5 @@
 module.exports.launch = (action, synchazard, params) => {
-    'use strict';
+    
 
     action.onconnection((data, ws) => {
         if (data._TYPE !== 'action') return;

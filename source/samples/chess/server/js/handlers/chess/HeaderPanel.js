@@ -6,6 +6,6 @@ function HeaderPanel () {
     this.startGameButton.innerHTML = 'StartMatch';
     this.container.appendChild(this.startGameButton);
     this.startGameButton.addEventListener('click', function () {
-        $NS$.send({ _ACTION: 'initMatch' });
+        maltaV('NS').send({ _ACTION: 'initMatch' });
     });
 }

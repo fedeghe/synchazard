@@ -1,4 +1,4 @@
-$$../../isomorph/token.js$$
+maltaF('../../isomorph/token.js')
 
 const createMatchToken = () => {
     const t1 = createToken(64),
@@ -20,9 +20,9 @@ const createMatchToken = () => {
         matchId: mix([t1, t2, t3, t4], id),
         created: +new Date
     };
-};
+},
 
-const Manager = {
+ Manager = {
     nextId: +new Date,
     matches: {}
 };
@@ -35,7 +35,7 @@ Manager.createMatch = function () {
         token: m.token.white,
         created: m.created,
         expires: m.created + 3.6E6,
-        link: `$WEBSERVER.HOST$/${toQs({ join: m.matchId, tw: m.token.white.cli, tb: m.token.black.cli })}`
+        link: `maltaV('WEBSERVER.HOST')/${toQs({ join: m.matchId, tw: m.token.white.cli, tb: m.token.black.cli })}`
     };
 };
 Manager.saveMatch = function (data) {

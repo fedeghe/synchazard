@@ -1,9 +1,9 @@
 module.exports.launch = (action, synchazard, params) => {
     
-    "use strict";
+    
 
     // Manager
-    $$matchManager.js$$
+    maltaF('matchManager.js')
 
     // just listen
     //

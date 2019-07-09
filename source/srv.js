@@ -1,4 +1,3 @@
-"use strict";
 /**
  * BARE MINIMAL SRV to free the user to create virtual hosts
  */
@@ -41,16 +40,16 @@ http.createServer(function (req, res) {
             res.statusCode = 404;
             res.write('<!DOCTYPE html><body style="font-family:verdana">');
             res.write('<h4>Synchazard: <span style="color:red">404</span></h4>');
-            res.write('<p>Document `' + path.basename(pathname) + '`  not found!</p>');
+            res.write(`<p>Document \`${  path.basename(pathname)  }\`  not found!</p>`);
             res.end('</body>');
-            return;
+            
         };
     
     if (parsedUrl.pathname.match(/^\/(package.json|srv.js|ws_srv.js|actions|core)/)) {
         return do404();
     }
 
-    fs.exists(pathname, function (exist) {
+    fs.exists(pathname, exist => {
         if (!exist) {
             return do404();
         }
@@ -59,7 +58,7 @@ http.createServer(function (req, res) {
             pathname += "/index.html";
         }
         // read file from file system
-        fs.readFile(pathname, function (err, data) {
+        fs.readFile(pathname, (err, data) => {
             if (err) {
                 res.statusCode = 500;
                 res.end("Error getting the file");
