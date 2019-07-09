@@ -1,13 +1,11 @@
-module.exports.launch = (action, synchazard, params) => {
+module.exports.launch = (action, synchazard/* , params */) => {
+    const state = {one: 0, two: 1},
+        updateState = () => {
+            const newTwo = state.one + state.two;
+            state.one = state.two;
+            state.two  = newTwo;
+        };
 
-    "use strict";
-    const updateState = () => {
-        const newTwo = state.one + state.two;
-        state.one = state.two;
-        state.two  = newTwo;
-    };
-
-    let state = {one: 0, two: 1};
 
     action.onconnection((data, ws) => {
         if (data._TYPE !== 'action') return;
@@ -28,6 +26,7 @@ module.exports.launch = (action, synchazard, params) => {
                     _ACTION: 'boldMe'
                 }, { data: data }));
                 break;
+            default: break;
         }
     });
 };

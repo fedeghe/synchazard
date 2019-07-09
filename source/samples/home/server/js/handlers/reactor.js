@@ -133,7 +133,7 @@
     };
 
     Reaction.prototype.init = function () {
-        var idn = this.node.tagName + (this.node.tagName == "INPUT" ? this.node.type : "");
+        var idn = this.node.tagName + (this.node.tagName === "INPUT" ? this.node.type : "");
         if (idn in this.handledNodes) {
             this.start = this.handledNodes[idn].start.bind(this);
             this.startLate = this.handledNodes[idn].startLate.bind(this);
@@ -203,17 +203,18 @@
                 this.elements.forEach(function (element) {
                     if (
                         d._ID !== maltaV('NS').id &&
-                        d._NODEID == element.node.dataset.reactor
+                        d._NODEID === element.node.dataset.reactor
                     ) element.doEnable(d._VALUE);
                 });
                 break;
             case 'reactor_disableAll':
                 this.elements.forEach(function (element) {
                     d._ID !== maltaV('NS').id &&
-                    d._NODEID == element.node.dataset.reactor &&
+                    d._NODEID === element.node.dataset.reactor &&
                     element.doDisable(d._VALUE);
                 });
                 break;
+            default: break;
         }
     };
 

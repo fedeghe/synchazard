@@ -2,7 +2,6 @@
  *
  */
 (function () {
-    'use strict';
     function onresize (instance) {
         window.addEventListener('resize', function () {
             instance.w = document.body.clientWidth;
@@ -20,7 +19,7 @@
         this.canvas.style.top = '2px';
         this.canvas.style.position = 'relative';
         this.canvas.style.border = 'none';
-        this.canvas.style.height = this.h + 'px';
+        this.canvas.style.height = `${this.h}px`;
         this.init();
         if (!w && !h) onresize(this);
     }
@@ -39,7 +38,8 @@
 
     Grp.prototype.addPoint = function (v) {
         var n = 100,
-            i = 0, l;
+            i = 0, 
+            l;
 
         this.points.push(v);
 

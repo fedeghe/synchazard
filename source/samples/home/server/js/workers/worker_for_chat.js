@@ -1,22 +1,26 @@
-"use strict";
 
+
+// eslint-disable-next-line no-unused-vars
 var actors = null;
 
 importScripts('actorsDontMatch.js');
-
+// eslint-disable-next-line no-restricted-globals
 self.onmessage = function (e) {
 
+    // eslint-disable-next-line no-undef
     if (actorsDontMatch(e)) return;
 
     if (e.data._TYPE !== 'action') return;
     switch(e.data._ACTION) {
         case 'messages':
+            // eslint-disable-next-line no-restricted-globals
             self.postMessage({
                 _HANDLER: 'Chat',
                 _DATA: e.data
             });
             break;
         case 'message':
+            // eslint-disable-next-line no-restricted-globals
             self.postMessage({
                 _HANDLER: 'Chat',
                 _DATA: e.data
@@ -29,10 +33,12 @@ self.onmessage = function (e) {
          * and decide how to punish him
          */
         case 'self':
+            // eslint-disable-next-line no-restricted-globals
             self.postMessage({
                 _HANDLER: 'ChatSelfHandler',
                 _DATA: e.data
             });
             break;
+        default: break;
     }
 };

@@ -1,10 +1,16 @@
 (function () {
-    'use strict';
+    var target = document.body,
+        container = document.createElement('div'),
+        form = document.createElement('form'),
+        input = document.createElement('input'),
+        messagesContainer = document.createElement('div'),
+        lastMessage = null;
+    
     function cleanup (text, pre) {
         return (pre ? '<pre>' : '') +
-            (text
-                .replace(/&(?![\w\#]+;)/g, '&amp;')
-                .replace(/</g, '&lt;')
+        (text
+            .replace(/&(?![\w#]+;)/g, '&amp;')
+            .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;')
                 .replace(/"/g, '&quot;')
                 .replace(/'/g, '&#039;')
@@ -19,7 +25,7 @@
             self = m.id === maltaV('NS').id;
 
         tag.className = 'msg';
-        user.innerText = cleanup(m.id) + ' : ';
+        user.innerText = `${cleanup(m.id)  } : `;
         msg.innerText = cleanup(m.message);
         if (self) {
             tag.className = 'self';
@@ -28,12 +34,6 @@
         tag.appendChild(msg);
         return tag;
     }
-    var target = document.body,
-        container = document.createElement('div'),
-        form = document.createElement('form'),
-        input = document.createElement('input'),
-        messagesContainer = document.createElement('div'),
-        lastMessage = null;
 
     messagesContainer.className = 'messagesContainer';
     container.className = 'chat';
@@ -54,17 +54,16 @@
         input.value = lastMessage;
     })
     form.addEventListener('submit', function (e) {
+        var v = cleanup(input.value);
         e.preventDefault();
         lastMessage = input.value;
-
-        var v = cleanup(input.value);
         input.focus();
         if (v) {
             input.value = '';
             maltaV('NS').send({
                 _ACTION: 'new_message',
                 _MESSAGE: v,
-                _TIMESTAMP: new Date() + ''
+                _TIMESTAMP: `${new Date()  }`
             });
         }
     });
@@ -72,21 +71,22 @@
     maltaV('NS').handlers.Chat = function (data) {
         var messages = data._PAYLOAD;
         switch (data._ACTION) {
-        case 'messages':
-            messages.all.forEach(function (m) {
-                messagesContainer.appendChild(getLine(m));
-            });
-            break;
-        case 'message': 
-            messagesContainer.appendChild(getLine(messages.one));
-            break;
+            case 'messages':
+                messages.all.forEach(function (m) {
+                    messagesContainer.appendChild(getLine(m));
+                });
+                break;
+            case 'message': 
+                messagesContainer.appendChild(getLine(messages.one));
+                break;
+            default: break;
         }
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     };
 
     maltaV('NS').handlers.ChatSelfHandler = function (data) {
         var selfMessage = data._PAYLOAD;
-        console.log('SELF MESSAGE: ' + cleanup(selfMessage));
-        maltaV('NS').utils.storage.set('maltaV('NS')clientID', maltaV('NS').id);
+        console.log(`SELF MESSAGE: ${  cleanup(selfMessage)}`);
+        maltaV('NS').utils.storage.set(`maltaV('NS')clientID`, maltaV('NS').id);
     };
 })();

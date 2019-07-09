@@ -1,6 +1,5 @@
 (function () {
     var head = document.getElementsByTagName('head')[0];
-
     function remove() {
         head.removeChild(this);
     }

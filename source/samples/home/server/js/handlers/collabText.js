@@ -64,7 +64,7 @@
             });
         }
 
-        node.addEventListener('input', function (e) {
+        node.addEventListener('input', function (/* e */) {
             clearTimeout(to);
             maltaV('NS').send({
                 _ACTION: 'disable',
@@ -77,7 +77,7 @@
         node.addEventListener('blur', updateAll);
 
         // resize textarea
-        node.addEventListener('mouseup', function (e) {
+        node.addEventListener('mouseup', function (/* e */) {
             var w = node.clientWidth,
                 h = node.clientHeight;
             if (w !== sizes[0] || h !== sizes[1]){

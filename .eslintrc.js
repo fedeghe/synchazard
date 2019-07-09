@@ -12,12 +12,14 @@ module.exports = {
         maltaV: true,
         maltaF: true,
         maltaE: true,
+        importScripts: true
     },
     env: {
         browser: true,
         node: true,
         mocha: true,
-        jest: true
+        jest: true,
+        bom: true
     },
     "rules": {
         "func-names": "off",
@@ -36,7 +38,8 @@ module.exports = {
         "complexity": ["error", 10],
         "brace-style": "error",
         "curly": "error",
-        "no-unused-expressions": ["error", { "allowShortCircuit": true, "allowTernary": true }]
+        "no-unused-expressions": ["error", { "allowShortCircuit": true, "allowTernary": true }],
+        "consistent-return": "off"
       },
     plugins: ["html", "prettier"]
 };

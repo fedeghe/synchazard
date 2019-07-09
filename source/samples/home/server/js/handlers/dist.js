@@ -13,11 +13,14 @@
 
     DC.prototype.handle = function (d) {
         if (maltaV('NS').id !== d._ID) {
+
+            // eslint-disable-next-line no-restricted-globals, no-alert
             if (confirm('Want to help a fellow client to compute π?')) {
                 maltaV('NS').send({
                     _ACTION: 'acceptedMontecarlo'
                 });
             } else {
+                // eslint-disable-next-line no-alert
                 alert('Got it!... thanks anyway!');
             }
         }
@@ -25,7 +28,8 @@
 
     maltaV('NS').handlers.DistComp = new DC();
 
-    maltaV('NS').handlers.DistCompNoClients = function (data) {
+    maltaV('NS').handlers.DistCompNoClients = function (/* data */) {
+        // eslint-disable-next-line no-alert
         alert('Ups ... !\nLooks like there are no other clients on this page that could help You... try later!\nor open one or more of the same page elsewhere');
     };
     maltaV('NS').handlers.DistCompSendResult = function (data) {

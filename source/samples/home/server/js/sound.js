@@ -1,6 +1,4 @@
 (function () {
-    
-
     function synth (mods, duration, min, max, mode) {
         var aContext,
             period,

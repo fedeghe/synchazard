@@ -32,7 +32,11 @@
         var tag = document.createElement(pars.tag || 'div'),
             i;
         if (pars.attrs) {
-            for (i in pars.attrs) tag.setAttribute(i, pars.attrs[i]);
+            for (i in pars.attrs) {
+                if (pars.attrs.heasOwnProperty(i)) {
+                    tag.setAttribute(i, pars.attrs[i]);
+                }
+            }
         }
         if (pars.cls) { tag.className = pars.cls; }
         if (pars.html) { tag.innerHTML = pars.html; }

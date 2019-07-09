@@ -1,12 +1,11 @@
-"use strict";
-
+// eslint-disable-next-line no-unused-vars
 var actors = null;
 
 function req(url, cb) {
     var oReq = new XMLHttpRequest();
     oReq.contentType = 'application/json';
     oReq.onload = function () {
-        this.status == 200
+        this.status === 200
         && cb(
             /**
              * IE sucks forever
@@ -24,7 +23,7 @@ function req(url, cb) {
             : this.response
         );
     };
-    oReq.open("GET", url + "?cb=" + Math.random());
+    oReq.open("GET", `${url}?cb=${Math.random()}`);
     oReq.setRequestHeader('Accept', 'application/json; charset=utf-8');
     oReq.responseType = 'json';
     oReq.send();
@@ -32,14 +31,17 @@ function req(url, cb) {
 
 importScripts('actorsDontMatch.js');
 
+// eslint-disable-next-line no-restricted-globals
 self.onmessage = function (e) {
 
+    // eslint-disable-next-line no-undef
     if (actorsDontMatch(e)) return;
 
     if (e.data._TYPE !== 'action') return;
     switch (e.data._ACTION) {
         case 'xhr': 
             req(e.data._FILECHANGED, function (cnt) {
+                // eslint-disable-next-line no-restricted-globals
                 self.postMessage({
                     _HANDLER: 'render',
                     _DATA: cnt
@@ -48,6 +50,7 @@ self.onmessage = function (e) {
             break;
 
         case 'json':
+            // eslint-disable-next-line no-restricted-globals
             self.postMessage({
                 _HANDLER: 'render2',
                 _DATA: e.data._PAYLOAD
@@ -55,6 +58,7 @@ self.onmessage = function (e) {
             break;
 
         case 'graph':
+            // eslint-disable-next-line no-restricted-globals
             self.postMessage({
                 _HANDLER: 'render3',
                 _DATA: e.data._PAYLOAD
@@ -62,6 +66,7 @@ self.onmessage = function (e) {
             break;
 
         case 'style':
+            // eslint-disable-next-line no-restricted-globals
             self.postMessage({
                 _HANDLER: 'render4',
                 _DATA: e.data._FILECHANGED
@@ -69,12 +74,14 @@ self.onmessage = function (e) {
             break;
 
         case 'script':
+            // eslint-disable-next-line no-restricted-globals
             self.postMessage({
                 _HANDLER: 'render5',
                 _DATA: e.data._FILECHANGED
             });
             break;
         case 'sunshine':
+            // eslint-disable-next-line no-restricted-globals
             self.postMessage({
                 _HANDLER: 'sunshine',
                 _DATA: e.data._PAYLOAD
@@ -82,6 +89,7 @@ self.onmessage = function (e) {
             break;
         
         default:
+            // eslint-disable-next-line no-restricted-globals
             self.postMessage(e.data);
             break;
     }
