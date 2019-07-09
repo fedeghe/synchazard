@@ -4,10 +4,8 @@
 var http = require('http'),
     url = require('url'),
     fs = require('fs'),
-    path = require('path'),
+    path = require('path');
     // you can pass the parameter in the command line. e.g. node static_server.js 3000
-    //
-    ext;
 
 http.createServer(function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -15,10 +13,10 @@ http.createServer(function (req, res) {
     res.setHeader('Access-Control-Allow-Methods', '*');
     res.setHeader('Access-Control-Allow-Headers', '*');
 
+    let pathname;
     // parse URL
-    let parsedUrl = url.parse(req.url),
-        // extract URL path
-        pathname = path.resolve(path.dirname(__filename) + parsedUrl.pathname),
+    const parsedUrl = url.parse(req.url),
+        
         // maps file extention to MIME types
         mimeType = {
             ".ico": "image/x-icon",
@@ -44,6 +42,8 @@ http.createServer(function (req, res) {
             res.end('</body>');
             
         };
+    // extract URL path
+    pathname = path.resolve(path.dirname(__filename) + parsedUrl.pathname);
     
     if (parsedUrl.pathname.match(/^\/(package.json|srv.js|ws_srv.js|actions|core)/)) {
         return do404();
@@ -59,18 +59,21 @@ http.createServer(function (req, res) {
         }
         // read file from file system
         fs.readFile(pathname, (err, data) => {
+            
             if (err) {
                 res.statusCode = 500;
                 res.end("Error getting the file");
             } else {
                 // based on the URL path, extract the file extention. e.g. .js, .doc, ...
-                ext = path.parse(pathname).ext;
+                const { ext } = path.parse(pathname);
                 // if the file is found, set Content-type and send data
                 res.setHeader("Content-type", mimeType[ext] || "text/plain");
                 res.end(data);
             }
         });
     });
-}).listen(parseInt(port));
+// eslint-disable-next-line no-undef
+}).listen(parseInt(port, 10));
 
+// eslint-disable-next-line no-undef
 console.log(msg);
