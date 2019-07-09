@@ -5,6 +5,6 @@
         "cp -r source/presentation/lib server/presentation/"
     ],
     "source/server/media/synchazard3.svg": "server/presentation/media",
-    "source/presentation/css/style.less": "server/presentation/css -plugins=malta-less",
-    "source/presentation/index.html": "server/presentation"
+    "source/presentation/css/style.less": "server/presentation/css -plugins=malta-less -options=placeholderMode:'func'",
+    "source/presentation/index.html": "server/presentation -options=placeholderMode:'func'"
 }

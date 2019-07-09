@@ -2,6 +2,6 @@
     "EXE": [
         "mkdir -p test/setup"
     ],
-    "source/test/*.js": "test -vars=vars.json",
-    "source/test/setup/*.js": "test/setup -vars=vars.json"
+    "source/test/*.js": "test -vars=vars.json -options=placeholderMode:'func'",
+    "source/test/setup/*.js": "test/setup -vars=vars.json -options=placeholderMode:'func'"
 }

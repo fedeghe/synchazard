@@ -2,6 +2,6 @@
     "EXE": [
         "mkdir -p serverws/actions serverws/css"
     ],
-    "source/samples/chess/serverws/actions/*.js": "serverws/actions -vars=vars.json",
-    "source/samples/chess/serverws/*.js": "serverws -vars=vars.json"
+    "source/samples/chess/serverws/actions/*.js": "serverws/actions -vars=vars.json -options=placeholderMode:'func'",
+    "source/samples/chess/serverws/*.js": "serverws -vars=vars.json -options=placeholderMode:'func'"
 }
