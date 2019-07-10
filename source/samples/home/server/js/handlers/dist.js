@@ -1,4 +1,7 @@
 (function () {
+
+    maltaF('../utils.js')
+
     function DC() { }
 
     DC.prototype.set = function (buttonID, resultID) {
@@ -50,15 +53,24 @@
          */
         var all = true,
             result,
-            distance;
+            distance,
+            using,
+            previousPI = data._PREVIOUS,
+            newPI = data._DATA,
+            err = data._ERR,
+            stats = data._STATS,
+            what = whatChanged(previousPI, newPI);
         if (all || data._ID === maltaV('NS').id) {
             result = document.createElement('p');
             distance = document.createElement('p');
-            result.innerHTML = `<span class="pi">&pi;</span> &asymp; ${data._DATA}`;
-            distance.innerHTML = `err (agains Math.PI): ${(100 * (Math.PI - parseFloat(data._DATA, 10)) / Math.PI).toFixed(7)}%`
+            using = document.createElement('p');
+            result.innerHTML = `<span class="pi">&pi;</span> &asymp; <span class="stable">${what.stable}</span><span class="unstable">${what.unstable}</span>`;
+            distance.innerHTML = `err (against Math.PI): ${err}%`;
+            using.innerHTML = `<span class="small">using ${prefixNumber(stats.inside + stats.outside)} shooting</span class="small">`;
             maltaV('NS').handlers.DistComp.result.innerHTML = '';
             maltaV('NS').handlers.DistComp.result.appendChild(result);
             maltaV('NS').handlers.DistComp.result.appendChild(distance);
+            maltaV('NS').handlers.DistComp.result.appendChild(using);
         }
     };
 })();

@@ -4,11 +4,13 @@ module.exports.launch = (action, synchazard, params) => {
         results = {
             inside: 0,
             outside: 0
-        };
-
-    const calcPi = data => results.outside
-        ? 4 * data.inside / (data.inside + data.outside)
-        : NaN;
+        },
+        
+        currentResult = 0;
+    const baseValue = 3,
+        calcPi = data => results.outside
+            ? 4 * data.inside / (data.inside + data.outside)
+            : baseValue;
 
     action.setup({
         clients: 0,
@@ -30,10 +32,15 @@ module.exports.launch = (action, synchazard, params) => {
                 _ACTION: 'noClients'
             }),
             completed: () => {
-                return action.encodeMessage({
+                const response = {
                     _ACTION: 'endComputation',
-                    _DATA: calcPi(results)
-                }, { id: askingingCli });
+                    _PREVIOUS: currentResult,
+                    _STATS: results
+                };
+                response._DATA = calcPi(results);
+                response._ERR = (100 * (Math.PI - parseFloat(response._DATA, 10)) / Math.PI).toFixed(7)
+                currentResult = response._DATA;
+                return action.encodeMessage(response, { id: askingingCli });
             }
         }
     });

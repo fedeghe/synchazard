@@ -4,16 +4,16 @@ var actors = null,
     jobs = {
         generate: function () {
             var res = {
-                inside: 0,
-                outside: 0
-            },
+                    inside: 0,
+                    outside: 0
+                },
                 n = 1E7,
                 x, y;
             while (n--) {
                 x = this.strategy();
                 y = this.strategy();
-                // why  loose time, around 1 sqrt is ininfluent
                 // res[Math.sqrt(x * x + y * y) < 1 ? 'inside' : 'outside']++;
+                // why  loose time, around 1 sqrt is ininfluent
                 res[(x * x + y * y) < 1 ? 'inside' : 'outside']++;
             }
             return res;
