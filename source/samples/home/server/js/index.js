@@ -33,7 +33,7 @@
             i;
         if (pars.attrs) {
             for (i in pars.attrs) {
-                if (pars.attrs.heasOwnProperty(i)) {
+                if (pars.attrs.hasOwnProperty(i)) {
                     tag.setAttribute(i, pars.attrs[i]);
                 }
             }

@@ -18,8 +18,7 @@ module.exports = {
         browser: true,
         node: true,
         mocha: true,
-        jest: true,
-        bom: true
+        jest: true
     },
     "rules": {
         "func-names": "off",
