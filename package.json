@@ -46,6 +46,7 @@
         "eslint": "^6.0.1",
         "eslint-config-airbnb": "^17.1.0",
         "eslint-config-prettier": "^4.1.0",
+        "eslint-config-prettierslint-no-headache": "^1.0.0",
         "eslint-plugin-html": "^6.0.0",
         "eslint-plugin-import": "^2.16.0",
         "eslint-plugin-jsx-a11y": "^6.2.1",

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 function prefixNumber(n) {
     var snum = `${  n}`,
         snlen = snum.length,
@@ -19,6 +20,7 @@ function prefixNumber(n) {
     }
     return n.toFixed(2) + pref;
 }
+// eslint-disable-next-line no-unused-vars
 function whatChanged(o/* old */, n/* new */) {
     const res = [],
           nS = `${n}`,

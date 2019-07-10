@@ -67,10 +67,13 @@ module.exports = (function () {
             defineDebugFunction(args);
             actions.forEach(params => {
                 if (!params.path) throw new Error('No path for action');
+                // eslint-disable-next-line import/no-dynamic-require, global-require
                 const a = require(`../${params.path}`),
                     {actor} = params,
+                    // eslint-disable-next-line no-use-before-define
                     action = new Action(exp, actor, debug);
                 debug(`> ${  params.path.split('/').pop()  }.js started`, 1);
+                // eslint-disable-next-line no-use-before-define
                 a.launch(action, exp, params);
             });
         },
@@ -92,7 +95,7 @@ module.exports = (function () {
      * stay
      */
     function heartbeat() { this.isAlive = true; }
-    wss.on('close', function connection(ws) {
+    wss.on('close', function connection(/* ws */) {
         console.log('close')
     })
     wss.on('connection', function connection(ws, req) {

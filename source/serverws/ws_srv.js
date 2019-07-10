@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 require('events').EventEmitter.defaultMaxListeners = Infinity;
 
 const fs = require('fs'),

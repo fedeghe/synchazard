@@ -1,8 +1,6 @@
-module.exports.launch = (action, synchazard, params) => {
-    'use strict';
-
-    let nodeList = {};
-    const disable = (id, nodeId) => {
+module.exports.launch = (action, synchazard/* , params */) => {
+    const nodeList = {},
+        disable = (id, nodeId) => {
             nodeList[nodeId] = nodeList[nodeId] || {};
             nodeList[nodeId].clients = nodeList[nodeId].clients || [];
             nodeList[nodeId].clients.indexOf(id) > -1 || nodeList[nodeId].clients.push(id);
@@ -11,7 +9,7 @@ module.exports.launch = (action, synchazard, params) => {
             return action.encodeMessage({
                 _ACTION: 'reactor_disableAll',
                 _VALUE: nodeList[nodeId].value,
-                _NODEID: nodeId + ''
+                _NODEID: `${nodeId  }`
             }, { id: id });
         },
         enable = (id, val, nodeId) => {
@@ -22,8 +20,8 @@ module.exports.launch = (action, synchazard, params) => {
             nodeList[nodeId].value = val;
             return action.encodeMessage({
                 _ACTION: 'reactor_enableAll',
-                _VALUE: val + '',
-                _NODEID: nodeId + ''
+                _VALUE: `${val  }`,
+                _NODEID: `${nodeId  }`
             }, { id: id });
         },
         getNodeList = () => {
@@ -34,20 +32,21 @@ module.exports.launch = (action, synchazard, params) => {
         };
 
     // RUN
-    action.onconnection((data, ws) => {
+    action.onconnection((data/* , ws */) => {
+        var response = null;
         if (data._TYPE !== 'action') return;
-        var action = null;
         switch (data._ACTION) {
-        case 'init':
-            action = getNodeList();
-            break;
-        case 'disable':
-            action = disable(data._ID, data._NODEID);
-            break;
-        case 'enable':
-            action = enable(data._ID, data._VALUE, data._NODEID);
-            break;
+            case 'init':
+                response = getNodeList();
+                break;
+            case 'disable':
+                response = disable(data._ID, data._NODEID);
+                break;
+            case 'enable':
+                response = enable(data._ID, data._VALUE, data._NODEID);
+                break;
+            default:break;
         }
-        action && synchazard.broadcast(action);
+        response && synchazard.broadcast(response);
     });
 };

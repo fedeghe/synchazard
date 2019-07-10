@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 
 
 class Action{
@@ -48,7 +49,7 @@ class Action{
 
     onconnection(f) {
         var self = this;
-        this.ss.wss.on('connection', (ws, req) => {
+        this.ss.wss.on('connection', (ws/* , req */) => {
             ws.on('message', (data) => {
                 data = JSON.parse(data);
 

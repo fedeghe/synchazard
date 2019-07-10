@@ -823,6 +823,11 @@ eslint-config-prettier@^4.1.0:
   dependencies:
     get-stdin "^6.0.0"
 
+eslint-config-prettierslint-no-headache@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettierslint-no-headache/-/eslint-config-prettierslint-no-headache-1.0.0.tgz#2988bf0c86c6f0179638a0860239172940095570"
+  integrity sha512-rtCpMLoGAmORrAF+eTU7OiyUvykgTRtId37CncO7UajFtpJ35Dmi3RzyXzuTeXbWcQjdm0o1rlXsJMcYpfTrZA==
+
 eslint-import-resolver-node@^0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/eslint-import-resolver-node/-/eslint-import-resolver-node-0.3.2.tgz#58f15fb839b8d0576ca980413476aab2472db66a"
