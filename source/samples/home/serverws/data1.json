@@ -1,6 +1,6 @@
 {
     "title": "Sync<span class='thunder'>h</span>azard",
-    "version": "0.0.4",
+    "version": "maltaV('PACKAGE.version')",
     "content": "alive web pages",
     "what": {
         "img": "/media/synchazard4.svg",

@@ -4,7 +4,7 @@
         "cp -R source/samples/home/serverws/media serverws/"
     ],
     "source/samples/home/serverws/actions/*.js": "serverws/actions -vars=vars.json -options=placeholderMode:'func'",
-    "source/samples/home/serverws/data1.json": "serverws -vars=vars.json",
+    "source/samples/home/serverws/data1.json": "serverws -vars=vars.json -options=placeholderMode:'func'",
     "source/samples/home/serverws/less/*.less": "serverws/css -plugins=malta-less -vars=vars.json -options=placeholderMode:'func'",
     "source/samples/home/serverws/js/*.js": "serverws/js -vars=vars.json -options=placeholderMode:'func'",
     "source/samples/home/serverws/js/lib/*.js": "serverws/js/lib -vars=vars.json -options=placeholderMode:'func'",
