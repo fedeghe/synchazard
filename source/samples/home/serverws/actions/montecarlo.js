@@ -1,13 +1,13 @@
-module.exports.launch = (action, synchazard, params) => {
+module.exports.launch = (action, synchazard /* , params */) => {
     let askingingCli = null,
         partecipants = 0,
+        currentResult = 0;
+
+    const baseValue = 3,
         results = {
             inside: 0,
             outside: 0
         },
-        
-        currentResult = 0;
-    const baseValue = 3,
         calcPi = data => results.outside
             ? 4 * data.inside / (data.inside + data.outside)
             : baseValue;
@@ -46,34 +46,35 @@ module.exports.launch = (action, synchazard, params) => {
     });
 
     action.onconnection((data, ws) => {
+        let available = null;
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
-        case 'init':
-            synchazard.unicast(data._ID, action.data.actions.completed());
-            break;
-        case 'askMontecarlo':
-            askingingCli = data._ID;
-            // there are other clients on this page available?
-            const ava = action.getCount();
-            if (ava.URL[data._URL].length > 1) {
-                synchazard.broadcast(action.data.actions.ask(askingingCli));
-            } else {
-                synchazard.unicast(data._ID, action.data.actions.noClients);
-            }
-            break;
-        case 'acceptedMontecarlo':
-            partecipants++;
-            ws.send(action.data.actions.proceed);
-            synchazard.unicast(data._ID, action.data.actions.thx);
-            break;
-        case 'joinMontecarlo':
-            if (partecipants) {
-                results.inside += data._DATA.inside;
-                results.outside += data._DATA.outside;
-            }
-            !--partecipants && synchazard.broadcast(action.data.actions.completed());
-            break;
-        default:break;
+            case 'init':
+                synchazard.unicast(data._ID, action.data.actions.completed());
+                break;
+            case 'askMontecarlo':
+                askingingCli = data._ID;
+                // there are other clients on this page available?
+                available = action.getCount();
+                if (available.URL[data._URL].length > 1) {
+                    synchazard.broadcast(action.data.actions.ask(askingingCli));
+                } else {
+                    synchazard.unicast(data._ID, action.data.actions.noClients);
+                }
+                break;
+            case 'acceptedMontecarlo':
+                partecipants++;
+                ws.send(action.data.actions.proceed);
+                synchazard.unicast(data._ID, action.data.actions.thx);
+                break;
+            case 'joinMontecarlo':
+                if (partecipants) {
+                    results.inside += data._DATA.inside;
+                    results.outside += data._DATA.outside;
+                }
+                !--partecipants && synchazard.broadcast(action.data.actions.completed());
+                break;
+            default:break;
         }
     });
 };
