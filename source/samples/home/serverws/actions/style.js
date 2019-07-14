@@ -1,6 +1,5 @@
 module.exports.launch = (action, synchazard, params) => {
     
-
     const resourceFile = params.cssToObserve,
         {fs} = params.deps,
         {path} = params.deps;
@@ -24,10 +23,12 @@ module.exports.launch = (action, synchazard, params) => {
     action.onconnection((data, ws) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
-        case 'init':
-            ws.send(action.data.actions.update());
-            break;
+            case 'init':
+                ws.send(action.data.actions.update());
+                break;
+            default: break;
         }
+        
     });
 
     // RUN
