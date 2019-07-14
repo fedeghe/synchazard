@@ -142,7 +142,7 @@ Chess.prototype.prepare = function () {
     this.gameContainer.appendChild(this.footerPanel.container);
 };
 
-Chess.prototype.render = function (d) {
+Chess.prototype.render = function () {
     this.target.appendChild(this.gameContainer);
 };
 
