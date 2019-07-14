@@ -1,64 +1,68 @@
 (function(W) {
-    /** include utilities */
-    // eslint-disable-next-line
-    maltaF('utilities.js');
-
     /**
      * the constructor does not gives the full worker back,
      * or at least
      */
     // eslint-disable-next-line vars-on-top
-    var currentScript = document.currentScript || (function() {
-            var scripts = document.getElementsByTagName('script');
-            return scripts[scripts.length - 1];
-        })(),
-         dataActors = currentScript.dataset.actors || null,         
-         maltaV('NS') = {
-            active: true,
-            handlers: {},
-            objHandlers: {},
-            synchazard: new Worker(currentScript.dataset.worker),
-            commands: {
-                stop: stop,
-                resume: resume,
-            },
-            utils: {
-                ready: (function() {
-                    var cb = [],
-                         readyStateCheckInterval = setInterval(function() {
-                             var i, l;
-                            if (document.readyState === 'complete') {
-                                maltaV('NS').loaded = true;
-                                clearInterval(readyStateCheckInterval);
-                                for (i = 0, l = cb.length; i < l; i++) {
-                                    cb[i].call(W);
-                                }
-                            }
-                        }, 10);
-                    return function(c) {
-                        if (document.readyState === 'complete') {
-                            c.call(W);
-                        } else {
-                            cb.push(c);
-                        }
-                    };
-                })(),
-                // eslint-disable-next-line no-undef
-                storage: Utilities.storage,
-                loadStyle,
-                loadScript,
-                injectTester,
-                createAction,
-                createInitAction,
-                createCloseAction,
-                decodeFunction,
-                getTime,
-                getQS,
-                getRTT,
-            },
-        },
-         head = document.getElementsByTagName('head')[0];
 
+    var currentScript = document.currentScript || (function() {
+        var scripts = document.getElementsByTagName('script');
+        return scripts[scripts.length - 1];
+    })(),
+    dataActors = currentScript.dataset.actors || null,
+    
+    head = document.getElementsByTagName('head')[0];
+    
+    
+    /** include utilities */
+    // eslint-disable-next-line
+    maltaF('utilities.js');
+
+    
+    W["maltaV('NS')"] = {
+        active: true,
+        handlers: {},
+        objHandlers: {},
+        synchazard: new Worker(currentScript.dataset.worker),
+        commands: {
+            stop: stop,
+            resume: resume,
+        },
+        utils: {
+            ready: (function() {
+                var cb = [],
+                        readyStateCheckInterval = setInterval(function() {
+                            var i, l;
+                        if (document.readyState === 'complete') {
+                            W["maltaV('NS')"].loaded = true;
+                            clearInterval(readyStateCheckInterval);
+                            for (i = 0, l = cb.length; i < l; i++) {
+                                cb[i].call(W);
+                            }
+                        }
+                    }, 10);
+                return function(c) {
+                    if (document.readyState === 'complete') {
+                        c.call(W);
+                    } else {
+                        cb.push(c);
+                    }
+                };
+            })(),
+            // eslint-disable-next-line no-undef
+            storage: Utilities.storage,
+            loadStyle,
+            loadScript,
+            injectTester,
+            createAction,
+            createInitAction,
+            createCloseAction,
+            decodeFunction,
+            getTime,
+            getQS,
+            getRTT,
+        }
+    };
     if (!head) {
         throw new Error('NO head');
     }
@@ -66,15 +70,15 @@
     /**
      * Set a non overwritable client id, hopefully unique
      */
-    Object.defineProperty(maltaV('NS'), 'id', {
+    Object.defineProperty(W["maltaV('NS')"], 'id', {
         value: getClientId(),
         writable: false,
     });
     
 
-    //set actors, even if null
+    // set actors, even if null
 
-    maltaV('NS').synchazard.postMessage({
+    W["maltaV('NS')"].synchazard.postMessage({
         _TYPE: '_INITACTORS',
         _ACTORS: dataActors,
     });
@@ -128,11 +132,11 @@
     function createAction(action) {
         action._ACTORS = dataActors || null;
         // ensure the client identifier
-        action._ID = action._ID || maltaV('NS').id;
+        action._ID = action._ID || W["maltaV('NS')"].id;
         // default type is action
         action._TYPE = action._TYPE || 'action';
         // given odr current
-        action._TIME = action._TIME || maltaV('NS').utils.getTime();
+        action._TIME = action._TIME || W["maltaV('NS')"].utils.getTime();
         // pass also always current url
         action._URL = document.location.href;
         return JSON.stringify(action);
@@ -181,15 +185,15 @@
      */
     function getClientId() {
         var cookieName = `maltaV('NS')clientID`,
-             cookieValue = maltaV('NS').utils.storage.get(cookieName);
+             cookieValue = W["maltaV('NS')"].utils.storage.get(cookieName);
         if (cookieValue) {
             return cookieValue;
         } 
-            maltaV('NS').utils.storage.set(
-                cookieName,
-                `maltaV('NS')_${Math.abs(~~(+new Date() * Math.random() * 1e3))}`
-            );
-            return getClientId();
+        W["maltaV('NS')"].utils.storage.set(
+            cookieName,
+            `maltaV('NS')_${Math.abs(~~(+new Date() * Math.random() * 1e3))}`
+        );
+        return getClientId();
         
     }
 
@@ -282,7 +286,7 @@
      *
      */
     function stop(to) {
-        maltaV('NS').active = false;
+        W["maltaV('NS')"].active = false;
         to && typeof to === 'number' && setTimeout(maltaV('NS').commands.resume, to);
     }
 
@@ -290,7 +294,7 @@
      * this is only available to the client obsiously
      */
     function resume() {
-        maltaV('NS').active = true;
+        W["maltaV('NS')"].active = true;
     }
 
     /**
@@ -301,15 +305,15 @@
      * if the function is found forward to it the
      * DATA
      */
-    maltaV('NS').synchazard.onmessage = function(e) {
+    W["maltaV('NS')"].synchazard.onmessage = function(e) {
         //= ================================================
         function r() {
-            switch (typeof maltaV('NS').handlers[e.data._HANDLER]) {
+            switch (typeof W["maltaV('NS')"].handlers[e.data._HANDLER]) {
                 case 'function':
-                    maltaV('NS').handlers[e.data._HANDLER](e.data._DATA);
+                    W["maltaV('NS')"].handlers[e.data._HANDLER](e.data._DATA);
                     break;
                 case 'object':
-                    maltaV('NS').handlers[e.data._HANDLER].handle(e.data._DATA);
+                    W["maltaV('NS')"].handlers[e.data._HANDLER].handle(e.data._DATA);
                     break;
                 default:
                     break;
@@ -318,7 +322,7 @@
         /**
          * in case give a small timegap
          */
-        '_HANDLER' in e.data && e.data._HANDLER in maltaV('NS').handlers
+        '_HANDLER' in e.data && e.data._HANDLER in W["maltaV('NS')"].handlers
             ? r()
             // eslint-disable-next-line no-undef
             : setTimeout(r, maltaV('WEBSERVER.TIMEGAP'));
@@ -327,9 +331,9 @@
     /**
      * in case a error occurs just shut the worker down
      */
-    maltaV('NS').synchazard.onerror = function(e) {
+    W["maltaV('NS')"].synchazard.onerror = function(e) {
         console.log(e);
-        maltaV('NS').synchazard.terminate();
+        W["maltaV('NS')"].synchazard.terminate();
     };
 
     /**
@@ -337,6 +341,6 @@
      * the easyiest option is to publish it
      */
     // eslint-disable-next-line
-    W.maltaV('NS') = maltaV('NS');
-    W.onbeforeunload = maltaV('NS').synchazard.terminate;
+    // W.maltaV('NS') = maltaV('NS');
+    W.onbeforeunload = W["maltaV('NS')"].synchazard.terminate;
 }(this))
