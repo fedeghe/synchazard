@@ -1,4 +1,3 @@
-"use strict";
 /**
  * BARE MINIMAL SRV to free the user to create virtual hosts
  */
@@ -10,16 +9,16 @@ var http = require('http'),
     //
     ext;
 
-http.createServer(function (req, res) {
+http.createServer((req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Request-Method', '*');
     res.setHeader('Access-Control-Allow-Methods', '*');
     res.setHeader('Access-Control-Allow-Headers', '*');
 
+    let pathname = null;
     // parse URL
-    let parsedUrl = url.parse(req.url),
-        // extract URL path
-        pathname = path.resolve(path.dirname(__filename) + parsedUrl.pathname),
+    const parsedUrl = url.parse(req.url),
+    
         // maps file extention to MIME types
         mimeType = {
             ".ico": "image/x-icon",
@@ -37,20 +36,23 @@ http.createServer(function (req, res) {
             ".eot": "appliaction/vnd.ms-fontobject",
             ".ttf": "aplication/font-sfnt"
         },
+       
         do404 = () => {
             res.statusCode = 404;
             res.write('<!DOCTYPE html><body style="font-family:verdana">');
             res.write('<h4>Synchazard: <span style="color:red">404</span></h4>');
-            res.write('<p>Document `' + path.basename(pathname) + '`  not found!</p>');
+            res.write(`<p>Document \`${  path.basename(pathname)  }\`  not found!</p>`);
             res.end('</body>');
-            return;
+            
         };
+        // extract URL path
+    pathname = path.resolve(path.dirname(__filename) + parsedUrl.pathname);
     
     if (parsedUrl.pathname.match(/^\/(package.json|srv.js|ws_srv.js|actions|core)/)) {
         return do404();
     }
 
-    fs.exists(pathname, function (exist) {
+    fs.exists(pathname, exist => {
         if (!exist) {
             return do404();
         }
@@ -59,19 +61,23 @@ http.createServer(function (req, res) {
             pathname += "/index.html";
         }
         // read file from file system
-        fs.readFile(pathname, function (err, data) {
+        fs.readFile(pathname, (err, data) => {
             if (err) {
                 res.statusCode = 500;
                 res.end("Error getting the file");
             } else {
                 // based on the URL path, extract the file extention. e.g. .js, .doc, ...
-                ext = path.parse(pathname).ext;
+                ({ ext } = path.parse(pathname));
                 // if the file is found, set Content-type and send data
                 res.setHeader("Content-type", mimeType[ext] || "text/plain");
                 res.end(data);
             }
         });
     });
-}).listen(parseInt(port));
+// it is, simply not here
+// eslint-disable-next-line no-undef
+}).listen(parseInt(port, 10));
 
+// AGAIN!, it is, simply not here
+// eslint-disable-next-line no-undef
 console.log(msg);
