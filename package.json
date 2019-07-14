@@ -55,7 +55,6 @@
         "eslint-plugin-react": "^7.12.4",
         "eslint-plugin-react-hooks": "^1.3.0",
         "event-stream": "^3.3.4",
-        "lodash": "^4.17.10",
         "malta": "^4.0.3",
         "malta-browser-refresh": "^1.2.2",
         "malta-header-comment": "^1.0.6",
