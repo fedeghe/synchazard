@@ -1,5 +1,4 @@
-module.exports.launch = (action, synchazard, params) => {
-    'use strict';
+module.exports.launch = (action, synchazard /* , params */) => {
     // SETUP
     //
     action.setup({ num: 0 });
@@ -8,12 +7,13 @@ module.exports.launch = (action, synchazard, params) => {
     action.onconnection((data, ws) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
-        case 'init':
-            ws.send(action.encodeMessage({
-                _ACTION: 'json',
-                _PAYLOAD: action.data
-            }));
-            break;
+            case 'init':
+                ws.send(action.encodeMessage({
+                    _ACTION: 'json',
+                    _PAYLOAD: action.data
+                }));
+                break;
+            default: break;
         }
     });
 
