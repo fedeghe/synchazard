@@ -73,7 +73,7 @@ Now on one or more clients, open one or more browsers and navigate to http://192
 
 ### More about the _build:home_ samples
 
-I will assume here that the build is done using the local IP address _192.168.5.107_ and that the ports have not been changed.
+I will assume here that the build is done using the local IP address _192.168.5.107_ and that the port has not been changed.
 
 
 
