@@ -49,13 +49,12 @@ console.log('powered by ᚗᚌ');
 //         d = new Date,
 //         now = [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
 //     test.assert(function () {
-//             return [].slice.call(document.getElementsByTagName('a'), 0).length == 2;
+//             return [].slice.call(document.getElementsByTagName('a'), 0).length === 2;
 //         },
 //         "not enough anchors"
 //     ).assert(function () {
 //             var graph = document.querySelector('.graph'),
 //                 child0 = graph.children;
-
 //             return child0 && child0.item(0) && child0.item(0).tagName.match(/CANVAS/i);
 //         },
 //         "canvas is not there"
