@@ -31,10 +31,11 @@ Chess.prototype.init = function () {
 };
 
 Chess.prototype.renderFEN = function (fen) {
-    this.validateFEN(fen);
     var self = this,
         tokens = fen.split(/\//),
         cursor = 0;
+    
+    this.validateFEN(fen);
 
     tokens.forEach(function (token) {
         var i = 0,
@@ -45,7 +46,7 @@ Chess.prototype.renderFEN = function (fen) {
         for (null; i < l; i++) {
             ch = token[i].toLowerCase();
             if (token[i].match(/^[1-9]{1}$/)) {
-                cursor += parseInt(token[i]);
+                cursor += parseInt(token[i], 10);
             } else if (token[i].match(/^[R|N|B|Q|K|P]{1}$/i)) {
                 color = token[i].charCodeAt(0) >= 97 ? 'white' : 'black';
                 tmp = config.pieces[config.mode][config.pieces.names[ch]];
@@ -62,15 +63,16 @@ Chess.prototype.renderFEN = function (fen) {
     });
 };
 
-Chess.prototype.validateFEN = function (fen) {
+Chess.prototype.validateFEN = function () {
     // eslint-disable-next-line
     if (false) {
+        console.log(fen)
         throw new Error('Fen invalid');
     }
 };
 
 Chess.prototype.initBoardersContainer = function () {
-    this.boardersContainer = CL.dom.create({ tag: 'div', cls: 'boardersContainer' });
+    
     var i = 0,
         l = 8,
         tmp1, tmp2, tmp3, tmp4,
@@ -83,7 +85,7 @@ Chess.prototype.initBoardersContainer = function () {
             top: getAlgebraicBorder('brdColumns', 'top'),
             bottom: getAlgebraicBorder('brdColumns', 'bottom')
         };
-
+    this.boardersContainer = CL.dom.create({ tag: 'div', cls: 'boardersContainer' });
     for (i = 0; i < l; i++) {
         tmp1 = CL.dom.create({
             cls: 'brdRow',
@@ -108,12 +110,12 @@ Chess.prototype.initBoardersContainer = function () {
 };
 
 Chess.prototype.initBoard = function () {
-    this.board = CL.dom.create({ tag: 'div', cls: 'board' });
     var i = 0,
         j = 0,
         l = 8,
         row,
         cell;
+    this.board = CL.dom.create({ tag: 'div', cls: 'board' });
     for (i = 0; i < l; i++) {
         row = CL.dom.create({ cls: 'row' });
         for (j = 0; j < l; j++) {
