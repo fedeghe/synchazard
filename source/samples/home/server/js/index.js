@@ -5,7 +5,8 @@
     
 
     var head = document.getElementsByTagName('head')[0],
-        {body} = document,
+        // eslint-disable-next-line prefer-destructuring
+        body = document.body,
         header = createNode({ tag: 'header', cls: 'group' }),
         watch = createNode({ tag: 'span', attrs: { id: 'watch' } }),
         samples = createNode({ tag: 'a', cls: 'samples', attrs: { href: '/samples.html' }, html: 'samples' }),
