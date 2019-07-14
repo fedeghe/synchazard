@@ -1,23 +1,26 @@
-const Interval = require('./tools/Interval');
+const interval = require('@fedeghe/interval');
 
-module.exports.launch = (action, synchazard, params) => {
-    'use strict';
+module.exports.launch = (action, synchazard /* , params */) => {
+    
+    // what on connection
+    //
     action.onconnection((data, ws) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
-        case 'init':
-            ws.send(action.encodeMessage({
-                _ACTION: 'status',
-                _PAYLOAD: {
-                    time: new Date()
-                }
-            }));
-            break;
+            case 'init':
+                ws.send(action.encodeMessage({
+                    _ACTION: 'status',
+                    _PAYLOAD: {
+                        time: new Date()
+                    }
+                }));
+                break;
+            default: break;
         }
     });
 
-    // RUN
-    new Interval(() => {
+    // 
+    interval(() => {
         var t = new Date();
         synchazard.broadcast(action.encodeMessage({
             _ACTION: 'status',
