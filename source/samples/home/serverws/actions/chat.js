@@ -1,5 +1,4 @@
-module.exports.launch = (action, synchazard, params) => {
-    'use strict';
+module.exports.launch = (action, synchazard /* , params */) => {
     // setup messages storage
     //
     action.setup({ messages: [] });
@@ -44,6 +43,7 @@ module.exports.launch = (action, synchazard, params) => {
                 }
             }));
             break;
+            default: break;
         }
     });
 };
