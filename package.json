@@ -26,6 +26,7 @@
         "_start:srv": "node server/srv.js"
     },
     "dependencies": {
+        "@fedeghe/interval": "^1.0.5",
         "ws": "^5.1.1"
     },
     "engines": {

@@ -104,6 +104,11 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
+"@fedeghe/interval@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@fedeghe/interval/-/interval-1.0.5.tgz#796aa6838c451cd5ab09007eae38bc1fcff8b575"
+  integrity sha512-nmCpiHtrU9cqXgb2yyfNmoAi7bog5FN+EnqkfRoN9iLfI5ONt9zSLmGvAapsoEY2HWDWkeV1AiqOwUMj5dsGyw==
+
 acorn-jsx@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-4.1.1.tgz#e8e41e48ea2fe0c896740610ab6a4ffd8add225e"
