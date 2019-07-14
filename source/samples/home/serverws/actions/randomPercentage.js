@@ -1,6 +1,4 @@
-module.exports.launch = (action, synchazard, params) => {
-    
-
+module.exports.launch = (action, synchazard /* , params */) => {
     action.setup({ num: 0 });
     action.onconnection((data, ws) => {
         if (data._TYPE !== 'action') return;
