@@ -6,12 +6,11 @@ window.addEventListener('load', function () {
     class Welcome extends React.Component {
         constructor (props) {
             // eslint-disable-next-line no-this-before-super
-            var self = this;
             super(props);
+            var self = this;
             this.state = {
                 time: null
             };
-
             maltaV('NS').handlers.react = function (d) {
                 self.setState({
                     time: d.time
