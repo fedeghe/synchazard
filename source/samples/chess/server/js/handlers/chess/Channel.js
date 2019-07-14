@@ -10,11 +10,12 @@ CL.Channel = (function () {
         // that object from dependencies
         //
         findInArray = function (arr, mvar) {
+            var l;
             // IE6,7,8 would fail here
             if ('indexOf' in arr) {
                 return arr.indexOf(mvar);
             }
-            var l = arr.length - 1;
+            l = arr.length - 1;
             while (arr[l] !== mvar) {
                 l--;
             }
@@ -129,6 +130,7 @@ CL.Channel = (function () {
         once: function (topic, cb) {
             var self = this,
                 cb2 = function () {
+                    // eslint-disable-next-line prefer-spread, prefer-rest-params
                     cb.apply(null, Array.prototype.slice.call(arguments, 0));
                     self.unsub(topic, cb2);
                 };
@@ -142,6 +144,7 @@ CL.Channel = (function () {
          * @return [Channel] the instance
          */
         reset: function () {
+            // eslint-disable-next-line prefer-rest-params
             var ts = Array.prototype.slice.call(arguments, 0),
                 l = ts.length,
                 i = 0;
@@ -161,12 +164,15 @@ CL.Channel = (function () {
      */
     return function (name) {
         /*
+            if (!(name in channels)) {
+                channels[name] = new _Channel();
+            }
+            return channels[name];
+        */
         if (!(name in channels)) {
             channels[name] = new _Channel();
-        }
+        }   
         return channels[name];
-        */
-        return name in channels ? channels[name] : (channels[name] = new _Channel());
     };
 })();
 
