@@ -2,6 +2,7 @@ require('events').EventEmitter.defaultMaxListeners = Infinity;
 
 const fs = require('fs'),
     path = require('path'),
+    // eslint-disable-next-line import/no-unresolved
     synchazard = require('./core/synchazard'),
     // get args if any
     argz = process.argv.slice(2);
@@ -59,7 +60,7 @@ synchazard.launch([{
 }, {
     path: 'actions/test'
 }
-//, {
+// , {
 //    path: 'actions/sunshine'
 // }
 ], argz);

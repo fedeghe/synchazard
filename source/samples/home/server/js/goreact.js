@@ -7,6 +7,7 @@ window.addEventListener('load', function () {
         constructor (props) {
             // eslint-disable-next-line no-this-before-super
             super(props);
+            // eslint-disable-next-line vars-on-top
             var self = this;
             this.state = {
                 time: null
