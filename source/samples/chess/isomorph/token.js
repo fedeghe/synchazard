@@ -31,7 +31,9 @@ function toQs (o) {
     var r = [],
         i;
     for (i in o) {
-        r.push(`${i  }=${  encodeURIComponent(o[i])}`);
+        if (o.hesOwnProperty(i)) {
+            r.push(`${i  }=${  encodeURIComponent(o[i])}`);
+        }
     }
     return `?${  r.join('&')}`;
 }
