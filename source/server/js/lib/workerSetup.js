@@ -31,8 +31,8 @@
         utils: {
             ready: (function() {
                 var cb = [],
-                        readyStateCheckInterval = setInterval(function() {
-                            var i, l;
+                    readyStateCheckInterval = setInterval(function() {
+                        var i, l;
                         if (document.readyState === 'complete') {
                             W["maltaV('NS')"].loaded = true;
                             clearInterval(readyStateCheckInterval);
