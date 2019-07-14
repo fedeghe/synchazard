@@ -59,6 +59,7 @@
             newPI = data._DATA,
             err = data._ERR,
             stats = data._STATS,
+            // eslint-disable-next-line no-undef
             what = whatChanged(previousPI, newPI);
         if (all || data._ID === maltaV('NS').id) {
             result = document.createElement('p');
@@ -66,6 +67,7 @@
             using = document.createElement('p');
             result.innerHTML = `<span class="pi">&pi;</span> &asymp; <span class="stable">${what.stable}</span><span class="unstable">${what.unstable}</span>`;
             distance.innerHTML = `err (against Math.PI): ${err}%`;
+            // eslint-disable-next-line no-undef
             using.innerHTML = `<span class="small">using ${prefixNumber(stats.inside + stats.outside)} shooting</span class="small">`;
             maltaV('NS').handlers.DistComp.result.innerHTML = '';
             maltaV('NS').handlers.DistComp.result.appendChild(result);

@@ -1,4 +1,6 @@
+/* eslint-disable no-undef */
 Widgzard.events.ready(function () {
+    // eslint-disable-next-line no-unused-vars
     var app = Widgzard.render({
         content: [
             {

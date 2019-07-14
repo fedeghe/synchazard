@@ -1,7 +1,4 @@
-module.exports.launch = (action, synchazard, params) => {
-    
-    
-
+module.exports.launch = (action /* , synchazard, params */) => {
     // Manager
     maltaF('matchManager.js')
 
@@ -31,29 +28,27 @@ module.exports.launch = (action, synchazard, params) => {
             case 'initMatch':
                 ws.send(action.encodeMessage({
                     _ACTION: 'matchCreated',
+                    // eslint-disable-next-line no-undef
                     _PAYLOAD: Manager.createMatch()
                 }));
                 break;
-
             case 'joinMatch':
                 ws.send(action.encodeMessage({
                     _ACTION: 'matchJoined',
                     _PAYLOAD: []
                 }));
                 break;
-
             case 'saveMatch':
                 ws.send(action.encodeMessage({
                     _ACTION: 'matchSaved',
+                    // eslint-disable-next-line no-undef
                     _PAYLOAD: Manager.saveMatch(data)
                 }));
                 break;
-
             default: 
                 console.log('DEFAULT REACHED:');
                 console.log(data);
                 break
         }
-        
     });
 };

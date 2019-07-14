@@ -1,19 +1,19 @@
-module.exports.launch = (action, synchazard, params) => {
+module.exports.launch = (action /* , synchazard, params */) => {
 
-    "use strict";
     const STATUSES = {
-        PLAYING: 'PLAYING',
-        WAITING: 'WAITING',
-        IDLE: 'IDLE'
-    }
-    const updateState = () => {
-        
-    };
+            PLAYING: 'PLAYING',
+            WAITING: 'WAITING',
+            IDLE: 'IDLE'
+        },
+        // eslint-disable-next-line no-unused-vars
+        updateState = () => {
+            
+        },
 
-    let state = {
-        status: STATUSES.IDLE, // 
-        players: []
-    };
+        state = {
+            status: STATUSES.IDLE, // 
+            players: []
+        };
 
     action.onconnection((data, ws) => {
         if (data._TYPE !== 'action') return;
@@ -24,6 +24,7 @@ module.exports.launch = (action, synchazard, params) => {
                     _PAYLOAD: state
                 }, { data: data }));
                 break;
+            default: break;
         }
     });
 };

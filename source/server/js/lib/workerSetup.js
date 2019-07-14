@@ -12,7 +12,7 @@
             var scripts = document.getElementsByTagName('script');
             return scripts[scripts.length - 1];
         })(),
-         dataActors = currentScript.dataset.actors || null,
+         dataActors = currentScript.dataset.actors || null,         
          maltaV('NS') = {
             active: true,
             handlers: {},
