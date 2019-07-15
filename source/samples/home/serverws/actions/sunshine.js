@@ -1,3 +1,5 @@
+const interval = require('@fedeghe/interval');
+
 module.exports.launch = (action, synchazard /* , params */) => {
 
     // SETUP
@@ -38,11 +40,11 @@ module.exports.launch = (action, synchazard /* , params */) => {
 
     // RUN
     //
-    setInterval(() => {
+    interval(() => {
         action.data.index++;
         synchazard.broadcast(action.encodeMessage({
             _ACTION: 'sunshine',
             _PAYLOAD: sliceRot(action.data.colors, action.data.index, action.data.size)
         }));
-    }, 60E3);
+    }, 60E3).run();
 };
