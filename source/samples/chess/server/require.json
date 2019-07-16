@@ -1,6 +1,7 @@
 {
     "EXE": [
-        "mkdir -p server/css server/js/handlers server/js/workers"
+        "mkdir -p server/media server/css server/js/handlers server/js/workers",
+        "cp source/samples/chess/server/media/* server/media"
     ],
     "source/samples/chess/server/*.html": "server -vars=vars.json -options=placeholderMode:'func'",
     "source/samples/chess/server/less/*.less": "server/css -plugins=malta-less -options=placeholderMode:'func'",
