@@ -7,7 +7,7 @@ A client page loads the synchazard.js (not meant to be modified) passing within 
 ```
 Here is an ordered list of what the `synchazard` script will do: 
 1) in the global namespace defines an object `maltaV('NS')` which will:
-    - create and hold a reference to **one webWorker** (from the data-worker attrsibute) that will be responsible to define the routing of all incoming data toward handling functions or object instances (thats implements a `handle` function)
+    - create and hold a reference to **one webWorker** (from the data-worker attribute) that will be responsible to define the routing of all incoming data toward handling functions or object instances (thats implements a `handle` function)
     - mantain needed references to all handling functions & instances
     - expose:
         - a send function meant to be used to communicate with the server (through the ws created at step #2)
