@@ -44,7 +44,8 @@
         this.points.push(v);
 
         if (this.points.length > n) {
-            this.points = this.points.reverse().slice(0, n).reverse();
+            // this.points = this.points.reverse().slice(0, n).reverse();
+            this.points = this.points.slice(1, n + 1);
         }
         l = this.points.length;
 
