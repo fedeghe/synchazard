@@ -99,6 +99,10 @@ module.exports = (function () {
         console.log('close')
     })
     wss.on('connection', function connection(ws, req) {
+        /**
+         * could happen that the host is not allowed to point here,
+         * this is the checkpoint
+         */
         if (req.headers.origin.search("maltaV('WEBSERVER.HOST')") !== 0) {
             ws.terminate();
             console.log(`${req.headers.origin} is not allowed to request here.`);
@@ -110,7 +114,7 @@ module.exports = (function () {
          * handle client death: 
          * this save the server from suddendeath of all clients that
          * does not trigger the "beforeunload" event, then the connection
-         * hangs and the we server crash.
+         * hangs and the ws server crash.
          * counterproof:
          * - comment the following line
          * - connect with safari mobile
