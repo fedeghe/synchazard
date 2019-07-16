@@ -1,5 +1,4 @@
 module.exports.launch = (action, synchazard /* , params */) => {
-    
     const nodeList = {},
         disable = (id, nodeId) => {
             nodeList[nodeId] = nodeList[nodeId] || {};
@@ -41,7 +40,8 @@ module.exports.launch = (action, synchazard /* , params */) => {
             }, { id: id });
         };
 
-    // RUN
+    // CONNECTION
+    //
     // eslint-disable-next-line no-unused-vars
     action.onconnection((data, ws) => {
         if (data._TYPE !== 'action') return;

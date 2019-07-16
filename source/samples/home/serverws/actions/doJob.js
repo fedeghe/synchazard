@@ -1,13 +1,20 @@
 module.exports.launch = (action /* , synchazard, params */) => {
-    const jobs = {
-        getFunc1: {
-            func: function (r) {
-                return 3 ** r;
-            },
-            description: '3 ^ $p'
-        }
-    };
 
+    // SETUP
+    //
+    action.setup({
+        jobs: {
+            getFunc1: {
+                func: function (r) {
+                    return 3 ** r;
+                },
+                description: '3 ^ $p'
+            }
+        }
+    });
+
+    // CONNECTION
+    //
     action.onconnection((data, ws) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
@@ -15,8 +22,8 @@ module.exports.launch = (action /* , synchazard, params */) => {
                 ws.send(action.encodeMessage({
                     _ACTION: 'doComputation',
                     _JOB: {
-                        func: jobs.getFunc1.func.toString(),
-                        desc: jobs.getFunc1.description
+                        func: action.data.jobs.getFunc1.func.toString(),
+                        desc: action.data.jobs.getFunc1.description
                     }
                 }));
                 break;

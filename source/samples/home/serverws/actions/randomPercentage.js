@@ -2,10 +2,12 @@ const interval = require('@fedeghe/interval');
 
 module.exports.launch = (action, synchazard /* , params */) => {
     
-    // init store
+    // SETUP
+    //
     action.setup({ num: 0 });
 
-    // what on connection
+    // CONNECTION
+    //
     action.onconnection((data, ws) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
@@ -19,7 +21,8 @@ module.exports.launch = (action, synchazard /* , params */) => {
         }
     });
 
-    // push
+    // RUN
+    //
     interval(() => {
         action.data.num = ~~(Math.random() * 100);
         synchazard.broadcast(action.encodeMessage({

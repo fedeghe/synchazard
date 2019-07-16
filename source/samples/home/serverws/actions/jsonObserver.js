@@ -3,6 +3,8 @@ module.exports.launch = (action, synchazard, params) => {
         {fs} = params.deps,
         {path} = params.deps;
 
+    // SETUP
+    //
     action.setup({
         resourceFile: `/../${resourceFile}`,
         host: `maltaV('DATASERVER.HOST')`,
@@ -14,6 +16,8 @@ module.exports.launch = (action, synchazard, params) => {
         }
     });
 
+    // CONNECTION
+    //
     action.onconnection((data, ws) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {

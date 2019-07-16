@@ -2,7 +2,7 @@ const interval = require('@fedeghe/interval');
 
 module.exports.launch = (action, synchazard /* , params */) => {
     
-    // what on connection
+    // CONNECTION
     //
     action.onconnection((data, ws) => {
         if (data._TYPE !== 'action') return;
@@ -19,7 +19,8 @@ module.exports.launch = (action, synchazard /* , params */) => {
         }
     });
 
-    // 
+    // RUN
+    //
     interval(() => {
         var t = new Date();
         synchazard.broadcast(action.encodeMessage({

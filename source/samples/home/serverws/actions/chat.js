@@ -1,9 +1,10 @@
 module.exports.launch = (action, synchazard /* , params */) => {
-    // setup messages storage
+    // SETUP
+    // messages storage
     //
     action.setup({ messages: [] });
 
-    // just listen
+    // CONNECTION
     //
     action.onconnection((data, ws) => {
         let newMessage;
@@ -27,7 +28,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
             '_MESSAGE' in data &&
                 action.data.messages.push(newMessage);
 
-            // self message
+            // send back a unicast message to the source
             //
             ws.send(action.encodeMessage({
                 _ACTION: 'self',

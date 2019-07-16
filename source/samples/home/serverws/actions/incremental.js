@@ -1,10 +1,12 @@
 const interval = require('@fedeghe/interval');
 
 module.exports.launch = (action, synchazard /* , params */) => {
+
     // SETUP
     //
     action.setup({ num: 0 });
-    // INIT
+
+    // CONNECTION
     //
     action.onconnection((data, ws) => {
         if (data._TYPE !== 'action') return;

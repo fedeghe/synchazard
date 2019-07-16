@@ -12,6 +12,8 @@ module.exports.launch = (action, synchazard /* , params */) => {
             ? 4 * data.inside / (data.inside + data.outside)
             : baseValue;
 
+    // SETUP
+    //
     action.setup({
         clients: 0,
         actions: {
@@ -45,6 +47,8 @@ module.exports.launch = (action, synchazard /* , params */) => {
         }
     });
 
+    // CONNECTION
+    //
     action.onconnection((data, ws) => {
         let available = null;
         if (data._TYPE !== 'action') return;
