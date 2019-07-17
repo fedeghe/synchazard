@@ -68,4 +68,57 @@ to broadcast a message to all connected clients instead we should use:
 
     synchazard.broadcast(action.encodeMessage({... here our message object ...}));
 
-...to be continued
+...to be continuedrite che code contained in the injected script
+</script>
+```
+now _myHandler.js_ will define in `SH.handlers` all consumers needed in that document
+
+```
+(function () {
+    SH.handlers.handlerOne = function (data) {
+        // use data on DOM as needed
+    };
+    SH.handlers.handlerTwo = function (data) {};
+    
+    // but even an instance (standing it implements the `handle` function)
+    function myObj(){}
+    myObj.protptype.handle = function (data) {
+        // use data as needed
+    };
+    SH.handlers.handlerThree = new myObj();
+})();
+```
+
+at that point it makes sense to show how the worker code would fit that particular example:
+
+```
+"use strict";
+
+var worker = this;
+
+worker.onmessage = function (e) {
+    if (e.data._TYPE === 'action') {
+        switch (e.data._ACTION) {
+            case 'one':
+                worker.postMessage({
+                    _HANDLER: 'handlerOne',
+                    _DATA: e.data._PAYLOAD
+                });
+                break;
+            case 'two':
+                worker.postMessage({
+                    _HANDLER: 'handlerTwo',
+                    _DATA: e.data._PAYLOAD
+                });
+                break;
+            //
+            // ....
+            //
+            default:
+                worker.postMessage(e.data);
+                break;
+        }
+    }
+};
+```
+but the worker could for example forward some data that retrieves asynchronously using the data received.
