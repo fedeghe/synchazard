@@ -61,6 +61,10 @@ body {
         background:-webkit-gradient(linear, 80% 20%, 10% 21%, from(#FFFFEC), to(#C0B9B5));
         cursor:pointer;
         outline:none;
+        &:disabled {
+            color:gray;
+            cursor: wait;
+        }
     }
     .small {
         font-size:0.5em;

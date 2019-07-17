@@ -16,7 +16,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
     //
     action.setup({
         // a flag to manage concurrent askMontecarlo requests
-        busy: false,
+        free: true,
         clients: 0,
         actions: {
             ask: (id) => {
@@ -37,6 +37,12 @@ module.exports.launch = (action, synchazard /* , params */) => {
             }),
             noClients: action.encodeMessage({
                 _ACTION: 'noClients'
+            }),
+            busy: action.encodeMessage({
+                _ACTION: 'busy'
+            }),
+            free: action.encodeMessage({
+                _ACTION: 'free'
             }),
             completed: () => {
                 const response = {
@@ -67,13 +73,20 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 break;
             case 'askMontecarlo':
                 // block if already busy
-                if (action.data.busy) break;
+                if (!action.data.free) break;
+                
                 // lock it
-                action.data.busy = true;
-                // store it as the one who triggered, used in `completed` action
+                action.data.free = false;
+                // broadcast the status so the client can disable the button
+                synchazard.broadcast(action.data.actions.busy);
+                
+                // store it as the one who triggered,
+                // used in `completed` action
                 askingingCli = data._ID;
+
                 // there are other clients on this page available?
                 available = action.getCount();
+                
                 if (available.URL[data._URL].length > 1) {
                     // synchazard.broadcast(action.data.actions.ask(askingingCli));
                     // or with some variations also on the sender client (to filter itself, it knows his id )
@@ -89,26 +102,35 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 }
                 break;
             case 'acceptedMontecarlo':
-                // partecipants++;
                 ws.send(action.data.actions.proceed);
-
                 // synchazard.unicast(data._ID, action.data.actions.thx);
                 // same here
                 ws.send(action.data.actions.thx);
 
                 break;
             case 'joinMontecarlo':
+                // the client sent back his contribution
+                // store it!
                 if (partecipants) {
                     results.inside += data._DATA.inside;
                     results.outside += data._DATA.outside;
                 }
+                
+                // thus one partecipant has done
                 --partecipants;
-                if ( partecipants === 0) {
-                    synchazard.broadcast(action.data.actions.completed()).then((r) => {
-                        console.log('ids: ', r);
-                        action.data.busy = false;
-                    });
-                }
+
+                // broadcast the results
+                // if there are no more partecipants then
+                // it is time, maybe, to reenable it
+                synchazard.broadcast(action.data.actions.completed()).then((r) => {
+                    // time to re-enable it
+                    action.data.free = partecipants === 0;
+                    if (action.data.free) {
+                        // broadcast the status so the client can reenable the button
+                        synchazard.broadcast(action.data.actions.free);
+                    }
+                });
+                
                 break;
             default:break;
         }

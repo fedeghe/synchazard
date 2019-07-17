@@ -79,4 +79,10 @@
             maltaV('NS').handlers.DistComp.result.appendChild(using);
         }
     };
+    maltaV('NS').handlers.DistCompBusy = function (data) {
+        maltaV('NS').handlers.DistComp.button.disabled = true;
+    };
+    maltaV('NS').handlers.DistCompFree = function (data) {
+        maltaV('NS').handlers.DistComp.button.disabled = false;
+    };
 })();

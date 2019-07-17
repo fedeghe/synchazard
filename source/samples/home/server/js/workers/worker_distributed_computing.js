@@ -68,6 +68,20 @@ self.onmessage = function (e) {
                 _DATA: e.data
             });
             break;
+        case 'busy': 
+            // eslint-disable-next-line no-restricted-globals
+            self.postMessage({
+                _HANDLER: 'DistCompBusy',
+                _DATA: e.data
+            });
+            break;
+        case 'free': 
+            // eslint-disable-next-line no-restricted-globals
+            self.postMessage({
+                _HANDLER: 'DistCompFree',
+                _DATA: e.data
+            });
+            break;
             default: break;
     }
 };
