@@ -21,7 +21,7 @@ let debug = () => {},
 
     /**
      * EXPORTED
-     * Broadcast to all connected clients
+     * Broadcast to ALL connected clients
      */
     broadcast = data => {
         wss.clients.forEach(client => {
@@ -33,7 +33,7 @@ let debug = () => {},
 
     /**
      * EXPORTED
-     * suncast only to the given id set
+     * subcast: only to the given ids array set
      */
     subcast = (ids, data) => {
         wss.clients.forEach(client => {
@@ -45,11 +45,38 @@ let debug = () => {},
 
     /**
      * EXPORTED
-     * Unicast toward a single client, by id
+     * unicast: toward a single client, by id
+     * 
+     * if the id passed is the id of the onconnection source then
+     * this is equivalent of using the ws.send (without passing the id)
      */
     unicast = (id, data) => {
         wss.clients.forEach(client => {
             if (client.id === id && client.readyState === WebSocket.OPEN) {
+                client.send(data, { binary: false });
+            }
+        });
+    },
+
+    /**
+     * EXPORTED
+     * otherscast: to all but the given id
+     */
+    otherscast = (id, data) => {
+        wss.clients.forEach(client => {
+            if (client.id !== id && client.readyState === WebSocket.OPEN) {
+                client.send(data, { binary: false });
+            }
+        });
+    },
+
+    /**
+     * EXPORTED
+     * subexcludecast: toward all but the given ids array set
+     */
+    subexcludecast = (ids, data) => {
+        wss.clients.forEach(client => {
+            if (ids.search(client.id) < 0 && client.readyState === WebSocket.OPEN) {
                 client.send(data, { binary: false });
             }
         });
@@ -98,7 +125,9 @@ synchazard = {
     wss,
     launch,
     broadcast,
+    otherscast,
     subcast,
+    subexcludecast,
     unicast,
     debug,
     WATCH_INTERVALS: {
