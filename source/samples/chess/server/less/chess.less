@@ -2,7 +2,7 @@
 @boardShadow: #000000;
 @boardBorder: rgba(0,0,0, 0.2);
 
-@whiteColor: #C9A85C;
+@whiteColor:gold;
 @whiteBackground: #EAE8D4;
 @whiteShadow:#000;
 
@@ -11,7 +11,7 @@
 @blackShadow: #fff;
 
 @hoverColor: rgba(0, 255, 0, 0.4);
-@boardTextColor: rgba(0, 0, 0, 0.6);
+@boardTextColor: rgba(200, 200, 200, 0.6);
 
 @outerBorder: rgba(170,170,170, 0.5);
 @innerBorder: rgba(170,170,170, 0.5);
@@ -25,13 +25,25 @@
 @outLineIn:0.3vmin;
 @fontSize:2vmin;
 
-@backgroundImage: '../media/marble2.jpg';
+@backgroundImageBoard: '../media/marble4.jpg';
+@backgroundImageCellWhite: '../media/marble2.jpg';
+@backgroundImageCellBlack: '../media/marble4.jpg';
 
 @rot: 20deg; 
 // @rot: 0deg;
 
 // @perspective: calc(2 * 100vmin);
 @perspective: 100em;
+
+.bgMarbleBoard(){
+    background-image: url(@backgroundImageBoard);
+}
+.bgMarbleCellWhite(){
+    background-image: url(@backgroundImageCellWhite);
+}
+.bgMarbleCellBlack(){
+    background-image: url(@backgroundImageCellBlack);
+}
 
 body {
     background-color: @bgColor;
@@ -58,7 +70,7 @@ body {
             -moz-box-shadow:0.5vmin 0.5vmin 5vmin @boardShadow;
             -webkit-box-shadow:0.5vmin 0.5vmin 5vmin @boardShadow;
             box-shadow:0.5vmin 0.5vmin 5vmin @boardShadow;
-            background-image: url(@backgroundImage);
+            .bgMarbleBoard();
             .brdColumns, .brdRows{
                 position:absolute;
                 // border:1px solid red;
@@ -169,13 +181,22 @@ body {
                 .row:nth-child(even){
                     .cell:nth-child(odd){
                         background-color:@blackBackground;
-                    }    
+                        .bgMarbleCellBlack();
+                    }
+                    .cell:nth-child(even){
+                        background-color:@whiteBackground;
+                        .bgMarbleCellWhite();
+                    }
                 }
                 .row:nth-child(odd){
                     .cell:nth-child(even){
                         background-color:@blackBackground;
-                        
-                    }    
+                        .bgMarbleCellBlack();
+                    }
+                    .cell:nth-child(odd){
+                        background-color:@whiteBackground;
+                        .bgMarbleCellWhite();
+                    }
                 }
                 .piece {
                     z-index:500;
@@ -187,11 +208,11 @@ body {
                     z-index:100;
                     &.white {
                         color:@whiteColor;
-                        // text-shadow:0px 0px 10px @whiteShadow;
+                        text-shadow:0px 0px 10px @whiteShadow;
                     }
                     &.black {
                         color:@blackColor;
-                        // text-shadow:0px 0px 10px @blackShadow;
+                        text-shadow:0px 0px 10px @blackShadow;
                     }
                 }
             }
