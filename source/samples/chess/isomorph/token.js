@@ -32,8 +32,8 @@ function toQs (o) {
         i;
     for (i in o) {
         if (o.hasOwnProperty(i)) {
-            r.push(`${i  }=${  encodeURIComponent(o[i])}`);
+            r.push(`${i}=${encodeURIComponent(o[i])}`);
         }
     }
-    return `?${  r.join('&')}`;
+    return `?${r.join('&')}`;
 }
