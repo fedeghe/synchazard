@@ -15,7 +15,11 @@
     };
 
     DC.prototype.handle = function (d) {
-        if (maltaV('NS').id !== d._ID) {
+        // since on source/samples/home/serverws/actions/montecarlo.js
+        // we use on action askMontecarlo we use otherscast,then the 
+        // ws-server itself does filter out 
+        // other wise if we use broadcast
+        // if (maltaV('NS').id !== d._ID) {
 
             // eslint-disable-next-line no-restricted-globals, no-alert
             if (confirm('Want to help a fellow client to compute π?')) {
@@ -26,7 +30,7 @@
                 // eslint-disable-next-line no-alert
                 alert('Got it!... thanks anyway!');
             }
-        }
+        // }
     };
 
     maltaV('NS').handlers.DistComp = new DC();
