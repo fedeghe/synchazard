@@ -46,9 +46,9 @@ class Action{
 
     decodeMessage(action) {return JSON.parse(action);}
 
-    onconnection(f) {
+    onconnection(onConnectionHandler) {
         var self = this;
-        this.ss.wss.on('connection', (ws/* , req */) => {
+        this.ss.wss.on('connection', (ws, req) => {
             ws.on('message', (data) => {
                 data = JSON.parse(data);
 
@@ -74,7 +74,7 @@ class Action{
                 /* forward injecting also the ws, with the id attached */
                 ws.id = data._ID;
                 Action.setCount(data);
-                f(data, ws);
+                onConnectionHandler(data, ws, req);
             });
         });   
     }
