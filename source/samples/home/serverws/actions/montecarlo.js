@@ -75,11 +75,6 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 // block if already busy
                 if (!action.data.free) break;
                 
-                // lock it
-                action.data.free = false;
-                // broadcast the status so the client can disable the button
-                synchazard.broadcast(action.data.actions.busy);
-                
                 // store it as the one who triggered,
                 // used in `completed` action
                 askingingCli = data._ID;
@@ -88,6 +83,11 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 available = action.getCount();
                 
                 if (available.URL[data._URL].length > 1) {
+                    // lock it
+                    action.data.free = false;
+                    // broadcast the status so the client can disable the button
+                    synchazard.broadcast(action.data.actions.busy);
+
                     // synchazard.broadcast(action.data.actions.ask(askingingCli));
                     // or with some variations also on the sender client (to filter itself, it knows his id )
                     synchazard.otherscast(data._ID, action.data.actions.ask(askingingCli)).then(ids => {
