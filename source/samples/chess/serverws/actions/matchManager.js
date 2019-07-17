@@ -1,16 +1,19 @@
 maltaF('../../isomorph/token.js')
 
-const createMatchToken = () => {
-    // eslint-disable-next-line no-undef
+const Manager = {
+    nextId: +new Date,
+    matches: {}
+};
+
+Manager.createMatchToken = () => {
+    /* eslint-disable no-undef */
     const t1 = createToken(64),
-        // eslint-disable-next-line no-undef
         t2 = createToken(64),
-        // eslint-disable-next-line no-undef
         t3 = createToken(64),
-        // eslint-disable-next-line no-undef
         t4 = createToken(64),
         // eslint-disable-next-line no-use-before-define
         id = 3 * Manager.nextId++;
+    /* eslint-enable */
     return { 
         token: {
             white: {
@@ -26,14 +29,10 @@ const createMatchToken = () => {
         matchId: mix([t1, t2, t3, t4], id),
         created: +new Date
     };
-},
-
- Manager = {
-    nextId: +new Date,
-    matches: {}
 };
 
 Manager.createMatch = function () {
+    // eslint-disable-next-line no-undef
     const m = createMatchToken();
     Manager.matches[m.matchId] = m;
     return {
