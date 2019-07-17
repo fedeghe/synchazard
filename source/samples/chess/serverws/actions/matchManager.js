@@ -33,7 +33,7 @@ Manager.createMatchToken = () => {
 
 Manager.createMatch = function () {
     // eslint-disable-next-line no-undef
-    const m = createMatchToken();
+    const m = Manager.createMatchToken();
     Manager.matches[m.matchId] = m;
     return {
         matchId: m.matchId,
@@ -49,4 +49,13 @@ Manager.saveMatch = function (data) {
 };
 Manager.joinMatch = function (data) {
     console.log('saving match: ', data);
+};
+Manager.checkLink = function (data) {
+    const url = data._URL,
+        idMatch = url.match(/join=(.*)/),
+        id = idMatch ? idMatch[1] : null;
+    return id && {
+        id,
+        data 
+    };
 };

@@ -10,7 +10,7 @@
 @blackBackground: #537395;
 @blackShadow: #fff;
 
-@hoverColor: rgba(0, 255, 0, 0.4);
+@hoverCellColor: rgba(0, 255, 0, 0.4);
 @boardTextColor: rgba(200, 200, 200, 0.6);
 
 @outerBorder: rgba(170,170,170, 0.5);
@@ -29,7 +29,7 @@
 @backgroundImageCellWhite: '../media/marble2.jpg';
 @backgroundImageCellBlack: '../media/marble4.jpg';
 
-@rot: 20deg; 
+@rot: 30deg; 
 // @rot: 0deg;
 
 // @perspective: calc(2 * 100vmin);
@@ -37,17 +37,23 @@
 
 .bgMarbleBoard(){
     background-image: url(@backgroundImageBoard);
+    background-repeat: no-repeat;
+  background-size: auto;
 }
 .bgMarbleCellWhite(){
     background-image: url(@backgroundImageCellWhite);
+    background-repeat: no-repeat;
+  background-size: auto;
 }
 .bgMarbleCellBlack(){
     background-image: url(@backgroundImageCellBlack);
+    background-repeat: no-repeat;
+  background-size: auto;
 }
 
 body {
     background-color: @bgColor;
-    padding: 10;
+    padding: 10px;
     font-family:verdana;
 
     .gameContainer{
@@ -62,6 +68,8 @@ body {
         .boardContainer{
             color: @boardTextColor;
             transform: rotateX(@rot);
+            perspective: @perspective;
+            // perspective-origin: bottom;
             width:@perc;
             height:@perc;
             position:relative;
@@ -161,7 +169,7 @@ body {
 
                         background-color: @whiteBackground;
                         &>.piece:hover {
-                            background-color:@hoverColor;
+                            background-color:@hoverCellColor;
                             cursor:pointer;
                         }
 
@@ -214,6 +222,23 @@ body {
                         color:@blackColor;
                         text-shadow:0px 0px 10px @blackShadow;
                     }
+                }
+            }
+            .underBoardContainer{
+                .bgMarbleCellBlack();
+                height:5vh;
+                position:absolute;
+                bottom:-3vh;
+                left:1%;
+                width:98%;
+                transform: rotateX(-2*@rot);
+                font-size:3vh;
+                a {
+                    color:inherit;
+                    text-decoration: none;
+                }
+                a:hover {
+                    color:white;
                 }
             }
 

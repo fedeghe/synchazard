@@ -6,7 +6,8 @@
      */
     // eslint-disable-next-line no-unused-vars
     var CL = {},
-        game = null;
+        game = null,
+        trg = document.getElementById('trg');
 
     /* eslint-disable */
     maltaF('chess/config.js')
@@ -21,28 +22,33 @@
      * publish the handler
      */
     maltaV('NS').handlers.chessManager = {
-        handle: (d) => {
-            if (d._TYPE !== 'action') {
+        handle: (data) => {
+            if (data._TYPE !== 'action') {
                 return;
             }
-            switch (d._ACTION) {
-            case 'init':
-                // eslint-disable-next-line no-undef
-                game = new Chess(
-                    document.getElementById('trg')
-                );
-                game.start(d);
-                game.checkQs();
-                break;
-            case 'matchCreated':
-                console.log('Consume the link');
-                console.log(d);
-                game.newGameLink(d);
-                break;
-            default:
-                console.log('default:');
-                console.log(d);
-                break;
+            switch (data._ACTION) {
+                case 'init':
+                    // eslint-disable-next-line no-undef
+                    game = new Chess(trg);
+                    game.start(data);
+                    game.checkQs();
+                    break;
+                case 'matchCreated':
+                    console.log('Consume the link');
+                    console.log(data);
+                    game = new Chess(trg);
+                    game.newGameLink(data);
+                    break;
+                case 'matchStarted':
+                    // eslint-disable-next-line no-undef
+                    game = new Chess(trg);
+                    game.start(data);
+                    game.checkQs();
+                    break;
+                default:
+                    console.log('default:');
+                    console.log(data);
+                    break;
             }
         }
     };

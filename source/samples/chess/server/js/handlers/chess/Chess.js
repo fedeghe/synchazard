@@ -126,11 +126,22 @@ Chess.prototype.initBoard = function () {
         this.board.appendChild(row);
     }
     this.boardContainer.appendChild(this.board);
+    this.boardContainer.appendChild(this.underBoardContainer);
+};
+
+Chess.prototype.initUnderBoardContainer = function () {
+    var anchor = document.createElement('a');
+    this.underBoardContainer = CL.dom.create({ tag: 'div', cls: 'underBoardContainer' });
+    anchor.setAttribute('href', '//wwww.chessdoom.org');
+    anchor.setAttribute('target', '_blank');
+    anchor.innerHTML = 'chessdoom.org';
+    this.underBoardContainer.appendChild(anchor)
 };
 
 Chess.prototype.initBoardContainer = function () {
     this.boardContainer = CL.dom.create({ tag: 'div', cls: 'boardContainer' });
     this.initBoardersContainer();
+    this.initUnderBoardContainer();
     this.initBoard();
 };
 
@@ -150,14 +161,15 @@ Chess.prototype.render = function () {
  * entry point for events
  */
 Chess.prototype.newGameLink = function (d) {
-    console.log(d._PAYLOAD.link);
+    var {link} = d._PAYLOAD;
+    prompt('Copy the following link and give it to Your opponent.', link)
 };
 Chess.prototype.start = function (d) {
     console.log('Start Chess');
-    console.log(d);
+    config.start = 'black';
     this.cleanup().init();
 };
 Chess.prototype.checkQs = function () {
     var qs = CL.bom.qs2obj();
-    console.log(qs);
+    // console.log(qs);
 };

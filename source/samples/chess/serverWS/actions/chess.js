@@ -5,16 +5,30 @@ module.exports.launch = (action /* , synchazard, params */) => {
     // just listen
     //
     action.onconnection((data, ws) => {
+        let gotNewMatch = false;
         if (data._TYPE !== 'action') return;
 
+        console.log("DATA: ");
         console.log(data);
+        console.log("------------\n\n");
         
         switch (data._ACTION) {
             case 'init':
                 /**
                  * check if qs contains all needed for a match
                  */
-
+                gotNewMatch = Manager.checkLink(data);
+                if (gotNewMatch) {
+                    console.log('sending init match data')
+                    ws.send(action.encodeMessage({
+                        _ACTION: 'matchCreated',
+                        _PAYLOAD: {
+                            initData: gotNewMatch
+                        }
+                    }));
+                    break;
+                }
+                
                 /**
                  * otherwise simply init
                  */
