@@ -54,7 +54,8 @@ module.exports.launch = (action, synchazard /* , params */) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
             case 'init':
-                synchazard.unicast(data._ID, action.data.actions.completed());
+                // synchazard.unicast(data._ID, action.data.actions.completed());
+                ws.send(action.data.actions.completed());
                 break;
             case 'askMontecarlo':
                 askingingCli = data._ID;
@@ -63,13 +64,15 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 if (available.URL[data._URL].length > 1) {
                     synchazard.broadcast(action.data.actions.ask(askingingCli));
                 } else {
-                    synchazard.unicast(data._ID, action.data.actions.noClients);
+                    // synchazard.unicast(data._ID, action.data.actions.noClients);
+                    ws.send(action.data.actions.noClients);
                 }
                 break;
             case 'acceptedMontecarlo':
                 partecipants++;
                 ws.send(action.data.actions.proceed);
-                synchazard.unicast(data._ID, action.data.actions.thx);
+                // synchazard.unicast(data._ID, action.data.actions.thx);
+                ws.send(action.data.actions.thx);
                 break;
             case 'joinMontecarlo':
                 if (partecipants) {
