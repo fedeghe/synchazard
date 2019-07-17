@@ -15,12 +15,17 @@ module.exports.launch = (action, synchazard /* , params */) => {
     // SETUP
     //
     action.setup({
+        // a flag to manage concurrent askMontecarlo requests
+        busy: false,
         clients: 0,
         actions: {
             ask: (id) => {
                 return action.encodeMessage({
                     _ACTION: 'requestRandomPairs'
                 }, { id: id });
+                // the id here is not reaaly usefull since 
+                // we use otherscast; it is if we use broadcast 
+                // (and we even have to activete the folter on the clients handler)
             },
             thx: action.encodeMessage({
                 _ACTION: 'thx',
@@ -49,37 +54,61 @@ module.exports.launch = (action, synchazard /* , params */) => {
 
     // CONNECTION
     //
-    action.onconnection((data, ws) => {
+    action.onconnection((data, ws, req) => {
+        // console.log(req)
         let available = null;
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
             case 'init':
                 // synchazard.unicast(data._ID, action.data.actions.completed());
+                // since the source is the sender the unicast (that needs the id)
+                // can be replaced with ws.send
                 ws.send(action.data.actions.completed());
                 break;
             case 'askMontecarlo':
+                // block if already busy
+                if (action.data.busy) break;
+                // lock it
+                action.data.busy = true;
+                // store it as the one who triggered, used in `completed` action
                 askingingCli = data._ID;
                 // there are other clients on this page available?
                 available = action.getCount();
                 if (available.URL[data._URL].length > 1) {
-                    synchazard.broadcast(action.data.actions.ask(askingingCli));
+                    // synchazard.broadcast(action.data.actions.ask(askingingCli));
+                    // or with some variations also on the sender client (to filter itself, it knows his id )
+                    synchazard.otherscast(data._ID, action.data.actions.ask(askingingCli)).then(ids => {
+                        partecipants = ids.length;
+                    });
+                    // or even 
+                    // partecipants = Object.keys(available.ID).length
                 } else {
                     // synchazard.unicast(data._ID, action.data.actions.noClients);
+                    // same here
                     ws.send(action.data.actions.noClients);
                 }
                 break;
             case 'acceptedMontecarlo':
-                partecipants++;
+                // partecipants++;
                 ws.send(action.data.actions.proceed);
+
                 // synchazard.unicast(data._ID, action.data.actions.thx);
+                // same here
                 ws.send(action.data.actions.thx);
+
                 break;
             case 'joinMontecarlo':
                 if (partecipants) {
                     results.inside += data._DATA.inside;
                     results.outside += data._DATA.outside;
                 }
-                !--partecipants && synchazard.broadcast(action.data.actions.completed());
+                --partecipants;
+                if ( partecipants === 0) {
+                    synchazard.broadcast(action.data.actions.completed()).then((r) => {
+                        console.log('ids: ', r);
+                        action.data.busy = false;
+                    });
+                }
                 break;
             default:break;
         }
