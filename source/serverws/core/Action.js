@@ -46,13 +46,14 @@ class Action{
 
     decodeMessage(action) {return JSON.parse(action);}
 
-    onconnection(onConnectionHandler) {
+    onconnection(onConnectionHandler, onCloseHandler) {
         var self = this;
         this.ss.wss.on('connection', (ws, req) => {
             ws.on('message', (data) => {
                 data = JSON.parse(data);
 
                 if (data._TYPE === 'action' && data._ACTION === 'close') {
+                    onCloseHandler && onCloseHandler(data, ws, req)
                     Action.unsetCount(data);
                     return;
                 }
