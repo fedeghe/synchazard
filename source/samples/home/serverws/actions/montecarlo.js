@@ -1,6 +1,6 @@
 module.exports.launch = (action, synchazard /* , params */) => {
     let askingingCli = null,
-        partecipants = 0,
+        pendingPartecipants = 0,
         currentResult = 0;
 
     const baseValue = 3,
@@ -17,7 +17,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
     action.setup({
         // a flag to manage concurrent askMontecarlo requests
         free: true,
-        clients: 0,
+        // clients: 0,
         actions: {
             ask: (id) => {
                 return action.encodeMessage({
@@ -44,9 +44,9 @@ module.exports.launch = (action, synchazard /* , params */) => {
             free: action.encodeMessage({
                 _ACTION: 'free'
             }),
-            completed: () => {
+            update: () => {
                 const response = {
-                    _ACTION: 'endComputation',
+                    _ACTION: 'updatedComputation',
                     _PREVIOUS: currentResult,
                     _STATS: results
                 };
@@ -60,23 +60,37 @@ module.exports.launch = (action, synchazard /* , params */) => {
 
     // CONNECTION
     //
+    // eslint-disable-next-line complexity
     action.onconnection((data, ws, req) => {
         // console.log(req)
         let available = null;
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
             case 'init':
-                // synchazard.unicast(data._ID, action.data.actions.completed());
+                // synchazard.unicast(data._ID, action.data.actions.update());
                 // since the source is the sender the unicast (that needs the id)
                 // can be replaced with ws.send
-                ws.send(action.data.actions.completed());
+
+                available = action.getCount();
+
+                ws.send(action.data.actions.update());
+                if (!action.data.free) {
+                    synchazard.unicast(data._ID, action.data.actions.busy);
+                } else {
+                    pendingPartecipants++;
+                    synchazard.broadcast(action.data.actions.free);
+                    // on askMontecarlo in case will be reset correctly
+                }
+                if (available.URL[data._URL].length <= 1) {
+                    ws.send(action.data.actions.noClients);
+                }
                 break;
             case 'askMontecarlo':
                 // block if already busy
                 if (!action.data.free) break;
                 
                 // store it as the one who triggered,
-                // used in `completed` action
+                // used in `update` action
                 askingingCli = data._ID;
 
                 // there are other clients on this page available?
@@ -91,10 +105,10 @@ module.exports.launch = (action, synchazard /* , params */) => {
                     // synchazard.broadcast(action.data.actions.ask(askingingCli));
                     // or with some variations also on the sender client (to filter itself, it knows his id )
                     synchazard.otherscast(data._ID, action.data.actions.ask(askingingCli)).then(ids => {
-                        partecipants = ids.length;
+                        pendingPartecipants = ids.length;
                     });
                     // or even 
-                    // partecipants = Object.keys(available.ID).length
+                    // pendingPartecipants = Object.keys(available.ID).length
                 } else {
                     // synchazard.unicast(data._ID, action.data.actions.noClients);
                     // same here
@@ -108,31 +122,51 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 ws.send(action.data.actions.thx);
 
                 break;
+            case 'rejectedMontecarlo':
+                --pendingPartecipants;
+                action.data.free = pendingPartecipants === 0;
+                if (action.data.free) {
+                    // broadcast the status so the client can reenable the button
+                    synchazard.broadcast(action.data.actions.free);
+                    askingingCli = null;
+                }
+                break;
+                
             case 'joinMontecarlo':
                 // the client sent back his contribution
                 // store it!
-                if (partecipants) {
+                if (pendingPartecipants) {
                     results.inside += data._DATA.inside;
                     results.outside += data._DATA.outside;
+                    // thus one partecipant has done
+                    --pendingPartecipants;
                 }
-                
-                // thus one partecipant has done
-                --partecipants;
 
                 // broadcast the results
-                // if there are no more partecipants then
+                // if there are no more pendingPartecipants then
                 // it is time, maybe, to reenable it
-                synchazard.broadcast(action.data.actions.completed()).then((r) => {
+                synchazard.broadcast(action.data.actions.update()).then((r) => {
                     // time to re-enable it
-                    action.data.free = partecipants === 0;
+                    action.data.free = pendingPartecipants === 0;
                     if (action.data.free) {
                         // broadcast the status so the client can reenable the button
                         synchazard.broadcast(action.data.actions.free);
+                        askingingCli = null;
                     }
                 });
                 
                 break;
             default:break;
+        }
+    }, (data, ws, req) => {
+        if (data._ACTION === 'close') {
+            pendingPartecipants && --pendingPartecipants;
+
+            // time to re-enable it, maybe
+            action.data.free = pendingPartecipants === 0;
+            // console.log(pendingPartecipants);
+            // broadcast the status so the client can reenable the button
+            action.data.free && synchazard.broadcast(action.data.actions.free);
         }
     });
 };

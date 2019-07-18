@@ -4,9 +4,11 @@
 
     function DC() { }
 
-    DC.prototype.set = function (buttonID, resultID) {
+    DC.prototype.set = function (buttonID, resultID, messageID) {
+        var self = this;
         this.button = document.getElementById(buttonID);
         this.result = document.getElementById(resultID);
+        this.message = document.getElementById(messageID);
         this.button.addEventListener('click', function () {
             maltaV('NS').send({
                 _ACTION: 'askMontecarlo'
@@ -14,47 +16,66 @@
         });
     };
 
-    DC.prototype.handle = function (d) {
-        // since on source/samples/home/serverws/actions/montecarlo.js
-        // we use on action askMontecarlo we use otherscast,then the 
-        // ws-server itself does filter out 
-        // other wise if we use broadcast
-        // if (maltaV('NS').id !== d._ID) {
-
-            // eslint-disable-next-line no-restricted-globals, no-alert
-            if (confirm('Want to help a fellow client to compute π?')) {
-                maltaV('NS').send({
-                    _ACTION: 'acceptedMontecarlo'
-                });
-            } else {
+    DC.prototype.handle = function (data) {
+        switch(data._ACTION) {
+            case 'requestRandomPairs':
+                // eslint-disable-next-line no-restricted-globals, no-alert
+                if (confirm('Want to help a fellow client to compute π?')) {
+                    maltaV('NS').send({
+                        _ACTION: 'acceptedMontecarlo'
+                    });
+                } else {
+                    maltaV('NS').send({
+                        _ACTION: 'rejectedMontecarlo'
+                    });
+                    // eslint-disable-next-line no-alert
+                    maltaV('NS').handlers.DistComp.message.innerHTML = 'Got it!... thanks anyway!';
+                }
+                break;
+            case 'updatedComputation':
+                consumeResult(data);
+                break;
+            case 'thx':
+                console.log(data._MSG);
+                break;
+            case 'noClients':
                 // eslint-disable-next-line no-alert
-                alert('Got it!... thanks anyway!');
-            }
-        // }
+                // alert('Ups ... !\nLooks like there are no other clients on this page that could help You... try later!\nor open one or more of the same page elsewhere');
+                maltaV('NS').handlers.DistComp.button.disabled = true;
+                maltaV('NS').handlers.DistComp.message.innerHTML = '... no clients connected';
+                break;
+            case 'busy': 
+                maltaV('NS').handlers.DistComp.button.disabled = true;
+                maltaV('NS').handlers.DistComp.button.title = '... ongoing collaborative calculation...be patient';
+                maltaV('NS').handlers.DistComp.message.innerHTML = '... ongoing!';
+                break;
+            case 'free': 
+                maltaV('NS').handlers.DistComp.button.disabled = false;
+                maltaV('NS').handlers.DistComp.button.title = 'trigger it!';
+                maltaV('NS').handlers.DistComp.message.innerHTML = 'ready!';
+
+                break;
+            default: break;
+        }
     };
 
     maltaV('NS').handlers.DistComp = new DC();
 
-    maltaV('NS').handlers.DistCompNoClients = function (/* data */) {
-        // eslint-disable-next-line no-alert
-        alert('Ups ... !\nLooks like there are no other clients on this page that could help You... try later!\nor open one or more of the same page elsewhere');
-    };
     maltaV('NS').handlers.DistCompSendResult = function (data) {
         maltaV('NS').send({
             _ACTION: 'joinMontecarlo',
             _DATA: data
         });
     };
-    maltaV('NS').handlers.DistCompSayThx = function (data) {
-        console.log(data._MSG);
-    };
-    maltaV('NS').handlers.DistCompConsumeResult = function (data) {
+
+    function consumeResult(data) {
         /**
          * here we filter the message on the client,
          * if the local cli id is not the one given by the server (the original requesting client id)
          * 
          * if we set to false the all flag  only the asking client will display the result
          */
+        // eslint-disable-next-line vars-on-top
         var all = true,
             result,
             distance,
@@ -78,11 +99,7 @@
             maltaV('NS').handlers.DistComp.result.appendChild(distance);
             maltaV('NS').handlers.DistComp.result.appendChild(using);
         }
-    };
-    maltaV('NS').handlers.DistCompBusy = function (data) {
-        maltaV('NS').handlers.DistComp.button.disabled = true;
-    };
-    maltaV('NS').handlers.DistCompFree = function (data) {
-        maltaV('NS').handlers.DistComp.button.disabled = false;
-    };
+    }
+
+
 })();

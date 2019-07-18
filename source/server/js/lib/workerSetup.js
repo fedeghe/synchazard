@@ -332,7 +332,7 @@
      * in case a error occurs just shut the worker down
      */
     W["maltaV('NS')"].synchazard.onerror = function(e) {
-        console.log(e);
+        // terminate the worker
         W["maltaV('NS')"].synchazard.terminate();
     };
 
@@ -342,5 +342,8 @@
      */
     // eslint-disable-next-line
     // W.maltaV('NS') = maltaV('NS');
-    W.onbeforeunload = W["maltaV('NS')"].synchazard.terminate;
+    W.addEventListener('beforeunload', function () {
+        // terminate the worker
+        W["maltaV('NS')"].synchazard.terminate();
+    });
 }(this))
