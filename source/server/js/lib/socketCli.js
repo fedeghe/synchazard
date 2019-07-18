@@ -102,13 +102,16 @@
     /**
      * let the client close the connection before refresh OR close
      */ 
-    function close() {
+    function close(e) {
+        e.preventDefault();
+        // Chrome requires returnValue to be set
+        e.returnValue = '';
+        
         /**
          * automatically send the close client action 
          * allowing the server to be updated about which client is on which page
          */
         ws && ws.send(maltaV('NS').utils.createCloseAction());
-        
         /**
          * automatically blur current element
          * on reload otherwise would hang

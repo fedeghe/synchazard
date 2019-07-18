@@ -7,7 +7,7 @@
         head.removeChild(this);
     }
     function launchDC () {
-        maltaV('NS').handlers.DistComp.set('ask', 'result');
+        maltaV('NS').handlers.DistComp.set('ask', 'result', 'message');
     }
     maltaV('NS').utils.loadScript('/js/handlers/dist.js', remove);
     window.addEventListener('load', launchDC);
