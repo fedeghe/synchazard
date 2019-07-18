@@ -100,6 +100,4 @@
             maltaV('NS').handlers.DistComp.result.appendChild(using);
         }
     }
-
-
 })();
