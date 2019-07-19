@@ -103,9 +103,9 @@
      * let the client close the connection before refresh OR close
      */ 
     function close(e) {
-        e.preventDefault();
+        // e.preventDefault();
         // Chrome requires returnValue to be set
-        e.returnValue = '';
+        // e.returnValue = '';
         
         /**
          * automatically send the close client action 

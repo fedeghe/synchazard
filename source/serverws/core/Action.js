@@ -11,7 +11,9 @@ class Action{
 
     setup(d) {this.data = d || {};}
 
-    getCount() {return Action.count;}
+    getCount() { return Action.count;}
+
+    getSize(url) { return Action.count.URL[url].length;}
 
     getTime() {
         var d = new Date(),
@@ -53,8 +55,10 @@ class Action{
                 data = JSON.parse(data);
 
                 if (data._TYPE === 'action' && data._ACTION === 'close') {
-                    onCloseHandler && onCloseHandler(data, ws, req)
+                    // FIRST !!!!
                     Action.unsetCount(data);
+                    // THEN.....
+                    onCloseHandler && onCloseHandler(data, ws, req)
                     return;
                 }
 
@@ -108,6 +112,7 @@ Action.setCount = function (data) {
 };
 
 Action.unsetCount = function (data) {
+    console.log('unset ', data)
     var t = null;
     if (data._ID in Action.count.ID) {
         t = Action.count.ID[data._ID].indexOf(data._URL);

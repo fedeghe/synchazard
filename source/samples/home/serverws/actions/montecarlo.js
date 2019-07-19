@@ -1,7 +1,8 @@
 module.exports.launch = (action, synchazard /* , params */) => {
     let askingingCli = null,
         pendingPartecipants = 0,
-        currentResult = 0;
+        currentResult = 0,
+        available = null;
 
     const baseValue = 3,
         results = {
@@ -63,7 +64,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
     // eslint-disable-next-line complexity
     action.onconnection((data, ws, req) => {
         // console.log(req)
-        let available = null;
+        
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
             case 'init':
@@ -71,17 +72,17 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 // since the source is the sender the unicast (that needs the id)
                 // can be replaced with ws.send
 
-                available = action.getCount();
+                available = action.getSize(data._URL);
 
                 ws.send(action.data.actions.update());
                 if (!action.data.free) {
                     synchazard.unicast(data._ID, action.data.actions.busy);
                 } else {
-                    pendingPartecipants++;
+                    pendingPartecipants = available - 1;
                     synchazard.broadcast(action.data.actions.free);
                     // on askMontecarlo in case will be reset correctly
                 }
-                if (available.URL[data._URL].length <= 1) {
+                if (available <= 1) {
                     ws.send(action.data.actions.noClients);
                 }
                 break;
@@ -94,9 +95,9 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 askingingCli = data._ID;
 
                 // there are other clients on this page available?
-                available = action.getCount();
+                available = action.getSize(data._URL);
                 
-                if (available.URL[data._URL].length > 1) {
+                if (available > 1) {
                     // lock it
                     action.data.free = false;
                     // broadcast the status so the client can disable the button
@@ -135,7 +136,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
             case 'joinMontecarlo':
                 // the client sent back his contribution
                 // store it!
-                if (pendingPartecipants) {
+                if (pendingPartecipants > 0) {
                     results.inside += data._DATA.inside;
                     results.outside += data._DATA.outside;
                     // thus one partecipant has done
@@ -159,6 +160,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
             default:break;
         }
     }, (data, ws, req) => {
+        
         if (data._ACTION === 'close') {
             pendingPartecipants && --pendingPartecipants;
 
@@ -166,7 +168,16 @@ module.exports.launch = (action, synchazard /* , params */) => {
             action.data.free = pendingPartecipants === 0;
             // console.log(pendingPartecipants);
             // broadcast the status so the client can reenable the button
-            action.data.free && synchazard.broadcast(action.data.actions.free);
+
+            if (action.data.free) {
+                synchazard.broadcast(action.data.actions.free);
+            }
+            available = action.getSize(data._URL);
+            console.log(available)
+            if (available < 2) {
+                synchazard.broadcast(action.data.actions.noClients);
+            }
+            
         }
     });
 };
