@@ -112,7 +112,6 @@ Action.setCount = function (data) {
 };
 
 Action.unsetCount = function (data) {
-    console.log('unset ', data)
     var t = null;
     if (data._ID in Action.count.ID) {
         t = Action.count.ID[data._ID].indexOf(data._URL);
