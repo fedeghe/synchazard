@@ -19,44 +19,44 @@ const fs = require('fs'),
  * launch all actions passing if found other parameters to activate debug
  */
 synchazard.launch([{
-//     path: 'actions/jsonObserver',
-//     deps: { fs, path },
-//     jsonToObserve: './data1.json',
-//     actor: 'jsonObserver'
-// }, {
-//     path: 'actions/style',
-//     deps: { fs, path },
-//     cssToObserve: 'css/sync_style.css',
-//     actor: 'style'
-// }, {
-//     path: 'actions/script',
-//     deps: { fs, path },
-//     jsToObserve: 'js/sync_script.js',
-//     actor: 'script'
-// }, {
-//     path: 'actions/incremental',
-//     actor: 'incremental'
-// }, {
-//     path: 'actions/randomPercentage',
-//     actor: 'randomPercentage'
-// }, {
-//     path: 'actions/reactor',
-//     actor: 'reactor'
-// }, {
-//     path: 'actions/react',
-//     actor: 'react'
-// }, {
-//     path: 'actions/chat',
-//     actor: 'chat'
-// }, {
+    path: 'actions/jsonObserver',
+    deps: { fs, path },
+    jsonToObserve: './data1.json',
+    actor: 'jsonObserver'
+}, {
+    path: 'actions/style',
+    deps: { fs, path },
+    cssToObserve: 'css/sync_style.css',
+    actor: 'style'
+}, {
+    path: 'actions/script',
+    deps: { fs, path },
+    jsToObserve: 'js/sync_script.js',
+    actor: 'script'
+}, {
+    path: 'actions/incremental',
+    actor: 'incremental'
+}, {
+    path: 'actions/randomPercentage',
+    actor: 'randomPercentage'
+}, {
+    path: 'actions/reactor',
+    actor: 'reactor'
+}, {
+    path: 'actions/react',
+    actor: 'react'
+}, {
+    path: 'actions/chat',
+    actor: 'chat'
+}, {
     path: 'actions/montecarlo',
     actor: 'montecarlo'
-// }, {
-//     path: 'actions/doJob',
-//     actor: 'doJob'
-// }, {
-//     path: 'actions/collabText',
-//     actor: 'collabText'
+}, {
+    path: 'actions/doJob',
+    actor: 'doJob'
+}, {
+    path: 'actions/collabText',
+    actor: 'collabText'
 }, {
     path: 'actions/test'
 }
