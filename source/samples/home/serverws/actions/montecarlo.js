@@ -173,7 +173,6 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 synchazard.broadcast(action.data.actions.free);
             }
             available = action.getSize(data._URL);
-            console.log(available)
             if (available < 2) {
                 synchazard.broadcast(action.data.actions.noClients);
             }
