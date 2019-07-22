@@ -159,7 +159,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 break;
             default:break;
         }
-    }, (data, ws, req) => {
+    }, (data /* , ws, req */) => {
         if (data._ACTION === 'close') {
             // console.log('0', pendingPartecipants)
             pendingPartecipants && --pendingPartecipants;
