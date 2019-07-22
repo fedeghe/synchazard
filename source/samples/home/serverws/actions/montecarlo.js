@@ -62,7 +62,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
     // CONNECTION
     //
     // eslint-disable-next-line complexity
-    action.onconnection((data, ws, req) => {
+    action.onconnection((data, ws /* , req */ ) => {
         // console.log(req)
         
         if (data._TYPE !== 'action') return;
