@@ -102,7 +102,7 @@
     /**
      * let the client close the connection before refresh OR close
      */ 
-    function close(e) {
+    function close( /* e */ ) {
         // e.preventDefault();
         // Chrome requires returnValue to be set
         // e.returnValue = '';
