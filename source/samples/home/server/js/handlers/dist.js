@@ -5,7 +5,6 @@
     function DC() { }
 
     DC.prototype.set = function (buttonID, resultID, messageID) {
-        var self = this;
         this.button = document.getElementById(buttonID);
         this.result = document.getElementById(resultID);
         this.message = document.getElementById(messageID);
