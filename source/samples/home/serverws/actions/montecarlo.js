@@ -146,7 +146,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 // broadcast the results
                 // if there are no more pendingPartecipants then
                 // it is time, maybe, to reenable it
-                synchazard.broadcast(action.data.actions.update()).then((r) => {
+                synchazard.broadcast(action.data.actions.update()).then(() => {
                     // time to re-enable it
                     action.data.free = pendingPartecipants === 0;
                     if (action.data.free) {
