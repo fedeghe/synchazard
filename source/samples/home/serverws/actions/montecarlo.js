@@ -160,21 +160,22 @@ module.exports.launch = (action, synchazard /* , params */) => {
             default:break;
         }
     }, (data, ws, req) => {
-        
         if (data._ACTION === 'close') {
+            // console.log('0', pendingPartecipants)
             pendingPartecipants && --pendingPartecipants;
 
+            // console.log('1', pendingPartecipants)
             // time to re-enable it, maybe
             action.data.free = pendingPartecipants === 0;
-            // console.log(pendingPartecipants);
-            // broadcast the status so the client can reenable the button
 
-            if (action.data.free) {
-                synchazard.broadcast(action.data.actions.free);
-            }
             available = action.getSize(data._URL);
             if (available < 2) {
                 synchazard.broadcast(action.data.actions.noClients);
+            
+            // console.log(pendingPartecipants);
+            // broadcast the status so the client can reenable the button
+            } else {
+                synchazard.broadcast(action.data.actions.free);
             }
             
         }
