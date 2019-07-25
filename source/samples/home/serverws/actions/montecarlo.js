@@ -76,16 +76,13 @@ module.exports.launch = (action, synchazard /* , params */) => {
 
                 ws.send(action.data.actions.update());
 
-                if (action.data.free) {
-                    // pendingPartecipants = available - 1;
-                    synchazard.broadcast(action.data.actions.free);
-                    // on askMontecarlo in case will be reset correctly
-                } else {
-                    synchazard.unicast(data._ID, action.data.actions.busy);
-                }
-                if (available <= 1) {
-                    ws.send(action.data.actions.noClients);
-                }
+                action.data.free
+                ? synchazard.broadcast(action.data.actions.free)
+                : synchazard.unicast(data._ID, action.data.actions.busy);
+
+                available <= 1
+                && ws.send(action.data.actions.noClients);
+
                 break;
             case 'askMontecarlo':
                 // block if already busy
@@ -104,8 +101,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
                     // broadcast the status so the client can disable the button
                     synchazard.broadcast(action.data.actions.busy);
 
-                    // synchazard.broadcast(action.data.actions.ask(askingingCli));
-                    // or with some variations also on the sender client (to filter itself, it knows his id )
+                    // otherscast the collaboration request
                     synchazard.otherscast(data._ID, action.data.actions.ask(askingingCli)).then(ids => {
                         pendingPartecipants = ids.length;
                     });
@@ -113,7 +109,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
                     // pendingPartecipants = Object.keys(available.ID).length
                 } else {
                     // synchazard.unicast(data._ID, action.data.actions.noClients);
-                    // same here
+                    // in this case same as
                     ws.send(action.data.actions.noClients);
                 }
                 break;
