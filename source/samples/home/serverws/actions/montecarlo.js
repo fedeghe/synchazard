@@ -75,12 +75,13 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 available = action.getSize(data._URL);
 
                 ws.send(action.data.actions.update());
-                if (!action.data.free) {
-                    synchazard.unicast(data._ID, action.data.actions.busy);
-                } else {
-                    pendingPartecipants = available - 1;
+
+                if (action.data.free) {
+                    // pendingPartecipants = available - 1;
                     synchazard.broadcast(action.data.actions.free);
                     // on askMontecarlo in case will be reset correctly
+                } else {
+                    synchazard.unicast(data._ID, action.data.actions.busy);
                 }
                 if (available <= 1) {
                     ws.send(action.data.actions.noClients);
@@ -161,19 +162,15 @@ module.exports.launch = (action, synchazard /* , params */) => {
         }
     }, (data /* , ws, req */) => {
         if (data._ACTION === 'close') {
-            // console.log('0', pendingPartecipants)
             pendingPartecipants && --pendingPartecipants;
 
-            // console.log('1', pendingPartecipants)
             // time to re-enable it, maybe
-            action.data.free = pendingPartecipants === 0;
-
+            action.data.free = pendingPartecipants <= 0;
+            
             available = action.getSize(data._URL);
             if (available < 2) {
                 synchazard.broadcast(action.data.actions.noClients);
-            
-            // console.log(pendingPartecipants);
-            // broadcast the status so the client can reenable the button
+                // broadcast the status so the client can reenable the button
             } else {
                 synchazard.broadcast(action.data.actions.free);
             }
