@@ -77,7 +77,6 @@
     
 
     // set actors, even if null
-
     W["maltaV('NS')"].synchazard.postMessage({
         _TYPE: '_INITACTORS',
         _ACTORS: dataActors,
@@ -307,25 +306,34 @@
      */
     W["maltaV('NS')"].synchazard.onmessage = function(e) {
         //= ================================================
-        function r() {
-            switch (typeof W["maltaV('NS')"].handlers[e.data._HANDLER]) {
-                case 'function':
-                    W["maltaV('NS')"].handlers[e.data._HANDLER](e.data._DATA);
-                    break;
+        function r(handler) {
+            switch (typeof handler) {
+                /**
+                 * it is a function thus it is responsible to know how to handle the data 
+                 */
+                case 'function': handler(e.data._DATA); break;
+
+                /**
+                 * it is an instance, then it is requred to have a handle function
+                 */
                 case 'object':
-                    W["maltaV('NS')"].handlers[e.data._HANDLER].handle(e.data._DATA);
+                    if (!('handle' in handler)) {
+                        throw new Error('the handler needs to have a handle function')
+                    }
+                    handler.handle(e.data._DATA);
                     break;
-                default:
-                    break;
+                default: break;
             }
         }
         /**
          * in case give a small timegap
          */
         '_HANDLER' in e.data && e.data._HANDLER in W["maltaV('NS')"].handlers
-            ? r()
+            ? r(W["maltaV('NS')"].handlers[e.data._HANDLER])
             // eslint-disable-next-line no-undef
-            : setTimeout(r, maltaV('WEBSERVER.TIMEGAP'));
+            : setTimeout(function() {
+                r(W["maltaV('NS')"].handlers[e.data._HANDLER])
+            }, maltaV('WEBSERVER.TIMEGAP'));
     };
 
     /**
