@@ -47,7 +47,7 @@
         // eslint-disable-next-line no-multi-assign
         init = ws.onopen = function (){
             maltaV('NS').utils.ready(function(){
-                console.log(`Connection established with ${url}`);
+                console.log(`Connection established with ${url}, sending init req`);
                 ws.send(maltaV('NS').utils.createInitAction());
             });
         };
@@ -132,7 +132,7 @@
     /**
      * when the browser is shut down close the socket,
      * this will not work on safari mobile for example,
-     * need to ahndle that on the server (see ws.on('error', ...) on synchazard.js) 
+     * need to handle that on the server (see ws.on('error', ...) on synchazard.js) 
      */
     W.addEventListener("beforeunload", close);
     W.addEventListener("pagehide", close);
