@@ -94,7 +94,7 @@ let debug = () => {},
      * EXPORTED
      * subexcludecast: toward all but the given ids array set
      */
-    subexcludecast = (ids, data, cb) => {
+    subexcludecast = (ids, data) => {
         const _ids = [];
         return new Promise(resolve => {
             wss.clients.forEach(client => {
