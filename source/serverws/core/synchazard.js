@@ -26,12 +26,11 @@ let debug = () => {},
     broadcast = data => {
         const _ids = [];
         return new Promise(resolve => {
-            wss.clients.forEach(client => {
-                if (client.readyState === WebSocket.OPEN) {
-                    _ids.push(client.id);
-                    client.send(data, { binary: false });
-                }
-            });
+            wss.clients.forEach(client => (
+                client.readyState === WebSocket.OPEN
+                && _ids.push(client.id)
+                && client.send(data, { binary: false })
+            ));
             resolve(_ids);
         });
     },
@@ -43,12 +42,12 @@ let debug = () => {},
     subcast = (ids, data) => {
         const _ids = [];
         return new Promise(resolve => {
-            wss.clients.forEach(client => {
-                if (ids.search(client.id) >= 0 && client.readyState === WebSocket.OPEN) {
-                    _ids.push(client.id);
-                    client.send(data, { binary: false });
-                }
-            });
+            wss.clients.forEach(client => (
+                ids.search(client.id) >= 0
+                && client.readyState === WebSocket.OPEN
+                && _ids.push(client.id)
+                && client.send(data, { binary: false })
+            ));
             resolve(_ids);
         });
     },
@@ -63,12 +62,12 @@ let debug = () => {},
     unicast = (id, data) => {
         const _ids = [];
         return new Promise(resolve => {
-            wss.clients.forEach(client => {
-                if (client.id === id && client.readyState === WebSocket.OPEN) {
-                    _ids.push(client.id);
-                    client.send(data, { binary: false });
-                }
-            });
+            wss.clients.forEach(client => (
+                client.id === id
+                && client.readyState === WebSocket.OPEN
+                && _ids.push(client.id)
+                && client.send(data, { binary: false })
+            ));
             resolve(_ids);
         });
     },
@@ -80,12 +79,12 @@ let debug = () => {},
     otherscast = (id, data) => {
         const _ids = [];
         return new Promise(resolve => {
-            wss.clients.forEach(client => {
-                if (client.id !== id && client.readyState === WebSocket.OPEN) {
-                    _ids.push(client.id);
-                    client.send(data, { binary: false });
-                }
-            });
+            wss.clients.forEach(client => (
+                client.id !== id
+                && client.readyState === WebSocket.OPEN
+                && _ids.push(client.id)
+                && client.send(data, { binary: false })
+            ));
             resolve(_ids);
         })
     },
@@ -97,19 +96,19 @@ let debug = () => {},
     subexcludecast = (ids, data) => {
         const _ids = [];
         return new Promise(resolve => {
-            wss.clients.forEach(client => {
-                if (ids.search(client.id) < 0 && client.readyState === WebSocket.OPEN) {
-                    _ids.push(client.id);
-                    client.send(data, { binary: false });
-                }
-            });
+            wss.clients.forEach(client => (
+                ids.search(client.id) < 0
+                && client.readyState === WebSocket.OPEN
+                && _ids.push(client.id)
+                && client.send(data, { binary: false })
+            ));
             resolve(_ids);
         })
     },
 
     // let define the debug level function 
     //
-    defineDebugFunction = (args) => {
+    defineDebugFunction = args => {
         if (!args.length) return;
         const match = args[0].match(/-(v+)/);
         if (match) {
