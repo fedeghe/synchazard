@@ -103,6 +103,7 @@
      * let the client close the connection before refresh OR close
      */ 
     function close( /* e */ ) {
+        // NOT NEEDED
         // e.preventDefault();
         // Chrome requires returnValue to be set
         // e.returnValue = '';
