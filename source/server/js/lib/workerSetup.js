@@ -306,7 +306,7 @@
      */
     W["maltaV('NS')"].synchazard.onmessage = function(e) {
         //= ================================================
-        function r(handler) {
+        function innerHandler(handler) {
             switch (typeof handler) {
                 /**
                  * it is a function thus it is responsible to know how to handle the data 
@@ -329,10 +329,10 @@
          * in case give a small timegap
          */
         '_HANDLER' in e.data && e.data._HANDLER in W["maltaV('NS')"].handlers
-            ? r(W["maltaV('NS')"].handlers[e.data._HANDLER])
+            ? innerHandler(W["maltaV('NS')"].handlers[e.data._HANDLER])
             // eslint-disable-next-line no-undef
             : setTimeout(function() {
-                r(W["maltaV('NS')"].handlers[e.data._HANDLER])
+                innerHandler(W["maltaV('NS')"].handlers[e.data._HANDLER])
             }, maltaV('WEBSERVER.TIMEGAP'));
     };
 
