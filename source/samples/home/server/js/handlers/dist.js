@@ -52,7 +52,6 @@
                 maltaV('NS').handlers.DistComp.button.disabled = false;
                 maltaV('NS').handlers.DistComp.button.title = 'trigger it!';
                 maltaV('NS').handlers.DistComp.message.innerHTML = 'ready!';
-
                 break;
             default: break;
         }
@@ -67,6 +66,18 @@
         });
     };
 
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
     function consumeResult(data) {
         /**
          * here we filter the message on the client,

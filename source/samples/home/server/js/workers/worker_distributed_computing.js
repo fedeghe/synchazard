@@ -3,10 +3,7 @@ var actors = null,
     strategy = 0,
     jobs = {
         generate: function () {
-            var res = {
-                    inside: 0,
-                    outside: 0
-                },
+            var res = { inside: 0, outside: 0},
                 n = 1E7,
                 x, y;
             while (n--) {
