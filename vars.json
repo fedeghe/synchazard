@@ -25,7 +25,7 @@
         "TESTLIB": "$WEBSERVER.HOST$/js/lib/testnject.js",
         "TIMEGAP": 1,
         "RECONNECTION": {
-            "ATTEMPTS": "Infinity",
+            "MAXATTEMPTS": "Infinity",
             "INTERVAL": 5000
         }
     },

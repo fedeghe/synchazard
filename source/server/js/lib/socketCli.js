@@ -11,7 +11,7 @@
         init = noop,
         send = noop,
         reconnectionAttempts = 0,
-        maxReconnectionAttempts = maltaV('WEBSERVER.RECONNECTION.ATTEMPTS'),
+        maxReconnectionAttempts = maltaV('WEBSERVER.RECONNECTION.MAXATTEMPTS'),
         reconnectionInterval = maltaV('WEBSERVER.RECONNECTION.INTERVAL'),
         url = null;
 
