@@ -10,7 +10,7 @@ module.exports.launch = (action, synchazard, params) => {
         resourceFile: path.resolve(path.join(__dirname, '/../', resourceFile)),
         actions: {
             update: function () {
-                return action.encodeMessage({
+                return action.encode({
                     _ACTION: 'script',
                     _FILECHANGED: `maltaV('DATASERVER.HOST')/${resourceFile}?cb=${Math.random()}`
                 });

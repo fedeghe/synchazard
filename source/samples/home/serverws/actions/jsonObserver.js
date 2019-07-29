@@ -9,7 +9,7 @@ module.exports.launch = (action, synchazard, params) => {
         resourceFile: `/../${resourceFile}`,
         host: `maltaV('DATASERVER.HOST')`,
         actions: {
-            update: action.encodeMessage({
+            update: action.encode({
                 _ACTION: 'xhr',
                 _FILECHANGED: `maltaV('DATASERVER.HOST')/${resourceFile}`
             })

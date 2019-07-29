@@ -6,7 +6,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
             nodeList[nodeId].clients.indexOf(id) > -1 || nodeList[nodeId].clients.push(id);
             nodeList[nodeId].gotToken = id;
             nodeList[nodeId].value = nodeList[nodeId].value || '';
-            return action.encodeMessage({
+            return action.encode({
                 _ACTION: 'disableAll',
                 _VALUE: nodeList[nodeId].value,
                 _NODEID: `${nodeId  }`
@@ -18,14 +18,14 @@ module.exports.launch = (action, synchazard /* , params */) => {
             nodeList[nodeId].clients.indexOf(id) > -1 || nodeList[nodeId].clients.push(id);
             nodeList[nodeId].gotToken = false;
             nodeList[nodeId].value = value;
-            return action.encodeMessage({
+            return action.encode({
                 _ACTION: 'enableAll',
                 _VALUE: `${value  }`,
                 _NODEID: `${nodeId  }`
             }, { id: id });
         },
         getNodes = () => {
-            return action.encodeMessage({
+            return action.encode({
                 _ACTION: 'updateInitStatus',
                 _NODE_LIST: nodeList
             });
@@ -33,7 +33,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
         resize = (id, sizes, nodeId) => {
             nodeList[nodeId] = nodeList[nodeId] || {};
             nodeList[nodeId].sizes = sizes;
-            return action.encodeMessage({
+            return action.encode({
                 _ACTION: 'resize',
                 _SIZES: sizes,
                 _NODEID: `${nodeId  }`

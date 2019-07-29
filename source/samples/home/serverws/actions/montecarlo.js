@@ -21,28 +21,28 @@ module.exports.launch = (action, synchazard /* , params */) => {
         // clients: 0,
         actions: {
             ask: (id) => {
-                return action.encodeMessage({
+                return action.encode({
                     _ACTION: 'requestRandomPairs'
                 }, { id: id });
                 // the id here is not reaaly usefull since 
                 // we use otherscast; it is if we use broadcast 
                 // (and we even have to activete the folter on the clients handler)
             },
-            thx: action.encodeMessage({
+            thx: action.encode({
                 _ACTION: 'thx',
                 _MSG: 'thank You very much'
             }),
-            proceed: action.encodeMessage({
+            proceed: action.encode({
                 _ACTION: 'startComputation',
                 _JOB: 'generate'
             }),
-            noClients: action.encodeMessage({
+            noClients: action.encode({
                 _ACTION: 'noClients'
             }),
-            busy: action.encodeMessage({
+            busy: action.encode({
                 _ACTION: 'busy'
             }),
-            free: action.encodeMessage({
+            free: action.encode({
                 _ACTION: 'free'
             }),
             update: () => {
@@ -54,7 +54,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 response._DATA = calcPi(results);
                 response._ERR = (100 * (Math.PI - parseFloat(response._DATA, 10)) / Math.PI).toFixed(7)
                 currentResult = response._DATA;
-                return action.encodeMessage(response, { id: askingingCli });
+                return action.encode(response, { id: askingingCli });
             }
         }
     });

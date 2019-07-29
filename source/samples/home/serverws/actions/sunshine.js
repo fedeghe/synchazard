@@ -29,7 +29,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
             case 'init':
-                ws.send(action.encodeMessage({
+                ws.send(action.encode({
                     _ACTION: 'sunshine',
                     _PAYLOAD: sliceRot(action.data.colors, action.data.index, action.data.size)
                 }));
@@ -42,7 +42,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
     //
     interval(() => {
         action.data.index++;
-        synchazard.broadcast(action.encodeMessage({
+        synchazard.broadcast(action.encode({
             _ACTION: 'sunshine',
             _PAYLOAD: sliceRot(action.data.colors, action.data.index, action.data.size)
         }));

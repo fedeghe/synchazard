@@ -20,7 +20,7 @@ module.exports.launch = (action /* , synchazard, params */) => {
                 gotNewMatch = Manager.checkLink(data);
                 if (gotNewMatch) {
                     console.log('sending init match data')
-                    ws.send(action.encodeMessage({
+                    ws.send(action.encode({
                         _ACTION: 'matchCreated',
                         _PAYLOAD: {
                             initData: gotNewMatch
@@ -32,7 +32,7 @@ module.exports.launch = (action /* , synchazard, params */) => {
                 /**
                  * otherwise simply init
                  */
-                ws.send(action.encodeMessage({
+                ws.send(action.encode({
                     _ACTION: 'init',
                     _PAYLOAD: {
                         originalRequest: data
@@ -40,20 +40,20 @@ module.exports.launch = (action /* , synchazard, params */) => {
                 }));
                 break;
             case 'initMatch':
-                ws.send(action.encodeMessage({
+                ws.send(action.encode({
                     _ACTION: 'matchCreated',
                     // eslint-disable-next-line no-undef
                     _PAYLOAD: Manager.createMatch()
                 }));
                 break;
             case 'joinMatch':
-                ws.send(action.encodeMessage({
+                ws.send(action.encode({
                     _ACTION: 'matchJoined',
                     _PAYLOAD: []
                 }));
                 break;
             case 'saveMatch':
-                ws.send(action.encodeMessage({
+                ws.send(action.encode({
                     _ACTION: 'matchSaved',
                     // eslint-disable-next-line no-undef
                     _PAYLOAD: Manager.saveMatch(data)

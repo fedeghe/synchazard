@@ -21,7 +21,7 @@ class Action{
         return +d + n * 60000;
     }
 
-    encodeMessage(action, options) {
+    encode(action, options) {
         action._TYPE = 'action';
         action._ACTOR = this.actor;
         // time
@@ -33,6 +33,20 @@ class Action{
             }
         }
         return JSON.stringify(action);
+    }
+
+    encodeMessage(message, options) {
+        message._TYPE = message._TYPE || 'message';
+        message._ACTOR = this.actor;
+        // time
+        message._TIME = message._TIME || this.getTime();
+        if (options) {
+            if (options.id) message._ID = options.id;
+            if (options.data) {
+                message._TIME = options.data._TIME;
+            }
+        }
+        return JSON.stringify(message);
     }
 
     notify(filename, data) {

@@ -41,7 +41,7 @@ module.exports.launch = (action, synchazard, params) => {
         if (data._TYPE === 'action') {
             switch (data._ACTION) {
                 case 'init':
-                    synchazard.broadcast(action.encodeMessage({
+                    synchazard.broadcast(action.encode({
                         _ACTION: 'messages',
                         _PAYLOAD: {
                             all : action.data.messages
@@ -62,10 +62,10 @@ module.exports.launch = (action, synchazard, params) => {
 
 here to send a unicast message to the client that connected we should use:
 
-    maltaV('NS').send(action.encodeMessage({... here our message object ...}))  
+    maltaV('NS').send(action.encode({... here our message object ...}))  
 
 to broadcast a message to all connected clients instead we should use:
 
-    synchazard.broadcast(action.encodeMessage({... here our message object ...}));
+    synchazard.broadcast(action.encode({... here our message object ...}));
 
 ...to be continued

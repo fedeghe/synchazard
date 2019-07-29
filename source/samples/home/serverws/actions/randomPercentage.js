@@ -12,7 +12,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
             case 'init':
-                ws.send(action.encodeMessage({
+                ws.send(action.encode({
                     _ACTION: 'graph',
                     _PAYLOAD: action.data
                 }));
@@ -25,7 +25,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
     //
     interval(() => {
         action.data.num = ~~(Math.random() * 100);
-        synchazard.broadcast(action.encodeMessage({
+        synchazard.broadcast(action.encode({
             _ACTION: 'graph',
             _PAYLOAD: action.data
         }));

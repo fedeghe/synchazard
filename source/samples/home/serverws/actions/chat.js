@@ -11,7 +11,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
         case 'init':
-            ws.send(action.encodeMessage({
+            ws.send(action.encode({
                 _ACTION: 'messages',
                 _PAYLOAD: {
                     all: action.data.messages
@@ -30,14 +30,14 @@ module.exports.launch = (action, synchazard /* , params */) => {
 
             // send back a unicast message to the source
             //
-            ws.send(action.encodeMessage({
+            ws.send(action.encode({
                 _ACTION: 'self',
                 _PAYLOAD: data._MESSAGE
             }));
 
             // and broadcast
             //
-            synchazard.broadcast(action.encodeMessage({
+            synchazard.broadcast(action.encode({
                 _ACTION: 'message',
                 _PAYLOAD: {
                     one: newMessage

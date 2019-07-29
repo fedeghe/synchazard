@@ -11,18 +11,18 @@ module.exports.launch = (action, synchazard/* , params */) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
             case 'init':
-                ws.send(action.encodeMessage({
+                ws.send(action.encode({
                     _ACTION: 'initDone',
                     _PAYLOAD: state
                 }, { data: data }));
                 break;
             case 'next':
                 updateState();
-                synchazard.broadcast(action.encodeMessage({
+                synchazard.broadcast(action.encode({
                     _ACTION: 'nextDone',
                     _PAYLOAD: state
                 }, { data: data }));
-                ws.send(action.encodeMessage({
+                ws.send(action.encode({
                     _ACTION: 'boldMe'
                 }, { data: data }));
                 break;

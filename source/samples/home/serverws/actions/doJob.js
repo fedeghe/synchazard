@@ -19,7 +19,7 @@ module.exports.launch = (action /* , synchazard, params */) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
             case 'init':
-                ws.send(action.encodeMessage({
+                ws.send(action.encode({
                     _ACTION: 'doComputation',
                     _JOB: {
                         func: action.data.jobs.getFunc1.func.toString(),
