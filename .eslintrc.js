@@ -12,6 +12,5 @@ module.exports = {
         maltaE: true,
         importScripts: true
     },
-    "rules": {
-    },
+    "rules": {},
 };
