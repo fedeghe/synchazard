@@ -187,7 +187,7 @@ wss.on('connection', (ws, req) => {
      * does not trigger the "beforeunload" event, then the connection
      * hangs and the ws server crash.
      * counterproof:
-     * - comment the following line
+     * - comment the following error handler
      * - connect with safari mobile
      * - shut down the browser
      * >>> ws server crashes
