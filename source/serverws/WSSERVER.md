@@ -63,7 +63,7 @@ module.exports.launch = (action, synchazard, params) => {
 here to send a unicast message to the client that connected we should use:
 
     const act = action.encode({... our message object ...}
-    maltaV('NS').send(act))  
+    maltaV('NS').send(act)
 
 to broadcast a message to all connected clients instead we should use:
 
