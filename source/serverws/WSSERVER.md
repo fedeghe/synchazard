@@ -85,7 +85,4 @@ to send a message to a specific client (we must know the id)
 
     synchazard.unicast(id, act);
 
-
-
-
 ...to be continued
