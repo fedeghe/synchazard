@@ -62,10 +62,30 @@ module.exports.launch = (action, synchazard, params) => {
 
 here to send a unicast message to the client that connected we should use:
 
-    maltaV('NS').send(action.encode({... here our message object ...}))  
+    const act = action.encode({... our message object ...}
+    maltaV('NS').send(act))  
 
 to broadcast a message to all connected clients instead we should use:
 
-    synchazard.broadcast(action.encode({... here our message object ...}));
+    synchazard.broadcast(act);
+
+to send a message to all clients but the sender
+
+    synchazard.otherscast(act);
+
+to send a message to a specific client set (we have to know the ids)
+
+    synchazard.subcast([id1, id2, ...], act);
+
+to send a message to all excluding a specific client set (we have to know the ids)
+
+    synchazard.subexcludecast([id1, id2, ...], act);
+    
+to send a message to a specific client (we must know the id)  
+
+    synchazard.unicast(id, act);
+
+
+
 
 ...to be continued
