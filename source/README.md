@@ -143,8 +143,8 @@ This may look wierd because in the end the ws srv sends one specific function to
 
 
 ### More about client and server data flow
-- [Client flow](docs/CLIENT.md)
-- [Server flow](docs/SERVER.md)
+- [Client flow](source/server/README.md)
+- [Server flow](source/serverws/README.md)
 
 ---
 

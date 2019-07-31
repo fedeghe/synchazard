@@ -1,10 +1,4 @@
 {
-    "EXE": [
-        "rm -rf docs",
-        "mkdir -p docs"
-    ],
-    "#source/README.md": ".",
-    "#source/LICENSE.md": ". -vars=vars.json -options=placeholderMode:'func'",
-    "#source/server/README.md": "docs -vars=vars.json -options=placeholderMode:'func'",
-    "#source/serverws/README.md": "docs -vars=vars.json -options=placeholderMode:'func'"
+    "source/README.md": ".",
+    "source/LICENSE.md": ". -vars=vars.json -options=placeholderMode:'func'"
 }

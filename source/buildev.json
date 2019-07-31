@@ -6,6 +6,7 @@
         "cp source/srv.js source/samples/chess",
         "cp source/srv.js source/samples/home"
     ],
+    "source/docs.json": true,
     "source/server/require.json": true,
     "source/serverws/require.json": true
 }
