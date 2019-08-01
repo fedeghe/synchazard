@@ -13,6 +13,8 @@
     "NS": "SH",
     // setup here the host or ip the app will run in
     "DOMAIN_OR_IP": "localhost",
+    "MODE": "WEBSOCKET",
+    // "MODE": "AJAXPOLL"
     "DATASERVER": {
         "PORT": 8000,
         "HOST": "http://$DOMAIN_OR_IP$:$DATASERVER.PORT$",
