@@ -13,6 +13,9 @@
     "NS": "SH",
     // setup here the host or ip the app will run in
     "DOMAIN_OR_IP": "localhost",
+    //
+    // NOT YET EFFECTIVE
+    //
     "MODE": "WEBSOCKET",
     // "MODE": "AJAXPOLL"
     "DATASERVER": {
@@ -21,6 +24,7 @@
         "WSPORT": 9000,
         "WSHOST": "ws://$DOMAIN_OR_IP$:$DATASERVER.WSPORT$"
     },
+    //
     "WEBSERVER": {
         "PORT": 4000,
         "HOST": "http://$DOMAIN_OR_IP$:$WEBSERVER.PORT$",
@@ -31,6 +35,7 @@
             "INTERVAL": 5000
         }
     },
+    //
     // Actors check setting
     //======================
     // false : no check
