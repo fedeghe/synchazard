@@ -164,8 +164,9 @@ module.exports.launch = (action, synchazard /* , params */) => {
     },
     /* ON_CLOSE */
     (data /* , ws, req */) => {
-        console.log(action.getCount());
-        console.log(data);
+        
+        // console.log(action.getCount());
+        // console.log(data);
 
         if (doneClis.includes(data._ID)) {
             return;
