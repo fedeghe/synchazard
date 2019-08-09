@@ -1,6 +1,7 @@
 module.exports.launch = (action, synchazard /* , params */) => {
     let askingingCli = null,
         pendingPartecipants = 0,
+        doneClis = [],
         currentResult = 0,
         available = null;
 
@@ -85,8 +86,11 @@ module.exports.launch = (action, synchazard /* , params */) => {
 
                 break;
             case 'askMontecarlo':
+                
                 // block if already busy
                 if (!action.data.free) break;
+
+                doneClis = [];
                 
                 // store it as the one who triggered,
                 // used in `update` action
@@ -139,6 +143,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
                     // thus one partecipant has done
                     --pendingPartecipants;
                 }
+                doneClis.push(data._ID)
 
                 // broadcast the results
                 // if there are no more pendingPartecipants then
@@ -156,7 +161,16 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 break;
             default:break;
         }
-    }, (data /* , ws, req */) => {
+    },
+    /* ON_CLOSE */
+    (data /* , ws, req */) => {
+        console.log(action.getCount());
+        console.log(data);
+
+        if (doneClis.includes(data._ID)) {
+            return;
+        }
+
         if (data._ACTION === 'close') {
             pendingPartecipants && --pendingPartecipants;
 
@@ -170,7 +184,6 @@ module.exports.launch = (action, synchazard /* , params */) => {
             } else {
                 synchazard.broadcast(action.data.actions.free);
             }
-            
         }
     });
 };
