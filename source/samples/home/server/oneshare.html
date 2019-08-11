@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="/media/favicon.ico">
+    <title>maltaV('PROJECT.NAME') maltaV('PROJECT.VERSION') - one share</title>
+    <link rel="stylesheet" type="text/css" href="/css/oneshare.css">
+    <!-- <script src="/js/lib/synchazard.js" data-worker="/js/workers/worker_reactor.js" data-actors="reactor,incremental"></script> -->
+    <script src="/js/lib/synchazard.js" data-worker="/js/workers/worker_oneshare.js"></script>
+    <script src="/js/oneshare.js"></script>
+</head>
+
+<body>
+    <div id="share" class="shareArea">Share a file dragging it here<button>stop sharing</button></div>
+    <div class="cnt">
+        <p class="title">List of elements:
+            <select class="filelist">
+                <option value="">F1.js</option>
+                <option disabled value="">F2.js</option>
+                <option value="">F3.js</option>
+                <option value="">F4.js</option>
+            </select><span>(4 elements available)</span>
+        </p>
+        <ul class="list">
+            <li class="active" title="shared by ID_23423423werferf">
+                File1.js<span class="close">&times;</span>
+            </li>
+            <li title="shared by ID_6757656hhh">
+                File2.js<span class="close">&times;</span>
+            </li>
+            <li title="shared by ID_9879787987898m">
+                File3.js<span class="close">&times;</span>
+            </li>
+        </ul>
+        <textarea class="content"></textarea>
+    </div>
+</body>
+
+</html>

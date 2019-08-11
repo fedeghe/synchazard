@@ -25,6 +25,7 @@
     maltaV('NS').utils.loadScript('/js/handlers/style.js', remove);
     maltaV('NS').utils.loadScript('/js/handlers/script.js', remove);
     maltaV('NS').utils.loadScript('/js/handlers/sunshine.js', remove);
+    maltaV('NS').utils.loadScript('/js/handlers/oneshare.js', remove);
 
     function remove () {
         head.removeChild(this);
