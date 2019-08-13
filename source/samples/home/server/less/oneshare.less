@@ -27,49 +27,81 @@ maltaF('style.less')
 
 
 body{
+    font-size: 18px;
+    font-family: verdana;
     .target{
         margin: 5%;
-        font-family: verdana;
-        font-size: 18px;
+        
         display: flex;
         flex-direction: column;
     }
     .shareArea{
-        flex:1 auto;
-        text-align: center;
-        border:1px dashed @gray;
-        height:100px;
-        color: @gray;
-        padding-top: 50px;
-        cursor: grab;
-        background-color: @lightGray;
-        .roundTop();
-        .roundBottom();
-        position:relative;
-        & button{
-            display:none;
-            border:1px solid black;
-            padding: 5px;
-            font-size: inherit;
-            margin: 0 5px;
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            cursor: pointer;
+        .shareAreaDrop {
+            flex:1 auto;
+            text-align: center;
+            border:1px dashed @gray;
+            height:100px;
+            color: @gray;
+            padding-top: 50px;
+            cursor: grab;
+            background-color: @lightGray;
             .roundTop();
             .roundBottom();
-        }
-        &.disabled {
-            & button {
-                display:block
+            position:relative;
+            & button{
+                display:none;
+                border:1px solid black;
+                padding: 5px;
+                font-size: inherit;
+                margin: 0 5px;
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
+                cursor: pointer;
+                .roundTop();
+                .roundBottom();
             }
-            cursor: default;
-            color: @lightGray;
-            height: 10px;
+            &.disabled {
+                & button {
+                    display:block
+                }
+                cursor: default;
+                color: @lightGray;
+                height: 10px;
+            }
+            &:hover {
+                background-color: rgba(120,180,120, 0.3)
+            }
         }
-        &:hover {
-            background-color: rgba(120,180,120, 0.3)
+        .shareAreaButtons {
+            display:flex;
+            li.file {
+                height:30px;
+                line-height:30px;
+                cursor:default;
+                margin-right:15px;
+                font-size:20px;
+                // span.close{
+                //     display:inline-block;
+                //     height:30px;
+                //     line-height:30px;
+                //     padding:0 5px;
+                //     cursor:pointer;
+
+
+                //     // visibility:hidden
+                    
+                // }
+                
+                
+                
+                &:hover span.close{
+                    color:Red;
+                    visibility:visible
+                }
+            }
         }
+
     }
     .sharedArea{
         flex : 1;
@@ -92,6 +124,7 @@ body{
 
         ul.tabList {
             li.tabTongue {
+                font-size:20px;
                 height:30px;
                 line-height: 30px;
                 padding-left:10px;
@@ -99,7 +132,7 @@ body{
                 border: 1px solid @gray;
                 // border-bottom: 1px solid @white;
                 position:relative;
-                top:4px;
+                top:1px;
                 width:100px;
                 display:inline-block;
                 margin-right:10px;
@@ -115,18 +148,12 @@ body{
                 }
                 &:hover{
                     color:@black;
+                    span.close{
+                        color:red;
+                        visibility:visible;
+                    }
                 }
-                span.close {
-                    position:absolute;
-                    right:5px;
-                    display: inline-block;
-                    border:none;
-                    background-color: transparent;
-                    font-size:20px;
-                    line-height:30px;
-                    height:30px;
-                    cursor:pointer;
-                }
+
             }
         }
         .tabContent{
@@ -151,7 +178,19 @@ body{
                 .roundBottom();
             }
         }
+
+
     }
-    
+    span.close {
+        visibility:hidden;
+        padding:0 5px;
+        display: inline-block;
+        border:none;
+        background-color: transparent;
+        font-size:20px;
+        line-height:30px;
+        height:30px;
+        cursor:pointer;
+    }    
     
 }

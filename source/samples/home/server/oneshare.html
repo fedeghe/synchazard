@@ -16,9 +16,18 @@
 <body>
     <div id="target"></div>
     <div class="target">
-        <div class="shareArea">Share a file dragging it here<button>stop sharing</button></div>
-        <div class="sharedArea">
+        <div class="shareArea">
+            <div class="shareAreaDrop">
+                Share a file dragging it here<button>stop sharing</button>
+            </div>
+            <ul class="shareAreaButtons">
+                <li class="file">xxx.js<span class="close">&times;</span></li>
+                <li class="file">yyy.js<span class="close">&times;</span></li>
+                <li class="file">zzz.js<span class="close">&times;</span></li>
+            </ul>
+        </div>
 
+        <div class="sharedArea">
             <p class="title">List of elements:
                 <select class="filelist">
                     <option value="">F1.js</option>
