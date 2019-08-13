@@ -27,11 +27,13 @@ maltaF('style.less')
 
 
 body{
-    margin: 5%;
-    font-family: verdana;
-    font-size: 18px;
-    display: flex;
-    flex-direction: column;
+    .target{
+        margin: 5%;
+        font-family: verdana;
+        font-size: 18px;
+        display: flex;
+        flex-direction: column;
+    }
     .shareArea{
         flex:1 auto;
         text-align: center;
@@ -88,8 +90,8 @@ body{
             margin-right:10px;
         }
 
-        ul.list {
-            li {
+        ul.tabList {
+            li.tabTongue {
                 height:30px;
                 line-height: 30px;
                 padding-left:10px;
@@ -97,7 +99,7 @@ body{
                 border: 1px solid @gray;
                 // border-bottom: 1px solid @white;
                 position:relative;
-                top:1px;
+                top:4px;
                 width:100px;
                 display:inline-block;
                 margin-right:10px;
@@ -127,24 +129,27 @@ body{
                 }
             }
         }
-
-        textarea {
-            height:500px;
-            resize: none;
-            border:1px solid @gray;
-            padding:10px;
-            font-size:18px;
-            font-family:verdana;
-            &:focus{
-                border:1px solid @gray;
-                overflow: auto;
-                outline: none;
-    
-                -webkit-box-shadow: none;
-                -moz-box-shadow: none;
-                box-shadow: none;
+        .tabContent{
+            .content {
+                flex-grow: 1;
+                height: 500px;
+                resize: none;
+                border: 1px solid @gray;
+                width: 98%;
+                padding: 1%;
+                font-size: 18px;
+                font-family: verdana;
+                &:focus{
+                    border:1px solid @gray;
+                    overflow: auto;
+                    outline: none;
+        
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                }
+                .roundBottom();
             }
-            .roundBottom();
         }
     }
     

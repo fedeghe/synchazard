@@ -14,28 +14,36 @@
 </head>
 
 <body>
-    <div id="share" class="shareArea">Share a file dragging it here<button>stop sharing</button></div>
-    <div class="cnt">
-        <p class="title">List of elements:
-            <select class="filelist">
-                <option value="">F1.js</option>
-                <option disabled value="">F2.js</option>
-                <option value="">F3.js</option>
-                <option value="">F4.js</option>
-            </select><span>(4 elements available)</span>
-        </p>
-        <ul class="list">
-            <li class="active" title="shared by ID_23423423werferf">
-                File1.js<span class="close">&times;</span>
-            </li>
-            <li title="shared by ID_6757656hhh">
-                File2.js<span class="close">&times;</span>
-            </li>
-            <li title="shared by ID_9879787987898m">
-                File3.js<span class="close">&times;</span>
-            </li>
-        </ul>
-        <textarea class="content"></textarea>
+    <div id="target"></div>
+    <div class="target">
+        <div class="shareArea">Share a file dragging it here<button>stop sharing</button></div>
+        <div class="cnt">
+
+            <p class="title">List of elements:
+                <select class="filelist">
+                    <option value="">F1.js</option>
+                    <option disabled value="">F2.js</option>
+                    <option value="">F3.js</option>
+                    <option value="">F4.js</option>
+                </select><span>(4 elements available)</span>
+            </p>
+            <ul class="tabList">
+                <li class="tabTongue active" title="shared by ID_23423423werferf">
+                    File1.js<span class="close">&times;</span>
+                </li>
+                <li class="tabTongue" title="shared by ID_6757656hhh">
+                    File2.js<span class="close">&times;</span>
+                </li>
+                <li class="tabTongue" title="shared by ID_9879787987898m">
+                    File3.js<span class="close">&times;</span>
+                </li>
+            </ul>
+
+            <div class="tabContent">
+                <textarea class="content"></textarea>
+            </div>
+
+        </div>
     </div>
 </body>
 
