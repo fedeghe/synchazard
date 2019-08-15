@@ -3,7 +3,7 @@
  */
 maltaF('../../../../../node_modules/widgzard/dist/theWidgzard.js')
 (function () {
-
+    // Widgzard
     var conf = {
         attrs : {'class': 'target'},
         content: [{
@@ -60,27 +60,17 @@ maltaF('../../../../../node_modules/widgzard/dist/theWidgzard.js')
                 tag: 'ul',
                 attrs: {'class':'shareAreaButtons'},
                 content: [{
-                    tag: 'li',
-                    attrs: {'class': 'file'},
-                    html: 'xxx.js',
-                    content: [{
-                        tag: 'span',
-                        attrs: {
-                            'class': 'close'
-                        },
-                        html : '&times;'
-                    }]
+                    component: 'button',
+                    params: {name: 'xxx.js'},
+                    onClick: function () {
+                        console.log('one')
+                    }
                 },{
-                    tag: 'li',
-                    attrs: {'class': 'file'},
-                    html: 'yyy.js',
-                    content: [{
-                        tag: 'span',
-                        attrs: {
-                            'class': 'close'
-                        },
-                        html : '&times;'
-                    }]
+                    component: 'button',
+                    params: {name: 'yyy.js'}
+                },{
+                    component: 'button',
+                    params: {name: 'zzz.js'}
                 }]
             }],
             attrs : {'class': 'shareArea'}
@@ -105,48 +95,83 @@ maltaF('../../../../../node_modules/widgzard/dist/theWidgzard.js')
                     text: '(4 elements available)'
                 }]
             }, {
+                tag:'button',
+                html : 'add',
+                onClick: function () {
+                    var n = this.getNode('xxx')
+                    n.data.add.call(n, 'Hello.js')
+                }
+            },{
                 tag: 'ul',
+                wid:'xxx',
                 attrs: {'class':'tabList'},
+                data: {
+                    active : 0,
+                    changeContent: function(content) {
+                        var cnt = this.getNode('content')
+                        // debugger;
+                        cnt.node.innerHTML = content
+                    },
+                    add: function (filename) {
+                        console.log(this)
+                        this.conf.content.push({
+                            component: 'tabTongue',
+                            params: {
+                                label: filename,
+                                title: 'shared By Jonas',
+                                contentRef: filename
+                            }
+                        })
+                        console.log(this.conf.content)
+                        this.render();
+                    }
+                },
                 content: [{
-                    tag: 'li',
-                    attrs: {
-                        'class': 'tabTongue active',
-                        title: 'shared By Jonas'
-                    },
-                    html: 'File1.js',
-                    content: [{
-                        tag: 'span',
-                        attrs: {'class':'close'},
-                        html: '&times;'
-                    }]
+                    component: 'tabTongue',
+                    params: {
+                        key : 0,
+                        label: 'File0.js',
+                        title: 'shared By Jonas',
+                        contentRef: 'aaaaaaaaaaa'
+                    }
                 },{
-                    tag: 'li',
-                    attrs: {
-                        'class': 'tabTongue',
-                        title: 'shared By Jonas'
-                    },
-                    html: 'File2.js',
-                    content: [{
-                        tag: 'span',
-                        attrs: {'class':'close'},
-                        html: '&times;'
-                    }]
+                    component: 'tabTongue',
+                    params: {
+                        key : 1,
+                        label: 'File1.js',
+                        title: 'shared By Jonas',
+                        contentRef: 'bbbbbbbbbbb'
+                    }
+                },{
+                    component: 'tabTongue',
+                    params: {
+                        key : 2,
+                        label: 'File2.js',
+                        title: 'shared By Jonas',
+                        contentRef: 'cccccccccccc'
+                    }
                 }]
             }, {
                 attrs: {'class':'tabContent'},
                 content: [{
                     tag: 'textarea',
+                    wid: 'content',
                     attrs:{'class': 'content'}
                 }]
             }]
         }]
     }
 
+    Engy.configSet({
+        // fileNamePrepend: '$COMPONENTS.NAME_PREPEND$',
+        ext: '.js',
+        componentsUrl: 'js/oneshare/'
+    });
 
     window.addEventListener('load', function () {
         var target = document.getElementById('target');
         conf.target = target
-        Widgzard.render(conf, true);
+        Engy.render(conf, true);
         maltaV('NS').utils.loadScript('/js/handlers/oneshare.js');
     });
 })();
