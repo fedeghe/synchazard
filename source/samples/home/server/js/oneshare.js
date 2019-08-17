@@ -67,27 +67,35 @@
         this.fileSelector.render()
 
         this.tabList = createElement('ul', {'class' : 'tabList'});
-        this.tabContent = createElement('div', {'class' : 'tabContent'});
+        this.tabs = [];
+        this.tabContent = createElement('div', {'class' : 'tabContent hide'});
         this.tabContentTextarea = createElement('textarea', {'class' : 'content'});
         this.tabContent.appendChild(this.tabContentTextarea)
         this.main.appendChild(this.tabList)
         this.count = 0;
-        // this.main.appendChild(this.tabContent)
+        this.main.appendChild(this.tabContent)
     }
     SharedArea.prototype.addFile = function(file){
         // add the tabtongue && activate content && disable from the select
         console.log('add file tab', file)
         this.addTab(file)
         console.log('request content')
+        var content = `the content is ${file}`;
+        this.tabContentTextarea.innerHTML = content;
+        this.tabContent.classList.remove('hide')
         console.log('activate content')
         console.log('disable from select')
     };
     SharedArea.prototype.addTab = function(filen){
+        this.tabs.forEach(function (tab){
+            tab.classList.remove('active')
+        })
         var split = filen.split('___'),
             user = split[0],
             file = split[1],
-            tab = createElement('li', {'class': 'tabTongue', title: user}, file),
+            tab = createElement('li', {'class': 'tabTongue active', title: user}, file),
             close = createElement('span', {'class':'close'}, '&times;')
+        this.tabs.push(tab);
         tab.appendChild(close)
         this.tabList.appendChild(tab)
     };
