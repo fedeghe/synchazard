@@ -74,6 +74,21 @@
         this.main.appendChild(this.tabList)
         this.count = 0;
         this.main.appendChild(this.tabContent)
+
+
+        this.tabList.addEventListener('click', function(e){
+            var trg = e.target,
+                tag = trg.tagName;
+            switch(tag) {
+                case 'LI':
+                    self.selectTab(trg)
+                    break;
+                case 'SPAN':
+                    self.removeTab(trg.parentNode)
+                    break;
+                default:;
+            }
+        })
     }
     SharedArea.prototype.addFile = function(file){
         // add the tabtongue && activate content && disable from the select
@@ -98,6 +113,16 @@
         this.tabs.push(tab);
         tab.appendChild(close)
         this.tabList.appendChild(tab)
+    };
+    SharedArea.prototype.removeTab = function(tag){
+        this.tabList.removeChild(tag)
+    };
+
+    SharedArea.prototype.selectTab = function(tag){
+        this.tabs.forEach(function (tab){
+            tab.classList.remove('active')
+        })
+        tag.classList.add('active')
     };
 
 
