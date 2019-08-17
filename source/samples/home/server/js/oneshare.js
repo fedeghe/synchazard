@@ -89,7 +89,8 @@
                 default:;
             }
         })
-    }
+    };
+    
     SharedArea.prototype.addFile = function(file){
         // add the tabtongue && activate content && disable from the select
         console.log('add file tab', file)
@@ -108,13 +109,32 @@
         var split = filen.split('___'),
             user = split[0],
             file = split[1],
-            tab = createElement('li', {'class': 'tabTongue active', title: user}, file),
+            tab = createElement('li', {'class': 'tabTongue active', title: filen}, file),
             close = createElement('span', {'class':'close'}, '&times;')
         this.tabs.push(tab);
         tab.appendChild(close)
         this.tabList.appendChild(tab)
     };
     SharedArea.prototype.removeTab = function(tag){
+
+        var removingActive = tag.classList.contains('active');
+
+
+        
+        // console.log(this.tabs);
+        this.tabs = this.tabs.filter(function (tab) {return tab.title !== tag.title})
+        
+        var t = tag.title.split('___').reverse();
+        
+        this.fileSelector.enableFile(t[0], t[1])
+        
+        // console.log(this.tabs);
+        if (this.tabs.length === 0) {
+            this.tabContent.classList.add('hide')
+        } else if (removingActive) {
+            this.tabs[0].classList.add('active');
+        }
+        
         this.tabList.removeChild(tag)
     };
 
@@ -148,8 +168,10 @@
         this.firstOption = createElement('option', {value: ''}, 'no files available')
         this.main.appendChild(this.firstOption);
         this.main.addEventListener('change', function (e) {
-            console.log(e.target.value)
-            self.parentInstance.addFile(e.target.value)
+            var val = e.target.value;
+            self.parentInstance.addFile(val)
+            self.disableFile.apply(self, val.split('___').reverse())
+            self.main.value = '';
         })
         this.fileCount = 0;
     }
