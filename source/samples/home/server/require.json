@@ -1,12 +1,11 @@
 {
     "EXE": [
-        "mkdir -p server/css server/js/handlers server/js/lib server/js/workers server/js/oneshare server/media",
+        "mkdir -p server/css server/js/handlers server/js/lib server/js/workers server/media",
         "cp source/samples/home/server/media/* server/media/"
     ],
-    "source/samples/home/server/*.html": "server -vars=vars.json -options=placeholderMode:'func'",
+    "source/samples/home/server/*.html": "server -plugins=malta-browser-refresh[files:\"*\"] -vars=vars.json -options=placeholderMode:'func'",
     "source/samples/home/server/less/*.less": "server/css -plugins=malta-less -options=placeholderMode:'func'",
     "source/samples/home/server/js/*.js": "server/js -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json -options=placeholderMode:'func'",
-    "source/samples/home/server/js/oneshare/*.js": "server/js/oneshare -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json -options=placeholderMode:'func'",
     "source/samples/home/server/js/workers/*.js": "server/js/workers -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json -options=placeholderMode:'func'",
     "source/samples/home/server/js/handlers/*.js": "server/js/handlers -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json -options=placeholderMode:'func'"
 }

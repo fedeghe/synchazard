@@ -2677,11 +2677,6 @@ which@^1.2.9:
   dependencies:
     isexe "^2.0.0"
 
-widgzard@^3.1.18:
-  version "3.1.18"
-  resolved "https://registry.yarnpkg.com/widgzard/-/widgzard-3.1.18.tgz#c3c98838a00e2c8682233d0703472a254d57cedf"
-  integrity sha512-tjCDz+jZm4JhUTQLMjmG0sAROqMs9fgKNurLMeb+pI28RYvhcT1KS4dujuS/vaAQt5kDrlFyeA8fQ2L2+AYGrg==
-
 window-size@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.1.0.tgz#5438cd2ea93b202efa3a19fe8887aee7c94f9c9d"
