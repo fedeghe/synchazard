@@ -100,8 +100,12 @@
         this.tabContentTextarea.innerHTML = content;
         this.tabContent.classList.remove('hide')
         console.log('activate content')
-        console.log('disable from select')
     };
+    SharedArea.prototype.deactiveAll = function(){
+        this.tabs.forEach(function (tab){
+            tab.classList.remove('active')
+        })
+    };  
     SharedArea.prototype.addTab = function(filen){
         this.tabs.forEach(function (tab){
             tab.classList.remove('active')
@@ -116,40 +120,30 @@
         this.tabList.appendChild(tab)
     };
     SharedArea.prototype.removeTab = function(tag){
+        var removingActive = tag.classList.contains('active'),
+            t = tag.title.split('___').reverse();
 
-        var removingActive = tag.classList.contains('active');
-
-
-        
-        // console.log(this.tabs);
-        this.tabs = this.tabs.filter(function (tab) {return tab.title !== tag.title})
-        
-        var t = tag.title.split('___').reverse();
-        
+        this.tabs = this.tabs.filter(function (tab) {return tab.title !== tag.title});
         this.fileSelector.enableFile(t[0], t[1])
         
-        // console.log(this.tabs);
         if (this.tabs.length === 0) {
             this.tabContent.classList.add('hide')
         } else if (removingActive) {
-            this.tabs[0].classList.add('active');
+            this.tabs[0].click();
         }
-        
         this.tabList.removeChild(tag)
     };
-
     SharedArea.prototype.selectTab = function(tag){
-        this.tabs.forEach(function (tab){
-            tab.classList.remove('active')
-        })
-        tag.classList.add('active')
+        this.deactiveAll();
+        tag.classList.add('active');
+        this.setContent(tag.title);
     };
-
-
-
     SharedArea.prototype.render = function  () {
         doRender.call(this);
-    }
+    };
+    SharedArea.prototype.setContent = function (cnt) {
+        this.tabContentTextarea.innerHTML = cnt;
+    };
 
     function FilePoolSelect(trg, parentInstance) {
         this.parentInstance = parentInstance;
@@ -158,10 +152,9 @@
         this.userFiles = {}
         this.init();
     }
-
     FilePoolSelect.prototype.render = function () {
         doRender.call(this);
-    }
+    };
     FilePoolSelect.prototype.init = function () {
         var self = this;
         this.main = createElement('select', {'class':'filelist'})
@@ -172,9 +165,10 @@
             self.parentInstance.addFile(val)
             self.disableFile.apply(self, val.split('___').reverse())
             self.main.value = '';
+            self.main.blur();
         })
         this.fileCount = 0;
-    }
+    };
     FilePoolSelect.prototype.addFile = function (file, user) {
         var newOption,
             optGroup,
@@ -200,7 +194,7 @@
         mustAppend && this.main.appendChild(optGroup);
 
         this.firstOption.innerHTML = this.fileCount > 0
-        ? `${this.fileCount} files available`
+        ? `${this.fileCount} files shared (select one or more)`
         : 'no files available'
     };
     FilePoolSelect.prototype.removeFile = function (file, user) {
@@ -241,6 +235,11 @@
         })
     };
 
+    FilePoolSelect.prototype.removeAll = function () {
+        this.main.innerHTML = ''
+        this.firstOption.innerHTML = 'no files available'
+        this.main.appendChild(this.firstOption)
+    };
 
     window.addEventListener('load', function () {
         var target = document.getElementById('target'),
@@ -253,11 +252,11 @@
         window.filePoolSelect = sharedArea.fileSelector;
 
 
-        filePoolSelect.addFile('aaa.js', 'Federico')
-        filePoolSelect.addFile('bbb.js', 'Federico')
-        filePoolSelect.addFile('ccc.js', 'Federico')
-        filePoolSelect.addFile('aaa.js', 'Gabri')
-        filePoolSelect.addFile('bbb.js', 'Gabri')
+filePoolSelect.addFile('aaa.js', 'Federico')
+filePoolSelect.addFile('bbb.js', 'Federico')
+filePoolSelect.addFile('ccc.js', 'Federico')
+filePoolSelect.addFile('aaa.js', 'Gabri')
+filePoolSelect.addFile('bbb.js', 'Gabri')
         
 
         maltaV('NS').utils.loadScript('/js/handlers/oneshare.js');
