@@ -251,13 +251,11 @@
         window.sharedArea = sharedArea;
         window.filePoolSelect = sharedArea.fileSelector;
 
-
-filePoolSelect.addFile('aaa.js', 'Federico')
-filePoolSelect.addFile('bbb.js', 'Federico')
-filePoolSelect.addFile('ccc.js', 'Federico')
-filePoolSelect.addFile('aaa.js', 'Gabri')
-filePoolSelect.addFile('bbb.js', 'Gabri')
-        
+        filePoolSelect.addFile('aaa.js', 'Federico')
+        filePoolSelect.addFile('bbb.js', 'Federico')
+        filePoolSelect.addFile('ccc.js', 'Federico')
+        filePoolSelect.addFile('aaa.js', 'Gabri')
+        filePoolSelect.addFile('bbb.js', 'Gabri')        
 
         maltaV('NS').utils.loadScript('/js/handlers/oneshare.js');
     });
