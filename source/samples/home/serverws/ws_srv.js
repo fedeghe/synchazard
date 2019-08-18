@@ -61,6 +61,7 @@ synchazard.launch([{
     path: 'actions/test'
 }, {
     path: 'actions/oneshare',
+    deps: { fs, path },
     actor: 'oneshare'
 }
 // , {

@@ -4,9 +4,11 @@ maltaF('style.less')
 
 @black: #000;
 @gray: #aaa;
+@darkGray: #888;
 @lightGray: #eee;
 @green: #8a8;
 @white: #fff;
+@red: #f00;
 
 .roundTop() {
     -moz-border-radius-topleft: @round;
@@ -16,6 +18,7 @@ maltaF('style.less')
     border-top-left-radius:@round;
     border-top-right-radius:@round;
 }
+
 .roundBottom() {
     -moz-border-radius-bottomleft:@round;
     -moz-border-radius-bottomright:@round;
@@ -25,13 +28,11 @@ maltaF('style.less')
     border-bottom-right-radius:@round;
 }
 
-
 body{
     font-size: 18px;
     font-family: verdana;
     .target{
         margin: 5%;
-        
         display: flex;
         flex-direction: column;
     }
@@ -75,39 +76,37 @@ body{
         }
         .shareAreaButtons {
             display:flex;
+            flex-wrap: wrap;
+            height:30px;
             li.file {
                 height:30px;
                 line-height:30px;
                 cursor:default;
                 margin-right:15px;
-                font-size:20px;
-                // span.close{
-                //     display:inline-block;
-                //     height:30px;
-                //     line-height:30px;
-                //     padding:0 5px;
-                //     cursor:pointer;
-
-
-                //     // visibility:hidden
-                    
-                // }
-                
-                
-                
+                font-size:20px;                
                 &:hover span.close{
                     color:Red;
                     visibility:visible
                 }
             }
         }
-
+        .shareAreaDetail{
+            height:20px;
+            line-height:20px;
+            font-size:12px;
+        }
+    }
+    .hr {
+        // background-color: @lightGray;
+        // color: @black;
+        // height:5px;
+        border:1px dashed @lightGray;
+        margin:10px 0
     }
     .sharedArea{
         flex : 1;
         display: flex;
         flex-direction: column;
-        
         p.title {
             margin:0px;
             padding: 10px 0;
@@ -124,7 +123,6 @@ body{
             margin:10px;
             margin-left:0
         }
-
         ul.tabList {
             li.tabTongue {
                 font-size:20px;
@@ -133,42 +131,56 @@ body{
                 padding-left:10px;
                 background-color: @white;
                 border: 1px solid @gray;
-                // border-bottom: 1px solid @white;
                 position:relative;
                 top:1px;
-                // width:100px;
                 display:inline-block;
                 margin-right:10px;
                 cursor:pointer;
-                background-color: @lightGray;
-                color:@gray;
+                background-color: @white;
+                color:@darkGray;
                 .roundTop();
                 &.active {
-                    border-bottom: 1px solid @white;
+                    border-bottom: 1px solid @lightGray;
                     cursor:default;
                     color:@black;
-                    background-color: @white;
+                    background-color: @lightGray;
                 }
                 &:hover{
                     color:@black;
                     span.close{
-                        color:red;
+                        color:@red;
                         visibility:visible;
                     }
                 }
-
             }
         }
         .tabContent{
+            border: 1px solid @gray;
+            background-color: @lightGray;
+            .roundBottom();
+            .contentPanel {
+                text-align:right;
+                margin:1%;
+                margin-bottom:0;
+                .contentPanelButton{
+                    font-size:18px;
+                    background-color: @white;
+                    color: @black;
+                    .roundBottom();
+                    .roundTop();
+                }
+            }
             .content {
                 flex-grow: 1;
                 height: 500px;
                 resize: none;
                 border: 1px solid @gray;
                 width: 98%;
-                padding: 1%;
+                margin: 1%;
                 font-size: 18px;
                 font-family: verdana;
+                background-color: @white;
+                .roundBottom();
                 &:focus{
                     border:1px solid @gray;
                     overflow: auto;
@@ -179,14 +191,11 @@ body{
                     box-shadow: none;
                 }
                 
-                .roundBottom();
             }
             &.hide{
                 display:none
             }
         }
-
-
     }
     span.close {
         visibility:hidden;

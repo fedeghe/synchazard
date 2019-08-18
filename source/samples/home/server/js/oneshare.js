@@ -29,6 +29,7 @@
         this.dropArea = createElement('div', {'class' : 'shareAreaDrop'}, 'share a file by dragging it here')
         
         this.fileList = createElement('ul', {'class' : 'shareAreaButtons'})
+        this.detail = createElement('p', {'class' : 'shareAreaDetail'})
         this.fileList.addEventListener('click', function (e) {
             var trg = e.target,
                 trgtag = trg.tagName;
@@ -36,14 +37,33 @@
                 self.fileList.removeChild(trg.parentNode)
             }
         })
+        this.fileList.addEventListener('mouseover', function (e) {
+            var trg = e.target,
+                trgtag = trg.tagName;
+            if (trgtag === 'LI') {
+                self.detail.innerHTML = `FULL PATH: ${trg.dataset.path}`
+            }
+        })
+        this.fileList.addEventListener('mouseout', function (e) {
+            var trg = e.target,
+                trgtag = trg.tagName;
+            if (trgtag === 'LI') {
+                self.detail.innerHTML = '';
+            }
+        })
 
         this.main.appendChild(this.dropArea)    
         this.main.appendChild(this.fileList)
+        this.main.appendChild(this.detail)
     };
     ShareArea.prototype.addFile = function (filename) {
-        var fileItem = createElement('li', {'class': 'file'}, filename),
-            closeIcon = createElement('span', {'class': 'close'}, '&times;');
-
+        var elems = filename.match(/(.*)\/([^/]*)/),
+            filePath = elems ? elems[1] : '',
+            fileName = elems ? elems[2] : filename,
+            fileItem = createElement('li', {'class': 'file'}, fileName),
+            closeIcon = createElement('span', {'class': 'close', title:'stop sharing that file'}, '&times;');
+        fileItem.dataset.path = [filePath, fileName].join('/')
+        fileItem.dataset.observers = 0
         fileItem.appendChild(closeIcon);
         this.sharedFileList.push(filename);
         this.fileList.appendChild(fileItem);
@@ -53,28 +73,35 @@
     };
 
 
-
-
     function SharedArea(trg) {
         this.target = trg;
+        this.activeTab = null;
         this.init();
     }
     SharedArea.prototype.init = function  () {
         var self = this;
         this.main = createElement('div', {'class' : 'sharedArea'});
 
-        this.fileSelector = new FilePoolSelect(this.main, this);
-        this.fileSelector.render()
+        this.filePoolSelect = new FilePoolSelect(this.main, this);
+        this.filePoolSelect.render()
 
         this.tabList = createElement('ul', {'class' : 'tabList'});
         this.tabs = [];
         this.tabContent = createElement('div', {'class' : 'tabContent hide'});
         this.tabContentTextarea = createElement('textarea', {'class' : 'content'});
+        
+        this.panel = createElement('div', {'class' : 'contentPanel'});
+        this.panelButton = createElement('button', {'class' : 'contentPanelButton'}, 'Download');
+
+        this.panel.appendChild(this.panelButton)
+        this.tabContent.appendChild(this.panel)
         this.tabContent.appendChild(this.tabContentTextarea)
         this.main.appendChild(this.tabList)
         this.count = 0;
+        
+        
         this.main.appendChild(this.tabContent)
-
+        
 
         this.tabList.addEventListener('click', function(e){
             var trg = e.target,
@@ -90,41 +117,32 @@
             }
         })
     };
-    
     SharedArea.prototype.addFile = function(file){
         // add the tabtongue && activate content && disable from the select
-        console.log('add file tab', file)
+        var content = `... loading content for ... ${file}`;
         this.addTab(file)
-        console.log('request content')
-        var content = `the content is ${file}`;
         this.tabContentTextarea.innerHTML = content;
         this.tabContent.classList.remove('hide')
-        console.log('activate content')
     };
-    SharedArea.prototype.deactiveAll = function(){
-        this.tabs.forEach(function (tab){
-            tab.classList.remove('active')
-        })
-    };  
     SharedArea.prototype.addTab = function(filen){
-        this.tabs.forEach(function (tab){
-            tab.classList.remove('active')
-        })
         var split = filen.split('___'),
-            user = split[0],
+            // user = split[0],
             file = split[1],
             tab = createElement('li', {'class': 'tabTongue active', title: filen}, file),
-            close = createElement('span', {'class':'close'}, '&times;')
+            close = createElement('span', {'class':'close'}, '&times;');
+
+        this.activeTab && this.activeTab.classList.remove('active')
         this.tabs.push(tab);
         tab.appendChild(close)
         this.tabList.appendChild(tab)
+        this.activeTab = tab
     };
     SharedArea.prototype.removeTab = function(tag){
         var removingActive = tag.classList.contains('active'),
             t = tag.title.split('___').reverse();
 
         this.tabs = this.tabs.filter(function (tab) {return tab.title !== tag.title});
-        this.fileSelector.enableFile(t[0], t[1])
+        this.filePoolSelect.enableFile(t[0], t[1])
         
         if (this.tabs.length === 0) {
             this.tabContent.classList.add('hide')
@@ -133,17 +151,22 @@
         }
         this.tabList.removeChild(tag)
     };
-    SharedArea.prototype.selectTab = function(tag){
-        this.deactiveAll();
+    SharedArea.prototype.activateTab = function(tag){
+        this.activeTab.classList.remove('active')
+        this.activeTab = tag;
         tag.classList.add('active');
+    }
+    SharedArea.prototype.selectTab = function(tag){
+        this.activateTab(tag);
         this.setContent(tag.title);
-    };
-    SharedArea.prototype.render = function  () {
-        doRender.call(this);
     };
     SharedArea.prototype.setContent = function (cnt) {
         this.tabContentTextarea.innerHTML = cnt;
     };
+    SharedArea.prototype.render = function  () {
+        doRender.call(this);
+    };
+
 
     function FilePoolSelect(trg, parentInstance) {
         this.parentInstance = parentInstance;
@@ -152,9 +175,6 @@
         this.userFiles = {}
         this.init();
     }
-    FilePoolSelect.prototype.render = function () {
-        doRender.call(this);
-    };
     FilePoolSelect.prototype.init = function () {
         var self = this;
         this.main = createElement('select', {'class':'filelist'})
@@ -234,29 +254,49 @@
             }
         })
     };
-
     FilePoolSelect.prototype.removeAll = function () {
         this.main.innerHTML = ''
         this.firstOption.innerHTML = 'no files available'
         this.main.appendChild(this.firstOption)
     };
+    FilePoolSelect.prototype.render = function () {
+        doRender.call(this);
+    };
+
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+        // Great success! All the File APIs are supported.
+    } else {
+        alert('The File APIs are not fully supported in this browser.');
+    }
 
     window.addEventListener('load', function () {
         var target = document.getElementById('target'),
             shareArea = new ShareArea(target),
+            hr = createElement('div', {'class': 'hr'}),
             sharedArea = new SharedArea(target);
         shareArea.render();
+        target.appendChild(hr)
         sharedArea.render();
-        window.shareArea = shareArea;
-        window.sharedArea = sharedArea;
-        window.filePoolSelect = sharedArea.fileSelector;
 
-        filePoolSelect.addFile('aaa.js', 'Federico')
-        filePoolSelect.addFile('bbb.js', 'Federico')
-        filePoolSelect.addFile('ccc.js', 'Federico')
-        filePoolSelect.addFile('aaa.js', 'Gabri')
-        filePoolSelect.addFile('bbb.js', 'Gabri')        
+        window.oneShare = {
+            shareArea,
+            sharedArea
+        }
 
+        shareArea.addFile('./../../../helloworld/server/js/workers/worker_helloWorld.js')
+        shareArea.addFile('aab.js')
+        shareArea.addFile('aac.js')
+        shareArea.addFile('aad.js')
+        sharedArea.filePoolSelect.addFile('aaa.js', 'Federico')
+        sharedArea.filePoolSelect.addFile('bbb.js', 'Federico')
+        sharedArea.filePoolSelect.addFile('ccc.js', 'Federico')
+        sharedArea.filePoolSelect.addFile('aaa.js', 'Gabri')
+        sharedArea.filePoolSelect.addFile('bbb.js', 'Gabri')
+
+        
         maltaV('NS').utils.loadScript('/js/handlers/oneshare.js');
     });
+
+
+    
 })();

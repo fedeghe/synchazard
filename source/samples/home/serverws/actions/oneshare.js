@@ -9,7 +9,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
         switch (data._ACTION) {
             case 'init':
                 ws.send(action.encode({
-                    _ACTION: 'status',
+                    _ACTION: 'statusFile',
                     _PAYLOAD: {
                         time: new Date()
                     }

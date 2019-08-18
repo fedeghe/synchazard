@@ -11,11 +11,11 @@ self.onmessage = function (e) {
 
     if (e.data._TYPE !== 'action') return;
     switch (e.data._ACTION) {
-        case 'doComputation':
+        case 'statusFile':
             // eslint-disable-next-line no-restricted-globals
             self.postMessage({
-                _HANDLER: 'computer',
-                _DATA: e.data._JOB
+                _HANDLER: 'oneShare',
+                _DATA: e.data
             });
             break;
         default: break;
