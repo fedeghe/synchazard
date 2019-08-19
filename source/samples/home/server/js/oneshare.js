@@ -34,8 +34,7 @@
             var trg = e.target,
                 trgtag = trg.tagName;
             if (trgtag === 'SPAN') {
-                self.fileList.removeChild(trg.parentNode)
-                self.onRemove && self.onRemove(this, trg.parentNode.dataset.dataPath);
+                self.removeFile(trg.parentNode)
             }
         })
         this.fileList.addEventListener('mouseover', function (e) {
@@ -70,6 +69,10 @@
         this.fileList.appendChild(fileItem);
         this.onAdd && this.onAdd(this, fileItem.dataset.path);
     };    
+    ShareArea.prototype.removeFile = function (node) {
+        this.fileList.removeChild(node)
+        this.onRemove && this.onRemove(this, node.dataset.path);
+    };
     ShareArea.prototype.render = function () {
         doRender.call(this);
     };
@@ -128,16 +131,19 @@
     };
     SharedArea.prototype.addTab = function(filen){
         var split = filen.split('___'),
-            // user = split[0],
+            user = split[0],
             file = split[1],
             tab = createElement('li', {'class': 'tabTongue active', title: filen}, file),
             close = createElement('span', {'class':'close'}, '&times;');
 
         this.activeTab && this.activeTab.classList.remove('active')
         this.tabs.push(tab);
+        tab.dataset.user = user; 
+        tab.dataset.file = file; 
         tab.appendChild(close)
         this.tabList.appendChild(tab)
         this.activeTab = tab
+        this.onAdd && this.onAdd(tab)
     };
     SharedArea.prototype.removeTab = function(tag){
         var removingActive = tag.classList.contains('active'),
@@ -152,6 +158,7 @@
             this.tabs[0].click();
         }
         this.tabList.removeChild(tag)
+        this.onRemove && this.onRemove(tag)
     };
     SharedArea.prototype.activateTab = function(tag){
         this.activeTab.classList.remove('active')
@@ -284,15 +291,15 @@
             sharedArea
         }
 
-        shareArea.addFile('./../../../helloworld/server/js/workers/worker_helloWorld.js')
-        shareArea.addFile('aab.js')
-        shareArea.addFile('aac.js')
-        shareArea.addFile('aad.js')
-        sharedArea.filePoolSelect.addFile('aaa.js', 'Federico')
-        sharedArea.filePoolSelect.addFile('bbb.js', 'Federico')
-        sharedArea.filePoolSelect.addFile('ccc.js', 'Federico')
-        sharedArea.filePoolSelect.addFile('aaa.js', 'Gabri')
-        sharedArea.filePoolSelect.addFile('bbb.js', 'Gabri')
+        // oneShare.shareArea.addFile('./../../../helloworld/server/js/workers/worker_helloWorld.js')
+        // oneShare.shareArea.addFile('aab.js')
+        // oneShare.shareArea.addFile('aac.js')
+        // oneShare.shareArea.addFile('aad.js')
+        // oneShare.sharedArea.filePoolSelect.addFile('aaa.js', 'Federico')
+        // oneShare.sharedArea.filePoolSelect.addFile('bbb.js', 'Federico')
+        // oneShare.sharedArea.filePoolSelect.addFile('ccc.js', 'Federico')
+        // oneShare.sharedArea.filePoolSelect.addFile('aaa.js', 'Gabri')
+        // oneShare.sharedArea.filePoolSelect.addFile('bbb.js', 'Gabri')
 
         
         maltaV('NS').utils.loadScript('/js/handlers/oneshare.js');
