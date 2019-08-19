@@ -11,7 +11,8 @@ self.onmessage = function (e) {
 
     if (e.data._TYPE !== 'action') return;
     switch (e.data._ACTION) {
-        case 'statusFile':
+        case 'OSanother':
+        case 'OSstatusFile':
             // eslint-disable-next-line no-restricted-globals
             self.postMessage({
                 _HANDLER: 'oneShare',

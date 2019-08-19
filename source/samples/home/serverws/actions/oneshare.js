@@ -3,11 +3,19 @@
 module.exports.launch = (action, synchazard /* , params */) => {
     
     action.setup({
-        files: [/*{
+        files: {/* {
             user: [file1, file2]
-        } */],
+        } */},
         actions: {
+            sendUserFiles: id => action.encode({
+                _ACTION: 'userFiles',
+                _PAYLOAD: {
+                    files: action.data.files[id]
+                }
+            }),
+            sendSharedFiles: () => {
 
+            },
         }
     });
 
@@ -17,8 +25,9 @@ module.exports.launch = (action, synchazard /* , params */) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
             case 'init':
+                action.data.actions.sendUserFiles(2)
                 ws.send(action.encode({
-                    _ACTION: 'statusFile',
+                    _ACTION: 'OSstatusFile',
                     _PAYLOAD: {
                         time: new Date()
                     }
