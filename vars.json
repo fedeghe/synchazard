@@ -40,7 +40,7 @@
     //======================
     // false : no check
     // true : actions must specify actor, the client must pass actors and they must match
-    "CHECK_ACTORS": true,
+    "CHECK_ACTORS": false,
     // toggle checking debug messages
     "NOTIFY_ACTORS_CHECKING": false,
     "START_MESSAGE": {
