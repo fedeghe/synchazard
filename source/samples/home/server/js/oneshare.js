@@ -35,6 +35,7 @@
                 trgtag = trg.tagName;
             if (trgtag === 'SPAN') {
                 self.fileList.removeChild(trg.parentNode)
+                self.onRemove && self.onRemove(this, trg.parentNode.dataset.dataPath);
             }
         })
         this.fileList.addEventListener('mouseover', function (e) {
@@ -67,6 +68,7 @@
         fileItem.appendChild(closeIcon);
         this.sharedFileList.push(filename);
         this.fileList.appendChild(fileItem);
+        this.onAdd && this.onAdd(this, fileItem.dataset.path);
     };    
     ShareArea.prototype.render = function () {
         doRender.call(this);
@@ -166,7 +168,6 @@
     SharedArea.prototype.render = function  () {
         doRender.call(this);
     };
-
 
     function FilePoolSelect(trg, parentInstance) {
         this.parentInstance = parentInstance;
