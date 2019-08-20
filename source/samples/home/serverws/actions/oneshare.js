@@ -2,20 +2,70 @@
 
 module.exports.launch = (action, synchazard /* , params */) => {
     
+    
+
     action.setup({
         files: {/* {
-            user: [file1, file2]
+            userId: [{
+                filePath: '',
+                content: ''
+                subscribers: [userId1, userId2]
+            }]
         } */},
         actions: {
-            sendUserFiles: () => action.encode({
+            sendSharedFiles: userId => action.encode({
                 _ACTION: 'userFiles',
                 _PAYLOAD: {
-                    files: action.data.files
+                    files: Object.keys(action.data.files)
+                        .filter(uk => uk !== userId).map(uk => ({
+                            [uk]: action.data.files[uk]
+                        }))
                 }
             }),
-            sendSharedFiles: () => {
-
+            shareFile: (userId, filePath, content) => {
+                if (!(userId in action.data.files)) {
+                    action.data.files[userId] = []
+                }
+                action.data.files[userId].push({filePath, content});
+                return action.encode({
+                    _ACTION: 'sharedAdded',
+                    _PAYLOAD: {
+                        userId,
+                        filePath,
+                        content
+                    }
+                });
             },
+            updateSharedFile: (userId, filePath, content) => {
+                action.data.files[userId].push({filePath, content});
+                return action.encode({
+                    _ACTION: 'sharedAdded',
+                    _PAYLOAD: {
+                        userId,
+                        filePath,
+                        content
+                    }
+                });
+            },
+            unshareFile: (userId, filePath) => action.encode({
+                _ACTION: '',
+                _PAYLOAD: {
+                    
+                }
+            }),
+            observeFile: (userId, owner_id, filePath) => action.encode({
+                _ACTION: '',
+                _PAYLOAD: {
+                    
+                }
+            }),
+            unobserveFile: (userId, owner_id, filePath) => action.encode({
+                _ACTION: '',
+                _PAYLOAD: {
+                    
+                }
+            })
+
         }
     });
 
@@ -25,13 +75,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
             case 'init':
-                action.data.actions.sendUserFiles()
-                ws.send(action.encode({
-                    _ACTION: 'OSstatusFile',
-                    _PAYLOAD: {
-                        time: new Date()
-                    }
-                }));
+                ws.send(action.data.actions.sendSharedFiles(data._ID));
                 break;
             case 'addShare':
                 
