@@ -34,27 +34,40 @@
             var trg = e.target,
                 trgtag = trg.tagName;
             if (trgtag === 'SPAN') {
-                self.removeFile(trg.parentNode)
+                self.removeFile(trg.parentNode);
             }
-        })
+        });
         this.fileList.addEventListener('mouseover', function (e) {
             var trg = e.target,
                 trgtag = trg.tagName;
             if (trgtag === 'LI') {
                 self.detail.innerHTML = `FULL PATH: ${trg.dataset.path}`
             }
-        })
+        });
         this.fileList.addEventListener('mouseout', function (e) {
             var trg = e.target,
                 trgtag = trg.tagName;
             if (trgtag === 'LI') {
                 self.detail.innerHTML = '';
             }
-        })
+        });
+
+        this.dropArea.addEventListener('dragover', this.handleDragOver, false);
+        this.dropArea.addEventListener('drop', this.handleFileSelect, false);
 
         this.main.appendChild(this.dropArea)    
         this.main.appendChild(this.fileList)
         this.main.appendChild(this.detail)
+    };
+    ShareArea.prototype.handleDragOver = function (e) {
+        console.log('Dragging over ', +new Date)
+        console.log(e)
+        e.preventDefault();
+    };
+    ShareArea.prototype.handleFileSelect = function (e) {
+        console.log('Dropping over ', +new Date)
+        console.log(e)
+        e.preventDefault();
     };
     ShareArea.prototype.addFile = function (filename) {
         var elems = filename.match(/(.*)\/([^/]*)/),
