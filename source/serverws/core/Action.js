@@ -13,7 +13,10 @@ class Action{
 
     getCount() { return Action.count;}
 
-    getSize(url) { return Action.count.URL[url].length;}
+    getSize(url) {
+        const cnt = Action.count.URL[url];
+        return cnt ? cnt.length : 0;
+    }
 
     getTime() {
         var d = new Date(),
@@ -33,6 +36,10 @@ class Action{
             }
         }
         return JSON.stringify(action);
+    }
+
+    checkRequestActor(data) {
+        return data._ACTORS.split(',').includes(this.actor)
     }
 
     encodeMessage(message, options) {

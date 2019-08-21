@@ -1,4 +1,4 @@
-module.exports.launch = (action, synchazard /* , params */) => {
+module.exports.launch = (action, synchazard, {actor} /* , params */) => {
     let askingingCli = null,
         pendingPartecipants = 0,
         doneClis = [],
@@ -68,7 +68,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
     //
     // eslint-disable-next-line complexity
     action.onconnection((data, ws /* , req */ ) => {
-        // console.log(req)
+        if(!action.checkRequestActor(data)) return;
         
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
