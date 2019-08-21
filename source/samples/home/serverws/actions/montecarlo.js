@@ -52,9 +52,13 @@ module.exports.launch = (action, synchazard /* , params */) => {
                     _PREVIOUS: currentResult,
                     _STATS: results
                 };
+                // calculate new PI, ...and put it directly in the data results
                 response._DATA = calcPi(results);
+                // include the error, based on the value of Math.PI, limited to 7 digits
                 response._ERR = (100 * (Math.PI - parseFloat(response._DATA, 10)) / Math.PI).toFixed(7)
+                // save the local most up to date result 
                 currentResult = response._DATA;
+                // return the action including the requiring client id
                 return action.encode(response, { id: askingingCli });
             }
         }
@@ -69,18 +73,26 @@ module.exports.launch = (action, synchazard /* , params */) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
             case 'init':
-                // synchazard.unicast(data._ID, action.data.actions.update());
                 // since the source is the sender the unicast (that needs the id)
                 // can be replaced with ws.send
 
+                // get the static count from Action, restricted to this url
                 available = action.getSize(data._URL);
 
+                // send back to the connecting client the most up to date data
                 ws.send(action.data.actions.update());
 
+                // in any case
+                // if the wsserver is not busy, then broadcast to all clients
+                // so they are aknowledged the wsserver is free to accept comnputing requests
+                // otherw
                 action.data.free
                 ? synchazard.broadcast(action.data.actions.free)
-                : synchazard.unicast(data._ID, action.data.actions.busy);
+                : synchazard.send(action.data.actions.busy);// same as the following
+                // : synchazard.unicast(data._ID, action.data.actions.busy);
 
+                // in case that there are not ehough clients
+                // let the only client be aware
                 available <= 1
                 && ws.send(action.data.actions.noClients);
 
