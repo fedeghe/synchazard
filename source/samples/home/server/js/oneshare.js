@@ -21,13 +21,13 @@
     function ShareArea(trg) {
         this.target = trg;
         this.init();
-        this.sharedFileList = [];
+        this.sh_sharedFileList = [];
+        this.locallyObserved = [];
     }
     ShareArea.prototype.init = function () {
         var self = this;
         this.main = createElement('div', {'class' : 'shareArea'})
         this.dropArea = createElement('div', {'class' : 'shareAreaDrop'}, 'share a file by dragging it here')
-        
         this.fileList = createElement('ul', {'class' : 'shareAreaButtons'})
         this.detail = createElement('p', {'class' : 'shareAreaDetail'})
         this.fileList.addEventListener('click', function (e) {
@@ -52,39 +52,109 @@
             }
         });
 
-        this.dropArea.addEventListener('dragover', this.handleDragOver, false);
-        this.dropArea.addEventListener('drop', this.handleFileSelect, false);
+        this.dropArea.addEventListener('dragover', this.handleDragOver.bind(this), false);
+        this.dropArea.addEventListener('drop', this.handleFileSelect.bind(this), false);
 
         this.main.appendChild(this.dropArea)    
         this.main.appendChild(this.fileList)
         this.main.appendChild(this.detail)
+        this.startWatching()
     };
-    ShareArea.prototype.handleDragOver = function (e) {
+    ShareArea.prototype.handleDragOver = function (evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
         console.log('Dragging over ', +new Date)
-        console.log(e)
-        e.preventDefault();
+        console.log(evt)
     };
-    ShareArea.prototype.handleFileSelect = function (e) {
-        console.log('Dropping over ', +new Date)
-        console.log(e)
-        e.preventDefault();
+    ShareArea.prototype.handleFileSelect = function (evt) {
+        var files = evt.dataTransfer.files,
+            i = 0,
+            len = 0,
+            f;
+        
+
+      // Read in the image file as a data URL.
+        
+        evt.preventDefault();
+        evt.stopPropagation();
+        console.log('Dropping over ', +new Date)    
+        console.log(evt)
+
+        // files is a FileList of File objects. List some properties.        
+        for (i = 0, f, len = files.length; i < len; i++) {
+
+
+            f = files[i]
+
+            // eslint-disable-next-line one-var, vars-on-top
+            var reader = new FileReader(),
+                // eslint-disable-next-line no-unused-vars
+                obj = {f: null, name: null, date : null, content : null, reader : reader};
+
+            // Closure to capture the file information.
+            // eslint-disable-next-line no-loop-func
+            reader.onload = (function() {
+                return function(e) {
+                    // Render thumbnail.
+                    obj.content =  e.target.result;
+                };
+            })(f);
+            reader.readAsDataURL(f);
+            
+            this.addFile(escape(f.name))
+            obj.f = f;
+            obj.name = f.name;
+            obj.date = f.lastModifiedDate;
+            this.locallyObserved.push(obj);
+/*
+            escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+                  f.size, ' bytes, last modified: ',
+                  f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+                  '</li>');
+*/
+        }
+    
+        
     };
-    ShareArea.prototype.addFile = function (filename) {
-        var elems = filename.match(/(.*)\/([^/]*)/),
-            filePath = elems ? elems[1] : '',
-            fileName = elems ? elems[2] : filename,
-            fileItem = createElement('li', {'class': 'file'}, fileName),
+    ShareArea.prototype.startWatching = function () {
+        var self = this,
+            inter = 500;
+
+        setInterval(function () {
+            self.locallyObserved.forEach(function (file) {
+                if (file.f.lastModifiedDate > (+new Date - inter)) {
+                    file.date = +new Date;
+                    
+                    file.reader.onload = (function() {
+                        return function(e) {
+                            file.content =  e.target.result;
+                            self.onLocalUpdate && self.onLocalUpdate(file);
+                        };
+                    })(file);
+                    file.reader.readAsDataURL(file.f);
+                }
+                file.f.lastModifiedDate = +new Date
+            })
+        }, inter);
+    };
+    ShareArea.prototype.addFile = function (fileName) {
+        var fileItem = createElement('li', {'class': 'file'}, fileName),
             closeIcon = createElement('span', {'class': 'close', title:'stop sharing that file'}, '&times;');
-        fileItem.dataset.path = [filePath, fileName].join('/')
-        fileItem.dataset.observers = 0
+        fileItem.dataset.path = fileName;
+        fileItem.dataset.observers = 0;
         fileItem.appendChild(closeIcon);
-        this.sharedFileList.push(filename);
+        this.sh_sharedFileList.push(fileName);
         this.fileList.appendChild(fileItem);
-        this.onAdd && this.onAdd(this, fileItem.dataset.path);
-    };    
+        this.onAdd && this.onAdd(fileName);
+        return false;
+    };
     ShareArea.prototype.removeFile = function (node) {
+        var fileName = node.dataset.path
         this.fileList.removeChild(node)
-        this.onRemove && this.onRemove(this, node.dataset.path);
+        this.sh_sharedFileList = this.sh_sharedFileList.filter(function (f) {
+            return f !== fileName
+        });
+        this.onRemove && this.onRemove(fileName);
     };
     ShareArea.prototype.render = function () {
         doRender.call(this);
@@ -96,6 +166,7 @@
         this.activeTab = null;
         this.init();
     }
+
     SharedArea.prototype.init = function  () {
         var self = this;
         this.main = createElement('div', {'class' : 'sharedArea'});
@@ -117,9 +188,7 @@
         this.main.appendChild(this.tabList)
         this.count = 0;
         
-        
         this.main.appendChild(this.tabContent)
-        
 
         this.tabList.addEventListener('click', function(e){
             var trg = e.target,

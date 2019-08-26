@@ -1,4 +1,4 @@
-module.exports.launch = (action, synchazard, {actor} /* , params */) => {
+module.exports.launch = (action, synchazard/* , params */) => {
     let askingingCli = null,
         pendingPartecipants = 0,
         doneClis = [],

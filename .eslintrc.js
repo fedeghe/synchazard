@@ -12,5 +12,12 @@ module.exports = {
         maltaE: true,
         importScripts: true
     },
-    "rules": {},
+    "rules": {
+        "prefer-destructuring": ["error", {
+            "array": false,
+            "object": false
+          }, {
+            "enforceForRenamedProperties": false
+          }]
+    },
 };

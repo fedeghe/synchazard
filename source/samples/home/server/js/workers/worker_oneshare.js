@@ -5,20 +5,19 @@ importScripts('actorsDontMatch.js');
 
 // eslint-disable-next-line no-restricted-globals
 self.onmessage = function (e) {
-
+    
+    console.log(e)
     // eslint-disable-next-line no-undef
     if (actorsDontMatch(e)) return;
 
     if (e.data._TYPE !== 'action') return;
     switch (e.data._ACTION) {
-        case 'OSanother':
-        case 'OSstatusFile':
+        default:
             // eslint-disable-next-line no-restricted-globals
             self.postMessage({
                 _HANDLER: 'oneShare',
                 _DATA: e.data
             });
             break;
-        default: break;
     }
 };
