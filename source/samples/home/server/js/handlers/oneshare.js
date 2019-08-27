@@ -1,3 +1,4 @@
+/* eslint-disable guard-for-in */
 (function () {
 
     //
@@ -9,8 +10,17 @@
     Share.prototype.handle = function (data) {
         console.log('cli gets ', data );
         switch(data._ACTION) {
+            case 'userFiles':
+                console.log('HEHEHEEHEHHEHE')
+                for(var userK in data._PAYLOAD.files) {
+                    data._PAYLOAD.files[userK].forEach( function (f) {
+                        oneShare.sharedArea.filePoolSelect.addFile(f.filePath, userK)
+                    })
+                }
+                break;
             default:
                 console.log(data._ACTION)
+                
                 break;
         }
     };
@@ -23,7 +33,7 @@
         });
     }
     oneShare.shareArea.onRemove = function () {
-        console.log('share remove', arguments);
+        console.log('share remove', arguments);x
     };
     oneShare.shareArea.onLocalUpdate = function (file) {
         console.log('local Update', arguments);
