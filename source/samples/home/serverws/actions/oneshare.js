@@ -50,17 +50,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 console.log(ret)
                 return ret
             },
-            updateSharedFile: (userId, filePath, content) => {
-                
-                action.data.files[userId] = action.data.files[userId].map( o => {
-                    if (o.filePath === filePath) {
-                        o.content = content
-                    }
-                    return o;
-                })
 
-
-            },
             unshareFile: (userId, filePath) => action.encode({
                 _ACTION: '',
                 _PAYLOAD: {
@@ -80,6 +70,16 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 }
             })
 
+        },
+        funcz: {
+            updateSharedFile: (userId, filePath, content) => {
+                action.data.files[userId] = action.data.files[userId].map( o => {
+                    if (o.filePath === filePath) {
+                        o.content = content
+                    }
+                    return o;
+                })
+            }
         }
     });
 
@@ -105,9 +105,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
              * - broadcast shared files (all clients will have to ignore their ones)
              */
             case 'addShare':
-                console.log('added Share')
                 synchazard.otherscast(action.data.actions.shareFile(data._ID, data._FILE.name, data._FILE.content))
-                console.log(data)  
                 break;
 
             /**
@@ -117,16 +115,9 @@ module.exports.launch = (action, synchazard /* , params */) => {
              * - broadcast to all subscribers
              */
             case 'updateShare':
-                console.log(data)
-                console.log('before')
-                console.log(action.data.files[data._ID])
-                action.data.actions.updateSharedFile(data._ID, data._FILE.name, data._FILE.content);
-                console.log('after')
-                console.log(action.data.files[data._ID])
+                action.data.funcz.updateSharedFile(data._ID, data._FILE.name, data._FILE.content);
                 // eslint-disable-next-line no-case-declarations
-                const up = action.data.actions.sendSharedFiles()
-                console.log('action: ', up)
-                synchazard.otherscast(up);
+                synchazard.otherscast(action.data.actions.sendSharedFiles());
                 break;
 
             /**
