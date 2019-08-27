@@ -66,86 +66,75 @@
         console.log('Dragging over ', +new Date)
         console.log(evt)
     };
+
+
+
+    /**
+     * the fila has just been dropped and we just need to 
+     * - quiet the dafault event handling/propagating
+     * - alert the server a new file from this client is available to be shared
+     * - save it among the locallyObserved ones so that at the watching loop we do not miss it
+     */
     ShareArea.prototype.handleFileSelect = function (evt) {
         var files = evt.dataTransfer.files,
             i = 0,
             len = 0,
-            f;
-        
-
-      // Read in the image file as a data URL.
+            file,
+            self = this;
         
         evt.preventDefault();
         evt.stopPropagation();
-        console.log('Dropping over ', +new Date)    
-        console.log(evt)
-
-        // files is a FileList of File objects. List some properties.        
-        for (i = 0, f, len = files.length; i < len; i++) {
-
-
-            f = files[i]
-
+        
+        // can handle more files in one drop
+        for (i = 0, len = files.length; i < len; i++) {
+            file = files[i]
             // eslint-disable-next-line one-var, vars-on-top
             var reader = new FileReader(),
                 // eslint-disable-next-line no-unused-vars
-                obj = {f: null, name: null, date : null, content : null, reader : reader};
+                obj = {file: file, name: file.name, date : file.lastModifiedDate, content : null, reader : reader};
 
-            // Closure to capture the file information.
             // eslint-disable-next-line no-loop-func
             reader.onload = (function() {
                 return function(e) {
-                    // Render thumbnail.
+                    // content available
                     obj.content =  e.target.result;
+                    self.addFile(obj)
+                    self.locallyObserved.push(obj);
                 };
-            })(f);
-            reader.readAsDataURL(f);
-            
-            this.addFile(escape(f.name))
-            obj.f = f;
-            obj.name = f.name;
-            obj.date = f.lastModifiedDate;
-            this.locallyObserved.push(obj);
-/*
-            escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
-                  f.size, ' bytes, last modified: ',
-                  f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
-                  '</li>');
-*/
+            })(file);
+            reader.readAsDataURL(file);
         }
-    
-        
     };
     ShareArea.prototype.startWatching = function () {
         var self = this,
             inter = 500;
 
         setInterval(function () {
-            self.locallyObserved.forEach(function (file) {
-                if (file.f.lastModifiedDate > (+new Date - inter)) {
-                    file.date = +new Date;
-                    
-                    file.reader.onload = (function() {
+            self.locallyObserved.forEach(function (observed) {
+                if (observed.file.lastModifiedDate > (+new Date - inter)) {
+                    observed.date = +new Date;
+                    observed.reader.onload = (function(obs) {
                         return function(e) {
-                            file.content =  e.target.result;
-                            self.onLocalUpdate && self.onLocalUpdate(file);
+                            observed.content =  e.target.result;
+                            self.onLocalUpdate && self.onLocalUpdate(obs);
                         };
-                    })(file);
-                    file.reader.readAsDataURL(file.f);
+                    })(observed);
+                    observed.reader.readAsDataURL(observed.file);
                 }
-                file.f.lastModifiedDate = +new Date
+                observed.file.lastModifiedDate = +new Date
             })
         }, inter);
     };
-    ShareArea.prototype.addFile = function (fileName) {
-        var fileItem = createElement('li', {'class': 'file'}, fileName),
+    ShareArea.prototype.addFile = function (file) {
+        var fileName = file.name,
+            fileItem = createElement('li', {'class': 'file'}, fileName),
             closeIcon = createElement('span', {'class': 'close', title:'stop sharing that file'}, '&times;');
         fileItem.dataset.path = fileName;
         fileItem.dataset.observers = 0;
         fileItem.appendChild(closeIcon);
         this.sh_sharedFileList.push(fileName);
         this.fileList.appendChild(fileItem);
-        this.onAdd && this.onAdd(fileName);
+        this.onAdd && this.onAdd(file);
         return false;
     };
     ShareArea.prototype.removeFile = function (node) {
@@ -159,7 +148,42 @@
     ShareArea.prototype.render = function () {
         doRender.call(this);
     };
-
+    
+    /* ********************************************************************
+     * 
+     * 
+     *
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+    ********************************************************************* */
 
     function SharedArea(trg) {
         this.target = trg;
@@ -373,17 +397,6 @@
             sharedArea
         }
 
-        // oneShare.shareArea.addFile('./../../../helloworld/server/js/workers/worker_helloWorld.js')
-        // oneShare.shareArea.addFile('aab.js')
-        // oneShare.shareArea.addFile('aac.js')
-        // oneShare.shareArea.addFile('aad.js')
-        // oneShare.sharedArea.filePoolSelect.addFile('aaa.js', 'Federico')
-        // oneShare.sharedArea.filePoolSelect.addFile('bbb.js', 'Federico')
-        // oneShare.sharedArea.filePoolSelect.addFile('ccc.js', 'Federico')
-        // oneShare.sharedArea.filePoolSelect.addFile('aaa.js', 'Gabri')
-        // oneShare.sharedArea.filePoolSelect.addFile('bbb.js', 'Gabri')
-
-        
         maltaV('NS').utils.loadScript('/js/handlers/oneshare.js');
     });
 

@@ -76,8 +76,9 @@ let debug = () => {},
      * EXPORTED
      * otherscast: to all but the given id
      */
-    otherscast = (id, data) => {
-        const _ids = [];
+    otherscast = (data) => {
+        const _ids = [],
+            id  = data._ID;
         return new Promise(resolve => {
             wss.clients.forEach(client => (
                 client.id !== id

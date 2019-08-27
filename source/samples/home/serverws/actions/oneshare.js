@@ -16,13 +16,14 @@ module.exports.launch = (action, synchazard /* , params */) => {
             sendSharedFiles: () => action.encode({
                 _ACTION: 'userFiles',
                 _PAYLOAD: {
-                    files: Object.keys(action.data.files)
-                        .map(uk => ({
-                            [uk]: action.data.files[uk].map(f => ({
-                                filePath: f.filePath,
-                                subscribersCount: f.subscribers.length,
-                            }))
-                        }))
+                    files: action.data.files
+                    // files: Object.keys(action.data.files)
+                    //     .map(uk => ({
+                    //         [uk]: action.data.files[uk].map(f => ({
+                    //             filePath: f.filePath,
+                    //             subscribersCount: f.subscribers.length,
+                    //         }))
+                    //     }))
                 }
             }),
             shareFile: (userId, filePath, content) => {
@@ -34,25 +35,31 @@ module.exports.launch = (action, synchazard /* , params */) => {
                     content,
                     subscribers: []
                 });
-                return action.encode({
-                    _ACTION: 'sharedAdded',
+
+                console.log('Shared file added:')
+                console.log(action.data.files)
+
+                const ret = action.encode({
+                    _ACTION: 'shareAdded',
                     _PAYLOAD: {
                         userId,
                         filePath,
                         content
                     }
                 });
+                console.log(ret)
+                return ret
             },
             updateSharedFile: (userId, filePath, content) => {
-                action.data.files[userId].push({filePath, content});
-                return action.encode({
-                    _ACTION: 'sharedAdded',
-                    _PAYLOAD: {
-                        userId,
-                        filePath,
-                        content
+                
+                action.data.files[userId] = action.data.files[userId].map( o => {
+                    if (o.filePath === filePath) {
+                        o.content = content
                     }
-                });
+                    return o;
+                })
+
+
             },
             unshareFile: (userId, filePath) => action.encode({
                 _ACTION: '',
@@ -98,6 +105,9 @@ module.exports.launch = (action, synchazard /* , params */) => {
              * - broadcast shared files (all clients will have to ignore their ones)
              */
             case 'addShare':
+                console.log('added Share')
+                synchazard.otherscast(action.data.actions.shareFile(data._ID, data._FILE.name, data._FILE.content))
+                console.log(data)  
                 break;
 
             /**
@@ -107,6 +117,16 @@ module.exports.launch = (action, synchazard /* , params */) => {
              * - broadcast to all subscribers
              */
             case 'updateShare':
+                console.log(data)
+                console.log('before')
+                console.log(action.data.files[data._ID])
+                action.data.actions.updateSharedFile(data._ID, data._FILE.name, data._FILE.content);
+                console.log('after')
+                console.log(action.data.files[data._ID])
+                // eslint-disable-next-line no-case-declarations
+                const up = action.data.actions.sendSharedFiles()
+                console.log('action: ', up)
+                synchazard.otherscast(up);
                 break;
 
             /**

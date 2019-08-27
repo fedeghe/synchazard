@@ -69,6 +69,7 @@
          */
         ws.onmessage = function (evt) {
             maltaV('NS').active && 
+            evt.data && 
             maltaV('NS').synchazard.postMessage(
                 JSON.parse(evt.data)
             );
