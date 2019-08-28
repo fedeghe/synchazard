@@ -144,6 +144,13 @@ module.exports.launch = (action, synchazard /* , params */) => {
 
             default: break;
         }
+    }, (data) => {
+        // on disconnection , update the list removing the user and all his files\
+        // then broadcast the updated list
+        // every client will have to remove those ones that he is looking at
+        // and have been removed
+        console.log('dis-connecting')
+        console.log(data)
     });
 
 };

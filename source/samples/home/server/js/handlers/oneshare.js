@@ -24,7 +24,6 @@
                 break;
         }
     };
-    console.log(oneShare)
     oneShare.shareArea.onAdd = function (file) {
         // console.log('share add', arguments);
         maltaV('NS').send({

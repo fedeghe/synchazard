@@ -18,6 +18,7 @@
         this.target.appendChild(this.main)
     }
 
+
     function ShareArea(trg) {
         this.target = trg;
         this.init();
@@ -30,6 +31,7 @@
         this.dropArea = createElement('div', {'class' : 'shareAreaDrop'}, 'share a file by dragging it here')
         this.fileList = createElement('ul', {'class' : 'shareAreaButtons'})
         this.detail = createElement('p', {'class' : 'shareAreaDetail'})
+
         this.fileList.addEventListener('click', function (e) {
             var trg = e.target,
                 trgtag = trg.tagName;
@@ -53,13 +55,14 @@
         });
 
         this.dropArea.addEventListener('dragover', this.handleDragOver.bind(this), false);
-        this.dropArea.addEventListener('drop', this.handleFileSelect.bind(this), false);
+        this.dropArea.addEventListener('drop', this.handleFileDrop.bind(this), false);
 
         this.main.appendChild(this.dropArea)    
         this.main.appendChild(this.fileList)
         this.main.appendChild(this.detail)
         this.startWatching()
     };
+
     ShareArea.prototype.handleDragOver = function (evt) {
         evt.preventDefault();
         evt.stopPropagation();
@@ -67,36 +70,39 @@
         console.log(evt)
     };
 
-
-
     /**
      * the fila has just been dropped and we just need to 
      * - quiet the dafault event handling/propagating
      * - alert the server a new file from this client is available to be shared
      * - save it among the locallyObserved ones so that at the watching loop we do not miss it
      */
-    ShareArea.prototype.handleFileSelect = function (evt) {
+    ShareArea.prototype.handleFileDrop = function (evt) {
         var files = evt.dataTransfer.files,
             i = 0,
             len = 0,
             file,
             self = this;
-        
         evt.preventDefault();
         evt.stopPropagation();
-        
+
         // can handle more files in one drop
         for (i = 0, len = files.length; i < len; i++) {
             file = files[i]
             // eslint-disable-next-line one-var, vars-on-top
             var reader = new FileReader(),
                 // eslint-disable-next-line no-unused-vars
-                obj = {file: file, name: file.name, date : file.lastModifiedDate, content : null, reader : reader};
+                obj = {
+                    file: file,
+                    name: file.name,
+                    date : file.lastModifiedDate,
+                    reader : reader,
+                    content : null
+                };
 
             // eslint-disable-next-line no-loop-func
             reader.onload = (function() {
                 return function(e) {
-                    // content available
+                    // content is available now
                     obj.content =  e.target.result;
                     self.addFile(obj)
                     self.locallyObserved.push(obj);
