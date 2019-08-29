@@ -13,30 +13,12 @@ module.exports.launch = (action, synchazard /* , params */) => {
             }]
         } */},
         actions: {
-            shareFile: (userId, filePath, content) => {
 
-                // if not there yet, create the user container
-                if (!(userId in action.data.files)) {
-                    action.data.files[userId] = []
-                }
+            sharedFiles: () => action.encode({
+                _ACTION: 'sharedFiles',
+                _PAYLOAD: action.data.get.sharedFilesMeta()
+            }),
 
-                // insert the file (collision who cares)
-                action.data.files[userId].push({
-                    filePath,
-                    content,
-                    subscribers: []
-                });
-
-                // return the ac
-                return action.encode({
-                    _ACTION: 'shareAdded',
-                    _PAYLOAD: {
-                        userId,
-                        filePath,
-                        content
-                    }
-                });
-            },
             unshareFile: (userId, filePath) => action.encode({
                 _ACTION: '',
                 _PAYLOAD: {
@@ -57,14 +39,33 @@ module.exports.launch = (action, synchazard /* , params */) => {
             })
         },
         set: {
-            sharedFile: (userId, filePath, content) => {
+            updateSharedFile: (userId, filePath, content) => {
+                let subscribers = [];
                 action.data.files[userId] = action.data.files[userId].map( o => {
                     if (o.filePath === filePath) {
                         o.content = content
+                        subscribers = [...subscribers, ...o.subscribers]
                     }
                     return o;
                 })
+                return subscribers;
             },
+
+
+
+            shareFile: (userId, filePath, content) => {
+                // if not there yet, create the user container
+                if (!(userId in action.data.files)) {
+                    action.data.files[userId] = []
+                }
+
+                // insert the file (collision who cares)
+                action.data.files[userId].push({
+                    filePath,
+                    content,
+                    subscribers: []
+                });
+            }
         },
         get: {
             
@@ -100,10 +101,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
              *  | but only {filePath, subscribersCount}
              */
             case 'init':
-                ws.send(action.encode({
-                    _ACTION: 'sharedFiles',
-                    _PAYLOAD: action.data.get.sharedFilesMeta()
-                }));
+                ws.send(action.data.actions.sharedFiles());
                 break;
 
             /**
@@ -113,7 +111,8 @@ module.exports.launch = (action, synchazard /* , params */) => {
              * - broadcast shared files (all clients will have to ignore their ones)
              */
             case 'addShare':
-                synchazard.otherscast(action.data.actions.shareFile(data._ID, data._FILE.name, data._FILE.content))
+                action.data.set.shareFile(data._ID, data._FILE.name, data._FILE.content)
+                synchazard.otherscast(action.data.actions.sharedFiles())
                 break;
 
             /**
@@ -123,10 +122,18 @@ module.exports.launch = (action, synchazard /* , params */) => {
              * - broadcast to all subscribers
              */
             case 'updateShare':
-                action.data.funcz.updateSharedFile(data._ID, data._FILE.name, data._FILE.content);
                 // eslint-disable-next-line no-case-declarations
-                synchazard.otherscast(action.data.actions.sendSharedFiles());
+                const subscribers = action.data.set.updateSharedFile(data._ID, data._FILE.name, data._FILE.content);
+                synchazard.subcast(
+                    subscribers,
+                    action.data.actions.sharedFiles()
+                );
                 break;
+
+            // ///////////////////////////////// SHOULD BE FINE, MUST TEST
+
+
+
 
             /**
              * when the user unshare a file just
