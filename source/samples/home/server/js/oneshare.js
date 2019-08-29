@@ -18,6 +18,9 @@
         this.target.appendChild(this.main)
     }
 
+    //
+    // =============================
+    //
 
     function ShareArea(trg) {
         this.target = trg;
@@ -25,6 +28,7 @@
         this.sh_sharedFileList = [];
         this.locallyObserved = [];
     }
+
     ShareArea.prototype.init = function () {
         var self = this;
         this.main = createElement('div', {'class' : 'shareArea'})
@@ -71,7 +75,7 @@
     };
 
     /**
-     * the fila has just been dropped and we just need to 
+     * the file has just been dropped and we just need to 
      * - quiet the dafault event handling/propagating
      * - alert the server a new file from this client is available to be shared
      * - save it among the locallyObserved ones so that at the watching loop we do not miss it
@@ -111,6 +115,7 @@
             reader.readAsDataURL(file);
         }
     };
+
     ShareArea.prototype.startWatching = function () {
         var self = this,
             inter = 500;
@@ -131,10 +136,14 @@
             })
         }, inter);
     };
+
     ShareArea.prototype.addFile = function (file) {
         var fileName = file.name,
             fileItem = createElement('li', {'class': 'file'}, fileName),
-            closeIcon = createElement('span', {'class': 'close', title:'stop sharing that file'}, '&times;');
+            closeIcon = createElement('span', {
+                'class': 'close',
+                title:'stop sharing that file'
+            }, '&times;');
         fileItem.dataset.path = fileName;
         fileItem.dataset.observers = 0;
         fileItem.appendChild(closeIcon);
@@ -143,6 +152,7 @@
         this.onAdd && this.onAdd(file);
         return false;
     };
+
     ShareArea.prototype.removeFile = function (node) {
         var fileName = node.dataset.path
         this.fileList.removeChild(node)
@@ -151,6 +161,7 @@
         });
         this.onRemove && this.onRemove(fileName);
     };
+
     ShareArea.prototype.render = function () {
         doRender.call(this);
     };
@@ -242,6 +253,7 @@
         this.tabContent.classList.remove('hide')
     };
     SharedArea.prototype.addTab = function(filen){
+
         var split = filen.split('___'),
             user = split[0],
             file = split[1],
@@ -295,6 +307,8 @@
         this.userFiles = {}
         this.init();
     }
+
+
     FilePoolSelect.prototype.init = function () {
         var self = this;
         this.main = createElement('select', {'class':'filelist'})

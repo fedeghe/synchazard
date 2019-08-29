@@ -13,33 +13,22 @@ module.exports.launch = (action, synchazard /* , params */) => {
             }]
         } */},
         actions: {
-            sendSharedFiles: () => action.encode({
-                _ACTION: 'userFiles',
-                _PAYLOAD: {
-                    files: action.data.files
-                    // files: Object.keys(action.data.files)
-                    //     .map(uk => ({
-                    //         [uk]: action.data.files[uk].map(f => ({
-                    //             filePath: f.filePath,
-                    //             subscribersCount: f.subscribers.length,
-                    //         }))
-                    //     }))
-                }
-            }),
             shareFile: (userId, filePath, content) => {
+
+                // if not there yet, create the user container
                 if (!(userId in action.data.files)) {
                     action.data.files[userId] = []
                 }
+
+                // insert the file (collision who cares)
                 action.data.files[userId].push({
                     filePath,
                     content,
                     subscribers: []
                 });
 
-                console.log('Shared file added:')
-                console.log(action.data.files)
-
-                const ret = action.encode({
+                // return the ac
+                return action.encode({
                     _ACTION: 'shareAdded',
                     _PAYLOAD: {
                         userId,
@@ -47,10 +36,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
                         content
                     }
                 });
-                console.log(ret)
-                return ret
             },
-
             unshareFile: (userId, filePath) => action.encode({
                 _ACTION: '',
                 _PAYLOAD: {
@@ -69,17 +55,36 @@ module.exports.launch = (action, synchazard /* , params */) => {
                     
                 }
             })
-
         },
-        funcz: {
-            updateSharedFile: (userId, filePath, content) => {
+        set: {
+            sharedFile: (userId, filePath, content) => {
                 action.data.files[userId] = action.data.files[userId].map( o => {
                     if (o.filePath === filePath) {
                         o.content = content
                     }
                     return o;
                 })
-            }
+            },
+        },
+        get: {
+            
+            // returns the object containing all metadata file information
+            // about the file shared by other users than userId
+            //
+            // toward: the user that connects,
+            // for reusability  it is not excluding any user then 
+            // could be necessary to filter out one user
+            sharedFilesMeta: () => ({
+                files: Object.keys(action.data.files)
+                    .reduce((acc, uid) => {
+                        acc[uid] = action.data.files[uid].map(f => ({
+                            filePath: f.filePath,
+                            subscribersCount: f.subscribers.length,
+                        }))
+                        return acc;
+                    }, {})
+                }
+            ),
         }
     });
 
@@ -95,7 +100,10 @@ module.exports.launch = (action, synchazard /* , params */) => {
              *  | but only {filePath, subscribersCount}
              */
             case 'init':
-                ws.send(action.data.actions.sendSharedFiles());
+                ws.send(action.encode({
+                    _ACTION: 'sharedFiles',
+                    _PAYLOAD: action.data.get.sharedFilesMeta()
+                }));
                 break;
 
             /**

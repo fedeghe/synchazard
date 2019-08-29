@@ -10,8 +10,7 @@
     Share.prototype.handle = function (data) {
         console.log('cli gets ', data );
         switch(data._ACTION) {
-            case 'userFiles':
-                console.log('HEHEHEEHEHHEHE')
+            case 'sharedFiles':
                 for(var userK in data._PAYLOAD.files) {
                     data._PAYLOAD.files[userK].forEach( function (f) {
                         oneShare.sharedArea.filePoolSelect.addFile(f.filePath, userK)
