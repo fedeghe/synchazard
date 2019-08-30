@@ -301,6 +301,11 @@
     SharedArea.prototype.addSharedFile = function (data) {
         this.filePoolSelect.addFile(data.name, data.uid);
     }
+    SharedArea.prototype.removeSharedFile = function (data) {
+        this.filePoolSelect.removeFile(data.name, data.uid);
+    }
+    
+
     SharedArea.prototype.updateSharedFiles = function (files) {
         this.filePoolSelect.update(files);
     }

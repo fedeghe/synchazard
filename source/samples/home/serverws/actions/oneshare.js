@@ -21,7 +21,15 @@ module.exports.launch = (action, synchazard /* , params */) => {
             shareAdded: (uid, name) => action.encode({
                 _ACTION: 'shareAdded',
                 _PAYLOAD: {
-                    uid,name
+                    uid,
+                    name
+                }
+            }),
+            shareRemoved: (uid, name) => action.encode({
+                _ACTION: 'shareRemoved',
+                _PAYLOAD: {
+                    uid,
+                    name
                 }
             }),
 
@@ -156,9 +164,9 @@ module.exports.launch = (action, synchazard /* , params */) => {
              * - broadcast shared files (all clients will have to ignore their ones)
              */
             case 'removeShare':
-                    console.log(data)
                     action.data.unset.shareFile(data._ID, data._FILE)
-                    synchazard.otherscast(data._ID, action.data.actions.sharedFiles())
+                    // synchazard.otherscast(data._ID, action.data.actions.sharedFiles())
+                    synchazard.otherscast(data._ID, action.data.actions.shareRemoved(data._ID, data._FILE))
                 break;
 
             /**

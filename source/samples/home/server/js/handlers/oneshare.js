@@ -16,6 +16,9 @@
             case 'shareAdded':
                 oneShare.sharedArea.addSharedFile(data._PAYLOAD);
                 break;
+            case 'shareRemoved':
+                oneShare.sharedArea.removeSharedFile(data._PAYLOAD);
+                break;
             default:
                 console.log(data._ACTION)
                 break;
