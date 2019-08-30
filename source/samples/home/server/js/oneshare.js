@@ -245,19 +245,16 @@
             }
         })
     };
-    SharedArea.prototype.addFile = function(file){
+    SharedArea.prototype.addFile = function(file, user){
         // add the tabtongue && activate content && disable from the select
         var content = `... loading content for ... ${file}`;
-        this.addTab(file)
+        this.addTab(file, user)
         this.tabContentTextarea.innerHTML = content;
         this.tabContent.classList.remove('hide')
     };
-    SharedArea.prototype.addTab = function(filen){
+    SharedArea.prototype.addTab = function(file, user){
 
-        var split = filen.split('___'),
-            user = split[0],
-            file = split[1],
-            tab = createElement('li', {'class': 'tabTongue active', title: filen}, file),
+        var tab = createElement('li', {'class': 'tabTongue active', title: `${file}_${user}`}, file),
             close = createElement('span', {'class':'close'}, '&times;');
 
         this.activeTab && this.activeTab.classList.remove('active')
@@ -271,10 +268,11 @@
     };
     SharedArea.prototype.removeTab = function(tag){
         var removingActive = tag.classList.contains('active'),
-            t = tag.title.split('___').reverse();
+            user = tag.dataset.user,
+            file = tag.dataset.file;
 
         this.tabs = this.tabs.filter(function (tab) {return tab.title !== tag.title});
-        this.filePoolSelect.enableFile(t[0], t[1])
+        this.filePoolSelect.enableFile(file, user)
         
         if (this.tabs.length === 0) {
             this.tabContent.classList.add('hide')
@@ -300,17 +298,11 @@
         doRender.call(this);
     };
 
+    SharedArea.prototype.addSharedFile = function (data) {
+        this.filePoolSelect.addFile(data.name, data.uid);
+    }
     SharedArea.prototype.updateSharedFiles = function (files) {
-        var self = this;
-        this.filePoolSelect.removeAll();
-
-        Object.keys(files)
-        .filter(function (userId) {return userId !== SH.id} ) 
-        .forEach(function (userId) {
-            files[userId].forEach( function (f) {
-                self.filePoolSelect.addFile(f.filePath, userId)
-            });
-        });
+        this.filePoolSelect.update(files);
     }
     /** *********************************************
      * 
@@ -339,9 +331,13 @@
         this.firstOption = createElement('option', {value: ''}, 'no files available')
         this.main.appendChild(this.firstOption);
         this.main.addEventListener('change', function (e) {
-            var val = e.target.value;
-            self.parentInstance.addFile(val)
-            self.disableFile.apply(self, val.split('___').reverse())
+            var trg = e.target,
+                opt = trg.options[trg.selectedIndex],
+                file = opt.dataset.file,
+                user = opt.dataset.user;
+            
+            self.parentInstance.addFile(file, user)
+            self.disableFile(file, user)
             self.main.value = '';
             self.main.blur();
         })
@@ -353,7 +349,7 @@
             mustAppend = false;
 
         if (!(user in this.optGroups)) {
-            this.optGroups[user] = createElement('optGroup', {label: user});
+            this.optGroups[user] = createElement('optGroup', {label: `user: ${user}`});
             mustAppend = true;
         }
         optGroup = this.optGroups[user];
@@ -367,7 +363,9 @@
         } else {
             return;
         }
-        newOption = createElement('option', {value: `${user}___${file}`}, file);
+        newOption = createElement('option', {value: ''}, file);
+        newOption.dataset.user = user;
+        newOption.dataset.file = file;
         optGroup.appendChild(newOption);
         mustAppend && this.main.appendChild(optGroup);
 
@@ -382,7 +380,7 @@
             this.fileCount--;
             
             Array.from(this.optGroups[user].children).forEach(function (child) {
-                if (child.value === `${user}___${file}`) {
+                if (child.dataset.user === user && child.dataset.file === file) {
                     self.optGroups[user].removeChild(child)
                 }
             })
@@ -391,23 +389,21 @@
                 delete(this.optGroups[user])
             }
 
-            if (this.fileCount > 0) {
-                this.firstOption.innerHTML = `${this.fileCount} files available`;
-            } else {
-                this.firstOption.innerHTML = 'no files available';
-            }
+            this.firstOption.innerHTML = this.fileCount > 0
+            ? `${this.fileCount} files shared (select one or more)`
+            : 'no files available'
         }
     };
     FilePoolSelect.prototype.disableFile = function (file, user) {
         Array.from(this.optGroups[user].children).forEach(function (child) {
-            if (child.value === `${user}___${file}`) {
+            if (child.dataset.user === user && child.dataset.file === file) {
                 child.setAttribute('disabled', 'disabled')
             }
         })
     };
     FilePoolSelect.prototype.enableFile = function (file, user) {
         Array.from(this.optGroups[user].children).forEach(function (child) {
-            if (child.value === `${user}___${file}`) {
+            if (child.dataset.user === user && child.dataset.file === file) {
                 child.removeAttribute('disabled')
             }
         })
@@ -420,9 +416,23 @@
         this.optGroups = {}
         this.userFiles = {}
     };
+
+    FilePoolSelect.prototype.update = function (files) {
+        var self = this;
+        this.removeAll();
+
+        Object.keys(files)
+        .filter(function (userId) {return userId !== SH.id} ) 
+        .forEach(function (userId) {
+            files[userId].forEach( function (f) {
+                self.addFile(f.filePath, userId)
+            });
+        });
+    };
     FilePoolSelect.prototype.render = function () {
         doRender.call(this);
     };
+
 
 
 

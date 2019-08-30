@@ -18,6 +18,12 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 _ACTION: 'sharedFiles',
                 _PAYLOAD: action.data.get.sharedFilesMeta()
             }),
+            shareAdded: (uid, name) => action.encode({
+                _ACTION: 'shareAdded',
+                _PAYLOAD: {
+                    uid,name
+                }
+            }),
 
             unshareFile: (userId, filePath) => action.encode({
                 _ACTION: '',
@@ -121,7 +127,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
              */
             case 'addShare':
                 action.data.set.shareFile(data._ID, data._FILE.name, data._FILE.content)
-                synchazard.otherscast(data._ID, action.data.actions.sharedFiles())
+                synchazard.otherscast(data._ID, action.data.actions.shareAdded(data._ID, data._FILE.name, data._FILE.content))
                 break;
 
             /**

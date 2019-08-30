@@ -13,6 +13,9 @@
             case 'sharedFiles':
                 oneShare.sharedArea.updateSharedFiles(data._PAYLOAD.files)
                 break;
+            case 'shareAdded':
+                oneShare.sharedArea.addSharedFile(data._PAYLOAD);
+                break;
             default:
                 console.log(data._ACTION)
                 break;
