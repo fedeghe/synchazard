@@ -392,6 +392,9 @@
         this.main.innerHTML = ''
         this.firstOption.innerHTML = 'no files available'
         this.main.appendChild(this.firstOption)
+        this.fileCount = 0
+        this.optGroups = {}
+        this.userFiles = {}
     };
     FilePoolSelect.prototype.render = function () {
         doRender.call(this);

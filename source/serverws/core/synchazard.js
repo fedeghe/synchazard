@@ -52,18 +52,11 @@ let debug = () => {},
         });
     },
 
-    /**
-     * EXPORTED
-     * unicast: toward a single client, by id
-     * 
-     * if the id passed is the id of the onconnection source then
-     * this is equivalent of using the ws.send (without passing the id)
-     */
-    unicast = (id, data) => {
+    xcast = (id, data, beEqual) => {
         const _ids = [];
         return new Promise(resolve => {
             wss.clients.forEach(client => (
-                client.id === id
+                (client.id === id) === beEqual 
                 && client.readyState === WebSocket.OPEN
                 && _ids.push(client.id)
                 && client.send(data, { binary: false })
@@ -74,20 +67,21 @@ let debug = () => {},
 
     /**
      * EXPORTED
+     * unicast: toward a single client, by id
+     * 
+     * if the id passed is the id of the onconnection source then
+     * this is equivalent of using the ws.send (without passing the id)
+     */
+    unicast = (id, data) => {
+        return xcast(id, data, true)
+    },
+
+    /**
+     * EXPORTED
      * otherscast: to all but the given id
      */
-    otherscast = (data) => {
-        const _ids = [],
-            id  = data._ID;
-        return new Promise(resolve => {
-            wss.clients.forEach(client => (
-                client.id !== id
-                && client.readyState === WebSocket.OPEN
-                && _ids.push(client.id)
-                && client.send(data, { binary: false })
-            ));
-            resolve(_ids);
-        })
+    otherscast = (id, data) => {
+        return xcast(id, data, false)
     },
 
     /**

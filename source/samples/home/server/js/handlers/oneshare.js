@@ -11,6 +11,7 @@
         console.log('cli gets ', data );
         switch(data._ACTION) {
             case 'sharedFiles':
+                oneShare.sharedArea.filePoolSelect.removeAll();
                 for(var userK in data._PAYLOAD.files) {
                     data._PAYLOAD.files[userK].forEach( function (f) {
                         oneShare.sharedArea.filePoolSelect.addFile(f.filePath, userK)
@@ -30,8 +31,12 @@
             _FILE: file
         });
     }
-    oneShare.shareArea.onRemove = function () {
-        console.log('share remove', arguments);x
+    oneShare.shareArea.onRemove = function (file) {
+        // console.log('share remove', arguments);
+        maltaV('NS').send({
+            _ACTION: 'removeShare',
+            _FILE: file
+        });
     };
     oneShare.shareArea.onLocalUpdate = function (file) {
         console.log('local Update', arguments);
@@ -39,7 +44,6 @@
         maltaV('NS').send({
             _ACTION: 'updateShare',
             _FILE: file,
-
         });
     }
 

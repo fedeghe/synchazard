@@ -51,8 +51,6 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 return subscribers;
             },
 
-
-
             shareFile: (userId, filePath, content) => {
                 // if not there yet, create the user container
                 if (!(userId in action.data.files)) {
@@ -65,6 +63,17 @@ module.exports.launch = (action, synchazard /* , params */) => {
                     content,
                     subscribers: []
                 });
+            }
+        },
+        unset: {
+            userFiles: userId => {
+                delete action.data.files[userId]
+            },
+            shareFile: (userId, filePath) => {
+                // if not there yet, create the user container
+                if (userId in action.data.files) {
+                    action.data.files[userId] = action.data.files[userId].filter(o => o.filePath !== filePath)
+                }
             }
         },
         get: {
@@ -112,7 +121,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
              */
             case 'addShare':
                 action.data.set.shareFile(data._ID, data._FILE.name, data._FILE.content)
-                synchazard.otherscast(action.data.actions.sharedFiles())
+                synchazard.otherscast(data._ID, action.data.actions.sharedFiles())
                 break;
 
             /**
@@ -141,6 +150,9 @@ module.exports.launch = (action, synchazard /* , params */) => {
              * - broadcast shared files (all clients will have to ignore their ones)
              */
             case 'removeShare':
+                    console.log(data)
+                    action.data.unset.shareFile(data._ID, data._FILE)
+                    synchazard.otherscast(data._ID, action.data.actions.sharedFiles())
                 break;
 
             /**
@@ -159,13 +171,15 @@ module.exports.launch = (action, synchazard /* , params */) => {
 
             default: break;
         }
-    }, (data) => {
+    }, (data, ws) => {
+        action.data.unset.userFiles(data._ID);
+        synchazard.otherscast(data._ID, action.data.actions.sharedFiles());
         // on disconnection , update the list removing the user and all his files\
         // then broadcast the updated list
         // every client will have to remove those ones that he is looking at
         // and have been removed
-        console.log('dis-connecting')
-        console.log(data)
+        console.log('dis-connecting');
+        console.log(data);
     });
 
 };
