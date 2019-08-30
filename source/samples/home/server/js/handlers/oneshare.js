@@ -11,23 +11,9 @@
         console.log('cli gets ', data );
         switch(data._ACTION) {
             case 'sharedFiles':
-                oneShare.sharedArea.filePoolSelect.removeAll();
+                oneShare.sharedArea.updateSharedFiles(data._PAYLOAD.files)
 
-
-                Object.keys(data._PAYLOAD.files)
-                .filter(function (k) {return k !== SH.id} ) 
-                .forEach(function (k) {
-                    data._PAYLOAD.files[k].forEach( function (f) {
-                        oneShare.sharedArea.filePoolSelect.addFile(f.filePath, k)
-                    });
-                })
-
-                // for(var userK in data._PAYLOAD.files) {
-
-                //     data._PAYLOAD.files[userK].forEach( function (f) {
-                //         oneShare.sharedArea.filePoolSelect.addFile(f.filePath, userK)
-                //     });
-                // }
+                
 
                 break;
             default:

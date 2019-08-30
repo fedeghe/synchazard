@@ -300,6 +300,32 @@
         doRender.call(this);
     };
 
+    SharedArea.prototype.updateSharedFiles = function (files) {
+        var self = this;
+        this.filePoolSelect.removeAll();
+
+        Object.keys(files)
+        .filter(function (userId) {return userId !== SH.id} ) 
+        .forEach(function (userId) {
+            files[userId].forEach( function (f) {
+                self.filePoolSelect.addFile(f.filePath, userId)
+            });
+        });
+    }
+    /** *********************************************
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     *********************************************** */
     function FilePoolSelect(trg, parentInstance) {
         this.parentInstance = parentInstance;
         this.target = trg;
@@ -307,8 +333,6 @@
         this.userFiles = {}
         this.init();
     }
-
-
     FilePoolSelect.prototype.init = function () {
         var self = this;
         this.main = createElement('select', {'class':'filelist'})
@@ -399,6 +423,17 @@
     FilePoolSelect.prototype.render = function () {
         doRender.call(this);
     };
+
+
+
+
+
+
+
+
+
+
+
 
     if (window.File && window.FileReader && window.FileList && window.Blob) {
         // Great success! All the File APIs are supported.
