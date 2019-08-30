@@ -12,11 +12,23 @@
         switch(data._ACTION) {
             case 'sharedFiles':
                 oneShare.sharedArea.filePoolSelect.removeAll();
-                for(var userK in data._PAYLOAD.files) {
-                    data._PAYLOAD.files[userK].forEach( function (f) {
-                        oneShare.sharedArea.filePoolSelect.addFile(f.filePath, userK)
-                    })
-                }
+
+
+                Object.keys(data._PAYLOAD.files)
+                .filter(function (k) {return k !== SH.id} ) 
+                .forEach(function (k) {
+                    data._PAYLOAD.files[k].forEach( function (f) {
+                        oneShare.sharedArea.filePoolSelect.addFile(f.filePath, k)
+                    });
+                })
+
+                // for(var userK in data._PAYLOAD.files) {
+
+                //     data._PAYLOAD.files[userK].forEach( function (f) {
+                //         oneShare.sharedArea.filePoolSelect.addFile(f.filePath, userK)
+                //     });
+                // }
+
                 break;
             default:
                 console.log(data._ACTION)
@@ -24,13 +36,15 @@
                 break;
         }
     };
+
     oneShare.shareArea.onAdd = function (file) {
         // console.log('share add', arguments);
         maltaV('NS').send({
             _ACTION: 'addShare',
             _FILE: file
         });
-    }
+    };
+
     oneShare.shareArea.onRemove = function (file) {
         // console.log('share remove', arguments);
         maltaV('NS').send({
