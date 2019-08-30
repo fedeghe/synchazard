@@ -33,12 +33,6 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 }
             }),
 
-            unshareFile: (userId, filePath) => action.encode({
-                _ACTION: '',
-                _PAYLOAD: {
-                    
-                }
-            }),
             observeFile: (userId, owner_id, filePath) => action.encode({
                 _ACTION: '',
                 _PAYLOAD: {
