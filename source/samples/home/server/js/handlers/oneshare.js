@@ -12,13 +12,9 @@
         switch(data._ACTION) {
             case 'sharedFiles':
                 oneShare.sharedArea.updateSharedFiles(data._PAYLOAD.files)
-
-                
-
                 break;
             default:
                 console.log(data._ACTION)
-                
                 break;
         }
     };
