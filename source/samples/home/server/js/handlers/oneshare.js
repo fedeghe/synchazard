@@ -8,22 +8,24 @@
     //
     function Share () {}
     Share.prototype.handle = function (data) {
-        console.log('cli gets ', data );
+        console.log('CLIENT gets ', data );
         switch(data._ACTION) {
             case 'sharedFiles':
                 oneShare.sharedArea.updateSharedFiles(data._PAYLOAD.files)
                 break;
+                
             case 'shareAdded':
                 oneShare.sharedArea.addSharedFile(data._PAYLOAD);
                 break;
+
             case 'shareRemoved':
                 oneShare.sharedArea.removeSharedFile(data._PAYLOAD);
                 break;
+
             case 'filecontent':
                 oneShare.sharedArea.setContent(data._PAYLOAD.filecontent);
                 break;
 
-            
             case 'updatedContent':
                 // valid only if is the viewed one
                 console.log(data)
@@ -31,7 +33,7 @@
                 break;
 
             default:
-                console.log(data._ACTION)
+                console.log('ERR: unhandled action')
                 break;
         }
     };
@@ -51,6 +53,7 @@
             _FILE: file
         });
     };
+
     oneShare.shareArea.onLocalUpdate = function (file) {
         console.log('local Update', arguments);
         console.log('the new Content is ', file.content)
@@ -59,6 +62,10 @@
             _FILE: file,
         });
     }
+
+    //
+    // =============================================>
+    //
 
     oneShare.sharedArea.onSelectTab = function (file, user) {
         maltaV('NS').send({
@@ -75,6 +82,7 @@
             _USER: user,
         });
     };
+
     oneShare.sharedArea.onRemove = function (file, user) {
         maltaV('NS').send({
             _ACTION: 'removeObserver',

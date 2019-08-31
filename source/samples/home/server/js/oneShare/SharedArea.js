@@ -79,7 +79,7 @@ SharedArea.prototype.removeTab = function(tag){
         this.tabs[0].click();
     }
     this.tabList.removeChild(tag)
-    this.onRemove && this.onRemove(tag)
+    this.onRemove && this.onRemove(file, user)
 };
 
 SharedArea.prototype.activateTab = function(tag){

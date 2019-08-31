@@ -157,7 +157,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 // eslint-disable-next-line no-case-declarations
                 const subscribers = action.data.set.updateSharedFile(data._ID, data._FILE.name, data._FILE.content),
                     ac = action.data.actions.newContent(data._ID, data._FILE.name)
-                console.log(ac)
+
                 synchazard.subcast(
                     subscribers,
                     ac
