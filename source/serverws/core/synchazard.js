@@ -19,51 +19,30 @@ let debug = () => {},
      */
     wss = new WebSocket.Server({ port }),
 
-    /**
-     * EXPORTED
-     * Broadcast to ALL connected clients
-     */
-    broadcast = data => {
+    xsend = (id , data , func) => {
         const _ids = [];
         return new Promise(resolve => {
             wss.clients.forEach(client => (
-                client.readyState === WebSocket.OPEN
+                func(id, data, client)
+                && client.readyState === WebSocket.OPEN
                 && _ids.push(client.id)
                 && client.send(data, { binary: false })
             ));
             resolve(_ids);
-        });
+        });  
     },
+
+    /**
+     * EXPORTED
+     * Broadcast to ALL connected clients
+     */
+    broadcast = data => xsend(null, data, () => true),
 
     /**
      * EXPORTED
      * subcast: only to the given ids array set
      */
-    subcast = (ids, data) => {
-        const _ids = [];
-        return new Promise(resolve => {
-            wss.clients.forEach(client => (
-                ids.search(client.id) >= 0
-                && client.readyState === WebSocket.OPEN
-                && _ids.push(client.id)
-                && client.send(data, { binary: false })
-            ));
-            resolve(_ids);
-        });
-    },
-
-    xcast = (id, data, beEqual) => {
-        const _ids = [];
-        return new Promise(resolve => {
-            wss.clients.forEach(client => (
-                (client.id === id) === beEqual 
-                && client.readyState === WebSocket.OPEN
-                && _ids.push(client.id)
-                && client.send(data, { binary: false })
-            ));
-            resolve(_ids);
-        });
-    },
+    subcast = (ids, data) => xsend(ids, data, (i, d, cli) => i.includes(cli.id)),    
 
     /**
      * EXPORTED
@@ -72,34 +51,20 @@ let debug = () => {},
      * if the id passed is the id of the onconnection source then
      * this is equivalent of using the ws.send (without passing the id)
      */
-    unicast = (id, data) => {
-        return xcast(id, data, true)
-    },
+    unicast = (id, data) => xsend(id, data, (i, d, cli) => cli.id === i),
 
     /**
      * EXPORTED
      * otherscast: to all but the given id
      */
-    otherscast = (id, data) => {
-        return xcast(id, data, false)
-    },
+    otherscast = (id, data) => xsend(id, data, (i, d, cli) => cli.id !== i),
 
     /**
      * EXPORTED
      * subexcludecast: toward all but the given ids array set
      */
-    subexcludecast = (ids, data) => {
-        const _ids = [];
-        return new Promise(resolve => {
-            wss.clients.forEach(client => (
-                ids.search(client.id) < 0
-                && client.readyState === WebSocket.OPEN
-                && _ids.push(client.id)
-                && client.send(data, { binary: false })
-            ));
-            resolve(_ids);
-        })
-    },
+    subexcludecast = (ids, data) => xsend(ids, data, (i, d, cli) => !(i.includes(cli.id))),
+
 
     // let define the debug level function 
     //
