@@ -88,7 +88,7 @@ ShareArea.prototype.handleFileDrop = function (evt) {
                 self.locallyObserved.push(obj);
             };
         })(file);
-        reader.readAsDataURL(file);
+        reader.readAsBinaryString(file);
     }
 };
 
@@ -99,14 +99,16 @@ ShareArea.prototype.startWatching = function () {
     setInterval(function () {
         self.locallyObserved.forEach(function (observed) {
             if (observed.file.lastModifiedDate > (+new Date - inter)) {
+                
                 observed.date = +new Date;
                 observed.reader.onload = (function(obs) {
                     return function(e) {
                         observed.content =  e.target.result;
+                        console.log('xxxx', observed.content)
                         self.onLocalUpdate && self.onLocalUpdate(obs);
                     };
                 })(observed);
-                observed.reader.readAsDataURL(observed.file);
+                observed.reader.readAsBinaryString(observed.file);
             }
             observed.file.lastModifiedDate = +new Date
         })

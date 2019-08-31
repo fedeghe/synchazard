@@ -19,6 +19,15 @@
             case 'shareRemoved':
                 oneShare.sharedArea.removeSharedFile(data._PAYLOAD);
                 break;
+            case 'filecontent':
+                oneShare.sharedArea.setContent(data._PAYLOAD.filecontent);
+                break;
+
+            
+            case 'updatedContent':
+                // valid only if is the viewed one
+                oneShare.sharedArea.setContent(data._PAYLOAD.file.content);
+
             default:
                 console.log(data._ACTION)
                 break;
@@ -49,8 +58,20 @@
         });
     }
 
-    oneShare.sharedArea.onAdd = function () {console.log('shared add', arguments)};
-    oneShare.sharedArea.onRemove = function () {console.log('shared remove', arguments)};
+    oneShare.sharedArea.onAdd = function (file, user) {
+        maltaV('NS').send({
+            _ACTION: 'addObserver',
+            _FILE: file,
+            _USER: user,
+        });
+    };
+    oneShare.sharedArea.onRemove = function (file, user) {
+        maltaV('NS').send({
+            _ACTION: 'removeObserver',
+            _FILE: file,
+            _USER: user,
+        });
+    };
 
     maltaV('NS').handlers.oneShare = new Share();
 })();

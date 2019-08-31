@@ -32,17 +32,16 @@ module.exports.launch = (action, synchazard /* , params */) => {
                     name
                 }
             }),
-
-            observeFile: (userId, owner_id, filePath) => action.encode({
-                _ACTION: '',
+            fileContent: (uid, name) => action.encode({
+                _ACTION:'filecontent',
                 _PAYLOAD: {
-                    
+                    filecontent: action.data.files[uid].find(e => e.filePath === name).content
                 }
             }),
-            unobserveFile: (userId, owner_id, filePath) => action.encode({
-                _ACTION: '',
+            newContent: (uid, name) => action.encode({
+                _ACTION: 'updatedContent',
                 _PAYLOAD: {
-                    
+                    file: action.data.files[uid].find(e => e.filePath === name)
                 }
             })
         },
@@ -71,6 +70,14 @@ module.exports.launch = (action, synchazard /* , params */) => {
                     content,
                     subscribers: []
                 });
+            },
+            observe: (idUserReq, trgFile, trgUser) => {
+                action.data.files[trgUser] = action.data.files[trgUser].map(f => {
+                    if (f.filePath === trgFile) {
+                        f.subscribers.push(idUserReq)
+                    }
+                    return f;
+                })
             }
         },
         unset: {
@@ -82,6 +89,14 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 if (userId in action.data.files) {
                     action.data.files[userId] = action.data.files[userId].filter(o => o.filePath !== filePath)
                 }
+            },
+            observe: (idUserReq, trgFile, trgUser) => {
+                action.data.files[trgUser] = action.data.files[trgUser].map(f => {
+                    if (f.filePath === trgFile) {
+                        f.subscribers = f.subscribers.filter(s => s !== idUserReq)
+                    }
+                    return f;
+                })
             }
         },
         get: {
@@ -143,38 +158,27 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 const subscribers = action.data.set.updateSharedFile(data._ID, data._FILE.name, data._FILE.content);
                 synchazard.subcast(
                     subscribers,
-                    action.data.actions.sharedFiles()
+                    action.data.actions.newContent(data._ID, data._FILE.name)
                 );
                 break;
-
-            // ///////////////////////////////// SHOULD BE FINE, MUST TEST
-
-
-
-
             /**
              * when the user unshare a file just
              * - remove it from the userId list
              * - broadcast shared files (all clients will have to ignore their ones)
              */
             case 'removeShare':
-                    action.data.unset.shareFile(data._ID, data._FILE)
-                    // synchazard.otherscast(data._ID, action.data.actions.sharedFiles())
-                    synchazard.otherscast(data._ID, action.data.actions.shareRemoved(data._ID, data._FILE))
+                action.data.unset.shareFile(data._ID, data._FILE);
+                // synchazard.otherscast(data._ID, action.data.actions.sharedFiles())
+                synchazard.otherscast(data._ID, action.data.actions.shareRemoved(data._ID, data._FILE));
+                break;
+                
+            case 'addObserver':
+                action.data.set.observe(data._ID, data._FILE, data._USER);
+                ws.send(action.data.actions.fileContent(data._USER, data._FILE))
                 break;
 
-            /**
-             * when a client subscribe to a file just
-             * - add his userId into the file's subscribers list
-             */
-            case 'addShared':
-                break;
-
-            /**
-             * when a client unsubscribe to a file just
-             * - remove his userId into the file's subscribers list
-             */
-            case 'removeShared':
+            case 'removeObserver':
+                action.data.unset.observe(data._ID, data._FILE, data._USER);
                 break;
 
             default: break;

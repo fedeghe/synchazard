@@ -62,7 +62,7 @@ SharedArea.prototype.addTab = function(file, user){
     tab.appendChild(close)
     this.tabList.appendChild(tab)
     this.activeTab = tab
-    this.onAdd && this.onAdd(tab)
+    this.onAdd && this.onAdd(file, user)
 };
 
 SharedArea.prototype.removeTab = function(tag){
@@ -94,7 +94,7 @@ SharedArea.prototype.selectTab = function(tag){
 };
 
 SharedArea.prototype.setContent = function (cnt) {
-    this.tabContentTextarea.innerHTML = cnt;
+    this.tabContentTextarea.innerHTML =  cnt;
 };
 
 SharedArea.prototype.render = function  () {
