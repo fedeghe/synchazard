@@ -90,6 +90,7 @@ SharedArea.prototype.activateTab = function(tag){
 
 SharedArea.prototype.selectTab = function(tag){
     this.activateTab(tag);
+    this.onSelectTab && this.onSelectTab(tag.dataset.file, tag.dataset.user)
     this.setContent(tag.title);
 };
 

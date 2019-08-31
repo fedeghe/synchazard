@@ -26,9 +26,10 @@
             
             case 'updatedContent':
                 // valid only if is the viewed one
+                console.log(data)
                 oneShare.sharedArea.setContent(data._PAYLOAD.file.content);
                 break;
-                
+
             default:
                 console.log(data._ACTION)
                 break;
@@ -58,6 +59,14 @@
             _FILE: file,
         });
     }
+
+    oneShare.sharedArea.onSelectTab = function (file, user) {
+        maltaV('NS').send({
+            _ACTION: 'getContent',
+            _FILE: file,
+            _USER: user,
+        });
+    };
 
     oneShare.sharedArea.onAdd = function (file, user) {
         maltaV('NS').send({

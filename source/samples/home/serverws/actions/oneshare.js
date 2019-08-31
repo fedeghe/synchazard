@@ -155,10 +155,12 @@ module.exports.launch = (action, synchazard /* , params */) => {
              */
             case 'updateShare':
                 // eslint-disable-next-line no-case-declarations
-                const subscribers = action.data.set.updateSharedFile(data._ID, data._FILE.name, data._FILE.content);
+                const subscribers = action.data.set.updateSharedFile(data._ID, data._FILE.name, data._FILE.content),
+                    ac = action.data.actions.newContent(data._ID, data._FILE.name)
+                console.log(ac)
                 synchazard.subcast(
                     subscribers,
-                    action.data.actions.newContent(data._ID, data._FILE.name)
+                    ac
                 );
                 break;
             /**
@@ -179,6 +181,10 @@ module.exports.launch = (action, synchazard /* , params */) => {
 
             case 'removeObserver':
                 action.data.unset.observe(data._ID, data._FILE, data._USER);
+                break;
+
+            case 'getContent': 
+                ws.send(action.data.actions.fileContent(data._USER, data._FILE))
                 break;
 
             default: break;
