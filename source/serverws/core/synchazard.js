@@ -65,22 +65,19 @@ let debug = () => {},
      */
     subexcludecast = (ids, data) => xsend(ids, data, (i, d, cli) => !(i.includes(cli.id))),
 
-
     // let define the debug level function 
     //
     defineDebugFunction = args => {
         if (!args.length) return;
         const match = args[0].match(/-(v+)/);
         if (match) {
-            debug = ((maxLevel) => {
-                return (msg, level) => {
-                    level = typeof level !== 'undefined' ? level : 0;
-                    (
-                        level <= maxLevel
-                        ||
-                        (level === '' && maxLevel > 0)
-                    ) && console.log(`DBG ${level}`, msg);
-                }
+            debug = (maxLevel => (msg, level) => {
+                level = typeof level !== 'undefined' ? level : 0;
+                (
+                    level <= maxLevel
+                    ||
+                    (level === '' && maxLevel > 0)
+                ) && console.log(`DBG ${level}`, msg);
             })(match[1].length);
         }
     },
