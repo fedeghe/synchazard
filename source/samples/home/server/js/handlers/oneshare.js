@@ -27,7 +27,8 @@
             case 'updatedContent':
                 // valid only if is the viewed one
                 oneShare.sharedArea.setContent(data._PAYLOAD.file.content);
-
+                break;
+                
             default:
                 console.log(data._ACTION)
                 break;
