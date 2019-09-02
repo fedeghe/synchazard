@@ -74,7 +74,7 @@
             _USER: user,
         });
     };
- 
+
     oneShare.sharedArea.onAdd = function (file, user) {
         maltaV('NS').send({
             _ACTION: 'addObserver',
