@@ -42,7 +42,11 @@ let debug = () => {},
      * EXPORTED
      * subcast: only to the given ids array set
      */
-    subcast = (ids, data) => xsend(ids, data, (i, d, cli) => i.includes(cli.id)),    
+    subcast = (ids, data) => xsend(
+        ids,
+        data,
+        (i, d, cli) => i.includes(cli.id)
+    ),
 
     /**
      * EXPORTED
@@ -51,19 +55,31 @@ let debug = () => {},
      * if the id passed is the id of the onconnection source then
      * this is equivalent of using the ws.send (without passing the id)
      */
-    unicast = (id, data) => xsend(id, data, (i, d, cli) => cli.id === i),
+    unicast = (id, data) => xsend(
+        id,
+        data,
+        (i, d, cli) => cli.id === i
+    ),
 
     /**
      * EXPORTED
      * otherscast: to all but the given id
      */
-    otherscast = (id, data) => xsend(id, data, (i, d, cli) => cli.id !== i),
+    otherscast = (id, data) => xsend(
+        id,
+        data,
+        (i, d, cli) => cli.id !== i
+    ),
 
     /**
      * EXPORTED
      * subexcludecast: toward all but the given ids array set
      */
-    subexcludecast = (ids, data) => xsend(ids, data, (i, d, cli) => !(i.includes(cli.id))),
+    subexcludecast = (ids, data) => xsend(
+        ids,
+        data,
+        (i, d, cli) => !(i.includes(cli.id))
+    ),
 
     // let define the debug level function 
     //
