@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable guard-for-in */
 (function () {
 
@@ -55,6 +56,7 @@
     };
 
     oneShare.shareArea.onLocalUpdate = function (file) {
+        // eslint-disable-next-line prefer-rest-params
         console.log('local Update', arguments);
         console.log('the new Content is ', file.content)
         maltaV('NS').send({
