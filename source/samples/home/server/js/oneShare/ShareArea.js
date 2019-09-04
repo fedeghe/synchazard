@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 function ShareArea(trg) {
     this.target = trg;
     this.init();
@@ -99,7 +100,6 @@ ShareArea.prototype.startWatching = function () {
     setInterval(function () {
         self.locallyObserved.forEach(function (observed) {
             if (observed.file.lastModifiedDate > (+new Date - inter)) {
-                
                 observed.date = +new Date;
                 observed.reader.onload = (function(obs) {
                     return function(e) {
