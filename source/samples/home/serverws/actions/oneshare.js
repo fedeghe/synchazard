@@ -196,8 +196,9 @@ module.exports.launch = (action, synchazard /* , params */) => {
         // then broadcast the updated list
         // every client will have to remove those ones that he is looking at
         // and have been removed
-        console.log('dis-connecting');
-        console.log(data);
+
+        // console.log('dis-connecting');
+        // console.log(data);
     });
 
 };

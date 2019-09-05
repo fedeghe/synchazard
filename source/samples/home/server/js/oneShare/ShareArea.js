@@ -47,8 +47,6 @@ ShareArea.prototype.init = function () {
 ShareArea.prototype.handleDragOver = function (evt) {
     evt.preventDefault();
     evt.stopPropagation();
-    console.log('Dragging over ', +new Date)
-    console.log(evt)
 };
 
 /**
@@ -104,7 +102,6 @@ ShareArea.prototype.startWatching = function () {
                 observed.reader.onload = (function(obs) {
                     return function(e) {
                         observed.content =  e.target.result;
-                        console.log('xxxx', observed.content)
                         self.onLocalUpdate && self.onLocalUpdate(obs);
                     };
                 })(observed);
