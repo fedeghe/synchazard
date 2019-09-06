@@ -19,11 +19,16 @@ let debug = () => {},
      */
     wss = new WebSocket.Server({ port }),
 
-    xsend = (id , data , func) => {
+    /**
+     * send data to 'to' (might be one or more)
+     * if the passed function 'func' will return true
+     * when receiving (to, data, client)
+     */
+    xsend = (to , data , func) => {
         const _ids = [];
         return new Promise(resolve => {
             wss.clients.forEach(client => (
-                func(id, data, client)
+                func(to, data, client)
                 && client.readyState === WebSocket.OPEN
                 && _ids.push(client.id)
                 && client.send(data, { binary: false })
