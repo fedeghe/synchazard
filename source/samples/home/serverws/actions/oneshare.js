@@ -154,15 +154,13 @@ module.exports.launch = (action, synchazard /* , params */) => {
              * - broadcast to all subscribers
              */
             case 'updateShare':
-                // eslint-disable-next-line no-case-declarations
-                const subscribers = action.data.set.updateSharedFile(data._ID, data._FILE.name, data._FILE.content),
-                    ac = action.data.actions.newContent(data._ID, data._FILE.name)
-
                 synchazard.subcast(
-                    subscribers,
-                    ac
+                    // subscribers
+                    action.data.set.updateSharedFile(data._ID, data._FILE.name, data._FILE.content),
+                    action.data.actions.newContent(data._ID, data._FILE.name)
                 );
                 break;
+
             /**
              * when the user unshare a file just
              * - remove it from the userId list
@@ -170,10 +168,9 @@ module.exports.launch = (action, synchazard /* , params */) => {
              */
             case 'removeShare':
                 action.data.unset.shareFile(data._ID, data._FILE);
-                // synchazard.otherscast(data._ID, action.data.actions.sharedFiles())
                 synchazard.otherscast(data._ID, action.data.actions.shareRemoved(data._ID, data._FILE));
                 break;
-                
+            
             case 'addObserver':
                 action.data.set.observe(data._ID, data._FILE, data._USER);
                 ws.send(action.data.actions.fileContent(data._USER, data._FILE))
@@ -192,11 +189,11 @@ module.exports.launch = (action, synchazard /* , params */) => {
     }, (data, ws) => {
         action.data.unset.userFiles(data._ID);
         synchazard.otherscast(data._ID, action.data.actions.sharedFiles());
-        // on disconnection , update the list removing the user and all his files\
+        //
+        // on disconnection update the list removing the user and all his files
         // then broadcast the updated list
         // every client will have to remove those ones that he is looking at
         // and have been removed
-
         // console.log('dis-connecting');
         // console.log(data);
     });
