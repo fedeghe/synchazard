@@ -1,7 +1,8 @@
+const fs = require('fs'),
+    path = require('path');
+
 module.exports.launch = (action, synchazard, params) => {
-    const resourceFile = params.jsonToObserve,
-        {fs} = params.deps,
-        {path} = params.deps;
+    const resourceFile = params.jsonToObserve;
 
     // SETUP
     //

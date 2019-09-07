@@ -20,17 +20,14 @@ const fs = require('fs'),
  */
 synchazard.launch([{
     path: 'actions/jsonObserver',
-    deps: { fs, path },
     jsonToObserve: './data1.json',
     actor: 'jsonObserver'
 }, {
     path: 'actions/style',
-    deps: { fs, path },
     cssToObserve: 'css/sync_style.css',
     actor: 'style'
 }, {
     path: 'actions/script',
-    deps: { fs, path },
     jsToObserve: 'js/sync_script.js',
     actor: 'script'
 }, {
@@ -61,7 +58,6 @@ synchazard.launch([{
     path: 'actions/test'
 }, {
     path: 'actions/oneshare',
-    deps: { fs, path },
     actor: 'oneshare'
 }
 // , {

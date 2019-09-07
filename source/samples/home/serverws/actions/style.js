@@ -1,8 +1,9 @@
+const fs = require('fs'),
+    path = require('path');
+
 module.exports.launch = (action, synchazard, params) => {
     
-    const resourceFile = params.cssToObserve,
-        {fs} = params.deps,
-        {path} = params.deps;
+    const resourceFile = params.cssToObserve;
 
     // SETUP
     //
