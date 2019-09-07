@@ -6,7 +6,7 @@ importScripts('actorsDontMatch.js');
 // eslint-disable-next-line no-restricted-globals
 self.onmessage = function (e) {
     
-    console.log(e)
+    // console.log(e)
     // eslint-disable-next-line no-undef
     if (actorsDontMatch(e)) return;
 
