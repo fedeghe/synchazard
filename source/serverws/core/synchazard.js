@@ -20,6 +20,7 @@ let debug = () => {},
     wss = new WebSocket.Server({ port }),
 
     /**
+     * PRIVATE
      * send data to 'to' (might be one or more)
      * if the passed function 'func' will return true
      * when receiving (to, data, client)
@@ -106,20 +107,20 @@ let debug = () => {},
     /**
      * @actions array the array of all the Action wrappers to be launched
      */
-    launch = (actions, args) => {
+    launch = (actionsParams, args) => {
         defineDebugFunction(args);
-        actions.forEach(params => {
-            if (!params.path) throw new Error('No path for action');
+        actionsParams.forEach(actionParams => {
+            if (!actionParams.path) throw new Error('No path for action');
             // eslint-disable-next-line import/no-dynamic-require, global-require
-            const a = require(`../${params.path}`),
-                {actor} = params,
+            const a = require(`../${actionParams.path}`),
+                {actor} = actionParams,
                 /**
                  * create the action
                  */
                 action = new Action(synchazard, actor, debug);
-            debug(`> ${  params.path.split('/').pop()  }.js started`, 1);
+            debug(`> ${  actionParams.path.split('/').pop()  }.js started`, 1);
             
-            a.launch(action, synchazard, params);
+            a.launch(action, synchazard, actionParams);
         });
     };
 
