@@ -177,7 +177,7 @@ In the project's root the two _server_ and _serverws_ folders will contain the m
 ---
 
 ## Actors
-<img src="https://raw.githubusercontent.com/fedeghe/synchazard/master/source/collsion.png" alt="drawing" width="80%"/>
+<img src="https://raw.githubusercontent.com/fedeghe/synchazard/master/docs/dia.png" alt="drawing" width="80%"/>
 
 Up to now each _action_ started on the web socket server is natively collision prone, in fact the client (on the very fist connection) will always automatically send a _init_ request and each action running on the ws socker server will react to that, maybe changing the state on the server. Also on the client side if the response of two different `actions` happen to collide in the action name there a collision also will occur. Actor solved the problem.
 
