@@ -1,6 +1,6 @@
 module.exports.launch = (action /* , synchazard, params */) => {
     
-    action.onconnection((data /* , ws */) => {
+    action.onConnect((data /* , ws */) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
         case 'test':
@@ -8,5 +8,5 @@ module.exports.launch = (action /* , synchazard, params */) => {
             break;
         default:break;
         }
-    });
+    }).start();
 };

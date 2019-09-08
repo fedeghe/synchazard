@@ -4,7 +4,7 @@ module.exports.launch = (action /* , synchazard, params */) => {
 
     // just listen
     //
-    action.onconnection((data, ws) => {
+    action.onConnect((data, ws) => {
         let gotNewMatch = false;
         if (data._TYPE !== 'action') return;
 
@@ -64,5 +64,5 @@ module.exports.launch = (action /* , synchazard, params */) => {
                 console.log(data);
                 break
         }
-    });
+    }).start();
 };

@@ -15,7 +15,7 @@ module.exports.launch = (action /* , synchazard, params */) => {
             players: []
         };
 
-    action.onconnection((data, ws) => {
+    action.onConnect((data, ws) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
             case 'init':
@@ -26,5 +26,5 @@ module.exports.launch = (action /* , synchazard, params */) => {
                 break;
             default: break;
         }
-    });
+    }).start();
 };

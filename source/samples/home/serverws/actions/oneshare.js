@@ -123,7 +123,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
 
     // CONNECTION
     //
-    action.onconnection((data, ws) => {
+    action.onConnect((data, ws) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
 
@@ -186,7 +186,8 @@ module.exports.launch = (action, synchazard /* , params */) => {
 
             default: break;
         }
-    }, (data, ws) => {
+    })
+    .onDisconnect((data, ws) => {
         action.data.unset.userFiles(data._ID);
         synchazard.otherscast(data._ID, action.data.actions.sharedFiles());
         //
@@ -196,6 +197,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
         // and have been removed
         // console.log('dis-connecting');
         // console.log(data);
-    });
+    })
+    .start();
 
 };

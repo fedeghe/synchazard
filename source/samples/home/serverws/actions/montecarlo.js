@@ -67,7 +67,7 @@ module.exports.launch = (action, synchazard/* , params */) => {
     // CONNECTION
     //
     // eslint-disable-next-line complexity
-    action.onconnection((data, ws /* , req */ ) => {
+    action.onConnect((data, ws /* , req */ ) => {
         if(!action.checkRequestActor(data)) return;
         
         if (data._TYPE !== 'action') return;
@@ -173,9 +173,8 @@ module.exports.launch = (action, synchazard/* , params */) => {
                 break;
             default:break;
         }
-    },
-    /* ON_CLOSE */
-    (data /* , ws, req */) => {
+    })
+    .onDisconnect((data /* , ws, req */) => {
         
         // console.log(action.getCount());
         // console.log(data);
@@ -198,5 +197,6 @@ module.exports.launch = (action, synchazard/* , params */) => {
                 synchazard.broadcast(action.data.actions.free);
             }
         }
-    });
+    })
+    .start();
 };

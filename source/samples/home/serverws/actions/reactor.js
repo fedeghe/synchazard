@@ -35,7 +35,7 @@ module.exports.launch = (action, synchazard/* , params */) => {
 
     // CONNECTION
     //
-    action.onconnection((data/* , ws */) => {
+    action.onConnect((data/* , ws */) => {
         var response = null;
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
@@ -51,5 +51,5 @@ module.exports.launch = (action, synchazard/* , params */) => {
             default:break;
         }
         response && synchazard.broadcast(response);
-    });
+    }).start();
 };

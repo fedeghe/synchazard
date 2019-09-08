@@ -4,7 +4,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
     
     // CONNECTION
     //
-    action.onconnection((data, ws) => {
+    action.onConnect((data, ws) => {
         if (data._TYPE !== 'action') return;
         switch (data._ACTION) {
             case 'init':
@@ -17,7 +17,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 break;
             default: break;
         }
-    });
+    }).start();
 
     // RUN
     //
