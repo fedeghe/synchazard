@@ -217,7 +217,10 @@ const fs = require('fs'),
 module.exports.launch = (action, synchazard, params) => {
     const resourceFile = params.jsonToObserve
     action.setup({
-        resourceFile: `/../${resourceFile}`,
+        filePath: path.resolve(path.join(
+            __dirname,
+            `/${resourceFile}`
+        )),
         actions: {
             update: (cnt) => action.encode({
                 _ACTION: 'info',
@@ -231,7 +234,7 @@ module.exports.launch = (action, synchazard, params) => {
             case 'init':
                 ws.send(action.encode({
                     _ACTION: 'json',
-                    _INFOS: action.data.infos
+                    _INFOS: action.data.update('...loading info')
                 }));
                 break;
             default: break;
@@ -239,13 +242,13 @@ module.exports.launch = (action, synchazard, params) => {
     }).start();
 
     // watch it
-    const filePAth = path.resolve(path.join(__dirname, action.data.resourceFile))
+    
     fs.watchFile(
-        filePath,
+        action.data.filePath,
         { interval: synchazard.WATCH_INTERVALS.SHORT },
         () => synchazard.broadcast(
             action.data.actions.update(
-                fs.readFileSync(filePath, 'utf8')
+                fs.readFileSync(action.data.filePath, 'utf8')
             )
         )
     );
