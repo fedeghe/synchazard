@@ -179,28 +179,99 @@ In the project's root the two _server_ and _serverws_ folders will contain the m
 ## Actors
 <img src="https://raw.githubusercontent.com/fedeghe/synchazard/master/docs/dia.png" alt="drawing" width="80%"/>
 
-Up to now each _action_ started on the web socket server is natively collision prone, in fact the client (on the very fist connection) will always automatically send a _init_ request and each action running on the ws socker server will react to that, maybe changing the state on the server. Also on the client side if the response of two different `actions` happen to collide in the action name there a collision also will occur. Actor solved the problem.
 
 
-What would happen if calling `socketsSrv.launch` we pass among all needed actions two particural ones which replies with structurally similar objects to the same request, for example the _init_?  
-For sure we could take the responsability on the \_ACTION field value of the response to pay it in terms of loss of semantic. Would be a naive solution.
+Up to now each _action_ started on the web socket server is natively collision prone, in fact the client (on the very fist connection) will always automatically send a _init_ request and each action running on the ws socker server will react to that, maybe changing the state on the server. Also on the client side if the response of two different `actions` happen to collide in the action name there a collision also will occur.  
+I'll describe here a simple example to clarify the problem. Assume we want to build a simple website with two pages: homepage and info. The dumb requirements are: 
+- on connection to _homepage_ we want to show the actual value of users that are visiting the homepage  
+- on connection to _info_ we simply want to show some informations  
 
-Ignoring it in this case there will be a _race condition_, causing unpredictable and undesired outcomes. 
+on the ws server two actions will do the job:  
+<details>
+<summary>visitors.js</summary>  
 
-To avoid the risk and the responsability to manage it I added a pretty simple mechanism that requires on both sides to specify a label and run a check on every worker. 
+``` js
+module.exports.launch = (action, synchazard /* , params */) => {
+    action.setup({ visitors: 0 });
+    action.onConnect((data, ws) => {
+        if (data._TYPE !== 'action') return;
+        switch (data._ACTION) {
+            case 'init':
+                ws.send(action.encode({
+                    _ACTION: 'json',
+                    _VISITORS: ++action.data.visitors
+                }));
+                break;
+            default: break;
+        }
+    }).start();
+};
+```
+</details>
+<details>
+<summary>info.js</summary>
+
+``` js
+const fs = require('fs'),
+    path = require('path');
+module.exports.launch = (action, synchazard, params) => {
+    const resourceFile = params.jsonToObserve
+    action.setup({
+        resourceFile: `/../${resourceFile}`,
+        actions: {
+            update: (cnt) => action.encode({
+                _ACTION: 'info',
+                _CONTENT: cnt
+            })
+        }
+    });
+    action.onConnect((data, ws) => {
+        if (data._TYPE !== 'action') return;
+        switch (data._ACTION) {
+            case 'init':
+                ws.send(action.encode({
+                    _ACTION: 'json',
+                    _INFOS: action.data.infos
+                }));
+                break;
+            default: break;
+        }
+    }).start();
+
+    // watch it
+    const filePAth = path.resolve(path.join(__dirname, action.data.resourceFile))
+    fs.watchFile(
+        filePath,
+        { interval: synchazard.WATCH_INTERVALS.SHORT },
+        () => synchazard.broadcast(
+            action.data.actions.update(
+                fs.readFileSync(filePath, 'utf8')
+            )
+        )
+    );
+};
+```
+</details>
+
+When a client visits the home page (and sends automatically the init request) it will get back all replies to init from all launched actions, and this is the problem cause even though on the client level we can filter the response, we cannot still clearly do it in the web socket server, in fact  
+also when a user land in the info page, the init request will also cause to sum the visotors count...and this is not what requested.
+
+The usage of the names of the actions (for example using a prepending `HOMEPAGE_`) to separate concers from one page to the other is NOT a solution.
+
+To avoid the risk and the responsability to manage it I added a simple mechanism that requires on both sides to specify a label and run a check on every worker. 
 
 On the webpage the user is in charge of setting a list of _actors_ (simple labels) that will be allowed.  
-```
+``` html
 <script src="/pathTo/synchazard.js"
     data-worker="/pathTo/webWorker.js"
     data-actors="dashboardHome,e2etest"
-    ></script>
+    >
+</script>
 ```
 
 On the server-side each action launched specifies one single _actor_ that will be enabled to consume the data send by the _action_.
 
-```
-...
+``` js
 socketsSrv.launch([{
         path: 'action/myHomeAction'
         actor: 'dashboardHome'
@@ -208,17 +279,15 @@ socketsSrv.launch([{
         path: 'actions/mySettingsAction'
         actor: 'settings'
     }
-    ...
-    ... more actions if needed
-    ... 
+    /**
+     * all needded actions
+     */ 
 ], argz);
 ```
 
-The actors mechanism is hardcoded and to enable it we should rebuild _Synchazard_ setting to `true` the `CHECK_ACTORS` variable in the `vars.json`.
+The client can only accept messages coming from _actions_ which declare an _actor_ that is included in those declared by the client. The webworker do not forward the data to the handling function/instance. Since webworker are not extensible, we cannot add to it special method to do the job, but we can use the _importScripts_ to make available one function to check if the actors match (in case this option is enabled on build):
 
-Now the client can only accept messages coming from _actions_ which declare an _actor_ that is included in those declared by the client. The webworker do not forward the data to the handling function/instance. Since webworker are not extensible, we cannot add to it special method to do the job, but we can use the _importScripts_ to make available one function to check if the actors match (in case this option is enabled on build):
-
-```
+``` js
 ...
 
 importScripts('actorsDontMatch.js');
