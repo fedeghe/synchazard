@@ -6,10 +6,12 @@ class Action{
         this.ss = ss;
         this.actor = actor;
         this.debug = debug;
+        this.onConnectionHandler = null;
+        this.onCloseHandler = null;
         this.data = {};
     }
 
-    setup(d) {this.data = d || {};}
+    setup(d) {this.data = d || {}; return this;}
 
     getCount() { return Action.count;}
 
@@ -69,8 +71,11 @@ class Action{
 
     decodeMessage(action) {return JSON.parse(action);}
 
-    onconnection(onConnectionHandler, onCloseHandler) {
+    start() {
         var self = this;
+        if (this.onConnectionHandler === null) {
+            throw new Error({message: 'A onConnectionHandler is needed befor starting the action'})
+        }
         this.ss.wss.on('connection', (ws, req) => {
             ws.on('message', (data) => {
                 data = JSON.parse(data);
@@ -79,7 +84,7 @@ class Action{
                     // FIRST !!!!
                     Action.unsetCount(data);
                     // THEN.....
-                    onCloseHandler && onCloseHandler(data, ws, req)
+                    self.onCloseHandler && self.onCloseHandler(data, ws, req)
                     return;
                 }
 
@@ -100,9 +105,20 @@ class Action{
                 /* forward injecting also the ws, with the id attached */
                 ws.id = data._ID;
                 Action.setCount(data);
-                onConnectionHandler(data, ws, req);
+                self.onConnectionHandler(data, ws, req);
             });
-        });   
+        });
+        return this;
+    }
+
+    onConnect(onConnectionHandler) {
+        this.onConnectionHandler = onConnectionHandler;
+        return this;
+    }
+
+    onDisconnect(onCloseHandler) {
+        this.onCloseHandler = onCloseHandler;
+        return this;
     }
 }
 
