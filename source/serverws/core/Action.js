@@ -89,11 +89,11 @@ class Action{
                 }
 
                 /* checkActors ? */
-                const checkActors = maltaV('CHECK_ACTORS');
+                const checkActors = true;
                 if (checkActors) {
                     if (!data._ACTORS || data._ACTORS.split(',').indexOf(self.actor) < 0) {
                         if (maltaV('NOTIFY_ACTORS_CHECKING_FAILURE')){
-                            console.log(['Actors not matching:', 'expected', self.actor, 'to be in', data._ACTORS].join(' '));
+                            console.log(['Actors not matching:', 'expected', self.actor, 'to be in [', data._ACTORS.join(', '), ']'].join(' '));
                             console.log('... the message will not be forwarded');
                         }
                         return;
