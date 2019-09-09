@@ -28,6 +28,9 @@
     "WEBSERVER": {
         "PORT": 4000,
         "HOST": "http://$DOMAIN_OR_IP$:$WEBSERVER.PORT$",
+        "DEVPROXYS": [
+            "http://$DOMAIN_OR_IP$.charlesproxy.com:$WEBSERVER.PORT$"
+        ],
         "TESTLIB": "$WEBSERVER.HOST$/js/lib/testnject.js",
         "TIMEGAP": 1,
         "RECONNECTION": {

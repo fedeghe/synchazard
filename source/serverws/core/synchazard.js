@@ -152,7 +152,10 @@ wss.on('connection', (ws, req) => {
      * could happen that the host is not allowed to point here,
      * this is the checkpoint
      */
-    if (req.headers.origin.search("maltaV('WEBSERVER.HOST')") !== 0) {
+    const proxys = maltaV('WEBSERVER.DEVPROXYS')
+    if (req.headers.origin.search("maltaV('WEBSERVER.HOST')") !== 0
+        && !proxys.includes(req.headers.origin)
+    ) {
         this.isAlive = false;
         ws.terminate();
         console.log(`${req.headers.origin} is not allowed to request here.`);
