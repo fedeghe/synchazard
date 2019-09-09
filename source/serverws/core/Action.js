@@ -88,7 +88,14 @@ class Action{
                     return;
                 }
 
-                /* checkActors ? */
+                /**
+                 * checkActors ? .... yes always
+                 * This is the other side of source/server/js/workers/actorsDontMatch.js
+                 * acting on the web socket server
+                 * and blocking any incoming request to the wss that having a specific scope
+                 * should not be of any interest for others actions running
+                 */
+
                 const checkActors = true;
                 if (checkActors) {
                     if (!data._ACTORS || data._ACTORS.split(',').indexOf(self.actor) < 0) {

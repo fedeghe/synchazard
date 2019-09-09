@@ -1,6 +1,27 @@
 /* eslint-disable no-undef */
 
-/*= ======================================================================================= */
+/**
+ * this file is imported at the very beginning of each worker
+ * using `importScripts` function 
+ * and each worker has to define an `actors` variable
+ * initialized to null
+ * basically the following is a template to be used when writing a worker
+ * for synchazard
+ * 
+ * | var actors = null;
+ * | importScripts('actorsDontMatch.js');
+ * | self.onmessage = function (e) {
+ * |    if (actorsDontMatch(e)) return;
+ * |    if (e.data._TYPE !== 'action') return;
+ * |    switch (e.data._ACTION) {
+ * |        case ....
+ * |    }
+ * | };
+ * 
+ * this mechanism allows the client to filter any incoming message that 
+ * is not meant to be consumed in that page context
+ */
+
 // eslint-disable-next-line no-unused-vars
 function actorsDontMatch(e) {
 
