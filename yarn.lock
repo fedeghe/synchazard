@@ -1659,6 +1659,13 @@ malta-header-comment@^1.0.6:
   dependencies:
     malta ">=3.8.14"
 
+malta-js-bookmarklet@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/malta-js-bookmarklet/-/malta-js-bookmarklet-1.0.11.tgz#a5cfe2d1808a7d0da85927e73b0bfc867964d639"
+  integrity sha512-JUrab1/FCY5RbUcDv5h+g0laQo+GwdwLxk9p0LJDSiyL+u2Qt4EJ/LJqYKLtWqlog8EWB3i+EuRmU16NerTrjw==
+  dependencies:
+    malta "^4.0.4"
+
 malta-js-obfuscator@^1.0.12:
   version "1.0.12"
   resolved "https://registry.yarnpkg.com/malta-js-obfuscator/-/malta-js-obfuscator-1.0.12.tgz#426060402353646bc9dd3d7bb920bfff15456b84"
@@ -1707,6 +1714,11 @@ malta@^4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/malta/-/malta-4.0.3.tgz#255c34cd3a66612499806e13d310f51f44f61eea"
   integrity sha512-vGt92EPCaX4n/6XhHj2VlCn4xDeSZh8r+BpnOttSROTw42xV/IXQB0+bNR/81X7beD3SQuCjCLJOjV4/D04qzA==
+
+malta@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/malta/-/malta-4.0.4.tgz#9ab860454307e57479daad3452c7abc62deddc4b"
+  integrity sha512-7+6zUDM2Az4t51mdLFk6XMgheExGNhl3Kwgp/hVp07bcJylu8VKwXwxVdFujxRxjxJmwGUHdjV9ABgaEpQuL0Q==
 
 map-stream@0.0.7:
   version "0.0.7"

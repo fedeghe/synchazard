@@ -1,0 +1,4 @@
+{
+    "EXE": "mkdir -p source/out",
+    "source/tk.js": "source/out -plugins=malta-js-bookmarklet"
+}
