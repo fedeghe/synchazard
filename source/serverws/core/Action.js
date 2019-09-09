@@ -59,7 +59,7 @@ class Action{
     }
 
     notify(filename, data) {
-        if (maltaV('NOTIFY_ACTORS_CHECKING')) {
+        if (maltaV('NOTIFY_ACTORS_CHECKING_FAILURE')) {
             console.log("\n--- ACTION NOTIFICATION:");
             console.log(`@ ${new Date}`);
             console.log(`- Action filename: ${filename}`);
@@ -92,14 +92,14 @@ class Action{
                 const checkActors = maltaV('CHECK_ACTORS');
                 if (checkActors) {
                     if (!data._ACTORS || data._ACTORS.split(',').indexOf(self.actor) < 0) {
-                        if (maltaV('NOTIFY_ACTORS_CHECKING')){
+                        if (maltaV('NOTIFY_ACTORS_CHECKING_FAILURE')){
                             console.log(['Actors not matching:', 'expected', self.actor, 'to be in', data._ACTORS].join(' '));
                             console.log('... the message will not be forwarded');
                         }
                         return;
                     } 
-                        maltaV('NOTIFY_ACTORS_CHECKING') &&
-                        console.log(['Actors matching:', self.actor, 'found in', data._ACTORS].join(' '));
+                    // maltaV('NOTIFY_ACTORS_CHECKING') &&
+                    // console.log(['Actors matching:', self.actor, 'found in', data._ACTORS].join(' '));
                     
                 }
                 /* forward injecting also the ws, with the id attached */

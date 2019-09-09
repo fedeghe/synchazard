@@ -7,7 +7,7 @@ function actorsDontMatch(e) {
     /* MANDATORY TO SET/CHECK collisions */
     /*-----------------------------------*/
     var enforceActorsMatch = maltaV('CHECK_ACTORS'),
-        notifyActorsChecking = maltaV('NOTIFY_ACTORS_CHECKING'),
+        notifyActorsChecking = maltaV('NOTIFY_ACTORS_CHECKING_FAILURE'),
         gotActorsDontMatch = null;
 
     // this is for init settings of the actors,

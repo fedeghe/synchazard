@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="icon" href="/media/favicon.ico">
-	<link rel="stylesheet" type="text/css" href="/css/style.css">
-	<title>hello world</title>
-	<style>body{font-family:verdana}</style>
-	<!-- <script src="/js/lib/synchazard.js" data-worker="/js/workers/worker.js" data-actors="jsonObserver,style,script,randomPercentage"></script> -->
-	<script src="/js/lib/synchazard.js" data-worker="/js/workers/worker_helloWorld.js"></script>
-	<script src="/js/helloWorld.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="/media/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>hello world</title>
+    <style>
+        body {
+            font-family: verdana
+        }
+    </style>
+    <script src="/js/lib/synchazard.js" data-worker="/js/workers/worker_helloWorld.js"
+        data-actors="helloWorld"></script>
+    <script src="/js/helloWorld.js"></script>
 </head>
+
 <body>
-	<button id="next">next</button>
-	<p id="fib"></p>
+    <button id="next">next</button>
+    <p id="fib"></p>
 </body>
+
 </html>
