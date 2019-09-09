@@ -271,21 +271,6 @@ On the webpage the user is in charge of setting a list of _actors_ (simple label
     >
 </script>
 ```
-each worker then will filter out undesider incoming messages using the `actorsDontMatch` function:  
-``` js
-var actors = null;
-importScripts('actorsDontMatch.js');
-self.onmessage = function (e) {
-
-    // eslint-disable-next-line no-undef
-    if (actorsDontMatch(e)) return;
-
-    if (e.data._TYPE !== 'action') return;
-    switch (e.data._ACTION) {
-        //...
-    }
-};
-```
 
 On the server-side each action launched specifies one single _actor_ that will be enabled to consume the data send by the _action_.
 
@@ -306,17 +291,14 @@ socketsSrv.launch([{
 The client can only accept messages coming from _actions_ which declare an _actor_ that is included in those declared by the client. The webworker do not forward the data to the handling function/instance. Since webworker are not extensible, we cannot add to it special method to do the job, but we can use the _importScripts_ to make available one function to check if the actors match (in case this option is enabled on build):
 
 ``` js
-...
-
+var actors = null; //do not forget that
 importScripts('actorsDontMatch.js');
-
 self.onmessage = function (e) {
-
     if (actorsDontMatch(e)) return;
-
-    ...
+    switch (e.data._ACTION) {
+        //...
+    }
 ```
-
 ---
 
 ### Tests  
