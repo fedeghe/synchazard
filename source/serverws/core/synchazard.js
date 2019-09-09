@@ -118,8 +118,8 @@ let debug = () => {},
                  * create the action
                  */
                 action = new Action(synchazard, actor, debug);
-            debug(`> ${  actionParams.path.split('/').pop()  }.js started`, 1);
-            
+
+            debug(`> ${actionParams.path.split('/').pop()}.js action running`, 1);
             a.launch(action, synchazard, actionParams);
         });
     };
