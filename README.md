@@ -257,7 +257,7 @@ module.exports.launch = (action, synchazard, params) => {
 </details>
 
 When a client visits the home page (and sends automatically the init request) it will get back all replies to init from all launched actions, and this is the problem cause even though on the client level we can filter the response, we cannot still clearly do it in the web socket server, in fact  
-also when a user land in the info page, the init request will also cause to sum the visotors count...and this is not what requested.
+also when a user land in the info page, the init request will also cause to sum the visitors count...and this is not what requested.
 
 The usage of the names of the actions (for example using a prepending `HOMEPAGE_`) to separate concers from one page to the other is NOT a solution.
 
@@ -270,6 +270,21 @@ On the webpage the user is in charge of setting a list of _actors_ (simple label
     data-actors="dashboardHome,e2etest"
     >
 </script>
+```
+each worker then will filter out undesider incoming messages using the `actorsDontMatch` function:  
+``` js
+var actors = null;
+importScripts('actorsDontMatch.js');
+self.onmessage = function (e) {
+
+    // eslint-disable-next-line no-undef
+    if (actorsDontMatch(e)) return;
+
+    if (e.data._TYPE !== 'action') return;
+    switch (e.data._ACTION) {
+        //...
+    }
+};
 ```
 
 On the server-side each action launched specifies one single _actor_ that will be enabled to consume the data send by the _action_.
