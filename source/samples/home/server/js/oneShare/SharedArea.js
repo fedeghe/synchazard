@@ -17,9 +17,9 @@ SharedArea.prototype.init = function  () {
     this.tabContentTextarea = createElement('textarea', {'class' : 'content'});
     
     this.panel = createElement('div', {'class' : 'contentPanel'});
-    this.panelButton = createElement('button', {'class' : 'contentPanelButton'}, 'Download');
+    // this.panelButton = createElement('button', {'class' : 'contentPanelButton'}, 'Download');
 
-    this.panel.appendChild(this.panelButton)
+    // this.panel.appendChild(this.panelButton)
     this.tabContent.appendChild(this.panel)
     this.tabContent.appendChild(this.tabContentTextarea)
     this.main.appendChild(this.tabList)
@@ -105,7 +105,7 @@ SharedArea.prototype.render = function  () {
 };
 
 SharedArea.prototype.addSharedFile = function (data) {
-    this.filePoolSelect.addFile(data.name, data.uid);
+    this.filePoolSelect.addFile(data.name, data.uid, data.pwd);
 };
 
 SharedArea.prototype.removeSharedFile = function (data) {

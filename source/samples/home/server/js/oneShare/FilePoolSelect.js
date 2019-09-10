@@ -21,11 +21,12 @@ FilePoolSelect.prototype.init = function () {
         self.disableFile(file, user)
         self.main.value = '';
         self.main.blur();
+        
     })
     this.fileCount = 0;
 };
 
-FilePoolSelect.prototype.addFile = function (file, user) {
+FilePoolSelect.prototype.addFile = function (file, user, pwd) {
     var newOption,
         optGroup,
         mustAppend = false;
@@ -45,7 +46,10 @@ FilePoolSelect.prototype.addFile = function (file, user) {
     } else {
         return;
     }
-    newOption = createElement('option', {value: ''}, file);
+    newOption = createElement('option', {value: ''}, `${pwd ?'🔒':''} ${file}`);
+    if (pwd) {
+        newOption.dataset.pwd = true;
+    }
     newOption.dataset.user = user;
     newOption.dataset.file = file;
     optGroup.appendChild(newOption);
@@ -111,7 +115,7 @@ FilePoolSelect.prototype.update = function (files) {
     .filter(function (userId) {return userId !== SH.id} ) 
     .forEach(function (userId) {
         files[userId].forEach( function (f) {
-            self.addFile(f.filePath, userId)
+            self.addFile(f.filePath, userId, f.pwd)
         });
     });
 };

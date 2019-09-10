@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 
 
 module.exports.launch = (action, synchazard /* , params */) => {
@@ -8,8 +9,9 @@ module.exports.launch = (action, synchazard /* , params */) => {
         files: {/* {
             userId: [{
                 filePath: '',
-                content: ''
-                subscribers: [userId1, userId2]
+                content: '',
+                subscribers: [userId1, userId2],
+                pwd
             }]
         } */},
         actions: {
@@ -18,11 +20,12 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 _ACTION: 'sharedFiles',
                 _PAYLOAD: action.data.get.sharedFilesMeta()
             }),
-            shareAdded: (uid, name) => action.encode({
+            shareAdded: (uid, name, content, pwd) => action.encode({
                 _ACTION: 'shareAdded',
                 _PAYLOAD: {
                     uid,
-                    name
+                    name,
+                    pwd
                 }
             }),
             shareRemoved: (uid, name) => action.encode({
@@ -43,6 +46,15 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 _PAYLOAD: {
                     file: action.data.files[uid].find(e => e.filePath === name)
                 }
+            }),
+            requestPwdFor: (uid, name) => action.encode({
+                _ACTION: 'requestPwd',
+                _PAYLOAD: {
+                    uid, file: name
+                }
+            }),
+            wrongPwd: () => action.encode({
+                _ACTION: 'wrongPwd'
             })
         },
         set: {
@@ -58,7 +70,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 return subscribers;
             },
 
-            shareFile: (userId, filePath, content) => {
+            shareFile: (userId, filePath, content, pwd) => {
                 // if not there yet, create the user container
                 if (!(userId in action.data.files)) {
                     action.data.files[userId] = []
@@ -68,7 +80,8 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 action.data.files[userId].push({
                     filePath,
                     content,
-                    subscribers: []
+                    subscribers: [],
+                    pwd
                 });
             },
             observe: (idUserReq, trgFile, trgUser) => {
@@ -113,6 +126,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
                         acc[uid] = action.data.files[uid].map(f => ({
                             filePath: f.filePath,
                             subscribersCount: f.subscribers.length,
+                            pwd: f.pwd,
                         }))
                         return acc;
                     }, {})
@@ -143,8 +157,8 @@ module.exports.launch = (action, synchazard /* , params */) => {
              * - broadcast shared files (all clients will have to ignore their ones)
              */
             case 'addShare':
-                action.data.set.shareFile(data._ID, data._FILE.name, data._FILE.content)
-                synchazard.otherscast(data._ID, action.data.actions.shareAdded(data._ID, data._FILE.name, data._FILE.content))
+                action.data.set.shareFile(data._ID, data._FILE.name, data._FILE.content, data._PWD)
+                synchazard.otherscast(data._ID, action.data.actions.shareAdded(data._ID, data._FILE.name, data._FILE.content, data._PWD))
                 break;
 
             /**
@@ -173,7 +187,13 @@ module.exports.launch = (action, synchazard /* , params */) => {
             
             case 'addObserver':
                 action.data.set.observe(data._ID, data._FILE, data._USER);
-                ws.send(action.data.actions.fileContent(data._USER, data._FILE))
+                if (action.data.files[data._USER]
+                    && action.data.files[data._USER].find(share => share.filePath ===data._FILE).pwd
+                ) {
+                    ws.send(action.data.actions.requestPwdFor(data._USER, data._FILE))
+                } else {
+                    ws.send(action.data.actions.fileContent(data._USER, data._FILE))
+                }
                 break;
 
             case 'removeObserver':
@@ -184,6 +204,15 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 ws.send(action.data.actions.fileContent(data._USER, data._FILE))
                 break;
 
+            case 'checkPwd':
+                if (action.data.files[data._USER]
+                    && action.data.files[data._USER].find(share => share.filePath ===data._FILE).pwd === data._PWD
+                ) {
+                    ws.send(action.data.actions.fileContent(data._USER, data._FILE))
+                } else {
+                    ws.send(action.data.actions.wrongPwd());
+                }
+                break;
             default: break;
         }
     })

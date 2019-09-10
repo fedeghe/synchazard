@@ -31,7 +31,19 @@
                 console.log(data._PAYLOAD)
                 oneShare.sharedArea.setContent(data._PAYLOAD.file.content, data._PAYLOAD.file.filePath);
                 break;
-
+            case 'requestPwd':
+                // short circuit
+                var pwd = prompt('This file is pwd protected, enter it');
+                maltaV('NS').send({
+                    _ACTION: 'checkPwd',
+                    _USER: data._PAYLOAD.uid,
+                    _FILE: data._PAYLOAD.file,
+                    _PWD: pwd
+                });
+                break;
+            case 'wrongPwd': 
+                alert('Wrong pwd');
+                break;
             default:
                 console.log('ERR: unhandled action')
                 break;
@@ -40,8 +52,8 @@
 
     // HOOKS
     //
-    oneShare.shareArea.onAdd = function (file) {
-        maltaV('NS').send({ _ACTION: 'addShare', _FILE: file });
+    oneShare.shareArea.onAdd = function (file, pwd) {
+        maltaV('NS').send({ _ACTION: 'addShare', _FILE: file, _PWD: pwd });
     };
     oneShare.shareArea.onRemove = function (file) {
         maltaV('NS').send({ _ACTION: 'removeShare', _FILE: file });

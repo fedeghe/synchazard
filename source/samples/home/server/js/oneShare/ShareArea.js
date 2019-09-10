@@ -10,6 +10,7 @@ ShareArea.prototype.init = function () {
     var self = this;
     this.main = createElement('div', {'class' : 'shareArea'})
     this.dropArea = createElement('div', {'class' : 'shareAreaDrop'}, 'share a file by dragging it here')
+    this.dropCryptArea = createElement('div', {'class' : 'shareAreaCryptDrop', 'title': 'password protected share'}, '🔑')
     this.fileList = createElement('ul', {'class' : 'shareAreaButtons'})
     this.detail = createElement('p', {'class' : 'shareAreaDetail'})
 
@@ -35,16 +36,33 @@ ShareArea.prototype.init = function () {
         }
     });
 
+    this.dropArea.addEventListener('mouseout', this.handleMouseout.bind(this), false);
+    this.dropArea.addEventListener('dragleave', this.handleDragLeave.bind(this), false);
+    this.dropCryptArea.addEventListener('dragover', this.handleDragOver.bind(this), false);
     this.dropArea.addEventListener('dragover', this.handleDragOver.bind(this), false);
+    // this.dropCryptArea.addEventListener('dragover', this.handleDragOver.bind(this), false);
     this.dropArea.addEventListener('drop', this.handleFileDrop.bind(this), false);
+    // this.dropCryptArea.addEventListener('drop', this.handleFileDrop.bind(this), false);
 
+    this.dropArea.appendChild(this.dropCryptArea)    
     this.main.appendChild(this.dropArea)    
     this.main.appendChild(this.fileList)
     this.main.appendChild(this.detail)
     this.startWatching()
 };
 
+ShareArea.prototype.handleMouseout = function (evt) {
+    evt.target.classList.remove('mayDrop');
+    evt.preventDefault();
+    evt.stopPropagation();
+}
+ShareArea.prototype.handleDragLeave = function (evt) {
+    evt.target.classList.remove('mayDrop');
+    evt.preventDefault();
+    evt.stopPropagation();
+};
 ShareArea.prototype.handleDragOver = function (evt) {
+    evt.target.classList.add('mayDrop')
     evt.preventDefault();
     evt.stopPropagation();
 };
@@ -56,13 +74,22 @@ ShareArea.prototype.handleDragOver = function (evt) {
  * - save it among the locallyObserved ones so that at the watching loop we do not miss it
  */
 ShareArea.prototype.handleFileDrop = function (evt) {
-    var files = evt.dataTransfer.files,
+    var trg = evt.target,
+        needPwd = trg.classList.contains('shareAreaCryptDrop'),
+        pwd = false,
+        files = evt.dataTransfer.files,
         i = 0,
         len = 0,
         file,
         self = this;
+    this.dropCryptArea.classList.remove('mayDrop');
+    this.dropArea.classList.remove('mayDrop');
     evt.preventDefault();
     evt.stopPropagation();
+
+    if (needPwd) {
+        pwd = prompt('Provide a password') || false
+    }
 
     // can handle more files in one drop
     for (i = 0, len = files.length; i < len; i++) {
@@ -83,7 +110,7 @@ ShareArea.prototype.handleFileDrop = function (evt) {
             return function(e) {
                 // content is available now
                 o.content =  e.target.result;
-                self.addFile(o)
+                self.addFile(o, pwd)
                 self.locallyObserved.push(o);
             };
         })(obj);
@@ -112,7 +139,7 @@ ShareArea.prototype.startWatching = function () {
     }, inter);
 };
 
-ShareArea.prototype.addFile = function (file) {
+ShareArea.prototype.addFile = function (file, pwd) {
     var fileName = file.name,
         fileItem = createElement('li', {'class': 'file'}, fileName),
         closeIcon = createElement('span', {
@@ -124,7 +151,7 @@ ShareArea.prototype.addFile = function (file) {
     fileItem.appendChild(closeIcon);
     this.sh_sharedFileList.push(fileName);
     this.fileList.appendChild(fileItem);
-    this.onAdd && this.onAdd(file);
+    this.onAdd && this.onAdd(file, pwd);
     return false;
 };
 
