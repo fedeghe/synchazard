@@ -94,8 +94,10 @@ SharedArea.prototype.selectTab = function(tag){
     this.setContent(tag.title);
 };
 
-SharedArea.prototype.setContent = function (cnt) {
-    this.tabContentTextarea.innerHTML =  cnt;
+SharedArea.prototype.setContent = function (cnt, filePath) {
+    if (!filePath || this.activeTab.dataset.file === filePath) {
+        this.tabContentTextarea.innerHTML =  cnt;
+    }
 };
 
 SharedArea.prototype.render = function  () {

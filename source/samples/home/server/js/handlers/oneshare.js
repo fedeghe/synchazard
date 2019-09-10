@@ -29,7 +29,7 @@
             case 'updatedContent':
                 // valid only if is the viewed one
                 console.log(data._PAYLOAD)
-                oneShare.sharedArea.setContent(data._PAYLOAD.file.content);
+                oneShare.sharedArea.setContent(data._PAYLOAD.file.content, data._PAYLOAD.file.filePath);
                 break;
 
             default:
