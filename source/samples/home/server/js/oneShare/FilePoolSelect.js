@@ -79,7 +79,7 @@ FilePoolSelect.prototype.removeFile = function (file, user) {
 };
 
 FilePoolSelect.prototype.disableFile = function (file, user) {
-    Array.from(this.optGroups[user].children).forEach(function (child) {
+    this.optGroups[user] && Array.from(this.optGroups[user].children).forEach(function (child) {
         if (child.dataset.user === user && child.dataset.file === file) {
             child.setAttribute('disabled', 'disabled')
         }
@@ -87,7 +87,7 @@ FilePoolSelect.prototype.disableFile = function (file, user) {
 };
 
 FilePoolSelect.prototype.enableFile = function (file, user) {
-    Array.from(this.optGroups[user].children).forEach(function (child) {
+    this.optGroups[user] && Array.from(this.optGroups[user].children).forEach(function (child) {
         if (child.dataset.user === user && child.dataset.file === file) {
             child.removeAttribute('disabled')
         }

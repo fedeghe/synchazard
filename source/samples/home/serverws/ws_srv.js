@@ -18,7 +18,7 @@ const fs = require('fs'),
 /**
  * launch all actions passing if found other parameters to activate debug
  */
-synchazard.launch([{
+synchazard.launch([{/*
     path: 'actions/jsonObserver',
     jsonToObserve: './data1.json',
     actor: 'jsonObserver'
@@ -56,7 +56,7 @@ synchazard.launch([{
     actor: 'collabText'
 }, {
     path: 'actions/test'
-}, {
+}, { */
     path: 'actions/oneshare',
     actor: 'oneshare'
 }
