@@ -67,7 +67,6 @@ ShareArea.prototype.handleFileDrop = function (evt) {
     // can handle more files in one drop
     for (i = 0, len = files.length; i < len; i++) {
         file = files[i]
-        console.log(file)
         // eslint-disable-next-line one-var, vars-on-top
         var reader = new FileReader(),
             // eslint-disable-next-line no-unused-vars
