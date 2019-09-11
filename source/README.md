@@ -311,4 +311,7 @@ more are coming....
 ---
 
 Guess what?  
-Again ... to be continued... Meanwhile, feel free to reach out to me with any questions. fedeghe@gmail.com
+Again ... to be continued... Meanwhile, feel free to reach out to me with any questions. fedeghe@gmail.com  
+
+
+For a filesharing demo I have a pending [challenge for you](https://github.com/fedeghe/exp/blob/master/watchdrop/index.html)
