@@ -23,12 +23,11 @@
                 break;
 
             case 'filecontent':
-                oneShare.sharedArea.setContent(data._PAYLOAD.filecontent);
+                oneShare.sharedArea.setContent(data._PAYLOAD.file.content, data._PAYLOAD.file.filePath);
                 break;
 
             case 'updatedContent':
                 // valid only if is the viewed one
-                console.log(data._PAYLOAD)
                 oneShare.sharedArea.setContent(data._PAYLOAD.file.content, data._PAYLOAD.file.filePath);
                 break;
             case 'requestPwd':

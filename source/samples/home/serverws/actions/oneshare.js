@@ -38,7 +38,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
             fileContent: (uid, name) => action.encode({
                 _ACTION:'filecontent',
                 _PAYLOAD: {
-                    filecontent: action.data.files[uid].find(e => e.filePath === name).content
+                    file: action.data.files[uid].find(e => e.filePath === name),
                 }
             }),
             newContent: (uid, name) => action.encode({

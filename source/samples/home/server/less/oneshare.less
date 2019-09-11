@@ -189,6 +189,7 @@ body{
             }
         }
         .tabContent{
+            text-align:center;
             border: 1px solid @gray;
             background-color: @lightGray;
             .roundBottom();
@@ -204,13 +205,20 @@ body{
                     .roundTop();
                 }
             }
+            .xeditor{
+                width:98%;
+                height: 500px;
+                margin:0 auto;
+                background-color:white;
+                display:none;
+            }
             .content {
                 flex-grow: 1;
                 height: 500px;
                 resize: none;
                 border: 1px solid @gray;
                 width: 98%;
-                margin: 1%;
+                margin: 0 auto;
                 font-size: 18px;
                 font-family: verdana;
                 background-color: @white;

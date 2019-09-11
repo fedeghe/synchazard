@@ -15,6 +15,7 @@ SharedArea.prototype.init = function  () {
     this.tabs = [];
     this.tabContent = createElement('div', {'class' : 'tabContent hide'});
     this.tabContentTextarea = createElement('textarea', {'class' : 'content'});
+    this.xeditor = createElement('div', {'class' : 'xeditor'});
     
     this.panel = createElement('div', {'class' : 'contentPanel'});
     // this.panelButton = createElement('button', {'class' : 'contentPanelButton'}, 'Download');
@@ -22,6 +23,7 @@ SharedArea.prototype.init = function  () {
     // this.panel.appendChild(this.panelButton)
     this.tabContent.appendChild(this.panel)
     this.tabContent.appendChild(this.tabContentTextarea)
+    this.tabContent.appendChild(this.xeditor)
     this.main.appendChild(this.tabList)
     this.count = 0;
     
@@ -39,7 +41,11 @@ SharedArea.prototype.init = function  () {
                 break;
             default:;
         }
-    })
+    });
+    // eslint-disable-next-line no-undef
+    this.viewer = new BpmnJS({
+        container: this.xeditor
+      });
 };
 
 SharedArea.prototype.addFile = function(file, user){
@@ -94,9 +100,29 @@ SharedArea.prototype.selectTab = function(tag){
     this.setContent(tag.title);
 };
 
+SharedArea.prototype.showContent = function () {
+    this.tabContentTextarea.style.display = 'block';
+    this.xeditor.style.display = 'none';
+}
+SharedArea.prototype.showXeditor = function () {
+    this.tabContentTextarea.style.display = 'none';
+    this.xeditor.style.display = 'block';
+}
 SharedArea.prototype.setContent = function (cnt, filePath) {
     if (!filePath || this.activeTab.dataset.file === filePath) {
-        this.tabContentTextarea.innerHTML =  cnt;
+        if (filePath && filePath.match(/\.bpmn$/)) {
+            this.showXeditor();
+            this.viewer.importXML(cnt, function(err) {
+                if (err) {
+                    console.log('error rendering', err);
+                } else {
+                    console.log('rendered');
+                }
+            });
+        } else {
+            this.showContent();
+            this.tabContentTextarea.innerHTML =  cnt;
+        }
     }
 };
 
