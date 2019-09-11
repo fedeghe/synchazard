@@ -44,7 +44,7 @@ body{
             height:100px;
             color: @gray;
             padding-top: 50px;
-            cursor: grab;
+            
             background-color: @lightGray;
             .roundTop();
             .roundBottom();
@@ -70,9 +70,7 @@ body{
                 color: @lightGray;
                 height: 10px;
             }
-            &:hover {
-                background-color: rgba(120,180,120, 0.3)
-            }
+            
             .shareAreaCryptDrop{
                 opacity:0;
                 position:absolute;
@@ -95,8 +93,12 @@ body{
                 }
             }
             &.mayDrop {   
+                background-color: rgba(120,180,120, 0.3);
+                cursor: grab;
                 .shareAreaCryptDrop{
-                    opacity:1
+                
+
+                    // opacity:1
                 }
             }
         }
