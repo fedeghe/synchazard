@@ -42,7 +42,7 @@
                 });
                 break;
             case 'wrongPwd': 
-                alert('Wrong pwd');
+                oneShare.sharedArea.setContent('Wrong password provided, close the tab and provide the right one.');
                 break;
             default:
                 console.log('ERR: unhandled action')
