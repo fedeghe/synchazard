@@ -1,3 +1,7 @@
+function getFileDate(file) {
+    return  file.lastModifiedDate ? 0+file.lastModifiedDate : file.lastModified ? 0+file.lastModified : 0
+}
+
 /* eslint-disable no-undef */
 function ShareArea(trg) {
     this.target = trg;
@@ -24,8 +28,8 @@ ShareArea.prototype.init = function () {
     this.fileList.addEventListener('mouseover', function (e) {
         var trg = e.target,
             trgtag = trg.tagName;
-        if (trgtag === 'LI') {
-            self.detail.innerHTML = `FULL PATH: ${trg.dataset.path}`
+        if (trgtag === 'LI' && trg.dataset.pwd) {
+            self.detail.innerHTML = `Secured with: ${trg.dataset.pwd}`
         }
     });
     this.fileList.addEventListener('mouseout', function (e) {
@@ -40,9 +44,8 @@ ShareArea.prototype.init = function () {
     this.dropArea.addEventListener('dragleave', this.handleDragLeave.bind(this), false);
     this.dropCryptArea.addEventListener('dragover', this.handleDragOver.bind(this), false);
     this.dropArea.addEventListener('dragover', this.handleDragOver.bind(this), false);
-    // this.dropCryptArea.addEventListener('dragover', this.handleDragOver.bind(this), false);
     this.dropArea.addEventListener('drop', this.handleFileDrop.bind(this), false);
-    // this.dropCryptArea.addEventListener('drop', this.handleFileDrop.bind(this), false);
+    
 
     this.dropArea.appendChild(this.dropCryptArea)    
     this.main.appendChild(this.dropArea)    
@@ -100,7 +103,7 @@ ShareArea.prototype.handleFileDrop = function (evt) {
             obj = {
                 file: file,
                 name: file.name,
-                date : file.lastModifiedDate,
+                date : getFileDate(file),
                 reader : reader,
                 content : null
             };
@@ -147,6 +150,10 @@ ShareArea.prototype.addFile = function (file, pwd) {
             title:'stop sharing that file'
         }, '&times;');
     fileItem.dataset.path = fileName;
+    if(pwd) {
+        fileItem.dataset.pwd = pwd;
+        fileItem.classList.add('protected')
+    }
     fileItem.dataset.observers = 0;
     fileItem.appendChild(closeIcon);
     this.sh_sharedFileList.push(fileName);
@@ -156,10 +163,13 @@ ShareArea.prototype.addFile = function (file, pwd) {
 };
 
 ShareArea.prototype.removeFile = function (node) {
-    var fileName = node.dataset.path
-    this.fileList.removeChild(node)
+    var fileName = node.dataset.path;
+    this.locallyObserved = this.locallyObserved.filter(function (lo) {
+        return lo.name !== fileName;
+    })
+    this.fileList.removeChild(node);
     this.sh_sharedFileList = this.sh_sharedFileList.filter(function (f) {
-        return f !== fileName
+        return f !== fileName;
     });
     this.onRemove && this.onRemove(fileName);
 };

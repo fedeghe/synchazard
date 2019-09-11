@@ -111,10 +111,15 @@ body{
                 line-height:30px;
                 cursor:default;
                 margin-right:15px;
-                font-size:20px;                
+                font-size:20px;
                 &:hover span.close{
                     color:Red;
                     visibility:visible
+                }
+                &.protected{
+                    &::before {
+                        content: '🔒'
+                    }
                 }
             }
         }
