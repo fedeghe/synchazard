@@ -60,13 +60,15 @@ module.exports.launch = (action, synchazard /* , params */) => {
         set: {
             updateSharedFile: (userId, filePath, content) => {
                 let subscribers = [];
-                action.data.files[userId] = action.data.files[userId].map( o => {
-                    if (o.filePath === filePath) {
-                        o.content = content
-                        subscribers = [...subscribers, ...o.subscribers]
-                    }
-                    return o;
-                })
+                if (action.data.files[userId]) {
+                    action.data.files[userId] = action.data.files[userId].map( o => {
+                        if (o.filePath === filePath) {
+                            o.content = content
+                            subscribers = [...subscribers, ...o.subscribers]
+                        }
+                        return o;
+                    })
+                }
                 return subscribers;
             },
 
@@ -85,12 +87,14 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 });
             },
             observe: (idUserReq, trgFile, trgUser) => {
-                action.data.files[trgUser] = action.data.files[trgUser].map(f => {
-                    if (f.filePath === trgFile) {
-                        f.subscribers.push(idUserReq)
-                    }
-                    return f;
-                })
+                if (action.data.files[trgUser]) {
+                    action.data.files[trgUser] = action.data.files[trgUser].map(f => {
+                        if (f.filePath === trgFile) {
+                            f.subscribers.push(idUserReq)
+                        }
+                        return f;
+                    })
+                }
             }
         },
         unset: {
@@ -104,12 +108,14 @@ module.exports.launch = (action, synchazard /* , params */) => {
                 }
             },
             observe: (idUserReq, trgFile, trgUser) => {
-                action.data.files[trgUser] = action.data.files[trgUser].map(f => {
-                    if (f.filePath === trgFile) {
-                        f.subscribers = f.subscribers.filter(s => s !== idUserReq)
-                    }
-                    return f;
-                })
+                if (action.data.files[trgUser]) {
+                    action.data.files[trgUser] = action.data.files[trgUser].map(f => {
+                        if (f.filePath === trgFile) {
+                            f.subscribers = f.subscribers.filter(s => s !== idUserReq)
+                        }
+                        return f;
+                    })
+                }
             }
         },
         get: {
