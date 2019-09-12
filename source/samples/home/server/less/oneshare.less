@@ -187,6 +187,11 @@ body{
                 background-color: @white;
                 color:@darkGray;
                 .roundTop();
+                span.close {
+                    display:inline-block;
+                    width: 28px;
+                    text-align: center;
+                }
                 &.active {
                     border-bottom: 1px solid @lightGray;
                     cursor:default;
@@ -198,6 +203,7 @@ body{
                     span.close{
                         color:@red;
                         visibility:visible;
+                        cursor:pointer;
                     }
                 }
             }
