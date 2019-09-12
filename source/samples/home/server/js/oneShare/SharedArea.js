@@ -43,9 +43,12 @@ SharedArea.prototype.init = function  () {
         }
     });
     // eslint-disable-next-line no-undef
-    this.viewer = new BpmnJS({
-        container: this.xeditor
-      });
+    injectBPMN('viewer', () => {
+        self.viewer = new BpmnJS({
+            container: self.xeditor
+        });
+    });
+    
 };
 
 SharedArea.prototype.addFile = function(file, user){

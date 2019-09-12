@@ -19,7 +19,7 @@ ShareArea.prototype.init = function () {
     this.detail = createElement('p', {'class' : 'shareAreaDetail'});
     
 
-    this.modeler = new Modeler(this);
+    
 
     this.fileList.addEventListener('click', function (e) {
         var trg = e.target,
@@ -27,7 +27,12 @@ ShareArea.prototype.init = function () {
         switch(trgtag) {
             case 'LI':
                 if (trg.dataset.path.match(/\.bpmn$/)) {
-                    self.BPMNgetMyContent(trg.dataset.path);
+                    injectBPMN('modeler', () => {
+                        self.modeler = new Modeler(self);
+                        self.modeler.render(self.target);
+                        self.BPMNgetMyContent(trg.dataset.path);
+
+                    });
                 }
                 break;
             case 'SPAN':
@@ -64,7 +69,7 @@ ShareArea.prototype.init = function () {
     this.main.appendChild(this.detail)
     //
     
-    this.modeler.render(this.target);
+    
 
     // this.modeler.toggle(true);
     //
