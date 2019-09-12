@@ -39,5 +39,6 @@ Modeler.prototype.setContent = function(file) {
     this.modeler.importXML(file.content, function(err) {});
 };
 Modeler.prototype.toggle = function(visible) {
+    visible && this.modeler.clear();
     this.wrap.style.display = visible ? 'block' : 'none'
 };
