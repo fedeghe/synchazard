@@ -12,17 +12,28 @@ function ShareArea(trg) {
 
 ShareArea.prototype.init = function () {
     var self = this;
-    this.main = createElement('div', {'class' : 'shareArea'})
-    this.dropArea = createElement('div', {'class' : 'shareAreaDrop'}, 'share a file by dragging it here')
-    this.dropCryptArea = createElement('div', {'class' : 'shareAreaCryptDrop', 'title': 'password protected share'}, '🔑')
-    this.fileList = createElement('ul', {'class' : 'shareAreaButtons'})
-    this.detail = createElement('p', {'class' : 'shareAreaDetail'})
+    this.main = createElement('div', {'class' : 'shareArea'});
+    this.dropArea = createElement('div', {'class' : 'shareAreaDrop'}, 'share a file by dragging it here');
+    this.dropCryptArea = createElement('div', {'class' : 'shareAreaCryptDrop', 'title': 'password protected share'}, '🔑');
+    this.fileList = createElement('ul', {'class' : 'shareAreaButtons'});
+    this.detail = createElement('p', {'class' : 'shareAreaDetail'});
+    
+
+    this.modeler = new Modeler(this);
 
     this.fileList.addEventListener('click', function (e) {
         var trg = e.target,
             trgtag = trg.tagName;
-        if (trgtag === 'SPAN') {
-            self.removeFile(trg.parentNode);
+        switch(trgtag) {
+            case 'LI':
+                if (trg.dataset.path.match(/\.bpmn$/)) {
+                    self.BPMNgetMyContent(trg.dataset.path);
+                }
+                break;
+            case 'SPAN':
+                    self.removeFile(trg.parentNode);
+                break;
+            default : break;
         }
     });
     this.fileList.addEventListener('mouseover', function (e) {
@@ -51,9 +62,18 @@ ShareArea.prototype.init = function () {
     this.main.appendChild(this.dropArea)    
     this.main.appendChild(this.fileList)
     this.main.appendChild(this.detail)
+    //
+    
+    this.modeler.render(this.target);
+
+    // this.modeler.toggle(true);
+    //
     this.startWatching()
 };
 
+ShareArea.prototype.shareUpdatedModel = function(file, xml)  {
+    this.BPMNupdateMyContent(file.filePath, xml);
+};
 ShareArea.prototype.handleMouseout = function (evt) {
     evt.target.classList.remove('mayDrop');
     evt.preventDefault();

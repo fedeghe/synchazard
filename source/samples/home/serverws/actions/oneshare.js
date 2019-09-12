@@ -55,6 +55,12 @@ module.exports.launch = (action, synchazard /* , params */) => {
             }),
             wrongPwd: () => action.encode({
                 _ACTION: 'wrongPwd'
+            }),
+            myFileContent: (uid, name) => action.encode({
+                _ACTION:'myfilecontent',
+                _PAYLOAD: {
+                    file: action.data.files[uid].find(e => e.filePath === name),
+                }
             })
         },
         set: {
@@ -219,6 +225,19 @@ module.exports.launch = (action, synchazard /* , params */) => {
                     ws.send(action.data.actions.wrongPwd());
                 }
                 break;
+            
+            // the user want his own content, maybe to share it thourh an editor
+            case 'BPMNgetMyContent':
+                ws.send(action.data.actions.myFileContent(data._ID, data._FILE))
+                break;
+            case 'BPMNupdateMyContent':
+                synchazard.subcast(
+                    // subscribers
+                    action.data.set.updateSharedFile(data._ID, data._FILENAME, data._CONTENT),
+                    action.data.actions.newContent(data._ID, data._FILENAME)
+                );
+                break;
+
             default: break;
         }
     })

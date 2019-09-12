@@ -43,6 +43,12 @@
             case 'wrongPwd': 
                 oneShare.sharedArea.setContent('Wrong password provided, close the tab and provide the right one.');
                 break;
+
+            // the user receives back the content of the file he shared
+            case 'myfilecontent':
+                oneShare.shareArea.modeler.toggle(true);
+                oneShare.shareArea.modeler.setContent(data._PAYLOAD.file);
+                break;
             default:
                 console.log('ERR: unhandled action')
                 break;
@@ -60,6 +66,15 @@
     oneShare.shareArea.onLocalUpdate = function (file) {
         maltaV('NS').send({ _ACTION: 'updateShare', _FILE: file });
     }
+    oneShare.shareArea.BPMNgetMyContent = function (file) {
+        maltaV('NS').send({ _ACTION: 'BPMNgetMyContent', _FILE: file });
+    }
+    oneShare.shareArea.BPMNupdateMyContent = function (filename, xml) {
+        maltaV('NS').send({ _ACTION: 'BPMNupdateMyContent', _FILENAME: filename, _CONTENT: xml });
+    }
+    //
+    // ------------------------------------------------------------
+    //
     oneShare.sharedArea.onSelectTab = function (file, user) {
         maltaV('NS').send({ _ACTION: 'getContent', _FILE: file, _USER: user});
     };
