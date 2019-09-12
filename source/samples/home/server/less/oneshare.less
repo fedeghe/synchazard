@@ -31,11 +31,14 @@ maltaF('style.less')
 body{
     font-size: 18px;
     font-family: verdana;
+
     .target{
         margin: 5%;
         display: flex;
         flex-direction: column;
+        
     }
+    
     .shareArea{
         .shareAreaDrop {
             flex:1 auto;
@@ -121,6 +124,17 @@ body{
                         content: '🔒'
                     }
                 }
+                span.close {
+                    visibility:hidden;
+                    padding:0 5px;
+                    display: inline-block;
+                    border:none;
+                    background-color: transparent;
+                    font-size:20px;
+                    line-height:30px;
+                    height:30px;
+                    cursor:pointer;
+                }   
             }
         }
         .shareAreaDetail{
@@ -239,16 +253,16 @@ body{
             }
         }
     }
-    span.close {
-        visibility:hidden;
-        padding:0 5px;
-        display: inline-block;
-        border:none;
-        background-color: transparent;
-        font-size:20px;
-        line-height:30px;
-        height:30px;
-        cursor:pointer;
-    }    
+     
+    .dot{
+        position:absolute;
+        padding:10px;
+        top:0;
+        left:0;
+        color:white;
+        &:hover{
+            color:red;
+        }
+    }
     
 }
