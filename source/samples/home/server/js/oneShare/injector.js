@@ -16,6 +16,11 @@ var injectBPMN = (function () {
             script.onload = then;
             script.src = urls[mode];
             head.appendChild(script);
+        } else {
+            // could not be there, shut up!
+            try {
+                head.removeChild(script);
+            } catch(e){}
         }
     };
 })();

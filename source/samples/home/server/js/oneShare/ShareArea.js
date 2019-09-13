@@ -26,14 +26,13 @@ ShareArea.prototype.init = function () {
             trgtag = trg.tagName;
         switch(trgtag) {
             case 'LI':
-                if (trg.dataset.path.match(/\.bpmn$/)) {
-                    injectBPMN('modeler', () => {
-                        self.modeler = new Modeler(self);
-                        self.modeler.render(self.target);
-                        self.BPMNgetMyContent(trg.dataset.path);
-
-                    });
-                }
+                trg.dataset.path.match(/\.bpmn$/)
+                ? injectBPMN('modeler', () => {
+                    self.modeler = new Modeler(self);
+                    self.modeler.render(self.target);
+                    self.BPMNgetMyContent(trg.dataset.path);
+                })
+                : injectBPMN(/* remove it */);
                 break;
             case 'SPAN':
                     self.removeFile(trg.parentNode);
