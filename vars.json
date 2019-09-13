@@ -5,7 +5,7 @@
     //
     "PROJECT": {
         "NAME": "SyncHazard",
-        "VERSION": "0.0.6",
+        "VERSION": "maltaV('PACKAGE.version')",
         "AUTHOR": "federico.ghedina@gmail.com",
         "URL": "https://github.com/fedeghe/synchazard"
     },
