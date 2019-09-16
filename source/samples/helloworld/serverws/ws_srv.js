@@ -1,9 +1,7 @@
 require('events').EventEmitter.defaultMaxListeners = Infinity;
 
-const fs = require('fs'),
-    path = require('path'),
-    // eslint-disable-next-line import/no-unresolved
-    synchazard = require('./core/synchazard'),
+// eslint-disable-next-line import/no-unresolved
+const synchazard = require('./core/synchazard'),
     
     // check for memory leaks
     // memwatch = require('memwatch-next'),
@@ -20,6 +18,5 @@ const fs = require('fs'),
  */
 synchazard.launch([{
     path: 'actions/helloWorld',
-    deps: { fs: fs, path: path },
     actor: 'helloWorld'
 }], argz);

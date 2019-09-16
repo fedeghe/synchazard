@@ -1,11 +1,13 @@
 module.exports.launch = (action, synchazard/* , params */) => {
-    const state = {one: 0, two: 1},
+    const state = {
+            one: 0,
+            two: 1
+        },
         updateState = () => {
             const newTwo = state.one + state.two;
             state.one = state.two;
             state.two  = newTwo;
         };
-
 
     action.onConnect((data, ws) => {
         if (data._TYPE !== 'action') return;
@@ -22,6 +24,7 @@ module.exports.launch = (action, synchazard/* , params */) => {
                     _ACTION: 'nextDone',
                     _PAYLOAD: state
                 }, { data: data }));
+
                 ws.send(action.encode({
                     _ACTION: 'boldMe'
                 }, { data: data }));

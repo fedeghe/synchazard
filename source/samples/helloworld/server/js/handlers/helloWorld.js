@@ -5,6 +5,7 @@
     next.addEventListener('click', function () {
         maltaV('NS').send({_ACTION: 'next'});
     });
+    
     maltaV('NS').handlers.hello = function (d) {
         var e1, space, e2, t, data, time;
         if (d === 'boldMe') {
