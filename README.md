@@ -73,9 +73,7 @@ Now on one or more clients, open one or more browsers and navigate to http://192
 
 ### More about the _build:home_ samples
 
-I will assume here that the build is done using the local IP address _192.168.5.107_ and that the port has not been changed.
-
-
+I will assume here that the build is done using the local IP address _192.168.5.107_ and that the port has not been changed.  
 
 #### @ url: http://192.168.5.107:4000  
 
@@ -99,11 +97,8 @@ Again, a quite boring watch task on `/serverws/css/sync_style.css`, which runs o
 - **hundredRandom**  
 The Action on the serverws regularly broadcasts a random number &isin; [0,100]. The client's handlers renders a live line chart adding one point each time it receives the value through the socket.  
     - client handler: `/server/js/handlers/randomPercentage.js`
-    - server Action: `/serverws/actions/randomPercentage.js`  
-
-
-
-#### @url:  http://192.168.5.107:4000/reactor.html
+    - server Action: `/serverws/actions/randomPercentage.js`    
+#### @url:  http://192.168.5.107:4000/reactor.html  
 
 - **reactor**  
 Nothing to do with React, but the name fits somehow. Here I think there is a clearer hazard. It would be boring to read a long pseudo-description of the flow. But it's worth trying to summarize the functionality. I wrote a small client library to enable on targeted `input[text]` and `textarea` tags some sort of concurrency. Basically, whenever the client Alice start typing in one of the target tags, immediately all other clients will see the tag being edited as disabled, when Alice leaves the focus from the tag, all other clients will see that tag enabled and filled with the value Alice entered.  
@@ -117,27 +112,31 @@ This is the simplest one. The Action broadcasts every second an incremental coun
     - server Action: `/serverws/actions/incremental.js`  
 
 Almost in all cases a WebWorker runs a `proxy` between the client-side socket and the handler function, allowing, for example, for the _datajson_ example to receive simple metadata sent by the serverws which contains all the information needed to get the real resource. The webWorker then decides in this case to start an xhr request for the resource and when the data is available it forwards all to the handler functions that decide how to consume it. In any case the WebWorker decides in the end which one is the handler function that will consume the data.  
-The WebWorker used in the main example is `/server/js/workers/worker.js`
+The WebWorker used in the main example is `/server/js/workers/worker.js`    
+#### @url:  http://192.168.5.107:4000/distcomp.html  
 
-#### @url:  http://192.168.5.107:4000/distcomp.html 
-A raw, distributed computing sample to get a (bad) value for &pi; using other clients that will accept to help. 
-... to be continued
+A raw, distributed computing sample to get a (bad) value for &pi; using other clients that will accept to help.  
+... to be continued    
+#### @url:  http://192.168.5.107:4000/oneshare.html  
 
+Exploit the File Api to try to broadcast the changes on a local shared file. Works only on chrome. But if we use a webapp to show / edit it ..all crossBro. Try with a `.bpmn` file.  
+... to be continued    
 #### @url:  http://192.168.5.107:4000/collabText.html  
-A couple of collaborative textareas where the content and the size is shared among all clients
-... to be continued
 
+A couple of collaborative textareas where the content and the size is shared among all clients  
+... to be continued    
 #### @url:  http://192.168.5.107:4000/chat.html  
-A basic chat which will enable messages to be sent in broadcast and to the client that sent one message (check the console when a message is posted)
-... to be continued
 
-#### @url:  http://192.168.5.107:4000/react.html   
-The most simple immaginable example using React
-... to be continued
+A basic chat which will enable messages to be sent in broadcast and to the client that sent one message (check the console when a message is posted)  
+... to be continued    
+#### @url:  http://192.168.5.107:4000/react.html  
 
-#### @url:  http://192.168.5.107:4000/job.html
+The most simple immaginable example using React  
+... to be continued    
+#### @url:  http://192.168.5.107:4000/job.html  
+
 This may look wierd because in the end the ws srv sends one specific function to the client that will be used to make a naive calculation.   
-... to be continued
+... to be continued    
 
 ---
 
