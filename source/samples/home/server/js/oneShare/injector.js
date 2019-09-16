@@ -2,11 +2,12 @@ var injectBPMN = (function () {
     var script = null,
         head = document.getElementsByTagName('head').item(0);
     return function(mode, then) {
-        var urls = {
-            // viewer:'https://cdn.jsdelivr.net/npm/bpmn-js@5.0.4/dist/bpmn-viewer.production.min.js',
-            viewer:'https://cdn.jsdelivr.net/npm/bpmn-js@5.0.4/dist/bpmn-navigated-viewer.production.min.js',
-            modeler:'https://cdn.jsdelivr.net/npm/bpmn-js@5.0.4/dist/bpmn-modeler.production.min.js',
-        };
+        var viewer = 'https://cdn.jsdelivr.net/npm/bpmn-js@5.0.4/dist/bpmn-navigated-viewer.production.min.js',
+            modeler = 'https://cdn.jsdelivr.net/npm/bpmn-js@5.0.4/dist/bpmn-modeler.production.min.js',
+            urls = {
+                viewer,
+                modeler
+            };
 
         if (mode.match(/viewer|modeler/)) {
             if (script) {
@@ -17,10 +18,7 @@ var injectBPMN = (function () {
             script.src = urls[mode];
             head.appendChild(script);
         } else {
-            // could not be there, shut up!
-            try {
-                head.removeChild(script);
-            } catch(e){}
+            script && head.removeChild(script);
         }
     };
 })();
