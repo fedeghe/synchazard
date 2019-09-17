@@ -55,7 +55,8 @@ synchazard.launch([{
     path: 'actions/collabText',
     actor: 'collabText'
 }, {
-    path: 'actions/test'
+    path: 'actions/test',
+    actor: 'script'
 }, { 
     path: 'actions/oneshare',
     actor: 'oneshare'
