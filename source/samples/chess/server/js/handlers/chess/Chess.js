@@ -161,7 +161,8 @@ Chess.prototype.render = function () {
  * entry point for events
  */
 Chess.prototype.newGameLink = function (d) {
-    var {link} = d._PAYLOAD;
+    var link = d._PAYLOAD.link;
+    console.log(d)
     prompt('Copy the following link and give it to Your opponent.', link)
 };
 Chess.prototype.start = function (d) {

@@ -36,7 +36,9 @@
                 case 'matchCreated':
                     console.log('Consume the link');
                     console.log(data);
-                    game = new Chess(trg);
+                    // if (!game) {
+                    //     game = new Chess(trg);
+                    // }
                     game.newGameLink(data);
                     break;
                 case 'matchStarted':
