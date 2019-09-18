@@ -5,8 +5,9 @@ maltaF('chess/footerPanel.js')
 /* eslint-enable */
 /* eslint-disable no-undef */
 
-function Chess (trg) {
+function Chess (trg, cnf) {
     this.target = trg;
+    this.config = cnf;
     this.target.innerHTML = '';
     this.cells = [];
     if (!this.target) {
@@ -26,10 +27,13 @@ Chess.prototype.cleanup = function () {
 Chess.prototype.init = function () {
     this.createDom();
     this.render();
-    this.renderFEN(config.pieces.posdown[config.start]);
+    this.renderFEN(config.pieces.posdown[this.config.frontPlayer]);
     return this;
 };
 
+Chess.prototype.setBlackInFront = function () {
+    this.config.frontPlayer = 'black';
+}
 Chess.prototype.renderFEN = function (fen) {
     var self = this,
         tokens = fen.split(/\//),
@@ -49,7 +53,7 @@ Chess.prototype.renderFEN = function (fen) {
                 cursor += parseInt(token[i], 10);
             } else if (token[i].match(/^[R|N|B|Q|K|P]{1}$/i)) {
                 color = token[i].charCodeAt(0) >= 97 ? 'white' : 'black';
-                tmp = config.pieces[config.mode][config.pieces.names[ch]];
+                tmp = self.config.pieces[self.config.mode][self.config.pieces.names[ch]];
                 self.cells[cursor].appendChild(
                     CL.dom.create({
                         tag: 'span',
@@ -73,11 +77,12 @@ Chess.prototype.validateFEN = function () {
 
 Chess.prototype.initBoardersContainer = function () {
     
-    var i = 0,
+    var self = this,
+        i = 0,
         l = 8,
         tmp1, tmp2, tmp3, tmp4,
         getAlgebraicBorder = function (cl1, b) {
-            return CL.dom.create({ tag: 'div', cls: [cl1, b, config.start].join(' ') });
+            return CL.dom.create({ tag: 'div', cls: [cl1, b, self.config.frontPlayer].join(' ') });
         },
         algBorders = {
             left: getAlgebraicBorder('brdRows', 'left'),
@@ -89,7 +94,7 @@ Chess.prototype.initBoardersContainer = function () {
     for (i = 0; i < l; i++) {
         tmp1 = CL.dom.create({
             cls: 'brdRow',
-            html: config.rows[i]
+            html: this.config.rows[i]
         });
         tmp2 = tmp1.cloneNode(true);
         tmp3 = CL.dom.create({

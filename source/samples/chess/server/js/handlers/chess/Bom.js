@@ -18,3 +18,4 @@ CL.bom.qs2obj = function () {
         )
         : {};
 };
+CL.bom.saveSession = function () {};

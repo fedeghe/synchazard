@@ -29,17 +29,21 @@
             switch (data._ACTION) {
                 case 'init':
                     // eslint-disable-next-line no-undef
-                    game = new Chess(trg);
+                    game = new Chess(trg, config);
                     game.start(data);
                     game.checkQs();
                     break;
                 case 'matchCreated':
                     console.log('Consume the link');
                     console.log(data);
-                    // if (!game) {
-                    //     game = new Chess(trg);
-                    // }
-                    game.newGameLink(data);
+                    if (!game) {
+                        // eslint-disable-next-line no-undef
+                        game = new Chess(trg, config);
+                        game.setBlackInFront();
+                    }
+                    game.start(data);
+                    
+                    game.checkQs();
                     break;
                 case 'matchStarted':
                     // eslint-disable-next-line no-undef

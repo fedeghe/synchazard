@@ -17,6 +17,7 @@ module.exports.launch = (action /* , synchazard, params */) => {
                 /**
                  * check if qs contains all needed for a match
                  */
+                // eslint-disable-next-line no-undef
                 gotNewMatch = Manager.checkLink(data);
                 if (gotNewMatch) {
                     console.log('sending init match data')
@@ -39,14 +40,14 @@ module.exports.launch = (action /* , synchazard, params */) => {
                     }
                 }));
                 break;
-            case 'initMatch':
+            case 'createMatch':
                 ws.send(action.encode({
                     _ACTION: 'matchCreated',
                     // eslint-disable-next-line no-undef
                     _PAYLOAD: Manager.createMatch()
                 }));
                 break;
-                
+
             case 'joinMatch':
                 ws.send(action.encode({
                     _ACTION: 'matchJoined',
