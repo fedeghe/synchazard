@@ -24,7 +24,7 @@ Chess.prototype.cleanup = function () {
 };
 
 Chess.prototype.init = function () {
-    this.prepare();
+    this.createDom();
     this.render();
     this.renderFEN(config.pieces.posdown[config.start]);
     return this;
@@ -132,9 +132,9 @@ Chess.prototype.initBoard = function () {
 Chess.prototype.initUnderBoardContainer = function () {
     var anchor = document.createElement('a');
     this.underBoardContainer = CL.dom.create({ tag: 'div', cls: 'underBoardContainer' });
-    anchor.setAttribute('href', '//wwww.chessdoom.org');
+    anchor.setAttribute('href', '//wwww.chesshero.org');
     anchor.setAttribute('target', '_blank');
-    anchor.innerHTML = 'chessdoom.org';
+    anchor.innerHTML = 'chesshero.org';
     this.underBoardContainer.appendChild(anchor)
 };
 
@@ -145,7 +145,7 @@ Chess.prototype.initBoardContainer = function () {
     this.initBoard();
 };
 
-Chess.prototype.prepare = function () {
+Chess.prototype.createDom = function () {
     this.gameContainer = CL.dom.create({ tag: 'div', cls: 'gameContainer' });
     this.initBoardContainer();
     this.gameContainer.appendChild(this.headerPanel.container);
@@ -167,10 +167,10 @@ Chess.prototype.newGameLink = function (d) {
 };
 Chess.prototype.start = function (d) {
     console.log('Start Chess');
-    config.start = 'black';
+    // config.start = 'black';
     this.cleanup().init();
 };
 Chess.prototype.checkQs = function () {
     var qs = CL.bom.qs2obj();
-    // console.log(qs);
+    console.log(qs);
 };

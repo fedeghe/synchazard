@@ -46,6 +46,7 @@ module.exports.launch = (action /* , synchazard, params */) => {
                     _PAYLOAD: Manager.createMatch()
                 }));
                 break;
+                
             case 'joinMatch':
                 ws.send(action.encode({
                     _ACTION: 'matchJoined',

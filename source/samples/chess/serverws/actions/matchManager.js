@@ -41,15 +41,23 @@ Manager.createMatch = function () {
         created: m.created,
         expires: m.created + 3.6E6,
         // eslint-disable-next-line no-undef
-        link: `maltaV('WEBSERVER.HOST')/${toQs({ join: m.matchId, tw: m.token.white.cli, tb: m.token.black.cli })}`
+        link: `maltaV('WEBSERVER.HOST')/${toQs({
+            join: m.matchId,
+            tw: m.token.white.cli,
+            tb: m.token.black.cli
+        })}`
     };
 };
+
 Manager.saveMatch = function (data) {
     console.log('saving match: ', data);
 };
+
 Manager.joinMatch = function (data) {
     console.log('saving match: ', data);
 };
+
+
 Manager.checkLink = function (data) {
     const url = data._URL,
         idMatch = url.match(/join=(.*)/),

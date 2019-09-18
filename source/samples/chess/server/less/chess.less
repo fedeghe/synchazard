@@ -25,6 +25,18 @@
 @outLineIn:0.3vmin;
 @fontSize:2vmin;
 
+.makeRandom(@min: 0, @max: @min+1, @int: 0) { 
+    .checkInt() {
+        @getNum: `Math.random() * (@{max} - @{min} + @{int})`;
+        @base: unit(`@{int} == 1 ? Math.floor(@{getNum}) : @{getNum}`);
+    }
+    .checkInt();
+    @randNum: @base + @min;
+}
+
+
+
+
 @backgroundImageBoard: '../media/marble4.jpg';
 @backgroundImageCellWhite: '../media/marble2.jpg';
 @backgroundImageCellBlack: '../media/marble4.jpg';
@@ -38,17 +50,18 @@
 .bgMarbleBoard(){
     background-image: url(@backgroundImageBoard);
     background-repeat: no-repeat;
-  background-size: auto;
+    background-size: auto;
 }
 .bgMarbleCellWhite(){
     background-image: url(@backgroundImageCellWhite);
+    transform: rotate('90deg');
     background-repeat: no-repeat;
-  background-size: auto;
+    background-size: auto;
 }
 .bgMarbleCellBlack(){
     background-image: url(@backgroundImageCellBlack);
     background-repeat: no-repeat;
-  background-size: auto;
+    background-size: auto;
 }
 
 body {
