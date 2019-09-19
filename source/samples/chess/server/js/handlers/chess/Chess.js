@@ -33,7 +33,8 @@ Chess.prototype.init = function () {
 
 Chess.prototype.setBlackInFront = function () {
     this.config.frontPlayer = 'black';
-}
+};
+
 Chess.prototype.renderFEN = function (fen) {
     var self = this,
         tokens = fen.split(/\//),
@@ -170,11 +171,12 @@ Chess.prototype.newGameLink = function (d) {
     console.log(d)
     prompt('Copy the following link and give it to Your opponent.', link)
 };
+
 Chess.prototype.start = function (d) {
     console.log('Start Chess');
-    // config.start = 'black';
     this.cleanup().init();
 };
+
 Chess.prototype.checkQs = function () {
     var qs = CL.bom.qs2obj();
     console.log(qs);

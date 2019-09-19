@@ -22,7 +22,7 @@ module.exports.launch = (action /* , synchazard, params */) => {
                 if (gotNewMatch) {
                     console.log('sending init match data')
                     ws.send(action.encode({
-                        _ACTION: 'matchCreated',
+                        _ACTION: 'matchJoined',
                         _PAYLOAD: {
                             initData: gotNewMatch
                         }
