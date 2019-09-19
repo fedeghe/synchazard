@@ -23,9 +23,6 @@
      */
     maltaV('NS').handlers.chessManager = {
         handle: (data) => {
-            if (data._TYPE !== 'action') {
-                return;
-            }
             switch (data._ACTION) {
                 case 'init':
                     // eslint-disable-next-line no-undef
@@ -35,19 +32,18 @@
                     break;
                 case 'matchCreated':
                     console.log('Consume the link');
-                    console.log(data);
+                    game.newGameLink(data)
+                    game.start(data);
+                    
+                    game.checkQs();
+                    break;
+                case 'matchJoined':
+                    // eslint-disable-next-line no-undef
                     if (!game) {
                         // eslint-disable-next-line no-undef
                         game = new Chess(trg, config);
                         game.setBlackInFront();
                     }
-                    game.start(data);
-                    
-                    game.checkQs();
-                    break;
-                case 'matchStarted':
-                    // eslint-disable-next-line no-undef
-                    game = new Chess(trg);
                     game.start(data);
                     game.checkQs();
                     break;
