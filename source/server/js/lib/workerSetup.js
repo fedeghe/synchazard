@@ -6,12 +6,12 @@
     // eslint-disable-next-line vars-on-top
 
     var currentScript = document.currentScript || (function() {
-        var scripts = document.getElementsByTagName('script');
-        return scripts[scripts.length - 1];
-    })(),
-    dataActors = currentScript.dataset.actors || null,
-    
-    head = document.getElementsByTagName('head')[0];
+            var scripts = document.getElementsByTagName('script');
+            return scripts[scripts.length - 1];
+        })(),
+        dataActors = currentScript.dataset.actors || null,
+        
+        head = document.getElementsByTagName('head')[0];
     
     
     /** include utilities */

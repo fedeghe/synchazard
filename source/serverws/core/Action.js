@@ -148,14 +148,14 @@ Action.count = {
     URL: {}
 };
 
-Action.setCount = function (data) {
+Action.setCount = data => {
     if (!(data._ID in Action.count.ID)) Action.count.ID[data._ID] = [];
     if (Action.count.ID[data._ID].indexOf(data._URL) < 0) Action.count.ID[data._ID].push(data._URL);
     if (!(data._URL in Action.count.URL)) Action.count.URL[data._URL] = [];
     if (Action.count.URL[data._URL].indexOf(data._ID) < 0) Action.count.URL[data._URL].push(data._ID);
 };
 
-Action.unsetCount = function (data) {
+Action.unsetCount = data => {
     var t = null;
     if (data._ID in Action.count.ID) {
         t = Action.count.ID[data._ID].indexOf(data._URL);

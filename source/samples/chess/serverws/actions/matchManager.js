@@ -43,7 +43,7 @@ Manager.createMatch = function () {
         // eslint-disable-next-line no-undef
         link: `maltaV('WEBSERVER.HOST')/${toQs({
             join: m.matchId,
-            tw: m.token.white.cli,
+            // tw: m.token.white.cli,
             tb: m.token.black.cli
         })}`
     };
