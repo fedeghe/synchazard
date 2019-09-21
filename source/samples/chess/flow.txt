@@ -3,10 +3,7 @@ ALICE wants to start a match with BOB
 
 EVENT: ALICE clicks create match button
 
-C - creates a 'white_token_cli'
-  - save it in the localStorage
-  - send it in the `create` request (create)
-
+C - send the `createMatch` request (create)
 
       S - creates a match token adding the 'white_token_cli' and creating and adding a 'black_token_cli'
         - send back a link that ALICE must send to BOB, the QS contains the matchId (created)
