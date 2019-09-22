@@ -5,7 +5,7 @@ const Manager = {
     matches: {}
 };
 
-Manager.createMatchToken = () => {
+Manager.createNewMatch = () => {
     /* eslint-disable no-undef */
     const t1 = createToken(64),
         t2 = createToken(64),
@@ -27,13 +27,16 @@ Manager.createMatchToken = () => {
         },
         // eslint-disable-next-line no-undef
         matchId: mix([t1, t2, t3, t4], id),
-        created: +new Date
+        created: +new Date,
+        states: [{
+            
+        }]
     };
 };
 
 Manager.createMatch = function () {
     // eslint-disable-next-line no-undef
-    const m = Manager.createMatchToken();
+    const m = Manager.createNewMatch();
     Manager.matches[m.matchId] = m;
     return {
         matchId: m.matchId,
@@ -44,7 +47,7 @@ Manager.createMatch = function () {
         link: `maltaV('WEBSERVER.HOST')/${toQs({
             join: m.matchId,
             // tw: m.token.white.cli,
-            tb: m.token.black.cli
+            // tb: m.token.black.cli
         })}`
     };
 };

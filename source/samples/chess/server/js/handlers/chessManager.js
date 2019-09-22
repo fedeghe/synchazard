@@ -40,7 +40,7 @@
                     if (!game) {
                         // eslint-disable-next-line no-undef
                         game = new Chess(trg, config);
-                        game.setBlackInFront();
+                        game.setInFront('black');
                     }
                     game.start(data);
                     game.checkQs();

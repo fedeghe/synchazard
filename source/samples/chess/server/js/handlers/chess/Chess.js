@@ -31,8 +31,16 @@ Chess.prototype.init = function () {
     return this;
 };
 
-Chess.prototype.setBlackInFront = function () {
-    this.config.frontPlayer = 'black';
+// Chess.prototype.setBlackInFront = function () {
+Chess.prototype.setInFront = function (who) {
+    var opponent = 'black'
+    if (who.match(/black|white/)) {
+        if (who === opponent) {
+            opponent = 'white'
+        }
+        this.config.frontPlayer = who;
+        this.config.backPlayer = opponent;
+    }
 };
 
 Chess.prototype.renderFEN = function (fen) {

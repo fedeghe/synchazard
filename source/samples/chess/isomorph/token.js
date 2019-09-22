@@ -13,7 +13,7 @@ function createToken (l) {
 // eslint-disable-next-line no-unused-vars
 function mix (tokens, n) {
     var m = '',
-        nStr = `${  n}`,
+        nStr = `${n}`,
         i = 0,
         j = 1,
         tLen = tokens.length,
