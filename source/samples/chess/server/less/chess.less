@@ -1,4 +1,4 @@
-@bgColor: #444;
+@bgColor: #666;
 @boardShadow: #000000;
 @boardBorder: rgba(0,0,0, 0.2);
 
@@ -25,6 +25,8 @@
 @outLineIn:0.3vmin;
 @fontSize:2vmin;
 
+@round : 20px;
+
 .makeRandom(@min: 0, @max: @min+1, @int: 0) { 
     .checkInt() {
         @getNum: `Math.random() * (@{max} - @{min} + @{int})`;
@@ -49,6 +51,7 @@
 
 .bgMarbleBoard(){
     background-image: url(@backgroundImageBoard);
+    // background-image: url(@backgroundImageCellWhite);
     background-repeat: no-repeat;
     background-size: auto;
 }
@@ -62,6 +65,40 @@
     background-image: url(@backgroundImageCellBlack);
     background-repeat: no-repeat;
     background-size: auto;
+}
+.roundTop() {
+    -moz-border-radius-topleft: @round;
+    -moz-border-radius-topright:@round;
+    -webkit-border-top-left-radius:@round;
+    -webkit-border-top-right-radius:@round;
+    border-top-left-radius:@round;
+    border-top-right-radius:@round;
+}
+.roundBottom() {
+    -moz-border-radius-bottomleft:@round;
+    -moz-border-radius-bottomright:@round;
+    -webkit-border-bottom-left-radius:@round;
+    -webkit-border-bottom-right-radius:@round;
+    border-bottom-left-radius:@round;
+    border-bottom-right-radius:@round;
+}
+
+.roundLeft() {
+    -moz-border-radius-bottomleft:@round;
+    -moz-border-radius-topleft:@round;
+    -webkit-border-bottom-left-radius:@round;
+    -webkit-border-top-left-radius:@round;
+    border-bottom-left-radius:@round;
+    border-top-left-radius:@round;
+}
+
+.roundRight() {
+    -moz-border-radius-bottomright:@round;
+    -moz-border-radius-topright:@round;
+    -webkit-border-bottom-right-radius:@round;
+    -webkit-border-top-right-radius:@round;
+    border-bottom-right-radius:@round;
+    border-top-right-radius:@round;
 }
 
 body {
@@ -77,12 +114,13 @@ body {
             height:@rem;
         }
         .headerContainer{background-color:rgba(0, 0, 0, 0);}
-        .footerContainer{background-color: rgba(0, 0, 0, 0);}
+        .footerContainer{background-color: rgba(0, 0, 0, 0);
+            padding-top:50px;
+        }
         .boardContainer{
             color: @boardTextColor;
             transform: rotateX(@rot);
             perspective: @perspective;
-            // perspective-origin: bottom;
             width:@perc;
             height:@perc;
             position:relative;
@@ -94,7 +132,6 @@ body {
             .bgMarbleBoard();
             .brdColumns, .brdRows{
                 position:absolute;
-                // border:1px solid red;
                 display:flex;
             }
 
@@ -168,11 +205,9 @@ body {
                 margin:0 auto;
                 
                 .row {
-                    // transform: rotateX(45deg);
                     display:flex;
                     flex-flow: row wrap;
                     .cell{
-                        // align-items: flex-start;
                         width:@cellSize;
                         height:@cellSize;
                         line-height:@cellSize;
@@ -181,16 +216,14 @@ body {
                         outline: @outLineIn inset @innerBorder;
 
                         background-color: @whiteBackground;
-                        &>.piece:hover {
+                        &>.piece.active:hover {
                             background-color:@hoverCellColor;
                             cursor:pointer;
                         }
-
                         box-sizing: border-box;
                         -moz-box-sizing: border-box;
                         -webkit-box-sizing: border-box;
                         overflow:hidden;
-
                         -moz-user-select: none;
                         -webkit-user-select: none;
                         -ms-user-select:none;
@@ -224,7 +257,7 @@ body {
                     // transform: rotateX(-0deg);
 
                     display:inline-block;
-                    font-size:calc(8 * @cellSize / 10);
+                    font-size:calc(0.8 * @cellSize);
                     text-align: center;
                     width:@cellSize;
                     z-index:100;
@@ -241,13 +274,14 @@ body {
                     border-spacing: 0pt;
                     font-family: 'Arial Unicode MS';
                     border-collapse: collapse;
-                    border-color: black;
+                    // border-color: black;
                     border-style: solid;
                     border-width: 0pt 0pt 0pt 0pt;
                 }
             }
             .underBoardContainer{
-                .bgMarbleCellBlack();
+                // .bgMarbleCellWhite();
+                .bgMarbleBoard();
                 height:5vh;
                 position:absolute;
                 bottom:-3vh;

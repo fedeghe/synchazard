@@ -8,11 +8,12 @@
         trg = document.getElementById('trg');
 
     /* eslint-disable */
+    maltaF('chess/Channel.js')
+    var channel = CL.Channel('chess');
     maltaF('chess/config.js')
     maltaF('chess/exceptions.js')
     maltaF('chess/Dom.js')
     maltaF('chess/Bom.js')
-    maltaF('chess/Channel.js')
     maltaF('chess/Chess.js')
     /* eslint-enable */
 
@@ -32,7 +33,6 @@
                     console.log('Consume the link');
                     game.newGameLink(data)
                     game.start(data);
-                    
                     game.checkQs();
                     break;
                 case 'matchJoined':
