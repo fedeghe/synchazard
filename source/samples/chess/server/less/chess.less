@@ -39,32 +39,34 @@
 
 
 
+@backgroundImage: '../media/bg1.jpg';
 @backgroundImageBoard: '../media/marble4.jpg';
 @backgroundImageCellWhite: '../media/marble2.jpg';
 @backgroundImageCellBlack: '../media/marble4.jpg';
 
 @rot: 30deg; 
-// @rot: 0deg;
-
-// @perspective: calc(2 * 100vmin);
 @perspective: 100em;
 
+
+.bgCover(){
+    // background-image: url(@backgroundImage);
+    background-size: 100vw 100vh;
+}
 .bgMarbleBoard(){
     background-image: url(@backgroundImageBoard);
-    // background-image: url(@backgroundImageCellWhite);
     background-repeat: no-repeat;
-    background-size: auto;
+    background-position:center;
+    background-size: cover;
 }
 .bgMarbleCellWhite(){
     background-image: url(@backgroundImageCellWhite);
-    transform: rotate('90deg');
     background-repeat: no-repeat;
-    background-size: auto;
+    background-position:center;
 }
 .bgMarbleCellBlack(){
     background-image: url(@backgroundImageCellBlack);
     background-repeat: no-repeat;
-    background-size: auto;
+    background-position:center;
 }
 .roundTop() {
     -moz-border-radius-topleft: @round;
@@ -102,7 +104,9 @@
 }
 
 body {
+    .bgCover();
     background-color: @bgColor;
+
     padding: 10px;
     font-family:verdana;
 
@@ -174,9 +178,9 @@ body {
                     flex:1;
                     width:@brd;
                     height: @cellSize;
-                }
-                
+                }  
             }
+
             .brdColumns{
                 &.bottom{
                     bottom:0px;
@@ -202,8 +206,7 @@ body {
                 width:calc(@perc - 2 * @brd);
                 height:calc(@perc - 2 * @brd);
                 outline: @outLineOut ridge @outerBorder;
-                margin:0 auto;
-                
+                margin:0 auto; 
                 .row {
                     display:flex;
                     flex-flow: row wrap;
@@ -279,6 +282,7 @@ body {
                     border-width: 0pt 0pt 0pt 0pt;
                 }
             }
+
             .underBoardContainer{
                 // .bgMarbleCellWhite();
                 .bgMarbleBoard();
@@ -288,7 +292,7 @@ body {
                 left:1%;
                 width:98%;
                 transform: rotateX(-2*@rot);
-                font-size:3vh;
+                font-size:3vmin;
                 a {
                     color:inherit;
                     text-decoration: none;
@@ -297,14 +301,7 @@ body {
                     color:white;
                 }
             }
-
         }
-
-    }
-
-
-    
-    
-    
+    } 
 }
 
