@@ -28,6 +28,11 @@
     background-repeat: no-repeat;
     background-position:center;
 }
+.round(@r) {
+    -moz-border-radius:@r;
+    -webkit-border-radius:@r;
+    border-radius:@r;
+}
 .roundTop() {
     -moz-border-radius-topleft: @round;
     -moz-border-radius-topright:@round;

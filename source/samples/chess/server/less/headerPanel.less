@@ -1,8 +1,55 @@
 .headerContainer{
-    background-color:rgba(0, 0, 100, 0.3);
-    outline:1px solid black;
+    // background-color:rgba(0, 0, 100, 0.3);
+    // outline:1px solid black;
     color:white;
     .header {
-        padding:50px;
+        padding:5vmin;
+        display:flex;
+        justify-content:space-between;
+        .headerSection{
+            flex: 1
+        }
+        .logoSection{
+            .logo {
+                font-size: 8vmin;
+                line-height: 8vmin;
+                font-family: 'Acme', sans-serif;
+                color: rgba(255,255,255, 0.1);
+                pointer-events: none;
+                user-select: none;
+            }
+            text-align:left;
+        }
+        .messageSection{
+            .message {
+                color: #22aa44;
+                font-size: 2vmin;
+                line-height: 8vmin;
+                letter-spacing:1px;
+                pointer-events: none;
+                user-select: none;
+            }
+            text-align: center;
+        }
+        .buttonSection{
+            text-align: right;
+            .startButton {
+                // flex:1;
+                display:inline-block;
+                width: 4vmin;
+                height:4vmin;
+                border:2px solid black;
+                font-size: 4vmin;
+                line-height: 3.6vmin;
+                text-align:center;
+                cursor:pointer;
+                background-color:white;
+                &::after {
+                    content : '+';
+                    color:black
+                };
+                .round(2vmin);
+            }
+        }
     }
 }

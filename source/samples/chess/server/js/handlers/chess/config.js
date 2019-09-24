@@ -42,8 +42,8 @@ var config = {
     backPlayer: 'black',
     mode: 'filled',// filled, empty
     rows: [1, 2, 3, 4, 5, 6, 7, 8],
-    // columns: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
     columns: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+    // columns: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
     // columns: ['&alpha;', '&beta;', '&gamma;', '&delta;', '&epsilon;', '&zeta;', '&eta;', '&theta;']
     // columns: ['&Alpha;', '&Beta;', '&Gamma;', '&Delta;', '&Epsilon;', '&Zeta;', '&Eta;', '&Theta;']
 };
