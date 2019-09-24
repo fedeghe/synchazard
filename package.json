@@ -31,6 +31,7 @@
     "dependencies": {
         "@fedeghe/interval": "^1.0.5",
         "malta-babel": "^1.0.16",
+        "malta-css-uglify": "^1.0.7",
         "malta-js-bookmarklet": "^1.0.11",
         "ws": "^5.1.1"
     },

@@ -1,0 +1,64 @@
+.makeRandom(@min: 0, @max: @min+1, @int: 0) { 
+    .checkInt() {
+        @getNum: `Math.random() * (@{max} - @{min} + @{int})`;
+        @base: unit(`@{int} == 1 ? Math.floor(@{getNum}) : @{getNum}`);
+    }
+    .checkInt();
+    @randNum: @base + @min;
+}
+.bgCover(){
+    background-size: 100vw 100vh;
+}
+.bgImage() {
+    background-image: url(@backgroundImage);
+}
+.bgMarbleBoard(){
+    background-image: url(@backgroundImageBoard);
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size: cover;
+}
+.bgMarbleCellWhite(){
+    background-image: url(@backgroundImageCellWhite);
+    background-repeat: no-repeat;
+    background-position:center;
+}
+.bgMarbleCellBlack(){
+    background-image: url(@backgroundImageCellBlack);
+    background-repeat: no-repeat;
+    background-position:center;
+}
+.roundTop() {
+    -moz-border-radius-topleft: @round;
+    -moz-border-radius-topright:@round;
+    -webkit-border-top-left-radius:@round;
+    -webkit-border-top-right-radius:@round;
+    border-top-left-radius:@round;
+    border-top-right-radius:@round;
+}
+.roundBottom() {
+    -moz-border-radius-bottomleft:@round;
+    -moz-border-radius-bottomright:@round;
+    -webkit-border-bottom-left-radius:@round;
+    -webkit-border-bottom-right-radius:@round;
+    border-bottom-left-radius:@round;
+    border-bottom-right-radius:@round;
+}
+
+.roundLeft() {
+    -moz-border-radius-bottomleft:@round;
+    -moz-border-radius-topleft:@round;
+    -webkit-border-bottom-left-radius:@round;
+    -webkit-border-top-left-radius:@round;
+    border-bottom-left-radius:@round;
+    border-top-left-radius:@round;
+}
+
+.roundRight() {
+    -moz-border-radius-bottomright:@round;
+    -moz-border-radius-topright:@round;
+    -webkit-border-bottom-right-radius:@round;
+    -webkit-border-top-right-radius:@round;
+    border-bottom-right-radius:@round;
+    border-top-right-radius:@round;
+}

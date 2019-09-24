@@ -4,7 +4,7 @@
         "cp source/samples/chess/server/media/* server/media"
     ],
     "source/samples/chess/server/*.html": "server -vars=vars.json -options=placeholderMode:'func'",
-    "source/samples/chess/server/less/*.less": "server/css -plugins=malta-less -options=placeholderMode:'func'",
+    "source/samples/chess/server/less/chess.less": "server/css -plugins=malta-less...malta-css-uglify -options=placeholderMode:'func'",
     "source/samples/chess/server/js/*.js": "server/js -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json -options=placeholderMode:'func'",
     "source/samples/chess/server/js/workers/*.js": "server/js/workers -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json -options=placeholderMode:'func'",
     "source/samples/chess/server/js/handlers/*.js": "server/js/handlers -plugins=malta-header-comment[name:\"source/header.txt\"] -vars=vars.json -options=placeholderMode:'func'"

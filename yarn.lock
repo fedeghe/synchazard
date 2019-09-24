@@ -2848,6 +2848,14 @@ malta-browser-refresh@^1.2.2:
   dependencies:
     malta ">=3.8.14"
 
+malta-css-uglify@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/malta-css-uglify/-/malta-css-uglify-1.0.7.tgz#48ee95e4ec6f7cb9e295ed03a836b23e0ee8137b"
+  integrity sha512-cmPw/UZxXdrJb5yx2T/Za0pi6G3HUeNhK9Cu0+GZ49IimN/5ngT1g0Z0U8hdqz0GjS9SpRlqsp7gxGMiURA4xA==
+  dependencies:
+    malta "^4.0.4"
+    uglifycss "0.0.25"
+
 malta-header-comment@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/malta-header-comment/-/malta-header-comment-1.0.6.tgz#6c2429faaf6819b2e720e78024bfe6a5e680f8a2"
@@ -4398,6 +4406,11 @@ uglify-to-browserify@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
   integrity sha1-bgkk1r2mta/jSeOabWMoUKD4grc=
+
+uglifycss@0.0.25:
+  version "0.0.25"
+  resolved "https://registry.yarnpkg.com/uglifycss/-/uglifycss-0.0.25.tgz#bea72bf4979eacef13a302cf47b2d1af3f344197"
+  integrity sha1-vqcr9JeerO8TowLPR7LRrz80QZc=
 
 union-value@^1.0.0:
   version "1.0.1"
