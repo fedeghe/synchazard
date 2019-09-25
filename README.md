@@ -1,6 +1,4 @@
-[![Known Vulnerabilities](https://snyk.io/test/github/fedeghe/synchazard/badge.svg)](https://snyk.io/test/github/fedeghe/synchazard)
-
-
+<!-- [![Known Vulnerabilities](https://snyk.io/test/github/fedeghe/synchazard/badge.svg)](https://snyk.io/test/github/fedeghe/synchazard) -->
 
 <p style="width:100%;text-align:center">
   <img src="./source/server/media/synchazard4.svg" style="margin:0 auto;max-width:100%;width:320px">
