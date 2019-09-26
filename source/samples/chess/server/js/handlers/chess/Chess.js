@@ -67,7 +67,7 @@ Chess.prototype.renderFEN = function (fen) {
                     CL.dom.create({
                         tag: 'span',
                         html: tmp,
-                        cls: `piece ${color} ${color === config.frontPlayer ? 'active' : ''}`
+                        cls: 'piece ' + color + (color === config.frontPlayer ? ' active' : '')
                     })
                 );
                 cursor += 1;

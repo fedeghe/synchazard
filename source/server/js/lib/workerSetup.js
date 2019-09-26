@@ -51,16 +51,16 @@
             })(),
             // eslint-disable-next-line no-undef
             storage: Utilities.storage,
-            loadStyle,
-            loadScript,
-            injectTester,
-            createAction,
-            createInitAction,
-            createCloseAction,
-            decodeFunction,
-            getTime,
-            getQS,
-            getRTT,
+            loadStyle:loadStyle,
+            loadScript: loadScript,
+            injectTester: injectTester,
+            createAction: createAction,
+            createInitAction: createInitAction,
+            createCloseAction: createCloseAction,
+            decodeFunction: decodeFunction,
+            getTime: getTime,
+            getQS: getQS,
+            getRTT: getRTT,
         }
     };
     if (!head) {
@@ -86,7 +86,7 @@
      * get queryString as obj
      */
     function getQS() {
-        var {search} = document.location,
+        var search = document.location.search,
              els = search && search.substr(1).split('&'),
              i,
              len,
@@ -116,7 +116,7 @@
      */
     function decodeFunction(fun) {
         // eslint-disable-next-line no-new-func
-        return new Function(`return ${fun}`)();
+        return new Function('return ' + fun  )();
     }
 
     function getTime() {
@@ -171,7 +171,7 @@
      * @param {*} f
      */
     function injectTester(f) {
-        loadScript(`maltaV('WEBSERVER.TESTLIB')`, f);
+        loadScript("maltaV('WEBSERVER.TESTLIB')", f);
     }
 
     /**
@@ -183,14 +183,14 @@
      * @return {string} description
      */
     function getClientId() {
-        var cookieName = `maltaV('NS')clientID`,
+        var cookieName = "maltaV('NS')clientID",
              cookieValue = W["maltaV('NS')"].utils.storage.get(cookieName);
         if (cookieValue) {
             return cookieValue;
         } 
         W["maltaV('NS')"].utils.storage.set(
             cookieName,
-            `maltaV('NS')_${Math.abs(~~(+new Date() * Math.random() * 1e3))}`
+            "maltaV('NS')_" + Math.abs(~~(+new Date() * Math.random() * 1e3))
         );
         return getClientId();
         

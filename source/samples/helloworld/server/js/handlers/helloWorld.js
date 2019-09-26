@@ -27,7 +27,7 @@
 
         e1.innerText = data.one;
         e2.innerText = data.two;
-        t.innerText = `rtt: ${maltaV('NS').utils.getTime() - time}`;
+        t.innerText = 'rtt: ' + (maltaV('NS').utils.getTime() - time);
         space.innerText = ' - ';
         fib.appendChild(e1);
         fib.appendChild(space);

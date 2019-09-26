@@ -100,10 +100,10 @@
             result = document.createElement('p');
             distance = document.createElement('p');
             using = document.createElement('p');
-            result.innerHTML = `<span class="pi">&pi;</span> &asymp; <span class="stable">${what.stable}</span><span class="unstable">${what.unstable}</span>`;
-            distance.innerHTML = `err (against Math.PI): ${err}%`;
+            result.innerHTML = '<span class="pi">&pi;</span> &asymp; <span class="stable">' + what.stable + '</span><span class="unstable">' + what.unstable + '</span>';
+            distance.innerHTML = 'err (against Math.PI): ' + err + '%';
             // eslint-disable-next-line no-undef
-            using.innerHTML = `<span class="small">using ${prefixNumber(stats.inside + stats.outside)} shooting</span class="small">`;
+            using.innerHTML = '<span class="small">using ' + prefixNumber(stats.inside + stats.outside) + ' shooting</span class="small">';
             maltaV('NS').handlers.DistComp.result.innerHTML = '';
             maltaV('NS').handlers.DistComp.result.appendChild(result);
             maltaV('NS').handlers.DistComp.result.appendChild(distance);

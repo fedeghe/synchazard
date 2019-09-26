@@ -18,9 +18,6 @@ ShareArea.prototype.init = function () {
     this.fileList = createElement('ul', {'class' : 'shareAreaButtons'});
     this.detail = createElement('p', {'class' : 'shareAreaDetail'});
     
-
-    
-
     this.fileList.addEventListener('click', function (e) {
         var trg = e.target,
             trgtag = trg.tagName;

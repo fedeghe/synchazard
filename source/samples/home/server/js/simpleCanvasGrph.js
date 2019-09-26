@@ -19,7 +19,7 @@
         this.canvas.style.top = '2px';
         this.canvas.style.position = 'relative';
         this.canvas.style.border = 'none';
-        this.canvas.style.height = `${this.h}px`;
+        this.canvas.style.height = this.h + 'px';
         this.init();
         if (!w && !h) onresize(this);
     }

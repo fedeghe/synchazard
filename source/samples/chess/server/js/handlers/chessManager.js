@@ -21,7 +21,7 @@
      * publish the handler
      */
     maltaV('NS').handlers.chessManager = {
-        handle: (data) => {
+        handle: function (data) {
             switch (data._ACTION) {
                 case 'init':
                     // eslint-disable-next-line no-undef

@@ -2,7 +2,6 @@
  *
  */
 (function () {
-
     function createElement(tag, attrs, html) {
         var t = document.createElement(tag),
             i;
@@ -18,11 +17,7 @@
         this.target.appendChild(this.main)
     }
 
-    maltaF('oneShare/injector.js');
-    maltaF('oneShare/ShareArea.js');
-    maltaF('oneShare/SharedArea.js');
-    maltaF('oneShare/FilePoolSelect.js');
-    maltaF('oneShare/Modeler.js');
+
     
 
     if (window.File && window.FileReader && window.FileList && window.Blob) {
@@ -41,9 +36,9 @@
         sharedArea.render();
 
         window.oneShare = {
-            shareArea,
-            sharedArea
-        }
+            shareArea: shareArea,
+            sharedArea: sharedArea
+        };
         maltaV('NS').utils.loadScript('/js/handlers/oneshare.js');
     });
 })();

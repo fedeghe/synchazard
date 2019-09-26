@@ -27,25 +27,25 @@
                         this.nodes[i].value = d._NODE_LIST[i].value || '';
 
                         if ('sizes' in d._NODE_LIST[i]) {
-                            this.nodes[i].style.width = `${d._NODE_LIST[i].sizes[0]}px`;
-                            this.nodes[i].style.height = `${d._NODE_LIST[i].sizes[1]}px`;
+                            this.nodes[i].style.width = d._NODE_LIST[i].sizes[0] + 'px';
+                            this.nodes[i].style.height = d._NODE_LIST[i].sizes[1] + 'px';
                         }
                     }
                 }
                 break;
             case 'resize':
                 if (d._ID !== maltaV('NS').id) {
-                    this.nodes[d._NODEID].style.width = `${d._SIZES[0]}px`;
-                    this.nodes[d._NODEID].style.height = `${d._SIZES[1]}px`;
+                    this.nodes[d._NODEID].style.width = d._SIZES[0] + 'px';
+                    this.nodes[d._NODEID].style.height = d._SIZES[1] + 'px';
                 }
                 break;
-            default:break;
+            default: break;
         }
         
     };
 
     Collab.prototype.add = function (node) {
-        var {id} = node,
+        var id = node.id,
             to = setTimeout(function () {}, Infinity),
             sizes = [0, 0];
         

@@ -25,7 +25,7 @@
             self = m.id === maltaV('NS').id;
 
         tag.className = 'msg';
-        user.innerText = `${cleanup(m.id)  } : `;
+        user.innerText = cleanup(m.id) + ' : ';
         msg.innerText = cleanup(m.message);
         if (self) {
             tag.className = 'self';
@@ -63,7 +63,7 @@
             maltaV('NS').send({
                 _ACTION: 'new_message',
                 _MESSAGE: v,
-                _TIMESTAMP: `${new Date()  }`
+                _TIMESTAMP: String(new Date())
             });
         }
     });
@@ -86,7 +86,7 @@
 
     maltaV('NS').handlers.ChatSelfHandler = function (data) {
         var selfMessage = data._PAYLOAD;
-        console.log(`SELF MESSAGE: ${  cleanup(selfMessage)}`);
-        maltaV('NS').utils.storage.set(`maltaV('NS')clientID`, maltaV('NS').id);
+        console.log('SELF MESSAGE: ' + cleanup(selfMessage));
+        maltaV('NS').utils.storage.set("maltaV('NS')clientID", maltaV('NS').id);
     };
 })();

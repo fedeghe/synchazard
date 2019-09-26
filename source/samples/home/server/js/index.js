@@ -46,12 +46,12 @@
     }
     function createWatch (node) {
         function p2 (d) {
-            return d > 9 ? d : `0${  d}`;
+            return d > 9 ? d : '0' + d;
         }
         function format (d) {
-            return `${[p2(d.getDate()), p2(d.getMonth() + 1), d.getFullYear()].join('-') 
-                } @ ${ 
-                [p2(d.getHours()), p2(d.getMinutes()), p2(d.getSeconds())].join(':')}`;
+            return [p2(d.getDate()), p2(d.getMonth() + 1), d.getFullYear()].join('-') 
+                +' @ ' + 
+                [p2(d.getHours()), p2(d.getMinutes()), p2(d.getSeconds())].join(':');
         }
         function t () {
             node.innerHTML = format(new Date());

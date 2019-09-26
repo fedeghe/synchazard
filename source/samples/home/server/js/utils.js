@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 function prefixNumber(n) {
-    var snum = `${  n}`,
+    var snum = String(n),
         snlen = snum.length,
         pref = '';
     switch(true) {
@@ -23,11 +23,12 @@ function prefixNumber(n) {
 // eslint-disable-next-line no-unused-vars
 function whatChanged(o/* old */, n/* new */) {
     const res = [],
-          nS = `${n}`,
-          oS = `${o}`,
-          l = Math.min(oS.length, nS.length);
-    let response = null;
-    for (let i = 0; i < l; i++) {
+          nS = String(n),
+          oS = String(o),
+          l = Math.min(oS.length, nS.length),
+          response = null,
+          i = 0;
+    for (null; i < l; i++) {
       if (nS[i] === oS[i]){
         res.push(oS[i])
       } else break;

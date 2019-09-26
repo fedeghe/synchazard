@@ -23,7 +23,7 @@ function req(url, cb) {
             : this.response
         );
     };
-    oReq.open("GET", `${url}?cb=${Math.random()}`);
+    oReq.open('GET', url + '?cb=' + Math.random());
     oReq.setRequestHeader('Accept', 'application/json; charset=utf-8');
     oReq.responseType = 'json';
     oReq.send();

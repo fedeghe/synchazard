@@ -25,7 +25,7 @@
         ws && ws.close();
 
         // pass the client id 
-        url = `maltaV('DATASERVER.WSHOST')/?id=${maltaV('NS').id}`;
+        url = "maltaV('DATASERVER.WSHOST')/?id=" + maltaV('NS').id;
 
         // attempt to start the client socket
         try {
@@ -47,7 +47,7 @@
         // eslint-disable-next-line no-multi-assign
         init = ws.onopen = function (){
             maltaV('NS').utils.ready(function(){
-                console.log(`Connection established with ${url}, sending init req`);
+                console.log('Connection established with ' + url + ', sending init req');
                 ws.send(maltaV('NS').utils.createInitAction());
             });
         };
@@ -83,7 +83,7 @@
             console.clear();
             console.log('Connection dropped from server');
             console.log(e);
-            console.log(`... attempting reconnection in 5 seconds #${  reconnectionAttempts}`);
+            console.log('... attempting reconnection in 5 seconds #' + reconnectionAttempts);
             /**
              * attempt reconnection
              */

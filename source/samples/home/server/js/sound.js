@@ -23,8 +23,8 @@
         oscillator.type = mode || 'sine'; // 'square', 'triangle'
         oscillator.connect(aContext.destination);
 
-        console.log(`Period: ${period}`);
-        console.log(`Type: ${oscillator.type}`);
+        console.log('Period: ' + period);
+        console.log('Type: ' + oscillator.type);
 
         // ensure stop on small periods
         setTimeout(function () {
@@ -35,7 +35,7 @@
         (function play () {
             var freq = freqFactory.next();
             oscillator.frequency.value = freq;
-            console.log(`#${freqFactory.index}: ${freq} Hz`);
+            console.log('#' + freqFactory.index + ': ' + freq + ' Hz');
             setTimeout(function () {
                 if (freqFactory.gotNext()) {
                     play();

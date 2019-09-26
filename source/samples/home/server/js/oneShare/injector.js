@@ -5,8 +5,8 @@ var injectBPMN = (function () {
         var viewer = 'https://cdn.jsdelivr.net/npm/bpmn-js@5.0.4/dist/bpmn-navigated-viewer.production.min.js',
             modeler = 'https://cdn.jsdelivr.net/npm/bpmn-js@5.0.4/dist/bpmn-modeler.production.min.js',
             urls = {
-                viewer,
-                modeler
+                viewer: viewer,
+                modeler: modeler
             };
 
         if (mode.match(/viewer|modeler/)) {

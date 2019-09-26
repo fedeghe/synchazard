@@ -9,7 +9,7 @@
             (function(j){
                 var el = document.createElement('div'),
                     desc = f.desc.replace('$p', j);
-                el.innerHTML = `${desc} = ${func(j)}`;
+                el.innerHTML = desc + ' = ' + func(j);
                 trg.appendChild(el);
             })(i);
         }
