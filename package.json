@@ -30,9 +30,6 @@
     },
     "dependencies": {
         "@fedeghe/interval": "^1.0.5",
-        "malta-babel": "^1.0.16",
-        "malta-css-uglify": "^1.0.7",
-        "malta-js-bookmarklet": "^1.0.11",
         "ws": "^5.1.1"
     },
     "engines": {
@@ -63,6 +60,9 @@
         "event-stream": "^3.3.4",
         "lodash": "^4.17.15",
         "malta": "^4.0.3",
+        "malta-babel": "^1.0.16",
+        "malta-css-uglify": "^1.0.7",
+        "malta-js-bookmarklet": "^1.0.11",
         "malta-browser-refresh": "^1.2.2",
         "malta-header-comment": "^1.0.6",
         "malta-js-obfuscator": "^1.0.12",
