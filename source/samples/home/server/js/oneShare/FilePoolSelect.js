@@ -17,8 +17,8 @@ FilePoolSelect.prototype.init = function () {
             file = opt.dataset.file,
             user = opt.dataset.user;
         
-        self.parentInstance.addFile(file, user)
-        self.disableFile(file, user)
+        self.parentInstance.addFile(file, user);
+        self.disableFile(file, user);
         self.main.value = '';
         self.main.blur();
         
