@@ -23,7 +23,7 @@ window.addEventListener('load', function () {
             // eslint-disable-next-line react/destructuring-assignment
             return this.state.time
                 // eslint-disable-next-line react/destructuring-assignment, no-undef, react/prop-types
-                ? React.createElement('h1', null, `Hi, it's ${this.state.time}, definitely time to ${this.props.message}!`)
+                ? React.createElement('h1', null, 'Hi, it\'s ' + this.state.time + ', definitely time to ' + this.props.message + '!')
                 : null;
         }
     }
