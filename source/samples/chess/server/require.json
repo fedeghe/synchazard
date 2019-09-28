@@ -1,7 +1,9 @@
 {
     "EXE": [
-        "mkdir -p server/media server/css server/js/handlers server/js/workers",
-        "cp source/samples/chess/server/media/* server/media"
+        "mkdir -p server/{media,csc,js/{handlers,workers}}",
+        "cp source/samples/chess/server/media/* server/media/",
+        "cp source/samples/chess/server/less/font.woff2 server/css/",
+        "cp node_modules/widgzard/dist/theWidgzard.js server/js/"
     ],
     "source/samples/chess/server/*.html": "server -vars=vars.json -options=placeholderMode:'func'",
     "source/samples/chess/server/less/chess.less": "server/css -plugins=malta-less...malta-css-uglify -options=placeholderMode:'func'",

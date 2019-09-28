@@ -4497,6 +4497,11 @@ wide-align@^1.1.0:
   dependencies:
     string-width "^1.0.2 || 2"
 
+widgzard@^3.1.20:
+  version "3.1.20"
+  resolved "https://registry.yarnpkg.com/widgzard/-/widgzard-3.1.20.tgz#64b3017e961a6017ee789af664665a3c6dd4fc96"
+  integrity sha512-uC4h0+cH/sZ7vMiSH5z68tYxPStQP6MsnadR0B0PHYMz3bH/iXTgYnw6FDUNgc/7WytEJFRpzqp3u1sWOzg95Q==
+
 window-size@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.1.0.tgz#5438cd2ea93b202efa3a19fe8887aee7c94f9c9d"
