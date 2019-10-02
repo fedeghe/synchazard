@@ -1,6 +1,8 @@
 {
     "EXE": [
-        "mkdir -p serverws/{css,actions/tools,js/lib}",
+        "mkdir -p serverws/css",
+        "mkdir -p serverws/actions/tools",
+        "mkdir -p serverws/js/lib",
         "cp -R source/samples/home/serverws/media serverws/"
     ],
     "source/samples/home/serverws/actions/*.js": "serverws/actions -vars=vars.json -options=placeholderMode:'func'",
