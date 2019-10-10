@@ -17,11 +17,11 @@
         this.target.appendChild(this.main)
     }
 
-    maltaF('oneShare/injector.js');
-    maltaF('oneShare/ShareArea.js');
-    maltaF('oneShare/SharedArea.js');
-    maltaF('oneShare/FilePoolSelect.js');
-    maltaF('oneShare/Modeler.js');
+    maltaF('../oneShare/injector.js');
+    maltaF('../oneShare/ShareArea.js');
+    maltaF('../oneShare/SharedArea.js');
+    maltaF('../oneShare/FilePoolSelect.js');
+    maltaF('../oneShare/Modeler.js');
     
 
     if (window.File && window.FileReader && window.FileList && window.Blob) {
