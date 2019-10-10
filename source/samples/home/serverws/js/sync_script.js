@@ -44,41 +44,41 @@ console.log('powered by ᚗᚌ');
  * injects a test library and then sends reports back to the srv
  * attacheing some useful informations about the cli env
  */
-maltaV('NS').utils.injectTester(function () {
-    var {test} = maltaV('NS').utils,
-        d = new Date,
-        now = [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
-    test.assert(function () {
-            return [].slice.call(document.getElementsByTagName('a'), 0).length === 2;
-        },
-        "not enough anchors"
-    ).assert(function () {
-            var graph = document.querySelector('.graph'),
-                child0 = graph.children;
-            return child0 && child0.item(0) && child0.item(0).tagName.match(/CANVAS/i);
-        },
-        "canvas is not there"
-    ).report(
-        function () {
-            document.title = `PASSED on ${now}`;
-            maltaV('NS').send({
-                _ACTION: 'test',
-                _RESULT: 'passed',
-                _CLIENT: navigator.userAgent
-            });
-        },
-        function (e) {
-            document.title = `FAILED on ${now}`;
-            console.log(e.join("\n"));
-            maltaV('NS').send({
-                _ACTION: 'test',
-                _RESULT: 'failed',
-                _ERROR: e.join("\n "),
-                _CLIENT: navigator.userAgent
-            });
-        }
-    );
-});
+// maltaV('NS').utils.injectTester(function () {
+//     var {test} = maltaV('NS').utils,
+//         d = new Date,
+//         now = [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
+//     test.assert(function () {
+//             return [].slice.call(document.getElementsByTagName('a'), 0).length === 2;
+//         },
+//         "not enough anchors"
+//     ).assert(function () {
+//             var graph = document.querySelector('.graph'),
+//                 child0 = graph.children;
+//             return child0 && child0.item(0) && child0.item(0).tagName.match(/CANVAS/i);
+//         },
+//         "canvas is not there"
+//     ).report(
+//         function () {
+//             document.title = `PASSED on ${now}`;
+//             maltaV('NS').send({
+//                 _ACTION: 'test',
+//                 _RESULT: 'passed',
+//                 _CLIENT: navigator.userAgent
+//             });
+//         },
+//         function (e) {
+//             document.title = `FAILED on ${now}`;
+//             console.log(e.join("\n"));
+//             maltaV('NS').send({
+//                 _ACTION: 'test',
+//                 _RESULT: 'failed',
+//                 _ERROR: e.join("\n "),
+//                 _CLIENT: navigator.userAgent
+//             });
+//         }
+//     );
+// });
 
 /**
  * reproduce a windy sound on the client
