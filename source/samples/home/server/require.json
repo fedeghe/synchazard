@@ -1,6 +1,10 @@
 {
     "EXE": [
-        "mkdir -p server/{css,media,js/{handlers/lib/workers}}",
+        "mkdir -p server/css",
+        "mkdir -p server/media",
+        "mkdir -p server/js/handlers",
+        "mkdir -p server/js/lib",
+        "mkdir -p server/js/workers",
         "cp source/samples/home/server/media/* server/media/"
     ],
     "source/samples/home/server/*.html": "server -plugins=malta-browser-refresh[files:\"relative\"] -vars=vars.json -options=placeholderMode:'func'",

@@ -1,6 +1,9 @@
 {
     "EXE": [
-        "mkdir -p server/{media,csc,js/{handlers,workers}}",
+        "mkdir -p server/media",
+        "mkdir -p server/css",
+        "mkdir -p server/js/handlers",
+        "mkdir -p server/js/workers",
         "cp source/samples/chess/server/media/* server/media/",
         "cp source/samples/chess/server/less/font.woff2 server/css/",
         "cp node_modules/widgzard/dist/theWidgzard.js server/js/"
