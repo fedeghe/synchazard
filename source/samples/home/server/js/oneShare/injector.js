@@ -3,6 +3,7 @@ var injectBPMN = (function () {
         head = document.getElementsByTagName('head').item(0);
     return function(mode, then) {
         var viewer = 'https://cdn.jsdelivr.net/npm/bpmn-js@5.0.4/dist/bpmn-navigated-viewer.production.min.js',
+        // var viewer = 'https://cdn.jsdelivr.net/npm/bpmn-js@5.0.4/dist/bpmn-modeler.production.min.js',
             modeler = 'https://cdn.jsdelivr.net/npm/bpmn-js@5.0.4/dist/bpmn-modeler.production.min.js',
             urls = {
                 viewer: viewer,
