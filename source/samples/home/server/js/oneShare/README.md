@@ -1,1 +1,0 @@
-I'll use this file as a reference for the protocol specification
