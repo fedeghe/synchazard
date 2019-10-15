@@ -16,7 +16,7 @@ The server runs some kind of IFTTT-like procedure that could be triggered by any
 
 ---
 
-### Expectations
+### Expectations  
 - Get rid of most of API requests triggered by user events.
 - Being able to **really** exploit the state of stateful frontend frameworks.
 - Enable automated synchronization among all clients staring at the same data.
