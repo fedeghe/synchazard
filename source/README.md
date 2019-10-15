@@ -51,7 +51,7 @@ Anyway in both cases the _terminal_ will invite You to visit http://localhost:40
 
 ---
 
-### Test broadcast to more clients within LAN
+### Test broadcast to more clients within a LAN
 
 Testing all concurrency samples in Your LAN (including for example Your mobile connected to the LAN) is super easy. First get the current LAN ip of the machine running the server:
 
