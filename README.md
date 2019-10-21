@@ -16,7 +16,7 @@ The server runs some kind of IFTTT-like procedure that could be triggered by any
 
 ---
 
-### Expectations
+### Expectations  
 - Get rid of most of API requests triggered by user events.
 - Being able to **really** exploit the state of stateful frontend frameworks.
 - Enable automated synchronization among all clients staring at the same data.
@@ -51,7 +51,7 @@ Anyway in both cases the _terminal_ will invite You to visit http://localhost:40
 
 ---
 
-### Test broadcast to more clients within LAN
+### Test broadcast to more clients within a LAN
 
 Testing all concurrency samples in Your LAN (including for example Your mobile connected to the LAN) is super easy. First get the current LAN ip of the machine running the server:
 
