@@ -22,7 +22,7 @@ function prefixNumber(n) {
 }
 // eslint-disable-next-line no-unused-vars
 function whatChanged(o/* old */, n/* new */) {
-    const res = [],
+    var res = [],
           nS = String(n),
           oS = String(o),
           l = Math.min(oS.length, nS.length),
