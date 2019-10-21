@@ -18,9 +18,6 @@ SharedArea.prototype.init = function  () {
     this.xeditor = createElement('div', {'class' : 'xeditor'});
     
     this.panel = createElement('div', {'class' : 'contentPanel'});
-    // this.panelButton = createElement('button', {'class' : 'contentPanelButton'}, 'Download');
-
-    // this.panel.appendChild(this.panelButton)
     this.tabContent.appendChild(this.panel)
     this.tabContent.appendChild(this.tabContentTextarea)
     this.tabContent.appendChild(this.xeditor)
@@ -60,10 +57,8 @@ SharedArea.prototype.addFile = function(file, user){
 };
 
 SharedArea.prototype.addTab = function(file, user){
-
     var tab = createElement('li', {'class': 'tabTongue active', title: `${file}_${user}`}, file),
         close = createElement('span', {'class':'close'}, '&times;');
-
     this.activeTab && this.activeTab.classList.remove('active')
     this.tabs.push(tab);
     tab.dataset.user = user; 
