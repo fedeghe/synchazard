@@ -24,7 +24,7 @@ ShareArea.prototype.init = function () {
         switch(trgtag) {
             case 'LI':
                 trg.dataset.path.match(/\.bpmn$/)
-                ? injectBPMN('modeler', () => {
+                ? injectBPMN('modeler', function () {
                     self.modeler = new Modeler(self);
                     self.modeler.render(self.target);
                     self.BPMNgetMyContent(trg.dataset.path);
@@ -58,17 +58,11 @@ ShareArea.prototype.init = function () {
     this.dropArea.addEventListener('dragover', this.handleDragOver.bind(this), false);
     this.dropArea.addEventListener('drop', this.handleFileDrop.bind(this), false);
     
-
     this.dropArea.appendChild(this.dropCryptArea)    
     this.main.appendChild(this.dropArea)    
     this.main.appendChild(this.fileList)
     this.main.appendChild(this.detail)
-    //
-    
-    
 
-    // this.modeler.toggle(true);
-    //
     this.startWatching()
 };
 

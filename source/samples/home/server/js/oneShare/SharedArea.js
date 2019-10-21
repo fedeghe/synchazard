@@ -40,7 +40,7 @@ SharedArea.prototype.init = function  () {
         }
     });
     // eslint-disable-next-line no-undef
-    injectBPMN('viewer', () => {
+    injectBPMN('viewer', function () {
         self.viewer = new BpmnJS({
             container: self.xeditor
         });
@@ -133,7 +133,7 @@ SharedArea.prototype.addSharedFile = function (data) {
 };
 
 SharedArea.prototype.removeSharedFile = function (data) {
-    var tag2Remove = this.tabs.find(t => t.dataset.file === data.name)
+    var tag2Remove = this.tabs.find(function(t){ return t.dataset.file === data.name})
     tag2Remove && this.removeTab(tag2Remove)
     this.filePoolSelect.removeFile(data.name, data.uid);
 };
