@@ -138,7 +138,7 @@ SharedArea.prototype.addSharedFile = function (data) {
 };
 
 SharedArea.prototype.removeSharedFile = function (data) {
-    const tag2Remove = this.tabs.find(t => t.dataset.file === data.name)
+    var tag2Remove = this.tabs.find(t => t.dataset.file === data.name)
     tag2Remove && this.removeTab(tag2Remove)
     this.filePoolSelect.removeFile(data.name, data.uid);
 };
