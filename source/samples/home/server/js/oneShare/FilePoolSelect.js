@@ -32,7 +32,7 @@ FilePoolSelect.prototype.addFile = function (file, user, pwd) {
         mustAppend = false;
 
     if (!(user in this.optGroups)) {
-        this.optGroups[user] = createElement('optGroup', {label: `user: ${user}`});
+        this.optGroups[user] = createElement('optGroup', {label: 'user: ' + user});
         mustAppend = true;
     }
     optGroup = this.optGroups[user];
@@ -46,7 +46,11 @@ FilePoolSelect.prototype.addFile = function (file, user, pwd) {
     } else {
         return;
     }
-    newOption = createElement('option', {value: ''}, `${pwd ?'🔒':''} ${file}`);
+    newOption = createElement(
+        'option',
+        {value: ''},
+        ( pwd ? '🔒 ' : '') +  file
+    );
     if (pwd) {
         newOption.dataset.pwd = true;
     }
@@ -56,7 +60,7 @@ FilePoolSelect.prototype.addFile = function (file, user, pwd) {
     mustAppend && this.main.appendChild(optGroup);
 
     this.firstOption.innerHTML = this.fileCount > 0
-    ? `${this.fileCount} files shared (select one or more)`
+    ? this.fileCount + ' files shared (select one or more)'
     : 'no files available'
 };
 
@@ -77,7 +81,7 @@ FilePoolSelect.prototype.removeFile = function (file, user) {
         }
 
         this.firstOption.innerHTML = this.fileCount > 0
-        ? `${this.fileCount} files shared (select one or more)`
+        ? this.fileCount + ' files shared (select one or more)'
         : 'no files available'
     }
 };

@@ -50,14 +50,14 @@ SharedArea.prototype.init = function  () {
 
 SharedArea.prototype.addFile = function(file, user){
     // add the tabtongue && activate content && disable from the select
-    var content = `... loading content for ... ${file}`;
+    var content = '... loading content for ... ' + file;
     this.addTab(file, user)
     this.tabContentTextarea.innerHTML = content;
     this.tabContent.classList.remove('hide')
 };
 
 SharedArea.prototype.addTab = function(file, user){
-    var tab = createElement('li', {'class': 'tabTongue active', title: `${file}_${user}`}, file),
+    var tab = createElement('li', {'class': 'tabTongue active', title: file + '_' + user}, file),
         close = createElement('span', {'class':'close'}, '&times;');
     this.activeTab && this.activeTab.classList.remove('active')
     this.tabs.push(tab);

@@ -41,7 +41,7 @@ ShareArea.prototype.init = function () {
         var trg = e.target,
             trgtag = trg.tagName;
         if (trgtag === 'LI' && trg.dataset.pwd) {
-            self.detail.innerHTML = `Secured with: ${trg.dataset.pwd}`
+            self.detail.innerHTML = 'Secured with: ' + trg.dataset.pwd
         }
     });
     this.fileList.addEventListener('mouseout', function (e) {
