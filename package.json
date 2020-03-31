@@ -68,7 +68,7 @@
         "malta-header-comment": "^1.0.6",
         "malta-js-bookmarklet": "^1.0.11",
         "malta-js-obfuscator": "^1.0.12",
-        "malta-js-uglify": "^1.0.6",
+        "malta-js-uglify": "^1.0.3",
         "malta-less": "^1.0.8",
         "malta-mocha": "^1.0.13",
         "malta-rename": "^1.0.4",

@@ -3075,10 +3075,10 @@ malta-js-obfuscator@^1.0.12:
   dependencies:
     javascript-obfuscator "0.25.4"
 
-malta-js-uglify@^1.0.6:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/malta-js-uglify/-/malta-js-uglify-1.0.8.tgz#04709ea720dc4e855b9d7304bba644a79c99f4e5"
-  integrity sha512-KaCKlov069qBO5B2+70qJceav4UJA1gp9ntIgHkaPzfSKBwfqPSUDzRiC++pTyjLVWKfpKTgnY+KIM+fevc0Xg==
+malta-js-uglify@^1.0.3:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/malta-js-uglify/-/malta-js-uglify-1.0.10.tgz#5b9f2c82b7f8ad0935d66915b80b1f9364d51746"
+  integrity sha512-UBQD3UhCqKCpjNae6Txe6HF0tVZuQ92/1vX2FrQPXc9bt8vRJg38isW1dAmcJkpsr1hAZz2aSluK84ULHZ4Spg==
   dependencies:
     uglify-js "3.8.0"
 

@@ -1,0 +1,177 @@
+yarn run v1.21.1
+$ run-s build _sample:home
+$ node --no-warnings node_modules/malta/src/bin.js source/build.json
+
+ [1;31mEXE[0m section for source/build.json
+
+ [1;31mEXE[0m section for #source/docs.json
+
+ [1;31mEXE[0m section for #source/server/require.json
+
+ [1;31mEXE[0m section for #source/serverws/require.json
+[#1] [1;97mREADME.md[0m @ 22:37:17 Malta compiled /Users/federicoghedina/htdocs/synchazard/README.md (15.74 KB)
+build #240 in [1;97m23[0mms
+watching [1;97m10[0m files
+
+[#3] [1;97mCLIENT.md[0m @ 22:37:17 Malta compiled /Users/federicoghedina/htdocs/synchazard/docs/CLIENT.md (3.93 KB)
+build #434 in [1;97m11[0mms
+watching [1;97m2[0m files
+
+[#2] [1;97mLICENSE.md[0m @ 22:37:17 Malta compiled /Users/federicoghedina/htdocs/synchazard/LICENSE.md (1.07 KB)
+build #214 in [1;97m13[0mms
+watching [1;97m2[0m files
+
+[#4] [1;97mWSSERVER.md[0m @ 22:37:17 Malta compiled /Users/federicoghedina/htdocs/synchazard/docs/WSSERVER.md (2.90 KB)
+build #434 in [1;97m9[0mms
+watching [1;97m2[0m files
+
+[#5] [1;97mWSSERVER.md[0m @ 22:37:17 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/WSSERVER.md (2.90 KB)
+build #435 in [1;97m26[0mms
+watching [1;97m2[0m files
+
+[#5] [1;97mWSSERVER.md[0m [1;33mStarting plugins[0m
+[#5] [1;97mWSSERVER.md[0m plugin [1;97mmalta-rename[0m renamed /Users/federicoghedina/htdocs/synchazard/serverws/WSSERVER.md to /Users/federicoghedina/htdocs/synchazard/serverws/README.md
+build #435 in [1;97m30[0mms
+watching [1;97m2[0m files
+
+[#7] [1;97msynchazard.js[0m @ 22:37:17 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/core/synchazard.js (4.54 KB)
+build #257 in [1;97m49[0mms
+watching [1;97m2[0m files
+
+[#6] [1;97mAction.js[0m @ 22:37:17 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/core/Action.js (5.39 KB)
+build #228 in [1;97m96[0mms
+watching [1;97m2[0m files
+
+[#9] [1;97mws_srv.js[0m @ 22:37:17 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/ws_srv.js (643.00 B)
+build #221 in [1;97m102[0mms
+watching [1;97m2[0m files
+
+[#8] [1;97msrv.js[0m @ 22:37:17 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/srv.js (3.18 KB)
+build #221 in [1;97m104[0mms
+watching [1;97m3[0m files
+
+[#10] [1;97msrv.js[0m @ 22:37:18 Malta compiled /Users/federicoghedina/htdocs/synchazard/server/srv.js (3.24 KB)
+build #221 in [1;97m389[0mms
+watching [1;97m3[0m files
+
+[#10] [1;97msrv.js[0m [1;33mStarting plugins[0m
+[#11] [1;97mindex.html[0m @ 22:37:18 Malta compiled /Users/federicoghedina/htdocs/synchazard/server/index.html (462.00 B)
+build #221 in [1;97m407[0mms
+watching [1;97m2[0m files
+
+[#12] [1;97mactorsDontMatch.js[0m @ 22:37:18 Malta compiled /Users/federicoghedina/htdocs/synchazard/server/js/workers/actorsDontMatch.js (1.67 KB)
+build #227 in [1;97m323[0mms
+watching [1;97m2[0m files
+
+[#12] [1;97mactorsDontMatch.js[0m [1;33mStarting plugins[0m
+DefaultsError: `fromString` is not a supported option
+    at DefaultsError.get (eval at <anonymous> (/Users/federicoghedina/htdocs/synchazard/node_modules/uglify-js/tools/node.js:18:1), <anonymous>:69:23)
+    at formatError (internal/util/inspect.js:1060:38)
+    at formatRaw (internal/util/inspect.js:867:14)
+    at formatValue (internal/util/inspect.js:721:10)
+    at inspect (internal/util/inspect.js:264:10)
+    at formatWithOptions (internal/util/inspect.js:1865:40)
+    at Object.Console.<computed> (internal/console/constructor.js:281:10)
+    at Object.log (internal/console/constructor.js:291:61)
+    at /Users/federicoghedina/htdocs/synchazard/node_modules/malta-js-uglify/index.js:20:25
+    at new Promise (<anonymous>) {
+  message: '`fromString` is not a supported option',
+  defs: {
+    compress: {},
+    enclose: false,
+    ie8: false,
+    keep_fnames: false,
+    mangle: {},
+    nameCache: null,
+    output: {},
+    parse: {},
+    rename: undefined,
+    sourceMap: false,
+    timings: false,
+    toplevel: false,
+    warnings: false,
+    wrap: false
+  }
+}
+$ node --no-warnings node_modules/malta/src/bin.js source/buildHome.json
+
+ [1;31mEXE[0m section for source/samples/home/server/require.json
+
+ [1;31mEXE[0m section for source/samples/home/serverws/require.json
+[#1] [1;97mdata1.json[0m @ 22:37:19 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/data1.json (233.00 B)
+build #116 in [1;97m70[0mms
+watching [1;97m2[0m files
+
+[#2] [1;97mchat.js[0m @ 22:37:19 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/actions/chat.js (1.41 KB)
+build #113 in [1;97m73[0mms
+watching [1;97m2[0m files
+
+[#3] [1;97mcollabText.js[0m @ 22:37:19 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/actions/collabText.js (2.36 KB)
+build #112 in [1;97m72[0mms
+watching [1;97m2[0m files
+
+[#4] [1;97mdoJob.js[0m @ 22:37:19 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/actions/doJob.js (849.00 B)
+build #112 in [1;97m72[0mms
+watching [1;97m2[0m files
+
+[#5] [1;97mincremental.js[0m @ 22:37:19 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/actions/incremental.js (757.00 B)
+build #112 in [1;97m72[0mms
+watching [1;97m2[0m files
+
+[#6] [1;97mjsonObserver.js[0m @ 22:37:19 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/actions/jsonObserver.js (998.00 B)
+build #116 in [1;97m71[0mms
+watching [1;97m2[0m files
+
+[#7] [1;97mmontecarlo.js[0m @ 22:37:19 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/actions/montecarlo.js (7.49 KB)
+build #129 in [1;97m70[0mms
+watching [1;97m2[0m files
+
+[#8] [1;97moneshare.js[0m @ 22:37:19 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/actions/oneshare.js (9.47 KB)
+build #346 in [1;97m69[0mms
+watching [1;97m2[0m files
+
+[#9] [1;97mrandomPercentage.js[0m @ 22:37:19 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/actions/randomPercentage.js (784.00 B)
+build #112 in [1;97m67[0mms
+watching [1;97m2[0m files
+
+[#11] [1;97mreactor.js[0m @ 22:37:19 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/actions/reactor.js (2.12 KB)
+build #112 in [1;97m67[0mms
+watching [1;97m2[0m files
+
+[#10] [1;97mreact.js[0m @ 22:37:19 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/actions/react.js (796.00 B)
+build #112 in [1;97m69[0mms
+watching [1;97m2[0m files
+
+[#12] [1;97mscript.js[0m @ 22:37:19 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/actions/script.js (1022.00 B)
+build #114 in [1;97m68[0mms
+watching [1;97m2[0m files
+
+[#13] [1;97mstyle.js[0m @ 22:37:19 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/actions/style.js (1.07 KB)
+build #113 in [1;97m68[0mms
+watching [1;97m2[0m files
+
+[#14] [1;97msunshine.js[0m @ 22:37:19 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/actions/sunshine.js (1.23 KB)
+build #112 in [1;97m66[0mms
+watching [1;97m2[0m files
+
+[#15] [1;97mtest.js[0m @ 22:37:19 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/actions/test.js (314.00 B)
+build #112 in [1;97m65[0mms
+watching [1;97m2[0m files
+
+[#17] [1;97msync_script.js[0m @ 22:37:19 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/js/sync_script.js (2.74 KB)
+build #114 in [1;97m36[0mms
+watching [1;97m2[0m files
+
+[#16] [1;97msync_style.less[0m @ 22:37:19 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/css/sync_style.less (722.00 B)
+build #123 in [1;97m38[0mms
+watching [1;97m2[0m files
+
+[#16] [1;97msync_style.less[0m [1;33mStarting plugins[0m
+[#18] [1;97mtestnject.js[0m @ 22:37:19 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/js/lib/testnject.js (455.00 B)
+build #112 in [1;97m57[0mms
+watching [1;97m2[0m files
+
+[#19] [1;97mws_srv.js[0m @ 22:37:19 Malta compiled /Users/federicoghedina/htdocs/synchazard/serverws/ws_srv.js (1.42 KB)
+build #122 in [1;97m55[0mms
+watching [1;97m2[0m files
+
