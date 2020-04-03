@@ -69,6 +69,12 @@ Now on one or more clients, open one or more browsers and navigate to http://192
 
 ---
 
+#### about safari  
+Safari enforce https protocol, thus could be it wont show anything.  
+To fix go to **Safari settings** -> **Privacy** -> click **'Manage website data'** -> search **'localhost'** -> **remove it** -> **reload successfully http://localhost:4000 (or the local ip version)**
+
+---
+
 ### More about the _build:home_ samples
 
 I will assume here that the build is done using the local IP address _192.168.5.107_ and that the port has not been changed.  
