@@ -29,7 +29,6 @@
     } else {
         alert('The File APIs are not fully supported in this browser.');
     }
-
     window.addEventListener('load', function () {
         var target = document.getElementById('target'),
             shareArea = new ShareArea(target),
