@@ -59,4 +59,10 @@
         t();
         setInterval(t, 1000);
     }
+
+    window.addEventListener('scroll', function (e) {
+        console.log(e)
+    }, false)
+
+
 })();
