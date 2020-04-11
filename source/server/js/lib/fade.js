@@ -9,5 +9,5 @@ window.addEventListener('load', function () {
         document.body.style.opacity = o;
         if (o < 1) window.requestAnimationFrame(doStep)
     }
-    window.requestAnimationFrame(doStep)
+    document.body.style.opacity == 0 && window.requestAnimationFrame(doStep)
 })

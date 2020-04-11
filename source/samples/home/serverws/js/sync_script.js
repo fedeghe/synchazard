@@ -16,15 +16,15 @@ console.log('powered by ᚗᚌ');
 /**
  * the page blurs in in X seconds, not in all brows: https://caniuse.com/#search=filter
  */
-(function () {
-    var X = 0.5,
-        bl = 50,
-        i = X * 1E3 / bl;
-    setTimeout(function x() {
-        document.body.style.filter = `blur(${  bl  }px)`;
-        bl-- && setTimeout(x, i);
-    }, 0);
-})();
+// (function () {
+//     var X = 0.5,
+//         bl = 50,
+//         i = X * 1E3 / bl;
+//     setTimeout(function x() {
+//         document.body.style.filter = `blur(${  bl  }px)`;
+//         bl-- && setTimeout(x, i);
+//     }, 0);
+// })();
 
 /**
  *  fades in the body

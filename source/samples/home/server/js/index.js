@@ -60,8 +60,16 @@
         setInterval(t, 1000);
     }
 
+    var origBg = document.body.style.backgroundImage;
     window.addEventListener('scroll', function (e) {
-        console.log(e)
+        var scroll = ~~document.documentElement.scrollTop,
+            graphPos = ~~graph.offsetTop;
+    
+        if (scroll > graphPos -100) {
+            document.body.style.backgroundImage = "linear-gradient(to bottom, #126, #000)";
+        } else {
+            document.body.style.backgroundImage = origBg;
+        }
     }, false)
 
 
