@@ -3,7 +3,7 @@ window.addEventListener('load', function () {
         duration = 1,
         steps = 30,
         step = duration / steps;
-    // document.body.style.opacity = 0;
+    document.body.style.opacity = 0;
     function doStep () {
         o += step;
         document.body.style.opacity = o;
