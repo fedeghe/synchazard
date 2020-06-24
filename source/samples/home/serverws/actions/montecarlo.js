@@ -84,11 +84,11 @@ module.exports.launch = (action, synchazard/* , params */) => {
 
                 // in any case
                 // if the wsserver is not busy, then broadcast to all clients
-                // so they are aknowledged the wsserver is free to accept comnputing requests
+                // so they are aknowledged the wsserver is free to accept computing requests
                 // otherw
                 action.data.free
                 ? synchazard.broadcast(action.data.actions.free)
-                : synchazard.send(action.data.actions.busy);// same as the following
+                : ws.send(action.data.actions.busy);// same as the following
                 // : synchazard.unicast(data._ID, action.data.actions.busy);
 
                 // in case that there are not ehough clients
