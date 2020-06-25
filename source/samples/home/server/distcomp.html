@@ -13,9 +13,19 @@
         data-actors="montecarlo"></script>
 
     <script src="/js/DistComp.js"></script>
-    <script type="text/javascript" async
+    <!-- <script type="text/javascript" async
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async></script>
-    </script>
+    </script> -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
@@ -34,8 +44,7 @@
                 <span class="pi">&pi;</span> it's extremely simple:</p>
             <img class="mc" src="media/montecarlopi.png" alt="">
             <p>We calculate a <strong>lot</strong> of random numbers &isin; [0, 1] so to collect a
-                <strong>lot/2</strong> of points in the unary square in
-                &real;<sup>2</sup>+,
+                <strong>lot/2</strong> of points in the unary square in $$ &real; ^ 2 +$$,
                 <br> some of those points will lie within the unary circle quarter and some will not.
                 <br> It`s clear at that point that:
             </p>
