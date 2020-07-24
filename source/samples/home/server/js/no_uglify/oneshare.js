@@ -22,7 +22,6 @@
     maltaF('../oneShare/SharedArea.js');
     maltaF('../oneShare/FilePoolSelect.js');
     maltaF('../oneShare/Modeler.js');
-    
 
     if (window.File && window.FileReader && window.FileList && window.Blob) {
         // Great success! All the File APIs are supported.
@@ -34,6 +33,7 @@
             shareArea = new ShareArea(target),
             hr = createElement('div', {'class': 'hr'}),
             sharedArea = new SharedArea(target);
+
         shareArea.render();
         target.appendChild(hr)
         sharedArea.render();
