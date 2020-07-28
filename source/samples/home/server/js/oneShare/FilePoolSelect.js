@@ -8,7 +8,9 @@ function FilePoolSelect(trg, parentInstance) {
 
 FilePoolSelect.prototype.init = function () {
     var self = this;
+    // eslint-disable-next-line no-undef
     this.main = createElement('select', {'class':'filelist'})
+    // eslint-disable-next-line no-undef
     this.firstOption = createElement('option', {value: ''}, 'no files available')
     this.main.appendChild(this.firstOption);
     this.main.addEventListener('change', function (e) {
@@ -32,6 +34,7 @@ FilePoolSelect.prototype.addFile = function (file, user, pwd) {
         mustAppend = false;
 
     if (!(user in this.optGroups)) {
+        // eslint-disable-next-line no-undef
         this.optGroups[user] = createElement('optGroup', {label: 'user: ' + user});
         mustAppend = true;
     }
@@ -46,6 +49,7 @@ FilePoolSelect.prototype.addFile = function (file, user, pwd) {
     } else {
         return;
     }
+    // eslint-disable-next-line no-undef
     newOption = createElement(
         'option',
         {value: ''},
@@ -116,6 +120,7 @@ FilePoolSelect.prototype.update = function (files) {
     this.removeAll();
 
     Object.keys(files)
+    // eslint-disable-next-line no-undef
     .filter(function (userId) {return userId !== SH.id} ) 
     .forEach(function (userId) {
         files[userId].forEach( function (f) {
@@ -125,5 +130,6 @@ FilePoolSelect.prototype.update = function (files) {
 };
 
 FilePoolSelect.prototype.render = function () {
+    // eslint-disable-next-line no-undef
     doRender.call(this);
 };
