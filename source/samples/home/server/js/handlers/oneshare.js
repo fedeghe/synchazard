@@ -9,6 +9,7 @@
     //
     function Share () {}
     Share.prototype.handle = function (data) {
+        var pwd;
         switch(data._ACTION) {
             case 'sharedFiles':
                 oneShare.sharedArea.updateSharedFiles(data._PAYLOAD.files)
@@ -32,7 +33,8 @@
                 break;
             case 'requestPwd':
                 // short circuit
-                var pwd = prompt('This file is pwd protected, enter it');
+                // eslint-disable-next-line no-alert
+                pwd = prompt('This file is pwd protected, enter it');
                 maltaV('NS').send({
                     _ACTION: 'checkPwd',
                     _USER: data._PAYLOAD.uid,

@@ -13,7 +13,7 @@ module.exports = {
         importScripts: true
     },
     "rules": {
-        "prefer-template": "ok",
+        "prefer-template": 0,
         "prefer-destructuring": ["error", {
             "array": false,
             "object": false

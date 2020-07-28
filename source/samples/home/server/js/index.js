@@ -11,7 +11,8 @@
         watch = createNode({ tag: 'span', attrs: { id: 'watch' } }),
         samples = createNode({ tag: 'a', cls: 'samples', attrs: { href: '/samples.html' }, html: 'samples' }),
         pres = createNode({ cls: 'presentation' }),
-        graph = createNode({ cls: 'graph' });
+        graph = createNode({ cls: 'graph' }),
+        origBg = document.body.style.backgroundImage;
 
     header.appendChild(watch);
     header.appendChild(samples);
@@ -60,7 +61,8 @@
         setInterval(t, 1000);
     }
 
-    var origBg = document.body.style.backgroundImage;
+    
+    // eslint-disable-next-line no-unused-vars
     window.addEventListener('scroll', function (e) {
         var scroll = ~~document.documentElement.scrollTop,
             graphPos = ~~graph.offsetTop;

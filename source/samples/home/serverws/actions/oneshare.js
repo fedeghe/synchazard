@@ -241,6 +241,7 @@ module.exports.launch = (action, synchazard /* , params */) => {
             default: break;
         }
     })
+    // eslint-disable-next-line no-unused-vars
     .onDisconnect((data, ws) => {
         action.data.unset.userFiles(data._ID);
         synchazard.otherscast(data._ID, action.data.actions.sharedFiles());

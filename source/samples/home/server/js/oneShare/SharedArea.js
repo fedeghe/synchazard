@@ -6,17 +6,24 @@ function SharedArea(trg) {
 
 SharedArea.prototype.init = function  () {
     var self = this;
+    // eslint-disable-next-line no-undef
     this.main = createElement('div', {'class' : 'sharedArea'});
 
+    // eslint-disable-next-line no-undef
     this.filePoolSelect = new FilePoolSelect(this.main, this);
     this.filePoolSelect.render()
 
+    // eslint-disable-next-line no-undef
     this.tabList = createElement('ul', {'class' : 'tabList'});
     this.tabs = [];
+    // eslint-disable-next-line no-undef
     this.tabContent = createElement('div', {'class' : 'tabContent hide'});
+    // eslint-disable-next-line no-undef
     this.tabContentTextarea = createElement('textarea', {'class' : 'content'});
+    // eslint-disable-next-line no-undef
     this.xeditor = createElement('div', {'class' : 'xeditor'});
     
+    // eslint-disable-next-line no-undef
     this.panel = createElement('div', {'class' : 'contentPanel'});
     this.tabContent.appendChild(this.panel)
     this.tabContent.appendChild(this.tabContentTextarea)
@@ -41,6 +48,7 @@ SharedArea.prototype.init = function  () {
     });
     // eslint-disable-next-line no-undef
     injectBPMN('viewer', function () {
+        // eslint-disable-next-line no-undef
         self.viewer = new BpmnJS({
             container: self.xeditor
         });
@@ -57,7 +65,9 @@ SharedArea.prototype.addFile = function(file, user){
 };
 
 SharedArea.prototype.addTab = function(file, user){
+    // eslint-disable-next-line no-undef
     var tab = createElement('li', {'class': 'tabTongue active', title: file + '_' + user}, file),
+        // eslint-disable-next-line no-undef
         close = createElement('span', {'class':'close'}, '&times;');
     this.activeTab && this.activeTab.classList.remove('active')
     this.tabs.push(tab);
@@ -125,6 +135,7 @@ SharedArea.prototype.setContent = function (cnt, filePath) {
 };
 
 SharedArea.prototype.render = function  () {
+    // eslint-disable-next-line no-undef
     doRender.call(this);
 };
 

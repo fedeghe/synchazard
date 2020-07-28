@@ -14,6 +14,7 @@ y: ord
  */
 
 
+// eslint-disable-next-line no-unused-vars
 function Position(actor, x, y){
     this.x = x;
     this.y = y;

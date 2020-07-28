@@ -1,5 +1,6 @@
 function getFileDate(file) {
-    return  file.lastModifiedDate ? 0+file.lastModifiedDate : file.lastModified ? 0+file.lastModified : 0
+    var lastMod = file.lastModified ? 0+file.lastModified : 0
+    return  file.lastModifiedDate ? 0+file.lastModifiedDate : lastMod
 }
 
 /* eslint-disable no-undef */
@@ -106,6 +107,7 @@ ShareArea.prototype.handleFileDrop = function (evt) {
     evt.stopPropagation();
 
     if (needPwd) {
+        // eslint-disable-next-line no-alert
         pwd = prompt('Provide a password') || false
     }
 

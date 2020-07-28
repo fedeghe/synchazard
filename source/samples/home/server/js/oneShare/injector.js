@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 var injectBPMN = (function () {
     var script = null,
         head = document.getElementsByTagName('head').item(0);

@@ -1,6 +1,8 @@
 require('events').EventEmitter.defaultMaxListeners = Infinity;
 
+// eslint-disable-next-line no-unused-vars
 const fs = require('fs'),
+    // eslint-disable-next-line no-unused-vars
     path = require('path'),
     // eslint-disable-next-line import/no-unresolved
     synchazard = require('./core/synchazard'),

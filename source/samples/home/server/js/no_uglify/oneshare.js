@@ -13,6 +13,7 @@
         html && (t.innerHTML = html);
         return t;
     }
+    // eslint-disable-next-line no-unused-vars
     function doRender() {
         this.target.appendChild(this.main)
     }
@@ -26,12 +27,15 @@
     if (window.File && window.FileReader && window.FileList && window.Blob) {
         // Great success! All the File APIs are supported.
     } else {
+        // eslint-disable-next-line no-alert
         alert('The File APIs are not fully supported in this browser.');
     }
     window.addEventListener('load', function () {
         var target = document.getElementById('target'),
+            // eslint-disable-next-line no-undef
             shareArea = new ShareArea(target),
             hr = createElement('div', {'class': 'hr'}),
+            // eslint-disable-next-line no-undef
             sharedArea = new SharedArea(target);
 
         shareArea.render();

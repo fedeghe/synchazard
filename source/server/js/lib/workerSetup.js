@@ -339,7 +339,7 @@
     /**
      * in case a error occurs just shut the worker down
      */
-    W["maltaV('NS')"].synchazard.onerror = function(e) {
+    W["maltaV('NS')"].synchazard.onerror = function() {
         // terminate the worker
         W["maltaV('NS')"].synchazard.terminate();
     };

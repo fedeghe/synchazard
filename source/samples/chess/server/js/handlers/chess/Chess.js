@@ -177,9 +177,11 @@ Chess.prototype.render = function () {
 Chess.prototype.newGameLink = function (d) {
     var link = d._PAYLOAD.link;
     console.log(d)
+    // eslint-disable-next-line no-alert
     prompt('Copy the following link and give it to Your opponent.', link)
 };
 
+// eslint-disable-next-line no-unused-vars
 Chess.prototype.start = function (d) {
     console.log('Start Chess');
     this.cleanup().init();
