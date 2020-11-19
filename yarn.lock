@@ -3071,10 +3071,10 @@ malta-rename@^1.0.6:
   resolved "https://registry.yarnpkg.com/malta-rename/-/malta-rename-1.0.6.tgz#c7a5f160c1395636d7adba2ce1eb382976ac228f"
   integrity sha512-TUgvbMK2ZYZK3E2kkXNfJZiHT/o9ebWKOBdlUWvbKpdBmw2AGFKm+Kw19R3BOSbrrnh7uazkktyIF+1BzBIgHQ==
 
-malta@^4.1.22:
-  version "4.1.22"
-  resolved "https://registry.yarnpkg.com/malta/-/malta-4.1.22.tgz#6e1835026a68994240e2d54332ab0598d6c152f1"
-  integrity sha512-bb78VzFXzYqCcaG8NXBu4MnMerzNxvN5bmo3jhiFJY6GG0hI0UnZk4Hlti4nyACPm6cx4ZCB1ppao37Ljrgivw==
+malta@^4.1.27:
+  version "4.1.27"
+  resolved "https://registry.yarnpkg.com/malta/-/malta-4.1.27.tgz#09cd7b16a698f8aaa37682c9e284c48a731d0dfc"
+  integrity sha512-LX1OFH6smY5BJOAozWAE4XBwpbZ/qsempxINijkTIEKrnCDxwnqqVVsCFtLldBExWNWVaj7wiNDxEzZZYW25tg==
 
 map-cache@^0.2.2:
   version "0.2.2"

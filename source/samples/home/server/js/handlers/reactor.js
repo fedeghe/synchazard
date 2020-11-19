@@ -26,7 +26,8 @@
             start: function () {
                 var self = this;
                 self.val = self.node.value;
-                self.node.addEventListener('input', function () {
+                //                      or 'input'
+                self.node.addEventListener('focus', function () {
                     if (self.node.value === self.val) {
                         self.enable();
                         return;

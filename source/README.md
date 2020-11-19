@@ -25,26 +25,26 @@ The server runs some kind of IFTTT-like procedure that could be triggered by any
 ### Install deps, build and run ...
 
 1. To install & build just run:  
-`> npm i && npm run build`  
+`> yarn i && yarn build`  
 The build itself will be fast, and will build the `server` and `serverws` folders in the project root.
 
 2. Start it:  
-`> npm start`  
+`> yarn start`  
 
 3. Now open one or more browsers on http://localhost:4000
 
-4. Opt for building the samples cause You just launched the raw lib build, there is nothing but the library itself, no samples, just an empty naked webpage.
+4. Opt for building the samples cause You just launched the raw lib build, there is nothing but the library itself, no samples, just an empty naked webpage with a svg in the middle ... so boring!
 ---
 ### Build samples 
 Here you can build:  
 - a non trivial amount of sample code, which covers almost all the features provided:  
-    `> npm run build:home`  
+    `> yarn build:home`  
     then in another terminal tab  
-    `> npm start`  
+    `> yarn start`  
 - a minimalistic due _helloworld_ that shows the simplest example I could imagine  
-    `> npm run build:hello`  
+    `> yarn build:hello`  
     then in another terminal tab    
-    `> npm start`  
+    `> yarn start`  
 
 Opening another terminal to start is needed cause in those two cases the build is set in watch mode, then any relevant editing to the source files involved will trigger the right fresh build.  
 Anyway in both cases the _terminal_ will invite You to visit http://localhost:4000
@@ -113,11 +113,11 @@ As the tradition dictates, I created the simplest example I could imagine:
 
 To build that example simply run:
 
-    > npm run build:hello  
+    > yarn build:hello  
 
 and then 
 
-    > npm start
+    > yarn start
 
 Now open the browser at [http://localhost:4000/](http://localhost:4000/) with at least two different browsers and try it out.
 
@@ -253,7 +253,7 @@ self.onmessage = function (e) {
 ### Tests  
 I started to write tests, more will come as far as the project becomes stable (in my mind). Btw some basic e2e tests are available (once the `home` code is started)
 
-   > npm test
+   > yarn test
 
 more are coming....
 
