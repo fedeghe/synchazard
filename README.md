@@ -33,7 +33,7 @@ The build itself will be fast, and will build the `server` and `serverws` folder
 
 3. Now open one or more browsers on http://localhost:4000
 
-4. Opt for building the samples cause You just launched the raw lib build, there is nothing but the library itself, no samples, just an empty naked webpage with a svg in the middle.
+4. Opt for building the samples cause You just launched the raw lib build, there is nothing but the library itself, no samples, just an empty naked webpage with a svg in the middle ... so boring!
 ---
 ### Build samples 
 Here you can build:  

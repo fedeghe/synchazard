@@ -12,7 +12,7 @@
     // namespace for the lib
     "NS": "SH",
     // setup here the host or ip the app will run in
-    "DOMAIN_OR_IP": "localhost",
+    "DOMAIN_OR_IP": "192.168.2.154",
     //
     // NOT YET EFFECTIVE
     //
