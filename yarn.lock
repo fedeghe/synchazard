@@ -2849,10 +2849,10 @@ malta-babel@^1.1.0:
     "@babel/preset-react" "^7.8.3"
     "@babel/preset-typescript" "^7.8.3"
 
-malta-browser-refresh@^1.2.6:
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/malta-browser-refresh/-/malta-browser-refresh-1.2.15.tgz#f809276855ab978b480098204b6b4d04983021bb"
-  integrity sha512-5ZwuPRhnTm5lQ8Sa5If90ls02TARHLWz3U8T3PE0iMdeFlH/N2105lw05H3aNY4FfYO3jChOj+R3BVKxe+orxA==
+malta-browser-refresh@^1.2.16:
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/malta-browser-refresh/-/malta-browser-refresh-1.2.16.tgz#9c238553f4b14acb333ae6bca9e387eebe1f9a9a"
+  integrity sha512-GSS15mWRX/lYpE+y8rEyt4xeKgfhZPD2K3px/VpNRdwZpmYi+BHIyxoMtd/rDiN9X8HxJxEXUHDHqJDIzU87jQ==
   dependencies:
     ws "^7.4.2"
 
@@ -2906,10 +2906,10 @@ malta-rename@^1.0.6:
   resolved "https://registry.yarnpkg.com/malta-rename/-/malta-rename-1.0.6.tgz#c7a5f160c1395636d7adba2ce1eb382976ac228f"
   integrity sha512-TUgvbMK2ZYZK3E2kkXNfJZiHT/o9ebWKOBdlUWvbKpdBmw2AGFKm+Kw19R3BOSbrrnh7uazkktyIF+1BzBIgHQ==
 
-malta@4.1.30:
-  version "4.1.30"
-  resolved "https://registry.yarnpkg.com/malta/-/malta-4.1.30.tgz#7bbc3a3e87d412cb70ed258e5618d5eb68136560"
-  integrity sha512-G+lxW5CD2yKvaHcuKrh7IWufpr/HgEsy9Ng9mCF9bFTF6vHieaCnJvx1IfDVMSVe5Flhux6AWEOK4ZKgKr9ilA==
+malta@^4.1.33:
+  version "4.1.33"
+  resolved "https://registry.yarnpkg.com/malta/-/malta-4.1.33.tgz#f8c294ebbad3e292ec133b6784626a34f41e56e6"
+  integrity sha512-HKQE3GZwvF3AojpTl53o751ZDMCJGQGHEhSFwYkXeMGQBya0p/K8k8i0nrRymmGEB7wG42d7DKeWNSDDRRBQ/A==
 
 map-stream@0.0.7:
   version "0.0.7"
