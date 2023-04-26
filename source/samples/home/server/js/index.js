@@ -12,7 +12,8 @@
         samples = createNode({ tag: 'a', cls: 'samples', attrs: { href: '/samples.html' }, html: 'samples' }),
         pres = createNode({ cls: 'presentation' }),
         graph = createNode({ cls: 'graph' }),
-        origBg = document.body.style.backgroundImage;
+        origBg = document.body.style.backgroundImage,
+        ns = maltaV('NS');
 
     header.appendChild(watch);
     header.appendChild(samples);
@@ -21,12 +22,12 @@
     body.appendChild(graph);
     createWatch(watch);
 
-    maltaV('NS').utils.loadScript('/js/handlers/jsonObserver.js');
-    maltaV('NS').utils.loadScript('/js/handlers/randomPercentage.js', remove);
-    maltaV('NS').utils.loadScript('/js/handlers/style.js', remove);
-    maltaV('NS').utils.loadScript('/js/handlers/script.js', remove);
-    maltaV('NS').utils.loadScript('/js/handlers/sunshine.js', remove);
-    maltaV('NS').utils.loadScript('/js/handlers/oneshare.js', remove);
+    ns.utils.loadScript('/js/handlers/jsonObserver.js');
+    ns.utils.loadScript('/js/handlers/randomPercentage.js', remove);
+    ns.utils.loadScript('/js/handlers/style.js', remove);
+    ns.utils.loadScript('/js/handlers/script.js', remove);
+    ns.utils.loadScript('/js/handlers/sunshine.js', remove);
+    ns.utils.loadScript('/js/handlers/oneshare.js', remove);
 
     function remove () {
         head.removeChild(this);
