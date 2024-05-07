@@ -101,7 +101,15 @@
                 var self = this;
                 self.val = self.node.value;
                 self.node.addEventListener('focus', function () {
-                    self.node.value = '';
+                    // self.node.value = '';
+                    if (self.node.value === self.val) {
+                        self.enable();
+                        return;
+                    }
+                    if (self._is_disabled) return;
+                    if (self.node.value !== self.val) {
+                        self.disable();
+                    }
                 });
                 self.node.addEventListener('blur', function () {
                     self.enable();
@@ -142,8 +150,8 @@
             this.enable = this.handledNodes[idn].enable.bind(this);
             this.doDisable = this.handledNodes[idn].doDisable.bind(this);
             this.doEnable = this.handledNodes[idn].doEnable.bind(this);
-            this.start();
-            // this.startLate();
+            // this.start();
+            this.startLate();
         }
         return this;
     };
