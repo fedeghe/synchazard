@@ -81,7 +81,7 @@
             start: function () {
                 var self = this;
                 self.val = self.node.value;
-                self.node.addEventListener('input', function () {
+                self.node.addEventListener('focus', function () {
                     if (self.node.value === self.val) {
                         self.enable();
                         return;
@@ -150,8 +150,8 @@
             this.enable = this.handledNodes[idn].enable.bind(this);
             this.doDisable = this.handledNodes[idn].doDisable.bind(this);
             this.doEnable = this.handledNodes[idn].doEnable.bind(this);
-            // this.start();
-            this.startLate();
+            this.start();
+            // this.startLate();
         }
         return this;
     };
