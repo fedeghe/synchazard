@@ -6,9 +6,10 @@ The server-side of _Synchazard_ is composed by two main elements:
 
 Both are not meant to be modified.
 
-The juice are the files that I called _Actions_ that will be launched using a method offered by the `synchazard`. Those actions will receive a brand new Action injected in the only method mandatory.
+The juice are the files that I called _Actions_ that will be launched using a method offered by the `synchazard`. Those actions will receive a brand new Action injected in the only mandatory method.
 Then name of the methods, one to launch all implemented Actions (in the synchazard) and the other to actually run the Actions is the same: `launch`. So the script that will run the socket server will most likely be similar to the following:
-```
+
+``` js
 const fs = require('fs'),
     path = require('path'),
     socketsSrv = require('./core/synchazard'),
@@ -19,19 +20,18 @@ const fs = require('fs'),
 /**
  * launch all actions passing if found other parameters to activate debug
  */
-socketsSrv.launch([{
+socketsSrv.launch([
+    {
         path: 'actions/myAction',
         deps: { fs: fs, path: path }
     },
-    ...
-    ... more actions if needed
-    ... 
+    // ...
 ], argz);
 ```
 
 then `actions/myAction.js` could look like:
 
-```
+``` js
 module.exports.launch = (action, synchazard, params) => {
     "use strict";
     // just listen
@@ -61,28 +61,35 @@ module.exports.launch = (action, synchazard, params) => {
 ```
 
 here to send a unicast message to the client that connected we should use:
-
-    const act = action.encode({... our message object ...}
-    maltaV('NS').send(act)
-
+``` js
+const act = action.encode({... our message object ...}
+maltaV('NS').send(act)
+```
 to broadcast a message to all connected clients instead we should use:
 
-    synchazard.broadcast(act);
+``` js
+synchazard.broadcast(act);
+```
 
 to send a message to all clients but the sender
 
-    synchazard.otherscast(act);
+``` js
+synchazard.otherscast(act);
+```
 
 to send a message to a specific client set (we have to know the ids)
-
-    synchazard.subcast([id1, id2, ...], act);
+``` js
+synchazard.subcast([id1, id2, ...], act);
+```
 
 to send a message to all excluding a specific client set (we have to know the ids)
+``` js
+synchazard.subexcludecast([id1, id2, ...], act);
+```
 
-    synchazard.subexcludecast([id1, id2, ...], act);
-    
 to send a message to a specific client (we must know the id)  
-
-    synchazard.unicast(id, act);
+``` js
+synchazard.unicast(id, act);
+```
 
 ...to be continued

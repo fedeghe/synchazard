@@ -5,8 +5,8 @@
     "main": "index.js",
     "scripts": {
         "start": "npm-run-all --parallel _start:ws _start:data _start:srv",
-        "build": "node --no-warnings node_modules/malta/src/bin.js source/build.json",
-        "buildev": "node --no-warnings node_modules/malta/src/bin.js source/buildev.json",
+        "build": "malta source/build.json",
+        "buildev": "malta source/buildev.json",
         "build:home": "run-s build _sample:home",
         "build:hello": "run-s build _sample:hello",
         "build:meier": "run-s build _sample:meier",
